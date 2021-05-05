@@ -1,0 +1,39 @@
+﻿@using TailBlazor.Shared.Components
+
+@namespace TailBlazor.Shared.Pages
+
+@page "/"
+
+@if (people is null)
+{
+    <div class="pt-8">
+        <Loading/>
+    </div>
+}
+else
+{
+    <div class="flex overflow-hidden">
+        <ol class="flex items-center w-max p-6 animate-hscroll">
+        @foreach(var person in people)
+        {
+            <li class="transform transition duration-75 ease-in-out
+                    even:rotate-1 odd:-rotate-2 
+                    hover:rotate-0 hover:scale-105 md:hover:scale-110">
+                <PersonCard Person=person/>
+            </li>
+        }
+        </ol>
+    </div>
+}
+
+@code
+{
+    [Inject] public IPersonService? PersonService { get; set; }
+
+    private Person[]? people;
+
+    protected override async Task OnParametersSetAsync()
+    {
+         people = (await PersonService.GetPeopleAsync(20)).ToArray();
+    }
+}

@@ -1,0 +1,133 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "API: Watch",
+      "type": "coreclr",
+      "request": "launch",
+      "program": "dotnet",
+      "console": "integratedTerminal",
+      "args": [
+        "watch",
+        "msbuild",
+        "/t:RunFunctions"
+      ],
+      "cwd": "${workspaceFolder}/API",
+      "presentation": {
+        "group": "API"
+      }
+    },
+    {
+      "name": "API: Debug",
+      "type": "coreclr",
+      "request": "attach",
+      "processId": "${command:azureFunctions.pickProcess}",
+      "presentation": {
+        "group": "API",
+      }
+    },
+    {
+      "name": "Client: Watch",
+      "type": "coreclr",
+      "request": "launch",
+      "program": "dotnet",
+      "console": "integratedTerminal",
+      "args": [
+        "watch",
+        "run"
+      ],
+      "cwd": "${workspaceFolder}/Client",
+      "presentation": {
+        "hidden": true
+      }
+    },
+    {
+      "name": "Client: Debug",
+      "type": "blazorwasm",
+      "request": "launch",
+      "cwd": "${workspaceFolder}/Client",
+      "presentation": {
+        "hidden": true
+      }
+    },
+    {
+      "name": "Server: Watch",
+      "type": "coreclr",
+      "request": "launch",
+      "program": "dotnet",
+      "console": "integratedTerminal",
+      "args": [
+        "watch",
+        "run"
+      ],
+      "cwd": "${workspaceFolder}/Server",
+      "presentation": {
+        "group": "Server",
+      },
+      "preLaunchTask": "npm watch-server",
+      "postDebugTask": "npm stop"
+    },
+    {
+      // Use IntelliSense to find out which attributes exist for C# debugging
+      // Use hover for the description of the existing attributes
+      // For further information visit https://github.com/OmniSharp/omnisharp-vscode/blob/master/debugger-launchjson.md
+      "name": "Server: Build & Debug",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "Server: Clean & Build",
+      // If you have changed target frameworks, make sure to update the program path.
+      "program": "${workspaceFolder}/Server/bin/Debug/net5.0/Server.dll",
+      "args": [],
+      "cwd": "${workspaceFolder}/Server",
+      "stopAtEntry": false,
+      // Enable launching a web browser when ASP.NET Core starts. For more information: https://aka.ms/VSCode-CS-LaunchJson-WebBrowser
+      "serverReadyAction": {
+        "action": "openExternally",
+        "pattern": "\\bNow listening on:\\s+(https?://\\S+)"
+      },
+      "env": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "presentation": {
+        "hidden": true
+      }
+    },
+  ],
+  "compounds": [
+    {
+      "name": "Client+API: Watch",
+      "configurations": [
+        "API: Watch",
+        "Client: Watch"
+      ],
+      "presentation": {
+        "group": "Client",
+      },
+      "preLaunchTask": "npm watch-client",
+      "postDebugTask":  "npm stop",
+    },
+    {
+      "name": "Client+API: Debug",
+      "configurations": [
+        "API: Debug",
+        "Client: Debug"
+      ],
+      "presentation": {
+        "group": "Client",
+      },
+      "preLaunchTask": "npm watch-client",
+      "postDebugTask":  "npm stop",
+    },
+    {
+      "name": "Server: Debug",
+      "configurations": [
+        "Server: Build & Debug"
+      ],
+      "presentation": {
+        "group": "Server",
+      },
+      "preLaunchTask": "npm watch-server",
+      "postDebugTask": "npm stop"
+    }
+  ]
+}

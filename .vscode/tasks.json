@@ -1,0 +1,119 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+    {
+      "label": "API: Clean & Build",
+      "type": "shell",
+      "command": "dotnet clean && dotnet build",
+      "presentation": {
+        "reveal": "silent",
+        "panel": "shared",
+        "clear":true
+      },
+      "problemMatcher": "$msCompile",
+      "options": {
+        "cwd": "${workspaceFolder}/API"
+      },
+      "group": "build"
+    },
+    {
+      "label": "Client: Clean & Build",
+      "type": "shell",
+      "command": "dotnet clean && dotnet build",
+      "presentation": {
+        "reveal": "silent",
+        "panel": "shared",
+        "clear":true
+      },
+      "problemMatcher": "$msCompile",
+      "options": {
+        "cwd": "${workspaceFolder}/Client"
+      },
+      "group": "build"
+    },
+    {
+      "label": "Core: Clean & Build",
+      "type": "shell",
+      "command": "dotnet clean && dotnet build",
+      "presentation": {
+        "reveal": "silent",
+        "panel": "shared",
+        "clear":true
+      },
+      "problemMatcher": "$msCompile",
+      "options": {
+        "cwd": "${workspaceFolder}/Core"
+      },
+      "group": "build"
+    },
+    {
+      "label": "Server: Clean & Build",
+      "type": "shell",
+      "command": "dotnet clean && dotnet build",
+      "presentation": {
+        "reveal": "silent",
+        "panel": "shared",
+        "clear":true
+      },
+      "problemMatcher": "$msCompile",
+      "options": {
+        "cwd": "${workspaceFolder}/Server"
+      },
+      "group": "build"
+    },
+    {
+      "label": "Shared: Clean & Build",
+      "type": "shell",
+      "command": "dotnet clean && dotnet build",
+      "presentation": {
+        "reveal": "silent",
+        "panel": "shared",
+        "clear":true
+      },
+      "problemMatcher": "$msCompile",
+      "options": {
+        "cwd": "${workspaceFolder}/Shared"
+      },
+      "group": "build"
+    },
+    {
+      "label": "Clean & Build All",
+      "type": "shell",
+      "command": "dotnet clean && dotnet build --no-restore",
+      "runOptions": {
+        "runOn": "folderOpen"
+      },
+      "presentation": {
+        "echo": false,
+        "reveal": "silent",
+        "panel": "shared",
+        "clear":true
+      },
+      "group": "build"
+    },
+    {
+      "label": "npm watch-client",
+      "type": "npm",
+      "script": "watch-client",
+      "problemMatcher": [],
+      "isBackground": true,
+      "presentation": {
+        "echo": false,
+        "reveal": "silent",
+        "panel": "shared",
+        "clear":true
+      }
+    },
+    {
+      "label": "npm stop",
+      "type": "shell",
+      "command": "npm stop",
+      "problemMatcher": [],
+            "presentation": {
+        "echo": false,
+        "reveal": "silent",
+        "panel": "shared"
+      }
+    }
+  ]
+}
