@@ -3,7 +3,7 @@
 ## Repository Goals/Features:
 
 * UI in a separate project so it can be used by existing and upcoming Blazor project types as well as MVC/Razor Pages.
-* Coupling Tailwind CSS `@apply` with [CSS Isolation](https://docs.microsoft.com/en-us/aspnet/core/blazor/components/css-isolation).
+* Coupling Tailwind CSS `@apply` with Blazor [CSS Isolation](https://docs.microsoft.com/en-us/aspnet/core/blazor/components/css-isolation) / Bundling.
 * Taking full advantage of Tailwind's great new [JIT mode](https://tailwindcss.com/docs/just-in-time-mode).
 * Optimal "F5" debug/run experience, with the above (isolation/JIT) in mind.
 * Implementing a Light/Dark/System theme switcher, using Tailwind's [`class` darkMode](https://tailwindcss.com/docs/dark-mode#toggling-dark-mode-manually).
@@ -12,7 +12,9 @@
 
 ---
 
-I'll link a more detailed post in the future, but for now i'll run through the key steps.
+I'll link a more detailed post in the future, but for now i'll run through the key steps.  Here's the deployed [Static Web App](https://polite-sky-006af1d1e.azurestaticapps.net/).
+
+---
 
 # Step 1 - Scaffold the C# projects
 
@@ -70,7 +72,7 @@ A couple steps need to be taken here to make Tailwind & Scoped CSS cooperate.
 
 ## Step 4 - Set up Build
 
-A smooth "F5" experience using `dotnet watch` requires the following:
+A smooth "F5" experience using `dotnet watch` requires the following: (Debug is simpler, as there are no automated rebuilds.)
 
 1) Start `API`
 2) Start `watch-client`
