@@ -57,7 +57,7 @@ Tailwind CSS is one of four steps that take place to create the CSS the browser 
 `npx tailwind init` writes a [`tailwind.config.js` template](https://github.com/McNerdius/TailBlazor/blob/main/tailwind.config.js) to disk.  The changes to note are:
   
   * Enabling JIT mode (line 7)
-  * Enabling class-based dark mode.
+  * Enabling class-based dark mode. (line 8)
   * Pointing it at our html markup, so JIT can keep an eye on what Tailwind features we're using and generate the appropriate CSS.  (lines 4-6).  (The `purge` array is borrowed from pre-JIT mode, where loads of CSS would be generated, and then what you weren't using would be purged, hence the name.)
   
   Now, the main CSS file will need [a few key `@import`s](https://tailwindcss.com/docs/installation#include-tailwind-in-your-css) for Tailwind to do its magic.  I've put that file at [`/Shared/Styles/tailwind.css`](https://github.com/McNerdius/TailBlazor/blob/main/Shared/Styles/tailwind.css).  Note the reference to `Shared.styles.css` in there - that's the "Scoped CSS" intermediate build - i'll come back to that below.
@@ -71,7 +71,7 @@ This is where we tell PostCSS what to do, in [package.json](https://github.com/M
 A couple steps need to be taken here to make Tailwind & Scoped CSS cooperate.
 
 * The "normal" way to use Scoped CSS is [described here](https://docs.microsoft.com/en-us/aspnet/core/blazor/components/css-isolation?view=aspnetcore-5.0#css-isolation-bundling).  But we can't do that and take full advantage of Tailwind CSS (`@apply` and other directives), so we need to `@import` the "intermediate" bundle of the Scoped CSS located at `/Shared/obj/Debug/net5.0/scopedcss/bundle/Shared.styles.css`.  See this in action in `tailwind.css` as mentioned above.
-* Blazor CSS isolation uses random scope identifiers by default.  This together with the above breaks things when the project is deployed - the CSS output by PostCSS is based on a Debug build, but the CSS embedded in the compiled razor components is based on a subsequent Release build - different random scopes !  The fix is to [assign a CssScope](https://docs.microsoft.com/en-us/aspnet/core/blazor/components/css-isolation?view=aspnetcore-5.0#css-isolation-configuration) when you use CSS isolation.  [`Shared.csproj`](https://github.com/McNerdius/TailBlazor/blob/main/Shared/Shared.csproj#L17) shows this in action for `PersonCard`.
+* Blazor CSS isolation uses random scope identifiers by default.  This together with the above breaks things when the project is deployed - the CSS output by PostCSS is based on a Debug build, but the CSS embedded in the deployed site is based on a subsequent Release build - different build, different random scopes !  The fix is to [assign a CssScope](https://docs.microsoft.com/en-us/aspnet/core/blazor/components/css-isolation?view=aspnetcore-5.0#css-isolation-configuration) whenever you use CSS isolation.  [`Shared.csproj`](https://github.com/McNerdius/TailBlazor/blob/main/Shared/Shared.csproj#L17) shows this in action for `PersonCard`.
 
 # Step 4 - Set up Build
 
