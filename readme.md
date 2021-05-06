@@ -66,7 +66,7 @@ This is where we tell PostCSS what to do, in [package.json]().  The `watch-***` 
 A couple steps need to be taken here to make Tailwind & Scoped CSS cooperate.
 
 * The "normal" way to use Scoped CSS is [described here](https://docs.microsoft.com/en-us/aspnet/core/blazor/components/css-isolation?view=aspnetcore-5.0#css-isolation-bundling).  But we can't do that and take full advantage of Tailwind CSS (`@apply` and other directives), so we need to `@import` the "intermediate" bundle of the Scoped CSS located at `/Shared/obj/Debug/net5.0/scopedcss/bundle/Shared.styles.css`.  See this in action in `tailwind.css`
-* Blazor CSS isolation uses random scope identifiers by default.  This together with the above breaks things when the project is deployed - the CSS output by PostCSS is based on a Debug build, but the CSS embedded in the compiled razor components is based on a Release build - different random scopes !  The fix is to [assign a CssScope](https://docs.microsoft.com/en-us/aspnet/core/blazor/components/css-isolation?view=aspnetcore-5.0#css-isolation-configuration) when you use CSS isolation.  `PersonCard` in `Shared` shows this in action.
+* Blazor CSS isolation uses random scope identifiers by default.  This together with the above breaks things when the project is deployed - the CSS output by PostCSS is based on a Debug build, but the CSS embedded in the compiled razor components is based on a Release build - different random scopes !  The fix is to [assign a CssScope](https://docs.microsoft.com/en-us/aspnet/core/blazor/components/css-isolation?view=aspnetcore-5.0#css-isolation-configuration) when you use CSS isolation.  `PersonCard` in `Shared` & its `.csproj` shows this in action.
 
 ## Step 4 - Set up Build
 
