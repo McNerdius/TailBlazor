@@ -23,7 +23,7 @@ Prerequisites... [dotnet sdk](https://dotnet.microsoft.com/download/dotnet/5.0) 
 * in the project folder...
 * `dotnet new blazorwasm -o Client`
 * `dotnet new razorclasslib -o Shared` - Where Shared UI will go.  
-* `dotnet new classlib -o Core` - Code common to all projects.
+* `dotnet new classlib -o Core --framework netstandard2.1` - Code common to all projects.  Needs to be `netstandard2.1` so it is compatible with `API` and Azure Static Web Apps `oryx` build system.  (Hoping to get this all on `net5.0`+ ASAP.) 
 * `dotnet add .\Client\ reference .\Shared` - (tab completion for the win, punching in the paths.)
 * `dotnet add .\Client\ reference .\Core`
 
