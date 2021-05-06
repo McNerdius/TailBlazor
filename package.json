@@ -13,9 +13,9 @@
   "scripts": {
     "watch-client": "postcss ./Shared/Styles/tailwind.css -o ./Client/wwwroot/css/site.min.css --watch --verbose",
     "watch-server": "postcss ./Shared/Styles/tailwind.css -o ./Server/wwwroot/css/site.min.css --watch --verbose",
-    "build-client": "postcss ./Shared/Styles/tailwind.css -o ./Client/wwwroot/css/site.min.css --env build --verbose",
-    "build-server": "postcss ./Shared/Styles/tailwind.css -o ./Server/wwwroot/css/site.min.css --env build --verbose",
-    "publish-client": "postcss ./Shared/Styles/tailwind.css -o ./Client/wwwroot/css/site.min.css --env production --verbose"
+    "build-client": "postcss ./Shared/Styles/tailwind.css -o ./Client/wwwroot/css/site.min.css --verbose",
+    "build-server": "postcss ./Shared/Styles/tailwind.css -o ./Server/wwwroot/css/site.min.css --verbose",
+    "publish-client": "postcss ./Shared/Styles/tailwind.css -o ./Client/wwwroot/css/site.min.css --verbose --env production"
   },
   "keywords": [
     "tailwindcss",
