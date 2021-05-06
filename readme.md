@@ -77,9 +77,9 @@ A couple steps need to be taken here to make Tailwind & Scoped CSS cooperate.
 
 A smooth "F5" experience using `dotnet watch` requires the following: (Debug is simpler, as there are no automated rebuilds.)
 
-1) Start `API`
-2) Start `watch-client`
-3) Start `dotnet watch run ./Client/`
+1) Start `API` (for `Client` only)
+2) Start `watch-client` / `watch-server`
+3) Start `dotnet watch run ./Client/` or `./Server/`
    * Do NOT restart `watch-client` during an automated `dotnet watch` rebuild.  This would add several seconds !
 4) Stop `watch-client` when `dotnet watch` exits.
    
@@ -87,4 +87,4 @@ I've got that all sorted for VS Code in `tasks.json` / `launch.json` but haven't
 
 # Step 5 - Set up Deploy
 
-Steps have been added to the GitHub Actions `yaml` file to build the CSS in "publish" mode, prior to the usual Static Web Apps steps.
+Steps [have been added](https://github.com/McNerdius/TailBlazor/blob/main/.github/workflows/azure-static-web-apps-polite-sky-006af1d1e.yml#L23) to the GitHub Actions `yaml` file to build the CSS in "publish" mode, prior to the usual Static Web Apps steps.
