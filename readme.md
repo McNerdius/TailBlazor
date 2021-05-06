@@ -83,7 +83,7 @@ A smooth "F5" experience using `dotnet watch` requires the following: (Debug is 
    * Do NOT restart `watch-***` during an automated `dotnet watch` rebuild.  This would add several seconds !
 4) Stop `watch-***` when `dotnet watch` exits.
    
-I've got that all sorted for VS Code in `tasks.json` / `launch.json` but haven't come up with an uncompromising solution for Visual Studio.  I've commented out some Build tasks to Client & Server `.csproj` files that do a full (non-JIT) CSS rebuild - but that task can't "watch" as it would stall the build.  One could run `watch-***` as a pre-build task in Visual Studio, but they wouldn't automatically stop.
+I've got that all sorted for VS Code in `tasks.json` / `launch.json` but haven't come up with an uncompromising solution for Visual Studio.  I've commented out some Build tasks to Client & Server `.csproj` files that do a full (non-JIT) CSS rebuild - but that task can't "watch" as it would stall the build.  One could run `watch-***` as a pre-build task in Visual Studio (Right Click on the project, go to Properties, then Build Events) - but it wouldn't automatically stop.  Best to just start it in an external terminal and leave it run until you're done working ?  (I've filed an issue about this, feel free to comment or PR a solution.) To start API alongside Client, Right click on the Solution and go to "Set Startup Projects" and use "Multiple Startup Projects."
 
 # Step 5 - Set up Deploy
 
