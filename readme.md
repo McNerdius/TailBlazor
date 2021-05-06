@@ -43,6 +43,8 @@ Followed by things like... moving `Index.razor`, `MainLayout.razor` to `Shared` 
 
 ## Installation
 
+Prerequisite is [node.js](https://nodejs.org/en/download/).
+
 * `npm init --yes` - initializes a `package.json` using defaults.  This is where CSS build scripts and tool references will go.
 * `npm install -D postcss@latest postcss-cli@latest postcss-import@latest postcss-csso@latest tailwindcss@latest autoprefixer@latest` - All of the CSS tools we'll use.
   
