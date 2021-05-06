@@ -50,7 +50,7 @@ Prerequisite is [node.js](https://nodejs.org/en/download/).
   
 ## PostCSS configuration
 
-Tailwind CSS is one of four steps that take place to create the CSS the browser sees.  PostCSS is the plumbing, feeding input CSS sequentially through those four steps, and writes the result to disk.  [postcss.config.js](https://github.com/McNerdius/TailBlazor/blob/main/postcss.config.js) is where those steps are defined: `postcss-import` aggregates any files you `@import` in your input CSS file into one large in-memory file, feeds that to `tailwindcss` to add on its generated CSS, then to `autoprefixer` to cross-browserify it all, then `postcss-csso` to shrink it down - but only for production builds.
+Tailwind CSS is one of four steps that take place to create the CSS the browser sees.  PostCSS is the plumbing, feeding input CSS sequentially through those four steps, and writes the result to disk.  [postcss.config.js](https://github.com/McNerdius/TailBlazor/blob/main/postcss.config.js) is where those steps are defined: `postcss-import` aggregates any files you `@import` in your input CSS file into one large in-memory file, feeds that to `tailwindcss` to insert its generated CSS, then to `autoprefixer` to cross-browserify it all, then `postcss-csso` to shrink it down - but only for production builds.
 
 ## Tailwind configuration
 
@@ -71,17 +71,17 @@ This is where we tell PostCSS what to do, in [package.json](https://github.com/M
 A couple steps need to be taken here to make Tailwind & Scoped CSS cooperate.
 
 * The "normal" way to use Scoped CSS is [described here](https://docs.microsoft.com/en-us/aspnet/core/blazor/components/css-isolation?view=aspnetcore-5.0#css-isolation-bundling).  But we can't do that and take full advantage of Tailwind CSS (`@apply` and other directives), so we need to `@import` the "intermediate" bundle of the Scoped CSS located at `/Shared/obj/Debug/net5.0/scopedcss/bundle/Shared.styles.css`.  See this in action in `tailwind.css` as mentioned above.
-* Blazor CSS isolation uses random scope identifiers by default.  This together with the above breaks things when the project is deployed - the CSS output by PostCSS is based on a Debug build, but the CSS embedded in the compiled razor components is based on a Release build - different random scopes !  The fix is to [assign a CssScope](https://docs.microsoft.com/en-us/aspnet/core/blazor/components/css-isolation?view=aspnetcore-5.0#css-isolation-configuration) when you use CSS isolation.  [`Shared.csproj`](https://github.com/McNerdius/TailBlazor/blob/main/Shared/Shared.csproj#L17) shows this in action for `PersonCard`.
+* Blazor CSS isolation uses random scope identifiers by default.  This together with the above breaks things when the project is deployed - the CSS output by PostCSS is based on a Debug build, but the CSS embedded in the compiled razor components is based on a subsequent Release build - different random scopes !  The fix is to [assign a CssScope](https://docs.microsoft.com/en-us/aspnet/core/blazor/components/css-isolation?view=aspnetcore-5.0#css-isolation-configuration) when you use CSS isolation.  [`Shared.csproj`](https://github.com/McNerdius/TailBlazor/blob/main/Shared/Shared.csproj#L17) shows this in action for `PersonCard`.
 
 # Step 4 - Set up Build
 
 A smooth "F5" experience using `dotnet watch` requires the following: (Debug is simpler, as there are no automated rebuilds.)
 
 1) Start `API` (for `Client` only)
-2) Start `watch-client` / `watch-server`
+2) Start `watch-client` or `watch-server` npm scripts
 3) Start `dotnet watch run ./Client/` or `./Server/`
-   * Do NOT restart `watch-client` during an automated `dotnet watch` rebuild.  This would add several seconds !
-4) Stop `watch-client` when `dotnet watch` exits.
+   * Do NOT restart `watch-***` during an automated `dotnet watch` rebuild.  This would add several seconds !
+4) Stop `watch-***` when `dotnet watch` exits.
    
 I've got that all sorted for VS Code in `tasks.json` / `launch.json` but haven't come up with an uncompromising solution for Visual Studio.  I've commented out some Build tasks to Client & Server `.csproj` files that do a full (non-JIT) CSS rebuild - but that task can't "watch" as it would stall the build.  One could run `watch-***` as a pre-build task in Visual Studio, but they wouldn't automatically stop.
 
