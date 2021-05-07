@@ -34,6 +34,6 @@ else
 
     protected override async Task OnParametersSetAsync()
     {
-         people = (await PersonService.GetPeopleAsync(20)).ToArray();
+         people = (await PersonService.GetPeopleAsync(50)).ToArray();
     }
 }

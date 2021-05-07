@@ -21,7 +21,7 @@ module.exports = {
                 }
             },
             animation: {
-                hscroll: 'hscroll 180s infinite linear',
+                hscroll: 'hscroll 800s infinite linear',
             }
         },
     },
