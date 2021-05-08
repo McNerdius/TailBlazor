@@ -1,13 +1,14 @@
+using System.Collections.Generic;
+using System.Net;
 using System.Threading.Tasks;
 
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Azure.WebJobs;
-using Microsoft.Azure.WebJobs.Extensions.Http;
+using Microsoft.Azure.Functions.Worker;
+using Microsoft.Azure.Functions.Worker.Http;
+using Microsoft.Extensions.Logging;
 
 using TailBlazor.Core;
 
-namespace TailBlazor.Functions
+namespace API
 {
     public class GetPeople
     {
@@ -15,13 +16,15 @@ namespace TailBlazor.Functions
 
         public GetPeople( IPersonService personService ) => this.personService = personService;
 
-        [FunctionName( "GetPeople" )]
-        public async Task<IActionResult> Run(
-            [HttpTrigger( AuthorizationLevel.Anonymous, "get", "post", Route = "GetPeople/{count?}" )] HttpRequest req,
-            int? count = null )
+        [Function( "GetPeople" )]
+        public async Task<HttpResponseData> Run( [HttpTrigger( AuthorizationLevel.Anonymous, "get", "post", Route = "GetPeople/{count?}" )] HttpRequestData req,
+             int? count = null )
         {
             var people = await personService.GetPeopleAsync( count ?? 10 );
-            return new JsonResult( people );
+
+            var response = req.CreateResponse( HttpStatusCode.OK );
+            await response.WriteAsJsonAsync( people );
+            return response;
         }
     }
 }
