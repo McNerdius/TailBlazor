@@ -1,8 +1,9 @@
 
-using Microsoft.Azure.Functions.Extensions.DependencyInjection;
-
 using Karmatach.McNerd.Net.Functions;
+
+using Microsoft.Azure.Functions.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
+
 using TailBlazor.Core;
 
 [assembly: FunctionsStartup( typeof( Startup ) )]

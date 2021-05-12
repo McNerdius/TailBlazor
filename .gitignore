@@ -2,4 +2,5 @@
 **/bin/*
 **/node_modules/*
 **/site.min.css
+changes.md
 post.md
