@@ -1,18 +1,18 @@
 # A reference setup for using Blazor with Tailwind JIT
 
-## Repository Goals/Features:
+## Quick overview:
 
-* UI in a separate project so it can be used by existing and upcoming Blazor project types as well as MVC/Razor Pages.
-* Coupling Tailwind CSS `@apply` with Blazor [CSS Isolation](https://docs.microsoft.com/en-us/aspnet/core/blazor/components/css-isolation) / Bundling.
-* Taking full advantage of Tailwind's great new [JIT mode](https://tailwindcss.com/docs/just-in-time-mode).
-* Optimal "F5" debug/run experience, with the above (isolation/JIT) in mind.
-* Implementing a Light/Dark/System theme switcher, using Tailwind's [`class` darkMode](https://tailwindcss.com/docs/dark-mode#toggling-dark-mode-manually).
+* UI in a separate project (`Shared`) so it can be used by existing and upcoming Blazor project types as well as MVC/Razor Pages.
+* Coupling Tailwind CSS `@apply` with Blazor [CSS Isolation](https://docs.microsoft.com/en-us/aspnet/core/blazor/components/css-isolation) / Bundling, by referencing the intermediate build of the `Shared` project's CSS.
+* Taking full advantage of Tailwind's great new [JIT mode](https://tailwindcss.com/docs/just-in-time-mode), by using an `npm` task rather than relying on `dotnet watch` which would do a full rebuild.
+* Optimal "F5" debug/run experience, with the above (isolation/JIT) in mind - (VS Code only at the moment, msbuild guru help wanted for VS integration!)
+* Implementing a Light/Dark/System theme switcher, using Tailwind's [`class` darkMode](https://tailwindcss.com/docs/dark-mode#toggling-dark-mode-manually) & Blazor's JS Isolation/Interop.
 * Azure Functions API & Azure Static Web Apps Deployment.
 * Basic Dependency Injection in each project.
 
 ---
 
-I'll link a more detailed post in the future, but for now i'll run through the key steps.  Here's the deployed [Static Web App](https://polite-sky-006af1d1e.azurestaticapps.net/).
+I'll link a more detailed post in the future, but for now i'll run through the key steps.  Here's the deployed [Static Web App](https://polite-sky-006af1d1e.azurestaticapps.net/).  The animation used to demonstrate DI, CSS Isolation, and a bunch of Tailwind features is inspired by one on [TailwindCSS.com](https://tailwindcss.com/)
 
 ---
 
@@ -24,13 +24,13 @@ Templates used for the projects:
 
 | project | template used                                                              | notes                                                                                                                                                                                           |
 | :------ | :------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Client  | `dotnet new blazorwasm`                                                    |                                                                                                                                                                                                 |
+| Client  | `dotnet new blazorwasm`                                                    | `Index.razor` and  `MainLayout.razor` are moved to `Shared`, lots of "fluff" removed from this and `Server`                                                                                     |
 | Shared  | `dotnet new razorclasslib`                                                 | Where Shared Razor & CSS goes                                                                                                                                                                   |
 | Server  | `dotnet new blazorserver`                                                  | I'm only deploying `Client`, but ensuring shared UI plays nicely with Blazor Server projects is a good idea.  Blazor Server can make for more productive development/debugging as well.         |
 | Core    | `dotnet new classlib --framework netstandard2.1`                           | Code common to all projects.  Needs to be `netstandard2.1` so it is compatible with `API` and to keep Azure Static Web Apps `oryx` build system happy.  Hoping to get it all on `net5.0`+ ASAP. |
 | API     | `func new --worker-runtime dotnet --template HttpTrigger --name GetPeople` |                                                                                                                                                                                                 |
 
-Followed by things like... `dotnet new sln` / `dotnet sln add ...`, moving `Index.razor` and  `MainLayout.razor` to `Shared` and adding `AdditionalAssemblies="new[] { typeof(DarkSwitch).Assembly }"` to both Client & Server's `App.razor`'s `<Router>` after `AppAssembly=`, removing Bootstrap/demo components and stylesheet references, and fixing up `using` statements.
+Followed by things like... `dotnet new sln` / `dotnet sln add ...`, adding `AdditionalAssemblies="new[] { typeof(DarkSwitch).Assembly }"` to both Client & Server's `App.razor`'s `<Router>` after `AppAssembly=`, and fixing up `using` statements.
 
 ---
 
