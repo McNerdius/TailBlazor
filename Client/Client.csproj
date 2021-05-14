@@ -14,8 +14,4 @@
         <ProjectReference Include="..\Core\Core.csproj" />
     </ItemGroup>
 
-    <!-- <Target Name="Tailwind" BeforeTargets="Build">
-        <Exec Command="npm run build-client"/>
-    </Target> -->
-    
 </Project>

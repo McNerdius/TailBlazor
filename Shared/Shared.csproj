@@ -3,6 +3,8 @@
         <TargetFramework>net5.0</TargetFramework>
         <Nullable>Enable</Nullable>
         <RootNamespace>TailBlazor.Shared</RootNamespace>
+        <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+        <IntermediateOutputPath>obj</IntermediateOutputPath>
     </PropertyGroup>
     <ItemGroup>
         <SupportedPlatform Include="browser" />
@@ -13,7 +15,9 @@
     <ItemGroup>
         <ProjectReference Include="..\Core\Core.csproj" />
     </ItemGroup>
-    <ItemGroup>
-        <None Update="Components/PersonCard.razor.css" CssScope="tb-person-card" />
-    </ItemGroup>
+
+    <Target Name="tw-publish" AfterTargets="Build" Condition="'$(Configuration)' == 'Release'" >
+        <Exec Command="npm run publish-client" />
+    </Target>
+
 </Project>

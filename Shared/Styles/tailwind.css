@@ -1,5 +1,5 @@
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
-@import "../obj/Debug/net5.0/scopedcss/bundle/Shared.styles.css";
+@import "../obj/scopedcss/bundle/Shared.styles.css";
 @import "site.css";
