@@ -15,13 +15,6 @@
     <ItemGroup>
         <ProjectReference Include="..\Core\Core.csproj" />
     </ItemGroup>
-    <ItemGroup>
-        <None Update="Components/PersonCard.razor.css" CssScope="tb-person-card" />
-    </ItemGroup>
-
-    <Target Name="tw-build" AfterTargets="Build" Condition="'$(Configuration)' != 'Release'" >
-        <Exec Command="npm run build-client" EnvironmentVariables="TAILWIND_MODE=build" />
-    </Target>
 
     <Target Name="tw-publish" AfterTargets="Build" Condition="'$(Configuration)' == 'Release'" >
         <Exec Command="npm run publish-client" />
