@@ -15,5 +15,18 @@
     <ItemGroup>
         <ProjectReference Include="..\Core\Core.csproj" />
     </ItemGroup>
+    
+    <PropertyGroup>
+        <PostBuildEvent Condition="'$(Configuration)' == 'Release'">
+            cd $(MSBuildProjectDirectory)/
+            npm run publish-client
+            cp ./Client/wwwroot/css/site.min.css ./Server/wwwroot/css/site.min.css 
+        </PostBuildEvent>
+        <PostBuildEvent Condition="'$(Configuration)' == 'Debug'">
+            cd $(MSBuildProjectDirectory)/
+            npm run build-client
+            cp ./Client/wwwroot/css/site.min.css ./Server/wwwroot/css/site.min.css 
+        </PostBuildEvent>
+    </PropertyGroup>
 
 </Project>
