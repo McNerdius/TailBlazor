@@ -9,4 +9,11 @@
         <ProjectReference Include="..\Core\Core.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+        <!-- exclude all Content items from being watched, -->
+        <!-- site.min.css in particular: this is a workaround -->
+        <!-- https://github.com/dotnet/aspnetcore/issues/27775 -->
+        <Content Update="@(Content)" Watch="false" />
+    </ItemGroup>
+
 </Project>

@@ -4,6 +4,7 @@
   "description": "template for using tailwind css in jit mode with blazor projects",
   "devDependencies": {
     "autoprefixer": "^10.2.5",
+    "cross-env": "^7.0.3",
     "postcss": "^8.2.10",
     "postcss-cli": "^8.3.1",
     "postcss-csso": "^5.0.1",
@@ -11,11 +12,12 @@
     "tailwindcss": "^2.1.1"
   },
   "scripts": {
-    "watch-client": "postcss ./Shared/Styles/tailwind.css -o ./Client/wwwroot/css/site.min.css --watch --verbose",
-    "watch-server": "postcss ./Shared/Styles/tailwind.css -o ./Server/wwwroot/css/site.min.css --watch --verbose",
-    "build-client": "postcss ./Shared/Styles/tailwind.css -o ./Client/wwwroot/css/site.min.css --verbose",
-    "build-server": "postcss ./Shared/Styles/tailwind.css -o ./Server/wwwroot/css/site.min.css --verbose",
-    "publish-client": "postcss ./Shared/Styles/tailwind.css -o ./Client/wwwroot/css/site.min.css --verbose --env production"
+    "watch-client": "postcss --verbose --watch ./Shared/Styles/tailwind.css -o ./Client/wwwroot/css/site.min.css",
+    "watch-server": "postcss --verbose --watch ./Shared/Styles/tailwind.css -o ./Server/wwwroot/css/site.min.css",
+    "build-client": "cross-env TAILWIND_MODE=build postcss --verbose ./Shared/Styles/tailwind.css -o ./Client/wwwroot/css/site.min.css",
+    "build-server": "cross-env TAILWIND_MODE=build postcss --verbose ./Shared/Styles/tailwind.css -o ./Server/wwwroot/css/site.min.css",
+    "publish-client": "postcss --verbose --env production ./Shared/Styles/tailwind.css -o ./Client/wwwroot/css/site.min.css",
+    "publish-server": "postcss --verbose --env production ./Shared/Styles/tailwind.css -o ./Server/wwwroot/css/site.min.css"
   },
   "keywords": [
     "tailwindcss",
