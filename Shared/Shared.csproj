@@ -16,8 +16,4 @@
         <ProjectReference Include="..\Core\Core.csproj" />
     </ItemGroup>
 
-    <Target Name="tw-publish" AfterTargets="Build" Condition="'$(Configuration)' == 'Release'" >
-        <Exec Command="npm run publish-client" />
-    </Target>
-
 </Project>

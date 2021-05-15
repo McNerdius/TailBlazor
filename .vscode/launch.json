@@ -34,7 +34,8 @@
       "console": "integratedTerminal",
       "args": [
         "watch",
-        "run"
+        "run",
+        "--configuration vscode",
       ],
       "cwd": "${workspaceFolder}/Client",
       "presentation": {
@@ -58,7 +59,8 @@
       "console": "integratedTerminal",
       "args": [
         "watch",
-        "run"
+        "run",
+        "--configuration vscode",
       ],
       "cwd": "${workspaceFolder}/Server",
       "presentation": {

@@ -74,15 +74,17 @@
       "options": {
         "cwd": "${workspaceFolder}/Shared"
       },
+      "runOptions": {
+        // generates Shared.styles.css behind the scenes
+        // if it is missing, npm scripts will fail
+        "runOn": "folderOpen"
+      },
       "group": "build"
     },
     {
       "label": "Clean & Build All",
       "type": "shell",
       "command": "dotnet clean && dotnet build --no-restore",
-      "runOptions": {
-        "runOn": "folderOpen"
-      },
       "presentation": {
         "echo": false,
         "reveal": "silent",

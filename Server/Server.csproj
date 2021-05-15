@@ -9,4 +9,22 @@
         <ProjectReference Include="..\Core\Core.csproj" />
     </ItemGroup>
 
+    <PropertyGroup>
+        <PreBuildEvent Condition="'$(Configuration)' == 'Release'">
+            cd $(MSBuildProjectDirectory)/
+            npm run publish-server
+        </PreBuildEvent>
+        <PreBuildEvent Condition="'$(Configuration)' == 'Debug'">
+            cd $(MSBuildProjectDirectory)/
+            npm run build-server
+        </PreBuildEvent>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <!-- exclude all Content items from being watched, -->
+        <!-- site.min.css in particular: this is a workaround -->
+        <!-- https://github.com/dotnet/aspnetcore/issues/27775 -->
+        <Content Update="@(Content)" Watch="false" />
+    </ItemGroup>
+
 </Project>
