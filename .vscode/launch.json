@@ -14,7 +14,8 @@
       ],
       "cwd": "${workspaceFolder}/API",
       "presentation": {
-        "group": "API"
+        "group": "API",
+        "close": true
       }
     },
     {
@@ -24,6 +25,7 @@
       "processId": "${command:azureFunctions.pickProcess}",
       "presentation": {
         "group": "API",
+        "close": true,
       }
     },
     {
@@ -39,7 +41,8 @@
       ],
       "cwd": "${workspaceFolder}/Client",
       "presentation": {
-        "hidden": true
+        "hidden": true,
+        "close": true
       }
     },
     {
@@ -48,7 +51,8 @@
       "request": "launch",
       "cwd": "${workspaceFolder}/Client",
       "presentation": {
-        "hidden": true
+        "hidden": true,
+        "close": true
       }
     },
     {
@@ -65,6 +69,7 @@
       "cwd": "${workspaceFolder}/Server",
       "presentation": {
         "group": "Server",
+        "close": true,
       },
       "preLaunchTask": "npm watch-server",
       "postDebugTask": "npm stop"
@@ -91,7 +96,8 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
       "presentation": {
-        "hidden": true
+        "hidden": true,
+        "close": true
       }
     },
   ],
@@ -104,9 +110,10 @@
       ],
       "presentation": {
         "group": "Client",
+        "close": true
       },
       "preLaunchTask": "npm watch-client",
-      "postDebugTask":  "npm stop",
+      "postDebugTask": "npm stop",
     },
     {
       "name": "Client+API: Debug",
@@ -116,9 +123,10 @@
       ],
       "presentation": {
         "group": "Client",
+        "close": true,
       },
       "preLaunchTask": "npm watch-client",
-      "postDebugTask":  "npm stop",
+      "postDebugTask": "npm stop",
     },
     {
       "name": "Server: Debug",
@@ -127,6 +135,7 @@
       ],
       "presentation": {
         "group": "Server",
+        "close": true,
       },
       "preLaunchTask": "npm watch-server",
       "postDebugTask": "npm stop"

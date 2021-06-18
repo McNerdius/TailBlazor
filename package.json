@@ -1,15 +1,15 @@
 {
   "name": "tailblazor",
-  "version": "1.0.0",
+  "version": "0.3.0",
   "description": "template for using tailwind css in jit mode with blazor projects",
   "devDependencies": {
     "autoprefixer": "^10.2.5",
-    "cross-env": "^7.0.3",
     "postcss": "^8.2.10",
-    "postcss-cli": "^8.3.1",
-    "postcss-csso": "^5.0.1",
     "postcss-import": "^14.0.1",
-    "tailwindcss": "^2.1.1"
+    "tailwindcss": "^2.2.2",
+    "cross-env": "^7.0.3",
+    "postcss-cli": "^8.3.1",
+    "postcss-csso": "^5.0.1"
   },
   "scripts": {
     "watch-client": "postcss --verbose --watch ./Shared/Styles/tailwind.css -o ./Client/wwwroot/css/site.min.css",
