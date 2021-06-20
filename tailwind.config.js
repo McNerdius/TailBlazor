@@ -16,7 +16,7 @@ module.exports = {
             keyframes: {
                 hscroll: {
                     '0%': { transform: 'translateX(10vw)' },
-                    '50%': { transform: 'translateX(-100%) translateX(90vw)' },
+                    '50%': { transform: 'translateX(calc(90vw - 100%))' },
                     '100%': { transform: 'translateX(10vw)' },
                 }
             },
