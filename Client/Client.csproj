@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
     <PropertyGroup>
-        <TargetFramework>net5.0</TargetFramework>
+        <TargetFramework>net6.0</TargetFramework>
         <Nullable>Enable</Nullable>
         <RootNamespace>TailBlazor.BlazorWasm</RootNamespace>
     </PropertyGroup>
@@ -13,12 +13,4 @@
         <ProjectReference Include="..\Shared\Shared.csproj" />
         <ProjectReference Include="..\Core\Core.csproj" />
     </ItemGroup>
-
-    <ItemGroup>
-        <!-- exclude all Content items from being watched, -->
-        <!-- site.min.css in particular: this is a workaround -->
-        <!-- https://github.com/dotnet/aspnetcore/issues/27775 -->
-        <Content Update="@(Content)" Watch="false" />
-    </ItemGroup>
-
 </Project>
