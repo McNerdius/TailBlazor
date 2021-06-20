@@ -3,21 +3,16 @@
   "version": "0.3.0",
   "description": "template for using tailwind css in jit mode with blazor projects",
   "devDependencies": {
-    "autoprefixer": "^10.2.5",
-    "postcss": "^8.2.10",
     "postcss-import": "^14.0.1",
-    "tailwindcss": "^2.2.2",
-    "cross-env": "^7.0.3",
-    "postcss-cli": "^8.3.1",
-    "postcss-csso": "^5.0.1"
+    "tailwindcss": "^2.2.2"
   },
   "scripts": {
-    "watch-client": "postcss --verbose --watch ./Shared/Styles/tailwind.css -o ./Client/wwwroot/css/site.min.css",
-    "watch-server": "postcss --verbose --watch ./Shared/Styles/tailwind.css -o ./Server/wwwroot/css/site.min.css",
-    "build-client": "cross-env TAILWIND_MODE=build postcss --verbose ./Shared/Styles/tailwind.css -o ./Client/wwwroot/css/site.min.css",
-    "build-server": "cross-env TAILWIND_MODE=build postcss --verbose ./Shared/Styles/tailwind.css -o ./Server/wwwroot/css/site.min.css",
-    "publish-client": "postcss --verbose --env production ./Shared/Styles/tailwind.css -o ./Client/wwwroot/css/site.min.css",
-    "publish-server": "postcss --verbose --env production ./Shared/Styles/tailwind.css -o ./Server/wwwroot/css/site.min.css"
+    "watch-client": "npx tailwindcss --watch --config tailwind.config.js --postcss postcss.config.js -i ./Shared/Styles/tailwind.css -o ./Client/wwwroot/css/site.min.css",
+    "watch-server": "npx tailwindcss --watch --config tailwind.config.js --postcss postcss.config.js -i ./Shared/Styles/tailwind.css -o ./Server/wwwroot/css/site.min.css",
+    "build-client": "npx tailwindcss --config tailwind.config.js --postcss postcss.config.js -i ./Shared/Styles/tailwind.css -o ./Client/wwwroot/css/site.min.css",
+    "build-server": "npx tailwindcss --config tailwind.config.js --postcss postcss.config.js -i ./Shared/Styles/tailwind.css -o ./Server/wwwroot/css/site.min.css",
+    "publish-client": "npx tailwindcss --minify --config tailwind.config.js --postcss postcss.config.js -i ./Shared/Styles/tailwind.css -o ./Client/wwwroot/css/site.min.css",
+    "publish-server": "npx tailwindcss --minify --config tailwind.config.js --postcss postcss.config.js -i ./Shared/Styles/tailwind.css -o ./Server/wwwroot/css/site.min.css"
   },
   "keywords": [
     "tailwindcss",

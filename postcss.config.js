@@ -1,8 +1,6 @@
-module.exports = (context) => ({
+module.exports = {
     plugins: {
         'postcss-import': {},
         tailwindcss: {},
-        autoprefixer: {},
-        'postcss-csso': context.env === 'production' ? {} : false
     }
-});
+};
