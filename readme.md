@@ -36,16 +36,18 @@ Followed by things like... `dotnet new sln` / `dotnet sln add ...`, adding `Addi
 
 # Step 2 - Set up CSS Tools
 
+Note: as i write this, TailwindCSS 2.2 has just been released and the [Installation Docs](https://tailwindcss.com/docs/installation) haven't been fully updated.  
+
 ## - Installation
 
 Prerequisite is [node.js](https://nodejs.org/en/download/).
 
 * `npm init --yes` - initializes a `package.json` using defaults.  This is where CSS build scripts and tool references will go.
-* `npm install -D postcss@latest postcss-cli@latest postcss-import@latest postcss-csso@latest tailwindcss@latest autoprefixer@latest cross-env@latest` - All of the CSS tools we'll use.
+* `npm install -D postcss-import@latest tailwindcss@latest` -The CSS tools we'll use.
   
 ## - PostCSS configuration
 
-Tailwind CSS is one of four steps that take place to create the CSS the browser sees.  PostCSS is the plumbing, feeding input CSS sequentially through those four steps, and writes the result to disk.  [postcss.config.js](https://github.com/McNerdius/TailBlazor/blob/main/postcss.config.js) is where those steps are defined: `postcss-import` aggregates any files you `@import` in the input CSS file into one large in-memory file, feeds that to `tailwindcss` to insert its generated CSS, then to `autoprefixer` to cross-browserify it all, then `postcss-csso` to shrink it down - but only for production builds.
+PostCSS is like plumbing, feeding your input CSS sequentially through steps specified in `postcss.config.js` before outputting the final CSS to disk.  Prior to Tailwind 2.2, PostCSS had a more central role in this project: it's where CSS minification and enhanced cross-browser support via `autoprefixer` happened (followed by `tailwindcss` itself).  Tailwind 2.2 takes care of minification and prefixing for us.  If not for `postcss-import`, we wouldn't have to install that or use `postcss.config.js`.  (What `postcss-import` does is aggregates any CSS files you `@import` into one in-memory file before feeding it to `tailwindcss`.)
 
 ## - Tailwind configuration
 
@@ -61,10 +63,16 @@ Tailwind CSS is one of four steps that take place to create the CSS the browser 
 
 This is where we tell PostCSS what to do, in [package.json](https://github.com/McNerdius/TailBlazor/blob/main/package.json#L13) - transforming our five line CSS "master" file into kilobytes of generated CSS based on what Tailwind utilities are used in markup and any `tailwind.config.js` tweaks.
 
-* The `watch-***` scripts are the full-on Tailwind JIT long-running tasks that take CSS re-builds from several seconds down to ~100ms.
-* The `build-***` scripts do a one-off build where long-running isn't possible or needed.  `cross-env TAILWIND_MODE=build` tells tailwind to do a one-off build, `cross-env` is npm magic for setting environment variables in a cross-platform-friendly manner.
-* The `publish-***` do one-off builds and minifies the CSS.  The `--env production` is used in our [postcss.config.js](https://github.com/McNerdius/TailBlazor/blob/main/postcss.config.js#L6) toggles on minification and tailwind uses it to disable JIT mode, just as `TAILWIND_MODE=build` would.
+They are mostly the same, the `build-*` flavors being simplest:
 
+`npx tailwindcss --config tailwind.config.js --postcss postcss.config.js -i ./Shared/Styles/tailwind.css -o ./***/wwwroot/css/site.min.css`
+
+Just pointing it at the  `tailwind.config.js` and `postcss.config.js` config files, and the input & output files, nothing special.  This does a full, one-off build.  It is the "slow" option.
+
+* The `watch-***` scripts add `--watch` to the command line, which is what we want to do if at all possible.  Edits to CSS files will trigger very fast incremental builds.  However, because it is a long-running task, i haven't figured out how to integrate it into a standard .csproj/msbuild configuration for a seamless "F5" experience in Visual Studio.  The approaches i've tried will either block the build or start a new instance per build. 
+  
+* The `publish-***` scripts just add minification.
+  
 # Step 3 - CSS Isolation
 
 * The "normal" way to use CSS Isolation is [described here](https://docs.microsoft.com/en-us/aspnet/core/blazor/components/css-isolation?view=aspnetcore-5.0#css-isolation-bundling).  But we can't do that and take full advantage of Tailwind CSS (`@apply` and other directives), so we need to `@import` the "intermediate" bundle of the Scoped CSS located at `/Shared/obj/scopedcss/bundle/Shared.styles.css`.  See this in action in `tailwind.css` as mentioned above.
@@ -87,4 +95,4 @@ To start API alongside Client in Visual Studio, Right click on the Solution and 
 
 # Step 5 - Set up Deploy
 
-Steps [have been added](https://github.com/McNerdius/TailBlazor/blob/main/.github/workflows/azure-static-web-apps-polite-sky-006af1d1e.yml#L23) to the GitHub Workflow `yaml` file.  The Static Web Apps Build/Deploy doesn't automatically install node.js so i've done it all beforehand, feeding the freshly-published directory to `app_location` where before that would have pointed to the to-be-published project's root folder.
+Steps [have been added](https://github.com/McNerdius/TailBlazor/blob/main/.github/workflows/azure-static-web-apps-polite-sky-006af1d1e.yml#L23) to the GitHub Workflow `yml` file.  The Static Web Apps Build/Deploy doesn't automatically install node.js so i've done it all beforehand, feeding the freshly-published directory to `app_location` where before that would have pointed to the to-be-published project's root folder.
