@@ -1,4 +1,8 @@
 
+# 0.3.1
+
+* Add a `no-hover` screen to demonstrate [custom media queries](https://tailwindcss.com/docs/breakpoints#custom-media-queries) and stacking [variants](https://tailwindcss.com/docs/hover-focus-and-other-states): Using a device with no "mouse-hover" capability, every other PersonCard will use a serif font, by adding `screens: { 'no-hover': { 'raw': '(hover:none)' } }` to `tailwind.config.js` and `no-hover:even:font-serif` to the `<li>` surrounding `<PersonCard />`
+
 # 0.3
 
 * Upgrade to Tailwind 2.2

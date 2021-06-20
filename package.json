@@ -1,6 +1,6 @@
 {
   "name": "tailblazor",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "template for using tailwind css in jit mode with blazor projects",
   "devDependencies": {
     "postcss-import": "^14.0.1",
