@@ -4,4 +4,5 @@
   @apply md:shadow-md md:rounded-xl md:h-64 md:w-96 md:m-4;
   @apply ring-2 hover:ring-4 ring-accent-300;
   @apply transition-all duration-300;
+  backface-visibility: hidden;
 }
