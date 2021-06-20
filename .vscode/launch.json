@@ -29,7 +29,7 @@
       }
     },
     {
-      "name": "Client: Watch",
+      "name": "Client ONLY: Watch",
       "type": "coreclr",
       "request": "launch",
       "program": "dotnet",
@@ -40,17 +40,15 @@
       ],
       "cwd": "${workspaceFolder}/Client",
       "presentation": {
-        "hidden": true,
         "close": true
       }
     },
     {
-      "name": "Client: Debug",
+      "name": "Client ONLY: Debug",
       "type": "blazorwasm",
       "request": "launch",
       "cwd": "${workspaceFolder}/Client",
       "presentation": {
-        "hidden": true,
         "close": true
       }
     },
@@ -62,8 +60,7 @@
       "console": "integratedTerminal",
       "args": [
         "watch",
-        "run",
-        "--configuration vscode",
+        "run"
       ],
       "cwd": "${workspaceFolder}/Server",
       "presentation": {
@@ -105,7 +102,7 @@
       "name": "Client+API: Watch",
       "configurations": [
         "API: Watch",
-        "Client: Watch"
+        "Client ONLY: Watch"
       ],
       "presentation": {
         "group": "Client",
@@ -113,12 +110,13 @@
       },
       "preLaunchTask": "npm watch-client",
       "postDebugTask": "npm stop",
+      "stopAll": true
     },
     {
       "name": "Client+API: Debug",
       "configurations": [
         "API: Debug",
-        "Client: Debug"
+        "Client ONLY: Debug"
       ],
       "presentation": {
         "group": "Client",
@@ -126,6 +124,7 @@
       },
       "preLaunchTask": "npm watch-client",
       "postDebugTask": "npm stop",
+      "stopAll": true
     },
     {
       "name": "Server: Debug",
@@ -137,7 +136,8 @@
         "close": true,
       },
       "preLaunchTask": "npm watch-server",
-      "postDebugTask": "npm stop"
+      "postDebugTask": "npm stop",
+      "stopAll": true
     }
   ]
 }
