@@ -22,6 +22,9 @@ module.exports = {
             },
             animation: {
                 hscroll: 'hscroll 300s infinite linear',
+            },
+            screens: {
+                'no-hover': { 'raw': '(hover:none)' }
             }
         },
     },
