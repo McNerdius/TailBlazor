@@ -82,7 +82,7 @@
       "request": "launch",
       "preLaunchTask": "Server: Clean & Build",
       // If you have changed target frameworks, make sure to update the program path.
-      "program": "${workspaceFolder}/Server/bin/Debug/net5.0/Server.dll",
+      "program": "${workspaceFolder}/Server/bin/Debug/net6.0/Server.dll",
       "args": [],
       "cwd": "${workspaceFolder}/Server",
       "stopAtEntry": false,
