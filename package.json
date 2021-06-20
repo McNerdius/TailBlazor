@@ -19,5 +19,8 @@
     "blazor"
   ],
   "author": "mcnerdius",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "@tailwindcss/line-clamp": "^0.2.1"
+  }
 }
