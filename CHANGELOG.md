@@ -2,7 +2,7 @@
 # 0.3
 
 * Upgrade to Tailwind 2.2
-  * Remove `autoprefixer`, and `postcss-csso` dependencies as Tailwind 2.2 takes care of this now.
+  * Remove `autoprefixer` and `postcss-csso` dependencies as Tailwind 2.2 takes care of this now.
   * Remove `cross-env`, `postcss`, `postcss-cli` as the new Tailwind CLI takes care of this.
   * Remove now-redundant `transform` classes.
 
