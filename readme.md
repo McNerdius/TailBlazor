@@ -4,9 +4,9 @@
 
 * UI in a separate project (`Shared`) so it can be used by existing and upcoming Blazor project types as well as MVC/Razor Pages.
 * Coupling Tailwind CSS `@apply` with Blazor [CSS Isolation](https://docs.microsoft.com/en-us/aspnet/core/blazor/components/css-isolation) / Bundling, by referencing the intermediate build of the `Shared` project's CSS.
-* Taking full advantage of Tailwind's great new [JIT mode](https://tailwindcss.com/docs/just-in-time-mode), by using an `npm` task rather than relying on `dotnet watch` which would do a full rebuild.
-* Optimal "F5" debug/run experience, with the above (isolation/JIT) in mind - Everything should Just Work™ in VS Code, but having tailwind JIT run "behind" VS Debug or `dotnet watch` is another story, hopefully an msbuild guru can help figure this one out.
-* Implementing a Light/Dark/System theme switcher, using Tailwind's [`class` darkMode](https://tailwindcss.com/docs/dark-mode#toggling-dark-mode-manually) & Blazor's JS Isolation/Interop.
+* Taking full advantage of Tailwind's great new [JIT mode](https://tailwindcss.com/docs/just-in-time-mode), by using background `npm` task rather than relying on `dotnet watch` / msbuild to do a full rebuild.
+* Optimal "F5" debug/run experience, with the above (isolation/JIT) in mind - Everything should Just Work™ in VS Code, but having Tailwind JIT run "behind" Visual Studio Debug or `dotnet watch` is another story, hopefully an msbuild guru can help figure this one out.  (In a csproj/msbuild context, can't figure out how to get a long-running `watch` task to: A) launch only one instance and B) not block the build.)
+* Implementing a Light/Dark/System theme switcher, using Tailwind's [`class` dark Mode](https://tailwindcss.com/docs/dark-mode#toggling-dark-mode-manually) & Blazor's JS Isolation/Interop.
 * Azure Functions API & Azure Static Web Apps Deployment.
 * Basic Dependency Injection in each project.
 
@@ -18,7 +18,7 @@ I'll link a more detailed post in the future, but for now i'll run through the k
 
 # Step 1 - Scaffold the C# projects
 
-Prerequisites... [dotnet SDK](https://dotnet.microsoft.com/download/dotnet/5.0) and latest [Azure Functions Core Tools](https://docs.microsoft.com/en-us/azure/azure-functions/functions-develop-local).
+Prerequisites... [dotnet SDK](https://dotnet.microsoft.com/download/dotnet/6.0) preview 5 and latest [Azure Functions Core Tools](https://docs.microsoft.com/en-us/azure/azure-functions/functions-develop-local).
 
 Templates used for the projects:
 
@@ -65,9 +65,9 @@ This is where we tell PostCSS what to do, in [package.json](https://github.com/M
 * The `build-***` scripts do a one-off build where long-running isn't possible or needed.  `cross-env TAILWIND_MODE=build` tells tailwind to do a one-off build, `cross-env` is npm magic for setting environment variables in a cross-platform-friendly manner.
 * The `publish-***` do one-off builds and minifies the CSS.  The `--env production` is used in our [postcss.config.js](https://github.com/McNerdius/TailBlazor/blob/main/postcss.config.js#L6) toggles on minification and tailwind uses it to disable JIT mode, just as `TAILWIND_MODE=build` would.
 
-# Step 3 - Scoped CSS
+# Step 3 - CSS Isolation
 
-* The "normal" way to use Scoped CSS is [described here](https://docs.microsoft.com/en-us/aspnet/core/blazor/components/css-isolation?view=aspnetcore-5.0#css-isolation-bundling).  But we can't do that and take full advantage of Tailwind CSS (`@apply` and other directives), so we need to `@import` the "intermediate" bundle of the Scoped CSS located at `/Shared/obj/scopedcss/bundle/Shared.styles.css`.  See this in action in `tailwind.css` as mentioned above.
+* The "normal" way to use CSS Isolation is [described here](https://docs.microsoft.com/en-us/aspnet/core/blazor/components/css-isolation?view=aspnetcore-5.0#css-isolation-bundling).  But we can't do that and take full advantage of Tailwind CSS (`@apply` and other directives), so we need to `@import` the "intermediate" bundle of the Scoped CSS located at `/Shared/obj/scopedcss/bundle/Shared.styles.css`.  See this in action in `tailwind.css` as mentioned above.
 
 # Step 4 - Set up Build
 
@@ -79,7 +79,9 @@ A smooth "F5" experience using `dotnet watch` requires the following: (Debug is 
    * Do NOT restart `watch-***` npm script during an automated `dotnet watch` rebuild.
 4) Stop `watch-***` npm script when `dotnet watch` exits.
    
-I've got that all sorted for VS Code in `tasks.json` / `launch.json` but haven't come up with an uncompromising solution for Visual Studio.  I've put a build Target in the `.csproj` to do a full (non-JIT) CSS build - but that task can't "watch" as it would stall the build.  One could run `watch-***` as a pre-build task in Visual Studio (Right Click on the project, go to Properties, then Build Events) - but it wouldn't automatically stop.  Best to just manually start it in an external terminal and leave it run until you're done working ?  (I've filed an issue about this, feel free to comment or PR a solution.) 
+I've got that all sorted for VS Code in `tasks.json` / `launch.json` but haven't come up with an uncompromising solution for Visual Studio.  I've put a build Target in the `.csproj` to do a full (non-JIT) CSS build - but that task can't "watch" as it would stall the build.  One could run `watch-***` as a pre-build task in Visual Studio (Right Click on the project, go to Properties, then Build Events) - but it wouldn't automatically stop.  Best to just manually start it in an external terminal and leave it run until you're done working ?  (I've filed an issue about this, feel free to comment or PR a solution.)
+
+(Ideally we'd be able to watch a debug session, but that combo isn't compatible]((https://github.com/dotnet/aspnetcore/issues/5456#issuecomment-726993425) with Hot Reload.)
 
 To start API alongside Client in Visual Studio, Right click on the Solution and go to "Set Startup Projects" and use "Multiple Startup Projects."
 

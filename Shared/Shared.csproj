@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk.Razor">
     <PropertyGroup>
-        <TargetFramework>net5.0</TargetFramework>
+        <TargetFramework>net6.0</TargetFramework>
         <Nullable>Enable</Nullable>
         <RootNamespace>TailBlazor.Shared</RootNamespace>
         <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
@@ -17,6 +17,7 @@
     </ItemGroup>
     <Target Name="tw-build" AfterTargets="Build" Condition="'$(Configuration)' == 'Debug'" >
         <Exec Command="npm run build-client" />
+        <Message Text="SLOW CSS BUILD" />
         <Copy SourceFiles="$(MSBuildProjectDirectory)/../Client/wwwroot/css/site.min.css" DestinationFolder="$(MSBuildProjectDirectory)/../Server/wwwroot/css/" />
     </Target>
     <Target Name="tw-publish" AfterTargets="Build" Condition="'$(Configuration)' == 'Release'" >
