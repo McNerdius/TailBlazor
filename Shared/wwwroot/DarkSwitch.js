@@ -1,36 +1,35 @@
 const darkQuery = window.matchMedia('(prefers-color-scheme: dark)');
 darkQuery.addEventListener('change', e => listener(e));
 
-export function switchTheme(theme)
+export function switchTheme(newTheme)
 {
-    if (theme === 'load')
-    {
-        theme = ('theme' in localStorage)
-            ? localStorage.theme
-            : 'system';
-    }
+    if ("theme" in localStorage)
+        removeClassFromDocument(localStorage.theme);
 
-    localStorage.theme = theme;
+    localStorage.theme = newTheme ?? localStorage.theme ?? "system";
 
-    let currentTheme = theme;
-
-    if (currentTheme === 'system')
-        currentTheme = darkQuery.matches ? 'dark' : 'light';
-
-    if (currentTheme === 'dark')
-        document.documentElement.classList.add('dark');
+    if (localStorage.theme === 'system')
+        applySystemTheme();
     else
-        document.documentElement.classList.remove('dark');
+        addClassToDocument(localStorage.theme);
 
-    return theme;
+    return localStorage.theme;
 }
 
-function listener(darkModeSwitch)
+function addClassToDocument(theme) { document.documentElement.classList.add(theme); }
+function removeClassFromDocument(theme) { document.documentElement.classList.remove(theme); }
+
+function applySystemTheme()
+{
+    if (darkQuery.matches)
+        addClassToDocument('dark');
+    else
+        removeClassFromDocument('dark');
+}
+
+function listener(e)
 {
     if (localStorage.theme !== 'system') return;
 
-    if (darkModeSwitch.matches)
-        document.documentElement.classList.add('dark');
-    else
-        document.documentElement.classList.remove('dark');
+    applySystemTheme();
 }
