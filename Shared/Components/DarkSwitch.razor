@@ -46,7 +46,7 @@
 
     private string currentTheme = "";
 
-    private async Task setTheme(string mode)
+    private async Task setTheme(string? mode)
     {
         var module = await Module;
         currentTheme = await module.InvokeAsync<string>("switchTheme", mode);
@@ -56,8 +56,7 @@
     {
         if (firstRender)
         {
-            var module = await Module;
-            currentTheme = await module.InvokeAsync<string>("switchTheme", "load");
+            await setTheme(null);
             StateHasChanged();
         }
     }
