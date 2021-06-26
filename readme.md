@@ -15,6 +15,8 @@
 
 I'll link a more detailed post in the future, but for now i'll run through the key steps.  Here's the deployed [Static Web App](https://polite-sky-006af1d1e.azurestaticapps.net/).  The animation used to demonstrate DI, CSS Isolation, and a bunch of Tailwind features is inspired by one on [TailwindCSS.com](https://tailwindcss.com/)
 
+See also [TailBlazorLite](https://github.com/McNerdius/TailBlazorLite) for a minimal version, just the default Blazor WASM project template, minus Bootstrap, plus Tailwind JIT & "F5" hooked up.
+
 ---
 
 # Prerequisites
