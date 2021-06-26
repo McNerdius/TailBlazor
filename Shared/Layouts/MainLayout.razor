@@ -4,7 +4,7 @@
 @inherits LayoutComponentBase
 @inject NavigationManager navManager
 
-<div class="flex flex-col justify-between h-full">
+<div class="flex flex-col justify-between h-full @accentColor" @onclick="changeAccent">
 
     <div class="flex justify-center pt-[10px]">
         <DarkSwitch />
@@ -18,7 +18,7 @@
         
         <button type="button" 
                 class="flex m-auto rounded-full px-1
-                        ring-1 ring-accent-300
+                        ring-1 ring-accent
                        dark:bg-gray-700 dark:text-gray-100
                        bg-gray-100 text-gray-700
                         focus:outline-none group"
@@ -37,3 +37,18 @@
 
     </div>
 </div>
+
+@code 
+{
+    private static Random random = new();
+    private string accentColor = "accent-green";
+
+    void changeAccent()
+    {
+        var colors = new[] { "blue", "green", "yellow", "indigo", "pink", "black", "white" };
+
+        accentColor = $"accent-{oneOf(colors)}";
+
+        T oneOf<T>(IEnumerable<T> items) => items.OrderBy(_ => random.Next()).First();
+    }
+}

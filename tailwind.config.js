@@ -11,7 +11,7 @@ module.exports = {
             colors: {
                 primary: colors.blue,
                 secondary: colors.amber,
-                accent: colors.lime
+                accent: "var(--accent-color)",
             },
             keyframes: {
                 hscroll: {
@@ -21,7 +21,7 @@ module.exports = {
                 }
             },
             animation: {
-                hscroll: 'hscroll 300s infinite linear',
+                hscroll: 'hscroll 300s infinite linear'
             },
             screens: {
                 'no-hover': { 'raw': '(hover:none)' }
