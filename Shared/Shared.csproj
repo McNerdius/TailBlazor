@@ -17,11 +17,8 @@
     </ItemGroup>
     <Target Name="tw-build" AfterTargets="Build" Condition="'$(Configuration)' == 'Debug'" >
         <Exec Command="npm run build-client" />
-        <Message Text="SLOW CSS BUILD" />
-        <Copy SourceFiles="$(MSBuildProjectDirectory)/../Client/wwwroot/css/site.min.css" DestinationFolder="$(MSBuildProjectDirectory)/../Server/wwwroot/css/" />
     </Target>
     <Target Name="tw-publish" AfterTargets="Build" Condition="'$(Configuration)' == 'Release'" >
         <Exec Command="npm run publish-client" />
-        <Copy SourceFiles="$(MSBuildProjectDirectory)/../Client/wwwroot/css/site.min.css" DestinationFolder="$(MSBuildProjectDirectory)/../Server/wwwroot/css/" />
     </Target>
 </Project>

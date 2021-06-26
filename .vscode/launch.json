@@ -109,7 +109,6 @@
         "close": true
       },
       "preLaunchTask": "npm watch-client",
-      "postDebugTask": "npm stop",
       "stopAll": true
     },
     {
@@ -123,7 +122,6 @@
         "close": true,
       },
       "preLaunchTask": "npm watch-client",
-      "postDebugTask": "npm stop",
       "stopAll": true
     },
     {
@@ -136,7 +134,6 @@
         "close": true,
       },
       "preLaunchTask": "npm watch-server",
-      "postDebugTask": "npm stop",
       "stopAll": true
     }
   ]

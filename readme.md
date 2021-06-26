@@ -5,7 +5,8 @@
 * Taking full advantage of Tailwind's great new [JIT mode](https://tailwindcss.com/docs/just-in-time-mode) intermediate builds, by using background `npm` tasks rather than relying on `dotnet watch` / msbuild to do a full rebuild.
 * Coupling Tailwind CSS with Blazor [CSS Isolation](https://docs.microsoft.com/en-us/aspnet/core/blazor/components/css-isolation), by referencing the `Shared` Razor Class Library's intermediate CSS bundle.
 * Optimal "F5" debug/run experience, with the above (isolation/JIT) in mind - Everything should Just Work™ in VS Code, but having Tailwind JIT run "behind" Visual Studio Debug or `dotnet watch` is another story, hopefully an msbuild guru can help figure this one out.  (In a csproj/msbuild context, i can't figure out how to get a long-running watch task to: A) launch only one instance and B) not block the build.)
-* Implementing a Light/Dark/System theme switcher, using Tailwind's [`class` dark Mode](https://tailwindcss.com/docs/dark-mode#toggling-dark-mode-manually) & Blazor's JS Isolation/Interop.
+* Implementing a Light/Dark/System mode switcher, using Tailwind's [`class` dark Mode](https://tailwindcss.com/docs/dark-mode#toggling-dark-mode-manually) & Blazor's JS Isolation/Interop.
+* Integrating CSS Variables with Tailwind Config - configuring an `accent` color in `tailwind.config.js` equal to `var(--accent-color)` so that anywhere `accent` is used (`ring-accent` and `border-accent` here, but `bg-`, `text-`, etc as well), changes to `--accent-color` will be reflected.  Click the page to see it in action.  
 * UI in a separate project (`Shared`) so it can be used by existing and upcoming Blazor project types as well as MVC/Razor Pages.
 * Azure Functions API & Azure Static Web Apps Deployment.
 * Basic Dependency Injection in each project.

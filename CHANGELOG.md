@@ -1,3 +1,8 @@
+# 0.4
+
+* DarkSwitch.js redone with theming in mind.  It defaults to `system`, matching [Tailwind's `media` mode](https://tailwindcss.com/docs/dark-mode), toggling `dark` based user system settings.  More work to be done though, upgrading [`foo`, `bar`, ..., `system`, `dark`] to look like [`foo`, `bar`, ...] * [`system`, `dark`].  UI work first though.
+  
+* Show use of CSS Variables in `tailwind.config.json`.  Various classes are defined in `site.css`, each with its own definition of `--accent-color`.  In `tailwind.config.js`, `colors.accent` is defined as `var(--accent-color)`.  Initially, `accent-green` is placed on a top-level `div`, and clicking on the page then changes that class randomly.  I went this route for now as a minimal demonstration of how it all works together - the CSS, the Tailwind Config, the Razor, the JS and JS interop.  Eventually DarkSwitch will become ThemeSwitch, for a more real world example.
 
 # 0.3.1
 
@@ -7,7 +12,7 @@
 
 * Upgrade to Tailwind 2.2
   * Remove `autoprefixer` and `postcss-csso` dependencies as Tailwind 2.2 takes care of this now.
-  * Remove `cross-env`, `postcss`, `postcss-cli` as the new Tailwind CLI takes care of this.
+  * Remove `cross-env`, `postcss`, and `postcss-cli` as the new Tailwind CLI takes care of this.
   * Remove now-redundant `transform` classes.
 
 * Upgrade Blazor projects to .NET 6 Preview 5
