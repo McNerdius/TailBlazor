@@ -15,10 +15,17 @@
     <ItemGroup>
         <ProjectReference Include="..\Core\Core.csproj" />
     </ItemGroup>
-    <Target Name="tw-build" AfterTargets="Build" Condition="'$(Configuration)' == 'Debug'" >
-        <Exec Command="npm run build-client" />
+    <Target Name="npm check" BeforeTargets="npm install">
+        <Exec Command="npm -v" ContinueOnError="true">
+            <Output TaskParameter="ExitCode" PropertyName="error" />
+        </Exec>
+        <Error Condition="'$(error)' != '0'" Text="install npm please !" />
     </Target>
-    <Target Name="tw-publish" AfterTargets="Build" Condition="'$(Configuration)' == 'Release'" >
-        <Exec Command="npm run publish-client" />
+    <Target Name="npm install" BeforeTargets="tailwind build">
+        <Exec Command="npm install" />
+    </Target>
+    <Target Name="tailwind build" AfterTargets="Build">
+        <Exec Command="npm run build-client" Condition="'$(Configuration)' == 'Debug'"/>
+        <Exec Command="npm run publish-client" Condition="'$(Configuration)' == 'Release'"/>
     </Target>
 </Project>
