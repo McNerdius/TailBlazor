@@ -7,6 +7,7 @@
       "request": "launch",
       "program": "dotnet",
       "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen",
       "args": [
         "watch",
         "msbuild",
@@ -26,7 +27,8 @@
       "presentation": {
         "group": "API",
         "close": true,
-      }
+      },
+      "internalConsoleOptions": "neverOpen"
     },
     {
       "name": "Client ONLY: Watch",
@@ -34,6 +36,9 @@
       "request": "launch",
       "program": "dotnet",
       "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen",
+      "preLaunchTask": "start tailwind jit/watch",
+      "postDebugTask": "stop tailwind jit/watch",
       "args": [
         "watch",
         "run"
@@ -48,9 +53,11 @@
       "type": "blazorwasm",
       "request": "launch",
       "cwd": "${workspaceFolder}/Client",
+      "preLaunchTask": "Clean & Build All",
       "presentation": {
         "close": true
-      }
+      },
+      "internalConsoleOptions": "neverOpen"
     },
     {
       "name": "Server: Watch",
@@ -58,6 +65,7 @@
       "request": "launch",
       "program": "dotnet",
       "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen",
       "args": [
         "watch",
         "run"
@@ -67,17 +75,17 @@
         "group": "Server",
         "close": true,
       },
-      "preLaunchTask": "npm watch-server",
-      "postDebugTask": "npm stop"
+      "preLaunchTask": "start tailwind jit/watch",
+      "postDebugTask": "stop tailwind jit/watch"
     },
     {
       // Use IntelliSense to find out which attributes exist for C# debugging
       // Use hover for the description of the existing attributes
       // For further information visit https://github.com/OmniSharp/omnisharp-vscode/blob/master/debugger-launchjson.md
-      "name": "Server: Build & Debug",
+      "name": "Server: Debug",
       "type": "coreclr",
       "request": "launch",
-      "preLaunchTask": "Server: Clean & Build",
+      "preLaunchTask": "Clean & Build All",
       // If you have changed target frameworks, make sure to update the program path.
       "program": "${workspaceFolder}/Server/bin/Debug/net6.0/Server.dll",
       "args": [],
@@ -92,10 +100,12 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
       "presentation": {
+        "group": "Server",
         "hidden": true,
         "close": true
-      }
-    },
+      },
+      "internalConsoleOptions": "neverOpen"
+    }
   ],
   "compounds": [
     {
@@ -108,7 +118,6 @@
         "group": "Client",
         "close": true
       },
-      "preLaunchTask": "npm watch-client",
       "stopAll": true
     },
     {
@@ -121,19 +130,6 @@
         "group": "Client",
         "close": true,
       },
-      "preLaunchTask": "npm watch-client",
-      "stopAll": true
-    },
-    {
-      "name": "Server: Debug",
-      "configurations": [
-        "Server: Build & Debug"
-      ],
-      "presentation": {
-        "group": "Server",
-        "close": true,
-      },
-      "preLaunchTask": "npm watch-server",
       "stopAll": true
     }
   ]

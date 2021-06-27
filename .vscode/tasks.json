@@ -1,6 +1,6 @@
 {
-	"version": "2.0.0",
-	"tasks": [
+  "version": "2.0.0",
+  "tasks": [
     {
       "label": "API: Clean & Build",
       "type": "shell",
@@ -8,7 +8,7 @@
       "presentation": {
         "reveal": "silent",
         "panel": "shared",
-        "clear":true
+        "clear": true
       },
       "problemMatcher": "$msCompile",
       "options": {
@@ -23,7 +23,7 @@
       "presentation": {
         "reveal": "silent",
         "panel": "shared",
-        "clear":true
+        "clear": true
       },
       "problemMatcher": "$msCompile",
       "options": {
@@ -38,7 +38,7 @@
       "presentation": {
         "reveal": "silent",
         "panel": "shared",
-        "clear":true
+        "clear": true
       },
       "problemMatcher": "$msCompile",
       "options": {
@@ -53,7 +53,7 @@
       "presentation": {
         "reveal": "silent",
         "panel": "shared",
-        "clear":true
+        "clear": true
       },
       "problemMatcher": "$msCompile",
       "options": {
@@ -68,7 +68,7 @@
       "presentation": {
         "reveal": "silent",
         "panel": "shared",
-        "clear":true
+        "clear": true
       },
       "problemMatcher": "$msCompile",
       "options": {
@@ -89,33 +89,36 @@
         "echo": false,
         "reveal": "silent",
         "panel": "shared",
-        "clear":true
+        "clear": true
       },
       "group": "build"
     },
     {
-      "label": "npm watch-client",
+      "label": "start tailwind jit/watch",
       "type": "npm",
       "script": "watch-client",
-      "problemMatcher": [],
+      // "problemMatcher": [],
       "isBackground": true,
       "presentation": {
         "echo": false,
-        "reveal": "silent",
+        "reveal": "never",
         "panel": "shared",
-        "clear":true
+        "clear": true
       }
     },
     {
-      "label": "npm stop",
+      "label": "stop tailwind jit/watch",
+      "command": "echo ${input:terminate}",
       "type": "shell",
-      "command": "npm stop",
-      "problemMatcher": [],
-            "presentation": {
-        "echo": false,
-        "reveal": "silent",
-        "panel": "shared"
-      }
+      "problemMatcher": []
+    }
+  ],
+  "inputs": [
+    {
+      "id": "terminate",
+      "type": "command",
+      "command": "workbench.action.tasks.terminate",
+      "args": "start tailwind jit/watch"
     }
   ]
 }
