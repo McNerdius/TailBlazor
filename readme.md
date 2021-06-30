@@ -1,5 +1,7 @@
 # A reference setup for using Blazor with Tailwind JIT
 
+See [TailBlazorLite](https://github.com/McNerdius/TailBlazorLite) for just the default Blazor WASM project template, minus Bootstrap, plus Tailwind JIT & VS Code "F5" hooked up.
+
 ## Quick overview:
 
 * Taking full advantage of Tailwind's great new [JIT mode](https://tailwindcss.com/docs/just-in-time-mode) intermediate builds, by using background `npm` tasks rather than relying on `dotnet watch` / msbuild to do a full rebuild.
@@ -14,8 +16,6 @@
 ---
 
 I'll link a more detailed post in the future, but for now i'll run through the key steps.  Here's the deployed [Static Web App](https://polite-sky-006af1d1e.azurestaticapps.net/).  The animation used to demonstrate DI, CSS Isolation, and a bunch of Tailwind features is inspired by one on [TailwindCSS.com](https://tailwindcss.com/)
-
-See also [TailBlazorLite](https://github.com/McNerdius/TailBlazorLite) for a minimal version, just the default Blazor WASM project template, minus Bootstrap, plus Tailwind JIT & "F5" hooked up.
 
 ---
 
