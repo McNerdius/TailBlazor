@@ -1,6 +1,6 @@
 # A reference setup for using Blazor with Tailwind JIT
 
-See [TailBlazorLite](https://github.com/McNerdius/TailBlazorLite) for just the default Blazor WASM project template, minus Bootstrap, plus Tailwind JIT & VS Code "F5" hooked up.
+👉 See [TailBlazorLite](https://github.com/McNerdius/TailBlazorLite) for just the default Blazor WASM project template, minus Bootstrap, plus Tailwind JIT & VS Code "F5" hooked up.
 
 ## Quick overview:
 
