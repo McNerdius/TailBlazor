@@ -1,10 +1,8 @@
 {
-  "recommendations": [
-    "bradlc.vscode-tailwindcss",
-    "rangav.vscode-thunder-client",
-    "ms-dotnettools.blazorwasm-companion",
-    "ms-azuretools.vscode-azurestaticwebapps",
-    "ms-azuretools.vscode-azurefunctions",
-    "ms-dotnettools.csharp"
-  ]
+   "recommendations": [
+      "bradlc.vscode-tailwindcss",
+      "rangav.vscode-thunder-client",
+      "ms-dotnettools.blazorwasm-companion",
+      "ms-dotnettools.csharp"
+   ]
 }
