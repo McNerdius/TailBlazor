@@ -19,7 +19,7 @@
         <Exec Command="npm -v" ContinueOnError="true">
             <Output TaskParameter="ExitCode" PropertyName="error" />
         </Exec>
-        <Error Condition="'$(error)' != '0'" Text="install npm please !" />
+        <Error Condition="'$(error)' != '0'" Text="install node.js/npm please ! https://nodejs.org/" />
     </Target>
     <Target Name="npm install" BeforeTargets="tailwind build">
         <Exec Command="npm install" />

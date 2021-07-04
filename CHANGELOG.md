@@ -1,3 +1,12 @@
+# 0.4.5
+
+* Added a workaround for parallel builds "file in use" issue.  An initial "build all" followed by a `dotnet watch run --no-build` would be useless, as no subsequent builds would happen on edit.  Workaround being, a manual 2 second delay between run/build of API & Client.  Something better exists, surely.
+* Added `npm check` and `npm install` Targets to Shared.csproj.  These are a "first run only" / UX sort of thing that will slow down subsequent builds and can be removed/commented to speed things up if node & the packages are installed.  Similar with the `tailwind build` target - if you're using VS Code and the launch configs i've set up, that Target is redundant and can be removed/commented.
+* Added in some C# tweaks to `.vscode/settings.json`.  The `*EditorConfig` and `*RoslynAnalyzers` settings are particularily important as they bring the C# editing much closer to Visual Studio, are disabled by default, and last i checked they are undocumented.
+    * enable full auto-formatting, auto-`using`, semantic highlighting
+    * `omnisharp.enableEditorConfigSupport` to enable the same "Code Style" enforcement and formatting featured in Visual Studio, but provided by Roslyn.  See [here](https://docs.microsoft.com/en-us/visualstudio/ide/code-styles-and-code-cleanup?view=vs-2019#code-styles-in-editorconfig-files), [here](https://docs.microsoft.com/en-us/visualstudio/ide/create-portable-custom-editor-options?view=vs-2019), and [here](https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/configuration-options?view=vs-2019).
+    * `omnisharp.enableRoslynAnalyzers` to enable the same analyzers, code fixes, and refactorings featured in Visual Studio, but again provided by Roslyn.
+
 # 0.4
 
 * DarkSwitch.js redone with theming in mind.  It defaults to `system`, matching [Tailwind's `media` mode](https://tailwindcss.com/docs/dark-mode), toggling `dark` based user system settings.  More work to be done though, upgrading [`foo`, `bar`, ..., `system`, `dark`] to look like [`foo`, `bar`, ...] * [`system`, `dark`].  UI work first though.
