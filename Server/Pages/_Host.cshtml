@@ -12,13 +12,15 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>Client</title>
-    <link rel="stylesheet" href="/css/site.min.css" />
+    <link rel="stylesheet" href="/_content/Shared/Shared.css" />
     <base href="/" />
 </head>
 
 <body>
     
-    <component type="typeof(App)" render-mode="ServerPrerendered" />
+    <div class="bg-gray-100 dark:bg-gray-500 w-screen h-screen">
+        <component type="typeof(App)" render-mode="ServerPrerendered" />
+    </div>
 
     <div id="blazor-error-ui">
         <environment include="Staging,Production">
