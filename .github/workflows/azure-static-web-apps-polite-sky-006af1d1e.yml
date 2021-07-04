@@ -34,7 +34,7 @@ jobs:
         run: npm install
 
       - name: Initial Build
-        run: dotnet build
+        run: dotnet build ./Client
 
       - name: Build CSS
         run: npm run publish
