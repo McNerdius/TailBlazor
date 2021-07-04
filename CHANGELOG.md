@@ -1,3 +1,8 @@
+# 0.5
+
+* Rearrange CSS structure.  See [the issue](https://github.com/McNerdius/TailBlazor/issues/5) for more info.
+* Revert `delay` task - `npx tailwindcss` no longer exited post-debug.  Look for that "something better" i guess.
+
 # 0.4.5
 
 * Added a workaround for parallel builds "file in use" issue.  An initial "build all" followed by a `dotnet watch run --no-build` would be useless, as no subsequent builds would happen on edit.  Workaround being, a manual 2 second delay between run/build of API & Client.  Something better exists, surely.
@@ -56,12 +61,12 @@ Minor Fixes/Improvements:
 
 ### Summary:
 
-| Context                | Build Configuration      | npm script     | behavior                                                                                           |
-| :--------------------- | :----------------------- | :------------- | :------------------------------------------------------------------------------------------------- |
-| VS "F5"                | Debug (default)          | build-client   | one-off build; does not take advantage of tailwind JIT                                             |
-| VS Code "F5"           | vscode (via launch.json) | watch-client   | tailwind/postcss watches files independent of `dotnet watch`, stops when done running.             |
-| Static Web Apps deploy | Release (default)        | publish-client | minifies.                                                                                          |
-| `dotnet watch run`     | Debug (default)          | build-client   | also does not take advantage of tailwind JIT: rebuilds css from scratch each time `watch` rebuilds |  |
+| Context                | Build Configuration      | npm script | behavior                                                                                           |
+| :--------------------- | :----------------------- | :--------- | :------------------------------------------------------------------------------------------------- |
+| VS "F5"                | Debug (default)          | build      | one-off build; does not take advantage of tailwind JIT                                             |
+| VS Code "F5"           | vscode (via launch.json) | watch      | tailwind/postcss watches files independent of `dotnet watch`, stops when done running.             |
+| Static Web Apps deploy | Release (default)        | publish    | minifies.                                                                                          |
+| `dotnet watch run`     | Debug (default)          | build      | also does not take advantage of tailwind JIT: rebuilds css from scratch each time `watch` rebuilds |  |
  
 ### Also: 
   

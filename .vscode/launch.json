@@ -37,8 +37,8 @@
       "program": "dotnet",
       "console": "integratedTerminal",
       "internalConsoleOptions": "neverOpen",
-      "preLaunchTask": "start tailwind jit/watch - client",
-      "postDebugTask": "stop tailwind jit/watch - client",
+      "preLaunchTask": "start tailwind jit/watch",
+      "postDebugTask": "stop tailwind jit/watch",
       "args": [
         "watch",
         "run"
@@ -46,24 +46,6 @@
       "cwd": "${workspaceFolder}/Client",
       "presentation": {
         "close": true
-      }
-    },
-    {
-      "name": "Client - Delayed Watch",
-      "type": "coreclr",
-      "request": "launch",
-      "program": "dotnet",
-      "console": "integratedTerminal",
-      "internalConsoleOptions": "neverOpen",
-      "preLaunchTask": "delay",
-      "args": [
-        "watch",
-        "run"
-      ],
-      "cwd": "${workspaceFolder}/Client",
-      "presentation": {
-        "close": true,
-        "hidden": true
       }
     },
     {
@@ -71,20 +53,10 @@
       "type": "blazorwasm",
       "request": "launch",
       "cwd": "${workspaceFolder}/Client",
+      "preLaunchTask": "start tailwind jit/watch",
+      "postDebugTask": "stop tailwind jit/watch",
       "presentation": {
         "close": true
-      },
-      "internalConsoleOptions": "neverOpen"
-    },
-    {
-      "name": "Client - Delayed Debug",
-      "type": "blazorwasm",
-      "request": "launch",
-      "cwd": "${workspaceFolder}/Client",
-      "preLaunchTask": "delay",
-      "presentation": {
-        "close": true,
-        "hidden": true
       },
       "internalConsoleOptions": "neverOpen"
     },
@@ -104,8 +76,8 @@
         "group": "Server",
         "close": true,
       },
-      "preLaunchTask": "start tailwind jit/watch - server",
-      "postDebugTask": "stop tailwind jit/watch - server",
+      "preLaunchTask": "start tailwind jit/watch",
+      "postDebugTask": "stop tailwind jit/watch",
     },
     {
       // Use IntelliSense to find out which attributes exist for C# debugging
@@ -139,10 +111,8 @@
       "name": "Client+API: Watch",
       "configurations": [
         "API: Watch",
-        "Client - Delayed Watch"
+        "Client ONLY: Watch"
       ],
-      "preLaunchTask": "start tailwind jit/watch - client",
-      "postDebugTask": "stop tailwind jit/watch - client",
       "presentation": {
         "group": "Client",
         "close": true
@@ -153,10 +123,8 @@
       "name": "Client+API: Debug",
       "configurations": [
         "API: Debug",
-        "Client - Delayed Debug"
+        "Client ONLY: Debug"
       ],
-      "preLaunchTask": "start tailwind jit/watch - client",
-      "postDebugTask": "stop tailwind jit/watch - client",
       "presentation": {
         "group": "Client",
         "close": true,
