@@ -26,6 +26,6 @@
     </Target>
     <Target Name="tailwind build" AfterTargets="Build">
         <Exec Command="npm run build" Condition="'$(Configuration)' == 'Debug'"/>
-        <Exec Command="npm run publish" Condition="'$(Configuration)' == 'Release'"/>
+        <!-- <Exec Command="npm run publish" Condition="'$(Configuration)' == 'Release'"/> -->
     </Target>
 </Project>

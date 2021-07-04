@@ -33,6 +33,12 @@ jobs:
       - name: Install CSS Tools
         run: npm install
 
+      - name: Initial Build
+        run: dotnet build
+
+      - name: Build CSS
+        run: npm run publish
+
       - name: Publish Site
         run: dotnet publish ./Client -c Release
 
