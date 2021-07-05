@@ -8,8 +8,4 @@
         <ProjectReference Include="..\Shared\Shared.csproj" />
         <ProjectReference Include="..\Core\Core.csproj" />
     </ItemGroup>
-    <Target Name="CopyTailwindCSS" BeforeTargets="BeforeCompile">
-        <!-- <Message Importance="High"  Text=" === Server Compiling === " /> -->
-        <Copy SourceFiles="$(ProjectDir)..\Shared\wwwroot\Shared.css" DestinationFolder="$(ProjectDir)wwwroot" ContinueOnError="true" />
-    </Target>
 </Project>

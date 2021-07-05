@@ -1,6 +1,6 @@
 **/obj/*
 **/bin/*
 **/node_modules/*
-**/wwwroot/Shared.css
+**/wwwroot/site.min.css
 changes.md
 post.md

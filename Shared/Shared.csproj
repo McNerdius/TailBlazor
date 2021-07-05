@@ -15,7 +15,7 @@
     <ItemGroup>
         <ProjectReference Include="..\Core\Core.csproj" />
     </ItemGroup>
-    <!-- <Target Name="npm check" BeforeTargets="npm install">
+    <Target Name="npm check" BeforeTargets="npm install">
         <Exec Command="npm -v" ContinueOnError="true">
             <Output TaskParameter="ExitCode" PropertyName="error" />
         </Exec>
@@ -23,10 +23,10 @@
     </Target>
     <Target Name="npm install" BeforeTargets="tailwind build">
         <Exec Command="npm install" />
-    </Target> -->
+    </Target>
     <Target Name="tailwind build" AfterTargets="AfterCompile">
-        <!-- <Message Importance="High"  Text=" === Shared Done Compiling === " /> -->
-        <Exec Command="npm run build" Condition="'$(Configuration)' == 'Debug'"/>
-        <Exec Command="npm run publish" Condition="'$(Configuration)' == 'Release'"/>
+        <Exec Command="npm run build-client" Condition="'$(Configuration)' == 'Debug'"/>
+        <!-- <Exec Command="npm run build-server" Condition="'$(Configuration)' == 'Debug'"/> -->
+        <Exec Command="npm run publish-client" Condition="'$(Configuration)' == 'Release'"/>
     </Target>
 </Project>

@@ -1,3 +1,7 @@
+# 0.5.1
+
+* Revert `npm` scripts to the hacky per-project, `wwwroot` output.  CSS output to `/Shared/wwwroot/` wasn't being picked up by msbuild [as i'd expect](https://github.com/McNerdius/TailBlazor/issues/34), and csproj Copy tasks aren't picked up by Hot Reload.  It was VS Code "F5 friendly" in that Hot Reload and Tailwind `--watch` would eventually sync things up, but publish would fail.  
+
 # 0.5
 
 * Rearrange CSS structure.  See [the issue](https://github.com/McNerdius/TailBlazor/issues/5) for more info.
