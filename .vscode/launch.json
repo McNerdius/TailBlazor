@@ -37,8 +37,8 @@
       "program": "dotnet",
       "console": "integratedTerminal",
       "internalConsoleOptions": "neverOpen",
-      "preLaunchTask": "start tailwind jit/watch",
-      "postDebugTask": "stop tailwind jit/watch",
+      "preLaunchTask": "start tailwind jit/watch - client",
+      "postDebugTask": "stop tailwind jit/watch - client",
       "args": [
         "watch",
         "run"
@@ -53,8 +53,8 @@
       "type": "blazorwasm",
       "request": "launch",
       "cwd": "${workspaceFolder}/Client",
-      "preLaunchTask": "start tailwind jit/watch",
-      "postDebugTask": "stop tailwind jit/watch",
+      "preLaunchTask": "start tailwind jit/watch - client",
+      "postDebugTask": "stop tailwind jit/watch - client",
       "presentation": {
         "close": true
       },
@@ -76,8 +76,8 @@
         "group": "Server",
         "close": true,
       },
-      "preLaunchTask": "start tailwind jit/watch",
-      "postDebugTask": "stop tailwind jit/watch",
+      "preLaunchTask": "start tailwind jit/watch - server",
+      "postDebugTask": "stop tailwind jit/watch - server",
     },
     {
       // Use IntelliSense to find out which attributes exist for C# debugging
@@ -103,7 +103,9 @@
         "group": "Server",
         "close": true
       },
-      "internalConsoleOptions": "neverOpen"
+      "internalConsoleOptions": "neverOpen",
+      "preLaunchTask": "start tailwind jit/watch - server",
+      "postDebugTask": "stop tailwind jit/watch - server",
     }
   ],
   "compounds": [

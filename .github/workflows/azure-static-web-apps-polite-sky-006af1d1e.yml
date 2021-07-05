@@ -30,14 +30,8 @@ jobs:
         with:
           node-version: "14"
 
-      - name: Install CSS Tools
-        run: npm install
-
-      - name: Initial Build
-        run: dotnet build ./Client
-
-      - name: Build CSS
-        run: npm run publish
+      # - name: Install CSS Tools
+      #   run: npm install
 
       - name: Publish Site
         run: dotnet publish ./Client -c Release

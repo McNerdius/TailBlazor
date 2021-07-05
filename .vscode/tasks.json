@@ -34,9 +34,9 @@
       "group": "build"
     },
     {
-      "label": "start tailwind jit/watch",
+      "label": "start tailwind jit/watch - client",
       "type": "npm",
-      "script": "watch",
+      "script": "watch-client",
       // "problemMatcher": [],
       "isBackground": true,
       "presentation": {
@@ -47,9 +47,17 @@
       }
     },
     {
-      "label": "delay",
+      "label": "stop tailwind jit/watch - client",
+      "command": "echo ${input:terminate-client}",
       "type": "shell",
-      "command": "sleep 2",
+      "problemMatcher": []
+    },
+    {
+      "label": "start tailwind jit/watch - server",
+      "type": "npm",
+      "script": "watch-server",
+      // "problemMatcher": [],
+      "isBackground": true,
       "presentation": {
         "echo": false,
         "reveal": "never",
@@ -58,18 +66,35 @@
       }
     },
     {
-      "label": "stop tailwind jit/watch",
-      "command": "echo ${input:terminate}",
+      "label": "stop tailwind jit/watch - server",
+      "command": "echo ${input:terminate-server}",
       "type": "shell",
       "problemMatcher": []
     }
+    // {
+    //   "label": "delay",
+    //   "type": "shell",
+    //   "command": "sleep 2",
+    //   "presentation": {
+    //     "echo": false,
+    //     "reveal": "never",
+    //     "panel": "shared",
+    //     "clear": true
+    //   }
+    // },
   ],
   "inputs": [
     {
-      "id": "terminate",
+      "id": "terminate-client",
       "type": "command",
       "command": "workbench.action.tasks.terminate",
-      "args": "start tailwind jit/watch"
+      "args": "start tailwind jit/watch - client"
+    },
+    {
+      "id": "terminate-server",
+      "type": "command",
+      "command": "workbench.action.tasks.terminate",
+      "args": "start tailwind jit/watch - server"
     }
   ]
 }
