@@ -13,7 +13,7 @@
         "msbuild",
         "/t:RunFunctions"
       ],
-      "cwd": "${workspaceFolder}/FunctionsAPI",
+      "cwd": "${workspaceFolder}/Source/FunctionsAPI",
       "presentation": {
         "group": "API",
         "close": true
@@ -43,7 +43,7 @@
         "watch",
         "run"
       ],
-      "cwd": "${workspaceFolder}/BlazorWasm",
+      "cwd": "${workspaceFolder}/Source/BlazorWasm",
       "presentation": {
         "close": true
       }
@@ -52,7 +52,7 @@
       "name": "Client ONLY: Debug",
       "type": "blazorwasm",
       "request": "launch",
-      "cwd": "${workspaceFolder}/Client",
+      "cwd": "${workspaceFolder}/Source/Client",
       "preLaunchTask": "start tailwind jit/watch - client",
       "postDebugTask": "stop tailwind jit/watch - client",
       "presentation": {
@@ -71,7 +71,7 @@
         "watch",
         "run"
       ],
-      "cwd": "${workspaceFolder}/BlazorServer",
+      "cwd": "${workspaceFolder}/Source/BlazorServer",
       "presentation": {
         "group": "Server",
         "close": true,
@@ -87,9 +87,9 @@
       "type": "coreclr",
       "request": "launch",
       // If you have changed target frameworks, make sure to update the program path.
-      "program": "${workspaceFolder}/BlazorServer/bin/Debug/net6.0/BlazorServer.dll",
+      "program": "${workspaceFolder}/Source/BlazorServer/bin/Debug/net6.0/BlazorServer.dll",
       "args": [],
-      "cwd": "${workspaceFolder}/BlazorServer",
+      "cwd": "${workspaceFolder}/Source/BlazorServer",
       "stopAtEntry": false,
       // Enable launching a web browser when ASP.NET Core starts. For more information: https://aka.ms/VSCode-CS-LaunchJson-WebBrowser
       "serverReadyAction": {
