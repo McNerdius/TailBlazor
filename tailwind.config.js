@@ -2,7 +2,7 @@ const colors = require('tailwindcss/colors')
 
 module.exports = {
     purge: [
-        './{Client,Server,Shared}/**/*.{razor,html,cshtml}'
+        './{BlazorWasm,BlazorServer,RazorClassLibrary}/**/*.{razor,html,cshtml}'
     ],
     mode: 'jit',
     darkMode: 'class',

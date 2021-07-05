@@ -2,26 +2,6 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "Shared: Clean & Build",
-      "type": "shell",
-      "command": "dotnet clean && dotnet build",
-      "presentation": {
-        "reveal": "silent",
-        "panel": "shared",
-        "clear": true
-      },
-      "problemMatcher": "$msCompile",
-      "options": {
-        "cwd": "${workspaceFolder}/Shared"
-      },
-      "runOptions": {
-        // generates Shared.styles.css behind the scenes
-        // if it is missing, npm scripts will fail
-        "runOn": "folderOpen"
-      },
-      "group": "build"
-    },
-    {
       "label": "Clean & Build All",
       "type": "shell",
       "command": "dotnet clean && dotnet build --no-restore",
