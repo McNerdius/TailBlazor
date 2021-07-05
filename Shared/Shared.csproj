@@ -24,7 +24,7 @@
     <Target Name="npm install" BeforeTargets="tailwind build">
         <Exec Command="npm install" />
     </Target>
-    <Target Name="tailwind build" AfterTargets="AfterCompile">
+    <Target Name="tailwind build" AfterTargets="AfterBuild">
         <Exec Command="npm run build-client" Condition="'$(Configuration)' == 'Debug'"/>
         <!-- <Exec Command="npm run build-server" Condition="'$(Configuration)' == 'Debug'"/> -->
         <Exec Command="npm run publish-client" Condition="'$(Configuration)' == 'Release'"/>

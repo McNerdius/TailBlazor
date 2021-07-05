@@ -1,4 +1,4 @@
-@import "./obj/scopedcss/bundle/Shared.styles.css";
+@import "/obj/scopedcss/bundle/Shared.styles.css";
 
 #blazor-error-ui {
   background: lightyellow;
