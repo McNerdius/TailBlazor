@@ -47,7 +47,7 @@
     {
         var colors = new[] { "blue", "green", "yellow", "indigo", "pink", "black", "white" };
 
-        accentColor = $"accent-{oneOf(colors)}";
+        accentColor = $"accent-{oneOf(colors.Except(new[]{accentColor}))}";
 
         T oneOf<T>(IEnumerable<T> items) => items.OrderBy(_ => random.Next()).First();
     }

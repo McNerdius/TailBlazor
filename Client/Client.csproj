@@ -13,4 +13,14 @@
         <ProjectReference Include="..\Shared\Shared.csproj" />
         <ProjectReference Include="..\Core\Core.csproj" />
     </ItemGroup>
+    <ItemGroup>
+        <Content Update="Shared.css">
+            <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+        </Content>
+    </ItemGroup>
+    <Target Name="CopyTailwindCSS" BeforeTargets="BeforeCompile">
+        <!-- <Message Importance="High"  Text=" === Client Compiling === " /> -->
+        <!-- <Exec Command="type ..\Shared\wwwroot\Shared.css" ContinueOnError="true" /> -->
+        <Copy SourceFiles="$(ProjectDir)..\Shared\wwwroot\Shared.css" DestinationFolder="$(ProjectDir)wwwroot" ContinueOnError="true" />
+    </Target>
 </Project>
