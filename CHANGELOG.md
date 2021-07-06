@@ -1,6 +1,11 @@
+# 0.6
+
+* Rename the projects, associated npm scripts, and vscode launch configs/tasks - names based on exactly what they are.  Shouldn't need a thesaurus to use a reference, right ?
+* Redo launch config groupings to reflect expected use, top-to-bottom.
+
 # 0.5.1
 
-* Revert `npm` scripts to the hacky per-project, `wwwroot` output.  CSS output to `/Shared/wwwroot/` wasn't being picked up by msbuild [as i'd expect](https://github.com/McNerdius/TailBlazor/issues/34), and csproj Copy tasks aren't picked up by Hot Reload.  It was VS Code "F5 friendly" in that Hot Reload and Tailwind `--watch` would eventually sync things up, but publish would fail.  
+* Revert `npm` scripts to the hacky per-project, `wwwroot` output.  CSS output to `/Shared/wwwroot/` wasn't being picked up by msbuild [as i'd expect](https://github.com/McNerdius/TailBlazor/issues/34), and csproj Copy tasks aren't picked up by Hot Reload.  It was VS Code "F5 friendly" in that Hot Reload and Tailwind `--watch` would (eventually) sync things up, but VS/vanilla `dotnet` CLI would fail on first run and have the prior CSS build on subsequent runs.  
 
 # 0.5
 
