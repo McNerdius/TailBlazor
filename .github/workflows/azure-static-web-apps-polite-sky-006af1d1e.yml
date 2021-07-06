@@ -30,11 +30,17 @@ jobs:
         with:
           node-version: "14"
 
-      # - name: Install CSS Tools
-      #   run: npm install
+      - name: Build Razor CSS
+        run: dotnet build ./Source/BlazorWasm -c Release
+
+      - name: Build Tailwind CSS
+        run: |
+          npm install -g npm@latest
+          npm install
+          npm run publish-wasm
 
       - name: Publish Site
-        run: dotnet publish ./Client -c Release
+        run: dotnet publish ./Source/BlazorWasm -c Release
 
       - name: Build And Deploy
         id: builddeploy
@@ -47,8 +53,8 @@ jobs:
           action: "upload"
           ###### Repository/Build Configurations - These values can be configured to match your app requirements. ######
           # For more information regarding Static Web App workflow configurations, please visit: https://aka.ms/swaworkflowconfig
-          app_location: "./Client/bin/Release/net6.0/publish/wwwroot" # App source code path
-          api_location: "API" # Api source code path - optional
+          app_location: "./Source/BlazorWasm/bin/Release/net6.0/publish/wwwroot" # App source code path
+          api_location: "/Source/FunctionsAPI" # Api source code path - optional
           output_location: "wwwroot" # Built app content directory - optional
           ###### End of Repository/Build Configurations ######
 

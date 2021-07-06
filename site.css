@@ -1,7 +1,7 @@
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
-@import "Shared/Shared.css";
+@import "./Source/RazorClassLibrary/Shared.css";
 
 .accent-blue {
   --accent-color: theme("colors.blue.600");

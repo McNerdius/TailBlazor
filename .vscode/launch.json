@@ -13,9 +13,9 @@
         "msbuild",
         "/t:RunFunctions"
       ],
-      "cwd": "${workspaceFolder}/API",
+      "cwd": "${workspaceFolder}/Source/FunctionsAPI",
       "presentation": {
-        "group": "API",
+        "group": "1",
         "close": true
       }
     },
@@ -25,38 +25,40 @@
       "request": "attach",
       "processId": "${command:azureFunctions.pickProcess}",
       "presentation": {
-        "group": "API",
+        "group": "1",
         "close": true
       },
       "internalConsoleOptions": "neverOpen"
     },
     {
-      "name": "Client ONLY: Watch",
+      "name": "WASM ONLY: Watch",
       "type": "coreclr",
       "request": "launch",
       "program": "dotnet",
       "console": "integratedTerminal",
       "internalConsoleOptions": "neverOpen",
-      "preLaunchTask": "start tailwind jit/watch - client",
-      "postDebugTask": "stop tailwind jit/watch - client",
+      "preLaunchTask": "start tailwind jit/watch - wasm",
+      "postDebugTask": "stop tailwind jit/watch - wasm",
       "args": [
         "watch",
         "run"
       ],
-      "cwd": "${workspaceFolder}/Client",
+      "cwd": "${workspaceFolder}/Source/BlazorWasm",
       "presentation": {
-        "close": true
+        "close": true,
+        "group": "2"
       }
     },
     {
-      "name": "Client ONLY: Debug",
+      "name": "WASM ONLY: Debug",
       "type": "blazorwasm",
       "request": "launch",
-      "cwd": "${workspaceFolder}/Client",
-      "preLaunchTask": "start tailwind jit/watch - client",
-      "postDebugTask": "stop tailwind jit/watch - client",
+      "cwd": "${workspaceFolder}/Source/BlazorWasm",
+      "preLaunchTask": "start tailwind jit/watch - wasm",
+      "postDebugTask": "stop tailwind jit/watch - wasm",
       "presentation": {
-        "close": true
+        "close": true,
+        "group": "2"
       },
       "internalConsoleOptions": "neverOpen"
     },
@@ -71,9 +73,9 @@
         "watch",
         "run"
       ],
-      "cwd": "${workspaceFolder}/Server",
+      "cwd": "${workspaceFolder}/Source/BlazorServer",
       "presentation": {
-        "group": "Server",
+        "group": "3",
         "close": true,
       },
       "preLaunchTask": "start tailwind jit/watch - server",
@@ -87,9 +89,9 @@
       "type": "coreclr",
       "request": "launch",
       // If you have changed target frameworks, make sure to update the program path.
-      "program": "${workspaceFolder}/Server/bin/Debug/net6.0/Server.dll",
+      "program": "${workspaceFolder}/Source/BlazorServer/bin/Debug/net6.0/BlazorServer.dll",
       "args": [],
-      "cwd": "${workspaceFolder}/Server",
+      "cwd": "${workspaceFolder}/Source/BlazorServer",
       "stopAtEntry": false,
       // Enable launching a web browser when ASP.NET Core starts. For more information: https://aka.ms/VSCode-CS-LaunchJson-WebBrowser
       "serverReadyAction": {
@@ -100,7 +102,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
       "presentation": {
-        "group": "Server",
+        "group": "3",
         "close": true
       },
       "internalConsoleOptions": "neverOpen",
@@ -110,25 +112,25 @@
   ],
   "compounds": [
     {
-      "name": "Client+API: Watch",
+      "name": "WASM+API: Watch",
       "configurations": [
         "API: Watch",
-        "Client ONLY: Watch"
+        "WASM ONLY: Watch"
       ],
       "presentation": {
-        "group": "Client",
+        "group": "0",
         "close": true
       },
       "stopAll": true
     },
     {
-      "name": "Client+API: Debug",
+      "name": "WASM+API: Debug",
       "configurations": [
         "API: Debug",
-        "Client ONLY: Debug"
+        "WASM ONLY: Debug"
       ],
       "presentation": {
-        "group": "Client",
+        "group": "0",
         "close": true,
       },
       "stopAll": true

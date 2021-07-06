@@ -5,7 +5,7 @@
         <RootNamespace>TailBlazor.BlazorServer</RootNamespace>
     </PropertyGroup>
     <ItemGroup>
-        <ProjectReference Include="..\Shared\Shared.csproj" />
-        <ProjectReference Include="..\Core\Core.csproj" />
+        <ProjectReference Include="..\RazorClassLibrary\RazorClassLibrary.csproj" />
+        <ProjectReference Include="..\SharedClassLibrary\SharedClassLibrary.csproj" />
     </ItemGroup>
 </Project>

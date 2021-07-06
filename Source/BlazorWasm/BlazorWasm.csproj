@@ -10,7 +10,7 @@
         <PackageReference Include="System.Net.Http.Json" Version="6.0.0-preview.5.*" />
     </ItemGroup>
     <ItemGroup>
-        <ProjectReference Include="..\Shared\Shared.csproj" />
-        <ProjectReference Include="..\Core\Core.csproj" />
+        <ProjectReference Include="..\RazorClassLibrary\RazorClassLibrary.csproj" />
+        <ProjectReference Include="..\SharedClassLibrary\SharedClassLibrary.csproj" />
     </ItemGroup>
 </Project>

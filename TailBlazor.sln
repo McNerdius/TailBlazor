@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client", "Client\Client.csproj", "{2440F78F-E570-4E31-9DE4-0DC5AD9AE29F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorWasm", "Source\BlazorWasm\BlazorWasm.csproj", "{2440F78F-E570-4E31-9DE4-0DC5AD9AE29F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "Shared\Shared.csproj", "{A96FE1FC-CDA3-4241-971B-2FD4FDA7C9CB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RazorClassLibrary", "Source\RazorClassLibrary\RazorClassLibrary.csproj", "{A96FE1FC-CDA3-4241-971B-2FD4FDA7C9CB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Server", "Server\Server.csproj", "{4946E03D-4291-4D9F-9D43-ED212F5EF6EB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorServer", "Source\BlazorServer\BlazorServer.csproj", "{4946E03D-4291-4D9F-9D43-ED212F5EF6EB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{F73D9E46-17C9-4035-909A-7DE60BF572E0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharedClassLibrary", "Source\SharedClassLibrary\SharedClassLibrary.csproj", "{F73D9E46-17C9-4035-909A-7DE60BF572E0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API", "API\API.csproj", "{E7C63132-E607-4CC5-AA1A-4B7BB15ACD90}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FunctionsAPI", "Source\FunctionsAPI\FunctionsAPI.csproj", "{E7C63132-E607-4CC5-AA1A-4B7BB15ACD90}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

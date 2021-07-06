@@ -2,7 +2,7 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "Shared: Clean & Build",
+      "label": "RazorClassLibrary: Clean & Build",
       "type": "shell",
       "command": "dotnet clean && dotnet build",
       "presentation": {
@@ -12,7 +12,7 @@
       },
       "problemMatcher": "$msCompile",
       "options": {
-        "cwd": "${workspaceFolder}/Shared"
+        "cwd": "${workspaceFolder}/Source/RazorClassLibrary"
       },
       "runOptions": {
         // generates Shared.styles.css behind the scenes
@@ -34,9 +34,9 @@
       "group": "build"
     },
     {
-      "label": "start tailwind jit/watch - client",
+      "label": "start tailwind jit/watch - wasm",
       "type": "npm",
-      "script": "watch-client",
+      "script": "watch-wasm",
       // "problemMatcher": [],
       "isBackground": true,
       "presentation": {
@@ -47,8 +47,8 @@
       }
     },
     {
-      "label": "stop tailwind jit/watch - client",
-      "command": "echo ${input:terminate-client}",
+      "label": "stop tailwind jit/watch - wasm",
+      "command": "echo ${input:terminate-wasm}",
       "type": "shell",
       "problemMatcher": []
     },
@@ -85,10 +85,10 @@
   ],
   "inputs": [
     {
-      "id": "terminate-client",
+      "id": "terminate-wasm",
       "type": "command",
       "command": "workbench.action.tasks.terminate",
-      "args": "start tailwind jit/watch - client"
+      "args": "start tailwind jit/watch - wasm"
     },
     {
       "id": "terminate-server",

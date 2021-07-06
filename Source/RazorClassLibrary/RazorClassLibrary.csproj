@@ -13,8 +13,10 @@
         <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.0-preview.5.*" />
     </ItemGroup>
     <ItemGroup>
-        <ProjectReference Include="..\Core\Core.csproj" />
+        <ProjectReference Include="..\SharedClassLibrary\SharedClassLibrary.csproj" />
     </ItemGroup>
+    <!-- the Targets below run on EVERY BUILD and will slow stuff down -->
+    <!-- 'npm check' / 'npm install' can be commented/deleted once this stuff is known to be installed -->
     <Target Name="npm check" BeforeTargets="npm install">
         <Exec Command="npm -v" ContinueOnError="true">
             <Output TaskParameter="ExitCode" PropertyName="error" />
@@ -24,9 +26,9 @@
     <Target Name="npm install" BeforeTargets="tailwind build">
         <Exec Command="npm install" />
     </Target>
+    <!-- 'tailwind build' can be commented/deleted if you're using VS Code & the run/debug configs -->
     <Target Name="tailwind build" AfterTargets="AfterBuild">
-        <Exec Command="npm run build-client" Condition="'$(Configuration)' == 'Debug'"/>
+        <Exec Command="npm run build-wasm" Condition="'$(Configuration)' == 'Debug'"/>
         <!-- <Exec Command="npm run build-server" Condition="'$(Configuration)' == 'Debug'"/> -->
-        <Exec Command="npm run publish-client" Condition="'$(Configuration)' == 'Release'"/>
     </Target>
 </Project>

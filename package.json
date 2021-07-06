@@ -1,18 +1,18 @@
 {
   "name": "tailblazor",
-  "version": "0.5.1",
+  "version": "0.6.0",
   "description": "template for using tailwind css in jit mode with blazor projects",
   "devDependencies": {
     "postcss-import": "^14.0.1",
     "tailwindcss": "^2.2.2"
   },
   "scripts": {
-    "build-client": "npx tailwindcss --config tailwind.config.js --postcss postcss.config.js -i site.css -o ./Client/wwwroot/site.min.css",
-    "watch-client": "npx tailwindcss --watch --config tailwind.config.js --postcss postcss.config.js -i site.css -o ./Client/wwwroot/site.min.css",
-    "publish-client": "npx tailwindcss --minify --config tailwind.config.js --postcss postcss.config.js -i site.css -o ./Client/wwwroot/site.min.css",
-    "build-server": "npx tailwindcss --config tailwind.config.js --postcss postcss.config.js -i site.css -o ./Server/wwwroot/site.min.css",
-    "watch-server": "npx tailwindcss --watch --config tailwind.config.js --postcss postcss.config.js -i site.css -o ./Server/wwwroot/site.min.css",
-    "publish-server": "npx tailwindcss --minify --config tailwind.config.js --postcss postcss.config.js -i site.css -o ./Server/wwwroot/site.min.css"
+    "build-wasm": "npx tailwindcss --config tailwind.config.js --postcss postcss.config.js -i site.css -o ./Source/BlazorWasm/wwwroot/site.min.css",
+    "watch-wasm": "npx tailwindcss --watch --config tailwind.config.js --postcss postcss.config.js -i site.css -o ./Source/BlazorWasm/wwwroot/site.min.css",
+    "publish-wasm": "npx tailwindcss --minify --config tailwind.config.js --postcss postcss.config.js -i site.css -o ./Source/BlazorWasm/wwwroot/site.min.css",
+    "build-server": "npx tailwindcss --config tailwind.config.js --postcss postcss.config.js -i site.css -o ./Source/BlazorServer/wwwroot/site.min.css",
+    "watch-server": "npx tailwindcss --watch --config tailwind.config.js --postcss postcss.config.js -i site.css -o ./Source/BlazorServer/wwwroot/site.min.css",
+    "publish-server": "npx tailwindcss --minify --config tailwind.config.js --postcss postcss.config.js -i site.css -o ./Source/BlazorServer/wwwroot/site.min.css"
   },
   "keywords": [
     "tailwindcss",
