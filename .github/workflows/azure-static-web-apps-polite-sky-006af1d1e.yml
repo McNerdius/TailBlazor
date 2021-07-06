@@ -30,7 +30,10 @@ jobs:
         with:
           node-version: "14"
 
-      - name: Publish CSS
+      - name: Build Razor CSS
+        run: dotnet build ./Source/BlazorWasm -c Release
+
+      - name: Build Tailwind CSS
         run: |
           npm install -g npm@latest
           npm install
