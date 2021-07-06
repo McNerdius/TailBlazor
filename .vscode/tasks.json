@@ -2,6 +2,26 @@
   "version": "2.0.0",
   "tasks": [
     {
+      "label": "RazorClassLibrary: Clean & Build",
+      "type": "shell",
+      "command": "dotnet clean && dotnet build",
+      "presentation": {
+        "reveal": "silent",
+        "panel": "shared",
+        "clear": true
+      },
+      "problemMatcher": "$msCompile",
+      "options": {
+        "cwd": "${workspaceFolder}/Source/RazorClassLibrary"
+      },
+      "runOptions": {
+        // generates Shared.styles.css behind the scenes
+        // if it is missing, npm scripts will fail
+        "runOn": "folderOpen"
+      },
+      "group": "build"
+    },
+    {
       "label": "Clean & Build All",
       "type": "shell",
       "command": "dotnet clean && dotnet build --no-restore",
@@ -14,9 +34,9 @@
       "group": "build"
     },
     {
-      "label": "start tailwind jit/watch - client",
+      "label": "start tailwind jit/watch - wasm",
       "type": "npm",
-      "script": "watch-client",
+      "script": "watch-wasm",
       // "problemMatcher": [],
       "isBackground": true,
       "presentation": {
@@ -27,8 +47,8 @@
       }
     },
     {
-      "label": "stop tailwind jit/watch - client",
-      "command": "echo ${input:terminate-client}",
+      "label": "stop tailwind jit/watch - wasm",
+      "command": "echo ${input:terminate-wasm}",
       "type": "shell",
       "problemMatcher": []
     },
@@ -65,10 +85,10 @@
   ],
   "inputs": [
     {
-      "id": "terminate-client",
+      "id": "terminate-wasm",
       "type": "command",
       "command": "workbench.action.tasks.terminate",
-      "args": "start tailwind jit/watch - client"
+      "args": "start tailwind jit/watch - wasm"
     },
     {
       "id": "terminate-server",
