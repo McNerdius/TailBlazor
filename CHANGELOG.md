@@ -1,3 +1,8 @@
+# vNext
+
+* Remove the `runOptions - folderOpen` vscode task; add an exception to "unignore" `RazorClassLibrary.styles.css` to gitignore.  This is just a first-build-post-clone experience issue: an initial build of `RazorClassLibrary.csproj` to generate this file is required before doing a TailwindCSS build.  It only manifests if one is using the CLI directly for both `tailwindcss --watch` and `dotnet watch run`, in that order: `tailwindcss` fill fail with `Error: Failed to find './obj/scopedcss/bundle/RazorClassLibrary.styles.css'`.
+* Remove `site.min.css` from gitignore for similar reasons.  Normally i'd ignore these generated files, but as this is a "getting started" sort of repo, having these files on-disk post clone is probably better.
+
 # 0.6
 
 * Rename the projects, associated npm scripts, and vscode launch configs/tasks - names based on exactly what they are.  Shouldn't need a thesaurus to use a reference, right ?

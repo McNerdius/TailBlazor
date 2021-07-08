@@ -1,6 +1,8 @@
 **/obj/*
+!**/obj/scopedcss
+
+**/obj/scopedcss/Components
+**/obj/scopedcss/projectbundle
+
 **/bin/*
 **/node_modules/*
-**/wwwroot/site.min.css
-changes.md
-post.md

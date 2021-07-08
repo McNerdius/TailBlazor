@@ -1,0 +1,11 @@
+/* _content/RazorClassLibrary/Components/PersonCard/PersonCard.razor.rz.scp.css */
+.personCard[b-hy0ipgjs1n] {
+  @apply bg-primary-300 dark:bg-secondary-400;
+  @apply shadow-md rounded-lg h-56 w-64 m-2;
+  @apply md:shadow-md md:rounded-xl md:h-64 md:w-96 md:m-4;
+  @apply ring-2 hover:ring-4 ring-accent;
+  @apply transition-all duration-300;
+  @apply hover:cursor-pointer;
+
+  backface-visibility: hidden;
+}
