@@ -24,6 +24,7 @@
       "type": "coreclr",
       "request": "attach",
       "processId": "${command:azureFunctions.pickProcess}",
+      "cwd": "${workspaceFolder}/Source/FunctionsAPI",
       "presentation": {
         "group": "1",
         "close": true
