@@ -20,5 +20,7 @@
 
 @code
 {
-    [Parameter] public Person? Person { get; set; }
+    [Parameter] 
+    [EditorRequired]
+    public Person? Person { get; set; }
 }
