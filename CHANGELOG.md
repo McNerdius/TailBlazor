@@ -1,3 +1,7 @@
+# vNext
+
+- Prevent redundant npm Target runs
+
 # 0.7
 
 - Upgrade to .NET 6 preview 6

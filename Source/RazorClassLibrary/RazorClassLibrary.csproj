@@ -15,16 +15,13 @@
     <ItemGroup>
         <ProjectReference Include="..\SharedClassLibrary\SharedClassLibrary.csproj" />
     </ItemGroup>
-    <!-- the Targets below run on EVERY BUILD and will slow stuff down -->
-    <!-- 'npm check' / 'npm install' can be commented/deleted once this stuff is known to be installed -->
-    <Target Name="npm check" BeforeTargets="npm install">
+    <Target Name="npm install" BeforeTargets="tailwind build" Inputs="../../package.json" Outputs="../../node_modules/.install-stamp">
         <Exec Command="npm -v" ContinueOnError="true">
             <Output TaskParameter="ExitCode" PropertyName="error" />
         </Exec>
-        <Error Condition="'$(error)' != '0'" Text="install node.js/npm please ! https://nodejs.org/" />
-    </Target>
-    <Target Name="npm install" BeforeTargets="tailwind build">
+        <Error Condition="'$(error)' != '0'" Text="install npm please !" />
         <Exec Command="npm install" />
+        <Touch Files="../../node_modules/.install-stamp" AlwaysCreate="true" />
     </Target>
     <!-- 'tailwind build' can be commented/deleted if you're using VS Code & the run/debug configs -->
     <Target Name="tailwind build" AfterTargets="AfterBuild">
