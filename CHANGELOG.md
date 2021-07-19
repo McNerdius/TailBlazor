@@ -1,6 +1,7 @@
 # vNext
 
 - Prevent redundant npm Target runs
+- Add watch powershell `watch-` scripts to fire up API/Blazor/Tailwind in watch mode similar to the vscode launch configs
 
 # 0.7
 
