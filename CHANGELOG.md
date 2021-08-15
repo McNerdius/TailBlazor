@@ -1,5 +1,6 @@
 # vNext
 
+- Pin Static Web Apps deploy task to _**Preview 6**_. _**Preview 7 breaks build and will be skipped.**_
 - Prevent redundant npm Target runs
 - Add watch powershell `watch-` scripts to fire up API/Blazor/Tailwind in watch mode similar to the vscode launch configs
 
