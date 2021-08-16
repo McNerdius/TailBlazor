@@ -38,11 +38,12 @@
       "program": "dotnet",
       "console": "integratedTerminal",
       "internalConsoleOptions": "neverOpen",
-      "preLaunchTask": "start tailwind jit/watch - wasm",
-      "postDebugTask": "stop tailwind jit/watch - wasm",
+      "preLaunchTask": "wasm - build & watch tailwind",
+      "postDebugTask": "stop wasm watch",
       "args": [
         "watch",
-        "run"
+        "run",
+        "-- -property TailwindBuild=false"
       ],
       "cwd": "${workspaceFolder}/Source/BlazorWasm",
       "presentation": {
@@ -55,8 +56,8 @@
       "type": "blazorwasm",
       "request": "launch",
       "cwd": "${workspaceFolder}/Source/BlazorWasm",
-      "preLaunchTask": "start tailwind jit/watch - wasm",
-      "postDebugTask": "stop tailwind jit/watch - wasm",
+      "preLaunchTask": "wasm - build & watch tailwind",
+      "postDebugTask": "stop wasm watch",
       "presentation": {
         "close": true,
         "group": "2"
@@ -72,15 +73,16 @@
       "internalConsoleOptions": "neverOpen",
       "args": [
         "watch",
-        "run"
+        "run",
+        "-- -property TailwindBuild=false"
       ],
       "cwd": "${workspaceFolder}/Source/BlazorServer",
       "presentation": {
         "group": "3",
         "close": true,
       },
-      "preLaunchTask": "start tailwind jit/watch - server",
-      "postDebugTask": "stop tailwind jit/watch - server",
+      "preLaunchTask": "server - build & watch tailwind",
+      "postDebugTask": "stop server watch",
     },
     {
       // Use IntelliSense to find out which attributes exist for C# debugging
@@ -107,8 +109,8 @@
         "close": true
       },
       "internalConsoleOptions": "neverOpen",
-      "preLaunchTask": "start tailwind jit/watch - server",
-      "postDebugTask": "stop tailwind jit/watch - server",
+      "preLaunchTask": "server - build & watch tailwind",
+      "postDebugTask": "stop server watch",
     }
   ],
   "compounds": [
