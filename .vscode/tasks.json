@@ -14,39 +14,37 @@
       "group": "build"
     },
     {
-      "label": "start tailwind jit/watch - wasm",
-      "type": "npm",
-      "script": "watch-wasm",
-      // "problemMatcher": [],
+      "label": "wasm - build & watch tailwind",
+      "type": "shell",
+      "command": "dotnet build -property TailwindBuild=false && npm run watch-wasm",
       "isBackground": true,
       "presentation": {
         "echo": false,
         "reveal": "never",
         "panel": "shared",
         "clear": true
-      }
+      },
     },
     {
-      "label": "stop tailwind jit/watch - wasm",
+      "label": "stop wasm watch",
       "command": "echo ${input:terminate-wasm}",
       "type": "shell",
       "problemMatcher": []
     },
     {
-      "label": "start tailwind jit/watch - server",
-      "type": "npm",
-      "script": "watch-server",
-      // "problemMatcher": [],
+      "label": "server - build & watch tailwind",
+      "type": "shell",
+      "command": "dotnet build -property TailwindBuild=false && npm run watch-server",
       "isBackground": true,
       "presentation": {
         "echo": false,
         "reveal": "never",
         "panel": "shared",
         "clear": true
-      }
+      },
     },
     {
-      "label": "stop tailwind jit/watch - server",
+      "label": "stop server watch",
       "command": "echo ${input:terminate-server}",
       "type": "shell",
       "problemMatcher": []
@@ -68,13 +66,13 @@
       "id": "terminate-wasm",
       "type": "command",
       "command": "workbench.action.tasks.terminate",
-      "args": "start tailwind jit/watch - wasm"
+      "args": "wasm - build & watch tailwind"
     },
     {
       "id": "terminate-server",
       "type": "command",
       "command": "workbench.action.tasks.terminate",
-      "args": "start tailwind jit/watch - server"
+      "args": "server - build & watch tailwind"
     }
   ]
 }

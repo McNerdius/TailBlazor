@@ -1,4 +1,4 @@
-dotnet build # need to do explicit build or wonky things can happen
+dotnet build -- -property TailwindBuild=false  # [wonky things](https://github.com/dotnet/aspnetcore/issues/34500) can happen without explicit pre-build - fixed in RC1 (?)
 start "dotnet" -ArgumentList "watch --project ../FunctionsAPI msbuild /t:RunFunctions" # -NoNewWindow
-start "dotnet" -ArgumentList "watch run" # -NoNewWindow
+start "dotnet" -ArgumentList "watch run -- -property TailwindBuild=false" # -NoNewWindow
 npm --prefix ../../ run watch-wasm
