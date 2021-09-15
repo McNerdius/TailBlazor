@@ -1,13 +1,14 @@
 <Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
     <PropertyGroup>
         <TargetFramework>net6.0</TargetFramework>
-        <Nullable>Enable</Nullable>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
         <RootNamespace>TailBlazor.BlazorWasm</RootNamespace>
     </PropertyGroup>
     <ItemGroup>
-        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="6.0.0-preview.6.*" />
-        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="6.0.0-preview.6.*" PrivateAssets="all" />
-        <PackageReference Include="System.Net.Http.Json" Version="6.0.0-preview.6.*" />
+        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="6.0.0-rc.1.21452.15" />
+        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="6.0.0-rc.1.21452.15" PrivateAssets="all" />
+        <PackageReference Include="System.Net.Http.Json" Version="6.0.0-rc.1.21451.13" />
     </ItemGroup>
     <ItemGroup>
         <ProjectReference Include="..\RazorClassLibrary\RazorClassLibrary.csproj" />
