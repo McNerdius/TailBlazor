@@ -35,6 +35,7 @@ jobs:
 
       - name: Build Tailwind CSS
         run: |
+          cd Source
           npm install -g npm@latest
           npm install
           npm run publish-wasm
