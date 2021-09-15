@@ -19,13 +19,13 @@
     <ItemGroup>
         <ProjectReference Include="..\SharedClassLibrary\SharedClassLibrary.csproj" />
     </ItemGroup>
-    <Target Name="npm install" BeforeTargets="tailwind build" Inputs="../../package.json" Outputs="../../node_modules/.install-stamp">
+    <Target Name="npm install" BeforeTargets="tailwind build" Inputs="../package.json" Outputs="../node_modules/.install-stamp">
         <Exec Command="npm -v" ContinueOnError="true">
             <Output TaskParameter="ExitCode" PropertyName="error" />
         </Exec>
         <Error Condition="'$(error)' != '0'" Text="install npm please !" />
         <Exec Command="npm install" />
-        <Touch Files="../../node_modules/.install-stamp" AlwaysCreate="true" />
+        <Touch Files="../node_modules/.install-stamp" AlwaysCreate="true" />
     </Target>
     <Target Name="tailwind build" AfterTargets="AfterBuild" Condition="'$(TailwindBuild)' == 'true'">
         <Message Text="tailwind build target running..." Importance="high"></Message>
