@@ -2,12 +2,6 @@
 
 👉 See [TailBlazorLite](https://github.com/McNerdius/TailBlazorLite) for just the default Blazor WASM project template, minus Bootstrap, plus Tailwind JIT & VS Code "F5" hooked up.
 
-# .NET 6 Preview Notes:
-
-- .NET 6 Preview 6 has a Hot Reload quirk where `dotnet watch run` will fail when there is no `obj` folder: i.e. immediately after cloning or nuking the folder manually. An explicit `dotnet build` is required beforehand. This is accounted for in the `watch-*.ps1` scripts and VSCode launch profiles/tasks.
-- .NET 6 Preview 7 has a bug that breaks the build process - ignoring `IntermediateOutputPath` mentioned below. Fast-forwarding to RC1 would make the Static Web Apps deployment a bit of a headache, so i'm sticking to Preview 6 until September/RC1.
-- Both issues are fixed in RC1.
-
 ## Overview:
 
 - Taking full advantage of Tailwind's great new [JIT mode](https://tailwindcss.com/docs/just-in-time-mode) intermediate builds, by using background `npm` tasks rather than relying on `dotnet watch` / msbuild to do a full rebuild.

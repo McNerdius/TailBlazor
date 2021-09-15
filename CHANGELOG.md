@@ -1,3 +1,9 @@
+# 0.9
+
+- Upgrade to .NET 6 RC1, yay
+- Bump Tailwind to 2.2.15
+- Move package.json, Tailblazor.sln, etc to `Source` folder
+
 # 0.8
 
 - Pin Static Web Apps deploy task to _**Preview 6**_. _**Preview 7 breaks build and will be skipped.**_
