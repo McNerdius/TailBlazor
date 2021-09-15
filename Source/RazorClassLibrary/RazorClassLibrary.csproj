@@ -1,7 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk.Razor">
     <PropertyGroup>
         <TargetFramework>net6.0</TargetFramework>
-        <Nullable>Enable</Nullable>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
         <RootNamespace>TailBlazor.Shared</RootNamespace>
         <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
         <IntermediateOutputPath>obj</IntermediateOutputPath>
@@ -13,7 +14,7 @@
         <SupportedPlatform Include="browser" />
     </ItemGroup>
     <ItemGroup>
-        <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.0-preview.6.*" />
+        <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.0-rc.1.21452.15" />
     </ItemGroup>
     <ItemGroup>
         <ProjectReference Include="..\SharedClassLibrary\SharedClassLibrary.csproj" />

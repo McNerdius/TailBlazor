@@ -1,14 +1,15 @@
 ﻿
 @namespace TailBlazor.Server
 
-<Router AppAssembly="@typeof(Program).Assembly"
+<Router AppAssembly="@typeof(App).Assembly"
         AdditionalAssemblies="new[] { typeof(DarkSwitch).Assembly }">
     <Found Context="routeData">
         <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" />
     </Found>
     <NotFound>
+        <PageTitle>Not found</PageTitle>
         <LayoutView Layout="@typeof(MainLayout)">
-            <p>Sorry, there's nothing at this address.</p>
+            <p role="alert">Sorry, there's nothing at this address.</p>
         </LayoutView>
     </NotFound>
 </Router>
