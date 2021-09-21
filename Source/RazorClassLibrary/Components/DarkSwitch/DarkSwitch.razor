@@ -42,7 +42,7 @@
     [Inject] IJSRuntime JSRuntime { get; set; }
 
     private Task<IJSObjectReference> _module;
-    private Task<IJSObjectReference> Module => _module ??= JSRuntime.InvokeAsync<IJSObjectReference>("import", "./_content/RazorClassLibrary/DarkSwitch.js").AsTask();
+    private Task<IJSObjectReference> Module => _module ??= JSRuntime.InvokeAsync<IJSObjectReference>("import", "./_content/RazorClassLibrary/Components/DarkSwitch/DarkSwitch.razor.js").AsTask();
 
     private string currentTheme = "";
 
