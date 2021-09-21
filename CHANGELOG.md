@@ -1,7 +1,7 @@
 # 0.9.1 
 
 - Use new [JS Colocation](https://devblogs.microsoft.com/aspnet/asp-net-core-updates-in-net-6-rc-1/#collocate-javascript-files-with-pages-views-and-components) introduced in RC1 for the DarkSwitch component.
-- Add <PageTitle>Home</PageTitle> to `Index.razor`
+- Add `<PageTitle>Home</PageTitle>` to `Index.razor`
 
 # 0.9
 
