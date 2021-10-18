@@ -1,3 +1,10 @@
+# v0.10
+
+- Updated to .NET 6 RC2
+- Updated to Tailwind 3 alpha 1.  
+    - Remove `mode: jit` and change `purge` to `content` in `tailwind.config.json` 
+    - The JIT CDN is a no-go for now.  A) How to include `<script>` for non-Release builds only ?  B) It wouldn't eliminate the need to watch your `css`: Style changes in `.razor` files would (presumably) be picked up by the JIT CDN script, but changes to `*.css` will still need to be plumbed through PostCSS.  Not sure it's worth the added complexity.
+
 # 0.9.1 
 
 - Use new [JS Colocation](https://devblogs.microsoft.com/aspnet/asp-net-core-updates-in-net-6-rc-1/#collocate-javascript-files-with-pages-views-and-components) introduced in RC1 for the DarkSwitch component.
