@@ -22,5 +22,8 @@
   "license": "MIT",
   "dependencies": {
     "@tailwindcss/line-clamp": "^0.2.1"
+  },
+  "optionalDependencies": {
+    "fsevents": "^2.1.2"
   }
 }
