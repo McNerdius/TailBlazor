@@ -1,0 +1,3 @@
+- Keep up with Minor versions of both .NET and Tailwind, major versions of C#.
+- Keep an eye on Azure Static Web Apps' support for newer Azure Functions.
+- Put together a blog post and/or add documentation content to the projects.

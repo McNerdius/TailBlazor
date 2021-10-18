@@ -1,10 +1,10 @@
 const colors = require('tailwindcss/colors')
 
 module.exports = {
-    purge: [
+    content: [
         './{BlazorWasm,BlazorServer,RazorClassLibrary}/**/*.{razor,html,cshtml}'
     ],
-    mode: 'jit',
+    // mode: 'jit',
     darkMode: 'class',
     theme: {
         extend: {

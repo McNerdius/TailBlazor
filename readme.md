@@ -21,7 +21,7 @@ I'll link a more detailed post in the future, but for now i'll run through the k
 
 # Prerequisites
 
-- [dotnet 6 preview 6 SDK](https://dotnet.microsoft.com/download/dotnet/6.0). See note at top about Preview 7.
+- [dotnet 6 RC2 SDK](https://dotnet.microsoft.com/download/dotnet/6.0). See note at top about Preview 7.
 - latest [Azure Functions Core Tools](https://docs.microsoft.com/en-us/azure/azure-functions/functions-develop-local) for the API
 - [Azurite](https://docs.microsoft.com/en-us/azure/storage/common/storage-use-azurite) for Azure Functions debugging. After installing the VS Code extension, i'm able to run the API outside VS Code and it works fine. (The Visual Studio 2019 Preview installer lists the deprecated "Azure Storage Emulator" under Individual Components which works fine but may have to be started manually.)
 - [node.js](https://nodejs.org/en/download/).
@@ -67,28 +67,26 @@ The `<IntermediateOutputPath>` property is set to `obj` so that Blazor's interme
 
 ## Step 2 - Set up CSS Tools
 
-Note: as i write this, TailwindCSS 2.2 has just been released and the [Installation Docs](https://tailwindcss.com/docs/installation) haven't been fully updated.
-
-## - Installation
+### - Installation
 
 - `npm init --yes` - initializes a `package.json` using defaults. This is where CSS build scripts and tool references will go.
-- `npm install -D postcss-import@latest tailwindcss@latest` -The CSS tools we'll use.
+- `npm install -D postcss-import@latest tailwindcss@next` -The CSS tools we'll use.
 
-## - PostCSS configuration
+### - PostCSS configuration
 
-PostCSS is like plumbing, feeding your input CSS sequentially through steps specified in `postcss.config.js` before outputting the final CSS to disk. Prior to Tailwind 2.2, PostCSS had a more central role in this project: it's where CSS minification and enhanced cross-browser support via `autoprefixer` happened (followed by `tailwindcss` itself). Tailwind 2.2 takes care of minification and prefixing for us. `postcss-import` is used to aggregate any CSS files you `@import` into one in-memory file for Tailwind CSS to process.
+PostCSS is like plumbing, feeding your input CSS through the plugins listed in `postcss.config.js` before outputting the final CSS to disk. `postcss-import` is used to aggregate any CSS files you `@import` into one in-memory file for Tailwind CSS to process.
 
-## - Tailwind configuration
+### - Tailwind configuration
 
 `npx tailwind init` writes a [`tailwind.config.js` template](https://github.com/McNerdius/TailBlazor/blob/main/tailwind.config.js) to disk. The changes to note are:
 
-- Enabling JIT mode (line 7)
+- ~~Enabling JIT mode (line 7)~~ - (no longer needed in tailwind 3.0)
 - Enabling CSS class-based dark mode. (line 8)
-- Pointing it at our html markup, so JIT can keep an eye on what Tailwind features are being used and generate the appropriate CSS. (lines 4-6). (The `purge` array is borrowed from pre-JIT mode, where loads of utilitiy classes would be generated, and then those that _were not_ in use in these files would be purged, hence the name.)
+- Pointing it at our html, so JIT can keep an eye on what Tailwind features are being used and generate the appropriate CSS. (lines 4-6).
 
 Now, the main CSS file will need [a few key `@import`s](https://tailwindcss.com/docs/installation#include-tailwind-in-your-css) for Tailwind to do its magic. I've put that file in the root, `site.css`. Note the reference to `Shared.css` in there, which in turn points to the Blazor-generated `RazorClassLibrary.styles.css` - i'll come back to that below.
 
-## - NPM scripts configuration
+### - NPM scripts configuration
 
 This is where we tell the Tailwind CLI what to do, in [package.json](https://github.com/McNerdius/TailBlazor/blob/main/package.json#L10) - transforming our five line CSS "master" file into kilobytes of generated CSS based on what Tailwind utilities are used in markup and any `tailwind.config.js` tweaks.
 
@@ -103,7 +101,7 @@ Just pointing it at the `tailwind.config.js` and `postcss.config.js` config file
 
 ## Step 3 - CSS Isolation
 
-- The "normal" way to use CSS Isolation is [described here](https://docs.microsoft.com/en-us/aspnet/core/blazor/components/css-isolation?view=aspnetcore-5.0#css-isolation-bundling). But we can't do that and take full advantage of Tailwind CSS / PostCSS (`@apply` and other directives), so we need to `@import` the "intermediate" bundle of the Scoped CSS located at `/RazorClassLibrary/obj/scopedcss/bundle/RazorClassLibrary.styles.css`.
+- The "normal" way to use CSS Isolation is [described here](https://docs.microsoft.com/en-us/aspnet/core/blazor/components/css-isolation?view=aspnetcore-6.0#css-isolation-bundling). But we can't do that and take full advantage of Tailwind CSS / PostCSS (`@apply` and other directives), so we need to `@import` the "intermediate" bundle of the Scoped CSS located at `/RazorClassLibrary/obj/scopedcss/bundle/RazorClassLibrary.styles.css`.
 
 ## Step 4 - Set up Build
 
@@ -111,7 +109,7 @@ An optimal "F5" experience requires the following:
 
 1. Start `FunctionsAPI` (for `BlazorWASM` only)
 2. Start `tailwindcss --watch` to get Tailwind's fast incremental builds.
-3. Start `dotnet watch run ***` to get Blazor's Hot Reload.
+3. Start `dotnet watch run ***` to get .NET's Hot Reload.
    a) Do NOT run `tailwindcss` when `RazorClassLibrary` builds.
 4. Stop `tailwindcss --watch` when `dotnet watch` exits.
 
