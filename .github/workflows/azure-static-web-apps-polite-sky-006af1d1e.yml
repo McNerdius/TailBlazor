@@ -22,13 +22,12 @@ jobs:
       - name: Install .NET 6
         uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: "6.0.100-rc.2.21505.57"
-          include-prerelease: true
+          dotnet-version: "6.0.x"
 
-      - name: Install Node 14
+      - name: Install Node 16
         uses: actions/setup-node@v2
         with:
-          node-version: "14"
+          node-version: "16"
 
       - name: Build Razor CSS
         run: dotnet build ./Source/BlazorWasm -c Release
