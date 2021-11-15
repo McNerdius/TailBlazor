@@ -44,9 +44,8 @@ jobs:
 
       - name: Build And Deploy
         id: builddeploy
-        uses: Azure/static-web-apps-deploy@v0.0.1-preview
+        uses: Azure/static-web-apps-deploy@v1
         with:
-          app_build_command: curl -sSL https://dot.net/v1/dotnet-install.sh | bash /dev/stdin -runtime dotnet --version 3.1
           # api_build_command: curl -sSL https://dot.net/v1/dotnet-install.sh | bash /dev/stdin -runtime dotnet --version 3.1
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_POLITE_SKY_006AF1D1E }}
           repo_token: ${{ secrets.GITHUB_TOKEN }} # Used for Github integrations (i.e. PR comments)
@@ -54,7 +53,7 @@ jobs:
           ###### Repository/Build Configurations - These values can be configured to match your app requirements. ######
           # For more information regarding Static Web App workflow configurations, please visit: https://aka.ms/swaworkflowconfig
           app_location: "./Source/BlazorWasm/bin/Release/net6.0/publish/wwwroot" # App source code path
-          api_location: "/Source/FunctionsAPI" # Api source code path - optional
+          api_location: "./Source/FunctionsAPI" # Api source code path - optional
           output_location: "wwwroot" # Built app content directory - optional
           ###### End of Repository/Build Configurations ######
 
