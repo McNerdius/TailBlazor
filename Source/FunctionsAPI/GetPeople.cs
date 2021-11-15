@@ -1,9 +1,7 @@
-using System.Threading.Tasks;
+using System.Net;
 
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Azure.WebJobs;
-using Microsoft.Azure.WebJobs.Extensions.Http;
+using Microsoft.Azure.Functions.Worker;
+using Microsoft.Azure.Functions.Worker.Http;
 
 using TailBlazor.Core;
 
@@ -15,13 +13,19 @@ namespace TailBlazor.Functions
 
         public GetPeople( IPersonService personService ) => this.personService = personService;
 
-        [FunctionName( "GetPeople" )]
-        public async Task<IActionResult> Run(
-            [HttpTrigger( AuthorizationLevel.Anonymous, "get", "post", Route = "GetPeople/{count?}" )] HttpRequest req,
-            int? count = null )
+        [Function( "GetPeople" )]
+        public async Task<HttpResponseData> Run
+        (
+            [HttpTrigger( AuthorizationLevel.Function, "get", "post", Route = "GetPeople/{count?}" )] HttpRequestData req,
+            int? count = null
+        )
         {
             var people = await personService.GetPeopleAsync( count ?? 10 );
-            return new JsonResult( people );
+
+            var response = req.CreateResponse( HttpStatusCode.OK );
+            await response.WriteAsJsonAsync( people );
+
+            return response;
         }
     }
 }

@@ -1,17 +1,21 @@
 
-using Microsoft.Azure.Functions.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 using TailBlazor.Core;
 
-[assembly: FunctionsStartup( typeof( TailBlazor.API.Startup ) )]
 namespace TailBlazor.API
 {
-    public class Startup : FunctionsStartup
+    public class Program
     {
-        public override void Configure( IFunctionsHostBuilder builder )
+        public static void Main()
         {
-            builder.Services.AddSingleton<IPersonService, RandomPersonService>();
+            var host = new HostBuilder()
+                .ConfigureFunctionsWorkerDefaults()
+                .ConfigureServices( services => services.AddSingleton<IPersonService, RandomPersonService>() )
+                .Build();
+
+            host.Run();
         }
     }
 }
