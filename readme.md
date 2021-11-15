@@ -21,9 +21,9 @@ I'll link a more detailed post in the future, but for now i'll run through the k
 
 # Prerequisites
 
-- [dotnet 6 RC2 SDK](https://dotnet.microsoft.com/download/dotnet/6.0). See note at top about Preview 7.
-- latest [Azure Functions Core Tools](https://docs.microsoft.com/en-us/azure/azure-functions/functions-develop-local) for the API
-- [Azurite](https://docs.microsoft.com/en-us/azure/storage/common/storage-use-azurite) for Azure Functions debugging. After installing the VS Code extension, i'm able to run the API outside VS Code and it works fine. (The Visual Studio 2019 Preview installer lists the deprecated "Azure Storage Emulator" under Individual Components which works fine but may have to be started manually.)
+- [dotnet 6 SDK](https://dotnet.microsoft.com/download/dotnet/6.0). This is installed with Visual Studio 2022.
+- Latest [Azure Functions Core Tools](https://docs.microsoft.com/en-us/azure/azure-functions/functions-develop-local) for the API, if using VSCode/CLI.
+- [Azurite](https://docs.microsoft.com/en-us/azure/storage/common/storage-use-azurite) for Azure Functions debugging, if using VSCode/CLI.
 - [node.js](https://nodejs.org/en/download/).
 
 This project is currently geared more toward [VS Code](https://code.visualstudio.com/download) as i am a fan and it is easy to create an "F5" experience that takes full advantage of both Tailwind JIT incremental builds and dotnet Hot Reload. See `.vscode/settings.json` for some settings that light up the same "code styles" (see [this](https://docs.microsoft.com/en-us/visualstudio/ide/code-styles-and-code-cleanup?view=vs-2019#code-styles-in-editorconfig-files), [this](https://docs.microsoft.com/en-us/visualstudio/ide/create-portable-custom-editor-options?view=vs-2019), and [this](https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/configuration-options?view=vs-2019)) and analyzers/fixes/refactorings featured in Visual Studio, but provided by Roslyn. Also note `.vscode/extensions.json`' suggestions, if you have the recommendations "muted". `bradlc.vscode-tailwindcss` in particular - it provides intellisense, linting, and [css previews](Assets/preview.png) for Tailwind.
@@ -32,7 +32,7 @@ This project is currently geared more toward [VS Code](https://code.visualstudio
 
 # Clone / Build / Debug notes
 
-- The first time launching the project in VS Code, it will [complain](Assets/no_tracker.png) about the `start tailwind jit/watch` Task having "no [problem matcher](https://code.visualstudio.com/Docs/editor/tasks#_processing-task-output-with-problem-matchers)". This isn't an error so much as an omission - the Tasks "just work" and cooking up [whatever regex](https://code.visualstudio.com/docs/editor/tasks#_defining-a-problem-matcher) it's after isn't on my to-do list. (PR welcome tho.)
+- The first time launching the project in VS Code, it will [complain](Assets/no_tracker.png) about the `start tailwind jit/watch` Task having "no [problem matcher](https://code.visualstudio.com/Docs/editor/tasks#_processing-task-output-with-problem-matchers)". This isn't an error so much as an omission - the Tasks "just work" and cooking up [whatever regex](https://code.visualstudio.com/docs/editor/tasks#_defining-a-problem-matcher) it's after isn't on my to-do list. (PR welcome, see [issue #49](https://github.com/McNerdius/TailBlazor/issues/49). )
 - When F5'ing one of the "WASM & API" configs, VS Code due to them building in parallel - one or the other build may fail. Doing a single full solution build followed by running the projects sans-build is not an option: `func start --no-build` fails for reasons i haven't figured out, and `dotnet watch run --no-build` would render `watch` useless. (`--no-first-build` would be nice...) That's why the "FunctionsAPI: Watch/Debug" and "WASM ONLY: Watch/Debug" configs exist - normally you wouldn't run just one or the other. Kill the errored task terminals and use one of those.
 - Take a look at the note about "rude edits" prompts [here](https://devblogs.microsoft.com/aspnet/asp-net-core-updates-in-net-6-preview-5/#net-hot-reload-updates-for-dotnet-watch)
 
@@ -44,13 +44,13 @@ This project is currently geared more toward [VS Code](https://code.visualstudio
 
 Templates used for the projects:
 
-| project            | template used                                                              | notes                                                                                                                                                                                                  |
-| :----------------- | :------------------------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| BlaorWasm          | `dotnet new blazorwasm`                                                    | `Index.razor` and `MainLayout.razor` are moved to `RazorClassLibrary`, lots of "fluff" removed from this and `BlazorServer`                                                                            |
-| RazorClassLibrary  | `dotnet new razorclasslib`                                                 | Where Shared Razor & CSS goes                                                                                                                                                                          |
-| BlazorServer       | `dotnet new blazorserver`                                                  | I'm only deploying `BlazorWasm`, but ensuring shared UI plays nicely with Blazor Server projects is a good idea. Blazor Server can make for more productive development/debugging as well.             |
-| SharedClassLibrary | `dotnet new classlib --framework netstandard2.1`                           | Code common to all projects. Needs to be `netstandard2.1` so it is compatible with `FunctionsAPI` and to keep Azure Static Web Apps `oryx` build system happy. Hoping to get it all on `net5.0`+ ASAP. |
-| FunctionsAPI       | `func new --worker-runtime dotnet --template HttpTrigger --name GetPeople` |                                                                                                                                                                                                        |
+| project            | template used                                                       | notes                                                                                                                                                                                                  |
+| :----------------- | :------------------------------------------------------------------ | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| BlaorWasm          | `dotnet new blazorwasm`                                             | `Index.razor` and `MainLayout.razor` are moved to `RazorClassLibrary`, lots of "fluff" removed from this and `BlazorServer`                                                                            |
+| RazorClassLibrary  | `dotnet new razorclasslib`                                          | Where Shared Razor & CSS goes                                                                                                                                                                          |
+| BlazorServer       | `dotnet new blazorserver`                                           | I'm only deploying `BlazorWasm`, but ensuring shared UI plays nicely with Blazor Server projects is a good idea. Blazor Server can make for more productive development/debugging as well.             |
+| SharedClassLibrary | `dotnet new classlib --framework netstandard2.1`                    | Code common to all projects. Needs to be `netstandard2.1` so it is compatible with `FunctionsAPI` and to keep Azure Static Web Apps `oryx` build system happy. Hoping to get it all on `net5.0`+ ASAP. |
+| FunctionsAPI       | VS 2022's Azure Functions Wizard - .NET 6 _isolated process_ option | When i upgraded this project to .NET 6, the Azure Functions Core Tools (`func init`) was a bit behind, still outputting a template based on the Functions v3 Runtime.                                  |
 
 Followed by things like... stripping out Bootstrap, `dotnet new sln` / `dotnet sln add ...`, adding `AdditionalAssemblies="new[] { typeof(DarkSwitch).Assembly }"` to both BlazorWasm & BlazorServer's `App.razor`'s `<Router>` after `AppAssembly=`, and fixing up `using` statements.
 
@@ -124,5 +124,5 @@ To start FunctionsAPI alongside WASM in Visual Studio, right-click on the Soluti
 Steps [have been added](https://github.com/McNerdius/TailBlazor/blob/main/.github/workflows/azure-static-web-apps-polite-sky-006af1d1e.yml#L23) to the GitHub Workflow `yml` file:
 
 - Install .NET 6 & do an initial build, outputting Blazor's isolated CSS from our \*.razor.css file(s).
-- Install Node 14 & feed the isolated CSS into Tailwind CSS, outputting the final `site.min.css`
+- Install Node 16 & feed the isolated CSS into Tailwind CSS, outputting the final `site.min.css`
 - Run a `dotnet publish`, [feeding that output path](https://github.com/McNerdius/TailBlazor/blob/main/.github/workflows/azure-static-web-apps-polite-sky-006af1d1e.yml#L56) to the following "Build and Deploy" step.

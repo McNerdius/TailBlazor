@@ -1,3 +1,5 @@
 - Keep up with Minor versions of both .NET and Tailwind, major versions of C#.
-- Keep an eye on Azure Static Web Apps' support for newer Azure Functions.
-- Put together a blog post and/or add documentation content to the projects.
+- Update the repo to be a template package and deprecate the Tailblazor-Lite repo.
+  - provide minimal (single-project) templates for WASM, Server, and MAUI project types.
+  - provide a "full" template, much like the current structure.
+- Move readme documentation to the Static Web Apps deployment
