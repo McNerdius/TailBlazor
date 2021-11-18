@@ -1,0 +1,22 @@
+{
+  "azureFunctions.deploySubpath": "Source/FunctionsAPI/bin/Release/net6.0/publish",
+  "azureFunctions.projectLanguage": "C#",
+  "azureFunctions.projectRuntime": "~4",
+  "azureFunctions.projectSubpath": "Source/FunctionsAPI/",
+  "debug.internalConsoleOptions": "neverOpen",
+  "azureFunctions.preDeployTask": "publish",
+  "[csharp]": {
+    // "editor.codeLensFontSize": 9,
+    "editor.formatOnType": true,
+    "editor.formatOnPaste": true,
+    "editor.formatOnSave": true,
+    "editor.autoIndent": "advanced",
+    "editor.wordBasedSuggestions": false,
+    "editor.semanticHighlighting.enabled": true,
+  },
+  "omnisharp.enableEditorConfigSupport": true,
+  "omnisharp.enableImportCompletion": true,
+  "omnisharp.enableRoslynAnalyzers": true,
+  "csharp.semanticHighlighting.enabled": true,
+  "csharp.suppressHiddenDiagnostics": false
+}

@@ -1,0 +1,86 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "WASM ONLY: Watch",
+      "type": "coreclr",
+      "request": "launch",
+      "program": "dotnet",
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen",
+      "preLaunchTask": "wasm - build & watch tailwind",
+      "postDebugTask": "stop wasm watch",
+      "args": [
+        "watch",
+        "run",
+        "-- -property TailwindBuild=false"
+      ],
+      "cwd": "${workspaceFolder}/BlazorWasm",
+      "presentation": {
+        "close": true,
+        "group": "2"
+      }
+    },
+    {
+      "name": "WASM ONLY: Debug",
+      "type": "blazorwasm",
+      "request": "launch",
+      "cwd": "${workspaceFolder}/BlazorWasm",
+      "preLaunchTask": "wasm - build & watch tailwind",
+      "postDebugTask": "stop wasm watch",
+      "presentation": {
+        "close": true,
+        "group": "2"
+      },
+      "internalConsoleOptions": "neverOpen"
+    },
+    {
+      "name": "Server: Watch",
+      "type": "coreclr",
+      "request": "launch",
+      "program": "dotnet",
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen",
+      "args": [
+        "watch",
+        "run",
+        "-- -property TailwindBuild=false"
+      ],
+      "cwd": "${workspaceFolder}/BlazorServer",
+      "presentation": {
+        "group": "3",
+        "close": true,
+      },
+      "preLaunchTask": "server - build & watch tailwind",
+      "postDebugTask": "stop server watch",
+    },
+    {
+      // Use IntelliSense to find out which attributes exist for C# debugging
+      // Use hover for the description of the existing attributes
+      // For further information visit https://github.com/OmniSharp/omnisharp-vscode/blob/master/debugger-launchjson.md
+      "name": "Server: Debug",
+      "type": "coreclr",
+      "request": "launch",
+      // If you have changed target frameworks, make sure to update the program path.
+      "program": "${workspaceFolder}/BlazorServer/bin/Debug/net6.0/BlazorServer.dll",
+      "args": [],
+      "cwd": "${workspaceFolder}/BlazorServer",
+      "stopAtEntry": false,
+      // Enable launching a web browser when ASP.NET Core starts. For more information: https://aka.ms/VSCode-CS-LaunchJson-WebBrowser
+      "serverReadyAction": {
+        "action": "openExternally",
+        "pattern": "\\bNow listening on:\\s+(https?://\\S+)"
+      },
+      "env": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "presentation": {
+        "group": "3",
+        "close": true
+      },
+      "internalConsoleOptions": "neverOpen",
+      "preLaunchTask": "server - build & watch tailwind",
+      "postDebugTask": "stop server watch",
+    }
+  ]
+}

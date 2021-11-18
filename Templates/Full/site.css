@@ -1,0 +1,32 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+@import "./RazorClassLibrary/Shared.css";
+
+.accent-blue {
+  --accent-color: theme("colors.blue.600");
+}
+
+.accent-green {
+  --accent-color: theme("colors.green.500");
+}
+
+.accent-yellow {
+  --accent-color: theme("colors.yellow.500");
+}
+
+.accent-indigo {
+  --accent-color: theme("colors.indigo.600");
+}
+
+.accent-pink {
+  --accent-color: theme("colors.pink.600");
+}
+
+.accent-black {
+  --accent-color: black;
+}
+
+.accent-white {
+  --accent-color: white;
+}
