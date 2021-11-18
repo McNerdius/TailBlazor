@@ -9,17 +9,14 @@
   "scripts": {
     "build-wasm": "npx tailwindcss --config tailwind.config.js --postcss postcss.config.js -i site.css -o ./BlazorWasm/wwwroot/site.min.css",
     "watch-wasm": "npx tailwindcss --watch --config tailwind.config.js --postcss postcss.config.js -i site.css -o ./BlazorWasm/wwwroot/site.min.css",
-    "publish-wasm": "npx tailwindcss --minify --config tailwind.config.js --postcss postcss.config.js -i site.css -o ./BlazorWasm/wwwroot/site.min.css",
-    "build-server": "npx tailwindcss --config tailwind.config.js --postcss postcss.config.js -i site.css -o ./BlazorServer/wwwroot/site.min.css",
-    "watch-server": "npx tailwindcss --watch --config tailwind.config.js --postcss postcss.config.js -i site.css -o ./BlazorServer/wwwroot/site.min.css",
-    "publish-server": "npx tailwindcss --minify --config tailwind.config.js --postcss postcss.config.js -i site.css -o ./BlazorServer/wwwroot/site.min.css"
+    "publish-wasm": "npx tailwindcss --minify --config tailwind.config.js --postcss postcss.config.js -i site.css -o ./BlazorWasm/wwwroot/site.min.css"
   },
   "keywords": [
     "tailwindcss",
     "blazor"
   ],
   "author": "mcnerdius",
-  "license": "MIT",
+  "license": "0BSD",
   "dependencies": {
     "@tailwindcss/line-clamp": "^0.2.1"
   },
