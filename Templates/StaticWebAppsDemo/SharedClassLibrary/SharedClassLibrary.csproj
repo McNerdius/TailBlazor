@@ -1,0 +1,8 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <Nullable>Enable</Nullable>
+        <RootNamespace>TailBlazor.Core</RootNamespace>
+        <ImplicitUsings>Enable</ImplicitUsings>
+    </PropertyGroup>
+</Project>

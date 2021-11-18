@@ -1,0 +1,94 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "API: Watch",
+      "type": "coreclr",
+      "request": "launch",
+      "program": "dotnet",
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen",
+      "args": [
+        "watch",
+        "msbuild",
+        "/t:RunFunctions"
+      ],
+      "cwd": "${workspaceFolder}/FunctionsAPI",
+      "presentation": {
+        "group": "1",
+        "close": true
+      }
+    },
+    {
+      "name": "API: Debug",
+      "type": "coreclr",
+      "request": "attach",
+      "processId": "${command:azureFunctions.pickProcess}",
+      "cwd": "${workspaceFolder}/FunctionsAPI",
+      "presentation": {
+        "group": "1",
+        "close": true
+      },
+      "internalConsoleOptions": "neverOpen"
+    },
+    {
+      "name": "WASM ONLY: Watch",
+      "type": "coreclr",
+      "request": "launch",
+      "program": "dotnet",
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen",
+      "preLaunchTask": "wasm - build & watch tailwind",
+      "postDebugTask": "stop wasm watch",
+      "args": [
+        "watch",
+        "run",
+        "-- -property TailwindBuild=false"
+      ],
+      "cwd": "${workspaceFolder}/BlazorWasm",
+      "presentation": {
+        "close": true,
+        "group": "2"
+      }
+    },
+    {
+      "name": "WASM ONLY: Debug",
+      "type": "blazorwasm",
+      "request": "launch",
+      "cwd": "${workspaceFolder}/BlazorWasm",
+      "preLaunchTask": "wasm - build & watch tailwind",
+      "postDebugTask": "stop wasm watch",
+      "presentation": {
+        "close": true,
+        "group": "2"
+      },
+      "internalConsoleOptions": "neverOpen"
+    },
+  ],
+  "compounds": [
+    {
+      "name": "WASM+API: Watch",
+      "configurations": [
+        "API: Watch",
+        "WASM ONLY: Watch"
+      ],
+      "presentation": {
+        "group": "0",
+        "close": true
+      },
+      "stopAll": true
+    },
+    {
+      "name": "WASM+API: Debug",
+      "configurations": [
+        "API: Debug",
+        "WASM ONLY: Debug"
+      ],
+      "presentation": {
+        "group": "0",
+        "close": true,
+      },
+      "stopAll": true
+    }
+  ]
+}
