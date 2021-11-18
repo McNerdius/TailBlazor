@@ -13,7 +13,7 @@
         "msbuild",
         "/t:RunFunctions"
       ],
-      "cwd": "${workspaceFolder}/Source/FunctionsAPI",
+      "cwd": "${workspaceFolder}/Templates/Full/FunctionsAPI",
       "presentation": {
         "group": "1",
         "close": true
@@ -24,7 +24,7 @@
       "type": "coreclr",
       "request": "attach",
       "processId": "${command:azureFunctions.pickProcess}",
-      "cwd": "${workspaceFolder}/Source/FunctionsAPI",
+      "cwd": "${workspaceFolder}/Templates/Full/FunctionsAPI",
       "presentation": {
         "group": "1",
         "close": true
@@ -45,7 +45,7 @@
         "run",
         "-- -property TailwindBuild=false"
       ],
-      "cwd": "${workspaceFolder}/Source/BlazorWasm",
+      "cwd": "${workspaceFolder}/Templates/Full/BlazorWasm",
       "presentation": {
         "close": true,
         "group": "2"
@@ -55,7 +55,7 @@
       "name": "WASM ONLY: Debug",
       "type": "blazorwasm",
       "request": "launch",
-      "cwd": "${workspaceFolder}/Source/BlazorWasm",
+      "cwd": "${workspaceFolder}/Templates/Full/BlazorWasm",
       "preLaunchTask": "wasm - build & watch tailwind",
       "postDebugTask": "stop wasm watch",
       "presentation": {
@@ -76,7 +76,7 @@
         "run",
         "-- -property TailwindBuild=false"
       ],
-      "cwd": "${workspaceFolder}/Source/BlazorServer",
+      "cwd": "${workspaceFolder}/Templates/Full/BlazorServer",
       "presentation": {
         "group": "3",
         "close": true,
@@ -92,9 +92,9 @@
       "type": "coreclr",
       "request": "launch",
       // If you have changed target frameworks, make sure to update the program path.
-      "program": "${workspaceFolder}/Source/BlazorServer/bin/Debug/net6.0/BlazorServer.dll",
+      "program": "${workspaceFolder}/Templates/Full/BlazorServer/bin/Debug/net6.0/BlazorServer.dll",
       "args": [],
-      "cwd": "${workspaceFolder}/Source/BlazorServer",
+      "cwd": "${workspaceFolder}/Templates/Full/BlazorServer",
       "stopAtEntry": false,
       // Enable launching a web browser when ASP.NET Core starts. For more information: https://aka.ms/VSCode-CS-LaunchJson-WebBrowser
       "serverReadyAction": {
