@@ -1,0 +1,25 @@
+﻿<div class="relative py-3 px-6 mb-4 mt-6 rounded
+            border border-transparent border-gray-300
+            text-gray-700 bg-gray-200 " role="alert">
+
+    @* pencil icon *@
+    <p class="relative inline-block w-8 mb-0 top-1">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
+            <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
+        </svg>
+    </p>
+    <strong>@Title</strong>
+
+    <span class="whitespace-nowrap">
+        Please take our
+        <a target="_blank" class="text-blue-600 hover:underline font-bold" href="https://go.microsoft.com/fwlink/?linkid=2148851">brief survey</a>
+    </span>
+    and tell us what you think.
+</div>
+
+@code {
+    // Demonstrates how a parent component can supply parameters
+    [Parameter]
+    [EditorRequired]
+    public string Title { get; set; }
+}

@@ -1,0 +1,42 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "build",
+      "type": "shell",
+      "command": "dotnet build",
+      "presentation": {
+        "echo": false,
+        "reveal": "silent",
+        "panel": "shared",
+        "clear": true
+      },
+      "group": "build"
+    },
+    {
+      "label": "build & start tailwind jit/watch",
+      "type": "shell",
+      "command": "dotnet build -property TailwindBuild=false && npm run watch",
+      "isBackground": true,
+      "presentation": {
+        "echo": false,
+        "reveal": "never",
+        "panel": "shared",
+        "clear": true
+      },
+    },
+    {
+      "label": "stop tailwind jit/watch",
+      "command": "echo ${input:terminate}",
+      "type": "shell"
+    }
+  ],
+  "inputs": [
+    {
+      "id": "terminate",
+      "type": "command",
+      "command": "workbench.action.tasks.terminate",
+      "args": "build & start tailwind jit/watch"
+    }
+  ]
+}
