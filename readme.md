@@ -2,7 +2,7 @@
 
 # NOTE:
 
-2019/11/19 - A bit of an overhaul going on, converting the repo to a set of [Runnable Templates](https://github.com/dotnet/templating/wiki/Runnable-Project-Templates). Things may be buggy and the readme will be a bit stale, but the [demo site](https://polite-sky-006af1d1e.azurestaticapps.net/) will soon replace its long-rambliness. Still debating naming, but eventually it'll resemble the following:
+2021/11/19 - A bit of an overhaul going on, converting the repo to a set of [Runnable Templates](https://github.com/dotnet/templating/wiki/Runnable-Project-Templates). Things may be buggy and the readme will be a bit stale, but the [demo site](https://polite-sky-006af1d1e.azurestaticapps.net/) will soon replace its long-rambliness. Still debating naming, but eventually it'll resemble the following:
 
 | Path                       |    template name    |                      description                       |
 | :------------------------- | :-----------------: | :----------------------------------------------------: |
