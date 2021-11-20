@@ -1,4 +1,4 @@
 **/obj/*
 **/bin/*
 **/node_modules/*
-*.nupkg
+/wwwroot/css/App.min.css

@@ -1,0 +1,20 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "McNerdius",
+  "classifications": [
+    "Web",
+    "Blazor",
+    "WebAssembly",
+    "Tailwind CSS"
+  ],
+  "identity": "McNerdius.TailBlazor.Wasm",
+  "name": "Tailwind JIT + Blazor WASM Basics",
+  "description": "Tailwind JIT + Blazor WASM Basics",
+  "shortName": "tailblazor-wasm",
+  "tags": {
+    "language": "C#",
+    "type": "project"
+  },
+  "sourceName": "TailBlazorWasm",
+  "defaultName": "TailBlazorWasm"
+}

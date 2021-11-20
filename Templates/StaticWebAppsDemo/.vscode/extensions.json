@@ -3,6 +3,8 @@
     "bradlc.vscode-tailwindcss",
     "rangav.vscode-thunder-client",
     "ms-dotnettools.blazorwasm-companion",
-    "ms-dotnettools.csharp"
+    "ms-dotnettools.csharp",
+    "ms-azuretools.vscode-azurefunctions",
+    "azurite.azurite"
   ]
 }

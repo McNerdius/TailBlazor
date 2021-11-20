@@ -1,0 +1,52 @@
+﻿@page "/fetchdata"
+
+<PageTitle>Weather forecast</PageTitle>
+
+@using TailBlazorServer.Data
+@inject WeatherForecastService ForecastService
+
+<h1>Weather forecast</h1>
+
+<p>This component demonstrates fetching data from the server.</p>
+
+@if (forecasts is null)
+{
+    <p class="mx-auto">
+        <Loading />
+    </p>
+}
+else
+{
+    <table class="w-full mb-4 text-gray-800 border-collapse">
+        <thead>
+            <tr class="border-b-2 border-solid border-gray-200 
+                     bg-yellow-200">
+                <th>Date</th>
+                <th>Temp. (C)</th>
+                <th>Temp. (F)</th>
+                <th>Summary</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var forecast in forecasts)
+            {
+                <tr class="bg-blue-300 even:bg-blue-200">
+                    <td>@forecast.Date.ToShortDateString()</td>
+                    <td>@forecast.TemperatureC</td>
+                    <td>@forecast.TemperatureF</td>
+                    <td>@forecast.Summary</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private WeatherForecast[]? forecasts;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await Task.Delay(2000); // show the loading animation :D 
+        forecasts = await ForecastService.GetForecastAsync(DateTime.Now);
+    }
+}

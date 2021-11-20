@@ -1,0 +1,31 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Watch",
+      "type": "coreclr",
+      "request": "launch",
+      "program": "dotnet",
+      "console": "integratedTerminal",
+      "args": [
+        "watch",
+        "run",
+        "-- -property TailwindBuild=false"
+      ],
+      "cwd": "${workspaceFolder}/",
+      "preLaunchTask": "build & start tailwind jit/watch",
+      "postDebugTask": "stop tailwind jit/watch",
+      "presentation": {
+        "close": true,
+      },
+      "internalConsoleOptions": "neverOpen"
+    },
+    {
+      "name": "Debug",
+      "type": "blazorwasm",
+      "request": "launch",
+      "cwd": "${workspaceFolder}/",
+      "preLaunchTask": "build",
+    },
+  ]
+}

@@ -1,0 +1,22 @@
+.nav {
+  @apply flex flex-wrap flex-col;
+  @apply pl-0 mb-0;
+  @apply list-none;
+}
+
+.nav-item {
+  @apply text-sm pb-2 px-4;
+  @apply first:pt-4 last:pb-4;
+}
+
+.nav-item ::deep a {
+  @apply text-gray-100 rounded h-12 flex items-center leading-[3rem];
+}
+
+.nav-item ::deep a.active {
+  @apply text-white bg-white/25;
+}
+
+.nav-item ::deep a:hover {
+  @apply text-white bg-white/10;
+}

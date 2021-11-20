@@ -1,5 +1,10 @@
 {
+  "azureFunctions.deploySubpath": "FunctionsAPI/bin/Release/net6.0/publish",
+  "azureFunctions.projectLanguage": "C#",
+  "azureFunctions.projectRuntime": "~4",
+  "azureFunctions.projectSubpath": "FunctionsAPI/",
   "debug.internalConsoleOptions": "neverOpen",
+  "azureFunctions.preDeployTask": "publish",
   "[csharp]": {
     // "editor.codeLensFontSize": 9,
     "editor.formatOnType": true,
