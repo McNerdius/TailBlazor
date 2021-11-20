@@ -1,10 +1,10 @@
 {
-  "name": "tailblazor",
+  "name": "tailblazorfull",
   "version": "0.9.1",
   "description": "template for using tailwind css in jit mode with blazor projects",
   "devDependencies": {
     "postcss-import": "^14.0.1",
-    "tailwindcss": "^3.0.0-alpha.1"
+    "tailwindcss": "^3.0.0-alpha.2"
   },
   "scripts": {
     "build-wasm": "npx tailwindcss --config tailwind.config.js --postcss postcss.config.js -i site.css -o ./BlazorWasm/wwwroot/site.min.css",
