@@ -6,13 +6,15 @@
 
 <p role="status">Current count: @currentCount</p>
 
-<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+<button class="text-white bg-blue-600 
+                rounded border border-blue-800
+                py-1.5 px-3 
+                select-none
+                focus:ring-4
+                transition duration-200 ease-in-out"
+
+        @onclick="_ => currentCount++">Click me</button>
 
 @code {
     private int currentCount = 0;
-
-    private void IncrementCount()
-    {
-        currentCount++;
-    }
 }

@@ -1,0 +1,4 @@
+th,
+td {
+  @apply text-left px-3 py-2;
+}
