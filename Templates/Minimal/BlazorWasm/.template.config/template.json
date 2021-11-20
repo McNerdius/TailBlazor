@@ -7,14 +7,14 @@
     "WebAssembly",
     "Tailwind CSS"
   ],
-  "identity": "McNerdius.TailBlazor.Lite",
+  "identity": "McNerdius.TailBlazor.Wasm",
   "name": "Tailwind JIT + Blazor WASM Basics",
   "description": "Tailwind JIT + Blazor WASM Basics",
-  "shortName": "tailblazor",
+  "shortName": "tailblazor-wasm",
   "tags": {
     "language": "C#",
     "type": "project"
   },
-  "sourceName": "TailBlazorProject",
-  "defaultName": "TailBlazorProject"
+  "sourceName": "TailBlazorWasm",
+  "defaultName": "TailBlazorWasm"
 }

@@ -1,8 +1,4 @@
 **/obj/*
-!**/obj/scopedcss
-
-**/obj/scopedcss/Components
-**/obj/scopedcss/projectbundle
-
 **/bin/*
 **/node_modules/*
+*.nupkg
