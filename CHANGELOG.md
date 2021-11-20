@@ -1,11 +1,20 @@
+# 0.20
+
+- First steps toward a hybrid Reference/Template Pack approach. Making [Runnable Templates](https://github.com/dotnet/templating/wiki/Runnable-Project-Templates) limits the "configurability" of the template since no special syntax is introduced to the source files - meaning the projects can be run locally, as-is. This way the repo can serve both as a 1:1 reference, and be used to create a template pack for nuget.
+
+# 0.11
+
+- Updated to .NET 6.0.100
+- Functions API is now using the Isolated/Out-of-Process model, as that will be the only option in .NET 7+.
+
 # v0.10
 
 - Updated to .NET 6 RC2
-- Updated to Tailwind 3 alpha 1.  
-    - Remove `mode: jit` and change `purge` to `content` in `tailwind.config.json` 
-    - The JIT CDN is a no-go for now.  A) How to include `<script>` for non-Release builds only ?  B) It wouldn't eliminate the need to watch your `css`: Style changes in `.razor` files would (presumably) be picked up by the JIT CDN script, but changes to `*.css` will still need to be plumbed through PostCSS.  Not sure it's worth the added complexity.
+- Updated to Tailwind 3 alpha 1.
+  - Remove `mode: jit` and change `purge` to `content` in `tailwind.config.json`
+  - The JIT CDN is a no-go for now. A) How to include `<script>` for non-Release builds only ? B) It wouldn't eliminate the need to watch your `css`: Style changes in `.razor` files would (presumably) be picked up by the JIT CDN script, but changes to `*.css` will still need to be plumbed through PostCSS. Not sure it's worth the added complexity.
 
-# 0.9.1 
+# 0.9.1
 
 - Use new [JS Colocation](https://devblogs.microsoft.com/aspnet/asp-net-core-updates-in-net-6-rc-1/#collocate-javascript-files-with-pages-views-and-components) introduced in RC1 for the DarkSwitch component.
 - Add `<PageTitle>Home</PageTitle>` to `Index.razor`
