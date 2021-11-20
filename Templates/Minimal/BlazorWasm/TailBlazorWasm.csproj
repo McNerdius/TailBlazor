@@ -3,7 +3,7 @@
         <TargetFramework>net6.0</TargetFramework>
         <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
         <IntermediateOutputPath>obj</IntermediateOutputPath>
-        <RootNamespace>TailBlazorProject</RootNamespace>
+        <RootNamespace>TailBlazorWasm</RootNamespace>
         <ImplicitUsings>enable</ImplicitUsings>
     </PropertyGroup>
     <ItemGroup>
