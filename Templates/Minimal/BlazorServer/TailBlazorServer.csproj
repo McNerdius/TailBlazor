@@ -5,7 +5,7 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
         <IntermediateOutputPath>obj</IntermediateOutputPath>
-        <RootNamespace>BlazorServer</RootNamespace>
+        <RootNamespace>TailBlazorServer</RootNamespace>
     </PropertyGroup>
     <Import Project="tailwindcss.targets" />
 </Project>

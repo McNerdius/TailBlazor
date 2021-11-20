@@ -1,7 +1,7 @@
 ﻿@import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
-@import "./obj/scopedcss/bundle/BlazorServer.styles.css";
+@import "./obj/scopedcss/bundle/TailBlazorServer.styles.css";
 
 main,
 html {
