@@ -8,8 +8,9 @@
     "Tailwind CSS"
   ],
   "identity": "McNerdius.TailBlazor.Wasm",
-  "name": "Tailwind JIT + Blazor Server Basics",
-  "description": "Tailwind JIT + Blazor Server Basics",
+  "groupIdentity": "McNerdius.TailBlazor",
+  "name": "Blazor Server + Tailwind 3 template",
+  "description": "Blazor Server + Tailwind 3 template",
   "shortName": "tailblazor-server",
   "tags": {
     "language": "C#",
