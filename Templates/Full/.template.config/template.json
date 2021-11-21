@@ -12,13 +12,14 @@
     // "MAUI"
   ],
   "identity": "McNerdius.TailBlazor.Full",
-  "name": "Tailwind JIT + Blazor WASM + Blazor Server",
-  "description": "Tailwind JIT + Blazor WASM + Blazor Server",
+  "groupIdentity": "McNerdius.TailBlazor",
+  "name": "Full Blazor + Tailwind 3 template",
+  "description": "Full Blazor + Tailwind 3 template",
   "shortName": "tailblazor-full",
   "tags": {
     "language": "C#",
     "type": "solution"
   },
-  "sourceName": "TailBlazorFull",
-  "defaultName": "TailBlazorFull"
+  "sourceName": "TailBlazor",
+  "defaultName": "TailBlazor"
 }

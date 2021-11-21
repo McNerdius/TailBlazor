@@ -2,7 +2,7 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "WASM ONLY: Watch",
+      "name": "WASM: Watch",
       "type": "coreclr",
       "request": "launch",
       "program": "dotnet",
@@ -22,7 +22,7 @@
       }
     },
     {
-      "name": "WASM ONLY: Debug",
+      "name": "WASM: Debug",
       "type": "blazorwasm",
       "request": "launch",
       "cwd": "${workspaceFolder}/BlazorWasm",

@@ -3,7 +3,10 @@
         <TargetFramework>net6.0</TargetFramework>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
-        <RootNamespace>TailBlazor.BlazorServer</RootNamespace>
+        <RootNamespace>BlazorServer</RootNamespace>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+        <IntermediateOutputPath>obj</IntermediateOutputPath>
     </PropertyGroup>
     <ItemGroup>
         <ProjectReference Include="..\RazorClassLibrary\RazorClassLibrary.csproj" />

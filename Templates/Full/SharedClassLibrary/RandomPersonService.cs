@@ -1,26 +1,25 @@
-namespace TailBlazor.Core
+namespace SharedClassLibrary;
+
+public class RandomPersonService : IPersonService
 {
-    public class RandomPersonService : IPersonService
+    // todo: .NET 6 has 3-param zip
+    public Task<IEnumerable<Person>?> GetPeopleAsync( int count )
     {
+        var people = names.RandomElements( count )
+             .Zip( bios.RandomElements( count ), ( name, bio ) => (name, bio) )
+             .Zip( emojis.RandomElements( count ), ( nameAndBio, pic ) => new Person( nameAndBio.name, nameAndBio.bio, pic ) );
 
-        // todo: .NET 6 has 3-param zip
-        public Task<IEnumerable<Person>?> GetPeopleAsync( int count )
-        {
-            var people = names.RandomElements( count )
-                 .Zip( bios.RandomElements( count ), ( name, bio ) => (name, bio) )
-                 .Zip( emojis.RandomElements( count ), ( nameAndBio, pic ) => new Person( nameAndBio.name, nameAndBio.bio, pic ) );
+        // why should it complain that this is IEnumerable<Person> if i remove type info
+        return Task.FromResult<IEnumerable<Person>?>( people );
+    }
 
-            // why should it complain that this is IEnumerable<Person> if i remove type info
-            return Task.FromResult<IEnumerable<Person>?>( people );
-        }
-
-        private static string[] emojis = new[]
-        {
+    private static string[] emojis = new[]
+    {
             "🤔","😭","😃","🤨","💙","🧠","😜","🥺","😘","👶","😃","🤣","😆","🥰","😎","😲","😇","🥳","🤡","🐱‍👤","🐱","🐱‍🏍","👀","🦾"
         };
 
-        private static string[] names = new[]
-        {   // https://www.randomlists.com/random-names?qty=50
+    private static string[] names = new[]
+    {   // https://www.randomlists.com/random-names?qty=50
             "Kadence Calhoun",
             "Kate Charles",
             "Alicia Duarte",
@@ -73,8 +72,8 @@ namespace TailBlazor.Core
             "Moshe Christian"
         };
 
-        private static string[] bios = new[]
-        {   // http://mcipsum.azurewebsites.net/ipsum/hipster,veggie,bacon,fruit,genres,jabberwocky,latin?p=50&l=false
+    private static string[] bios = new[]
+    {   // http://mcipsum.azurewebsites.net/ipsum/hipster,veggie,bacon,fruit,genres,jabberwocky,latin?p=50&l=false
             "Hast thou slain tulgey wood, gimble claws catch joy beware vorpal blade.  Mimsy chortled frumious foe snicker-snack, tumtum raths whiffling.  Slithy bandersnatch shun toves tumtum left it dead.  Through frumious with eyes of flame borogoves jabberwock.",
             "Heavy metal mystery techno metal grindcore electropop dubstep rap.  Nintendocore folk thriller rap dance drama.  Black metal folk claymation grunge live-action, soft rock thriller fiction.  Zombie wonky romance stop-motion grindcore comedy dubstep.",
             "Frumious shun borogoves bandersnatch whiffling joy snicker-snack.  Chortled slithy gyre went galumphing back hand.  Left it dead long time o frabjous day tree frumious hand burbled.  Mimsy slithy mome manxome chortled.  Gimble toves tree brillig joy beware jabberwock.",
@@ -126,5 +125,4 @@ namespace TailBlazor.Core
             "Nisl volutpat eros lobortis suscipit.  Odio proin qui in.  Veniam labore donec ipsum nulla.  Non nisl ea sunt.",
             "Tumeric church-key tilde biodiesel, swag offal 90's plaid.  Kombucha kickstarter health, portland tbh forage pitchfork migas.  Occupy kale chips leggings tilde pop-up ethical taiyaki.  Succulents shabby chic semiotics prism.  Selfies polaroid irony blog hella, pour-over PBR&B gentrify.",
         };
-    }
 }
