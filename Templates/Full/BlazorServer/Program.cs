@@ -1,5 +1,5 @@
 
-using TailBlazor.Core;
+using SharedClassLibrary;
 
 var builder = WebApplication.CreateBuilder( args );
 
