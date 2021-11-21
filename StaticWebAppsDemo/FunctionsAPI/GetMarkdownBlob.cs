@@ -5,7 +5,7 @@ using Markdig.Renderers;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
 
-namespace TailBlazor.Functions;
+namespace StaticWebAppsDemo.API;
 
 public class GetMarkdownBlob
 {

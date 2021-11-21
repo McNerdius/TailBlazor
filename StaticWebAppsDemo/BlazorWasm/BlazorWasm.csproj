@@ -3,15 +3,21 @@
         <TargetFramework>net6.0</TargetFramework>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
-        <RootNamespace>BlazorWasm</RootNamespace>
+        <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+        <IntermediateOutputPath>obj</IntermediateOutputPath>
+        <RootNamespace>StaticWebAppsDemo</RootNamespace>
     </PropertyGroup>
+    <Import Project="tailwindcss.targets" />
     <ItemGroup>
+        <SupportedPlatform Include="browser" />
+    </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\SharedClassLibrary\SharedClassLibrary.csproj" />
+    </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.0" />
         <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="6.0.0" />
         <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="6.0.0" PrivateAssets="all" />
         <PackageReference Include="System.Net.Http.Json" Version="6.0.0" />
-    </ItemGroup>
-    <ItemGroup>
-        <ProjectReference Include="..\RazorClassLibrary\RazorClassLibrary.csproj" />
-        <ProjectReference Include="..\SharedClassLibrary\SharedClassLibrary.csproj" />
     </ItemGroup>
 </Project>

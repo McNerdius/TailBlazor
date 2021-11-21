@@ -3,29 +3,28 @@ using System.Net;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
 
-using TailBlazor.Core;
+using SharedClassLibrary;
 
-namespace TailBlazor.Functions
+namespace StaticWebAppsDemo.API;
+
+public class GetPeople
 {
-    public class GetPeople
+    private readonly IPersonService personService;
+
+    public GetPeople( IPersonService personService ) => this.personService = personService;
+
+    [Function( "GetPeople" )]
+    public async Task<HttpResponseData> Run
+    (
+        [HttpTrigger( AuthorizationLevel.Function, "get", "post", Route = "GetPeople/{count?}" )] HttpRequestData req,
+        int? count = null
+    )
     {
-        private readonly IPersonService personService;
+        var people = await personService.GetPeopleAsync( count ?? 10 );
 
-        public GetPeople( IPersonService personService ) => this.personService = personService;
+        var response = req.CreateResponse( HttpStatusCode.OK );
+        await response.WriteAsJsonAsync( people );
 
-        [Function( "GetPeople" )]
-        public async Task<HttpResponseData> Run
-        (
-            [HttpTrigger( AuthorizationLevel.Function, "get", "post", Route = "GetPeople/{count?}" )] HttpRequestData req,
-            int? count = null
-        )
-        {
-            var people = await personService.GetPeopleAsync( count ?? 10 );
-
-            var response = req.CreateResponse( HttpStatusCode.OK );
-            await response.WriteAsJsonAsync( people );
-
-            return response;
-        }
+        return response;
     }
 }

@@ -1,7 +1,7 @@
 
 using Markdig;
 
-namespace TailBlazor.Functions;
+namespace StaticWebAppsDemo.API;
 
 public static class MarkDigExtensions
 {

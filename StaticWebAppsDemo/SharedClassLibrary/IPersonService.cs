@@ -1,9 +1,8 @@
 
 
-namespace TailBlazor.Core
+namespace SharedClassLibrary;
+
+public interface IPersonService
 {
-    public interface IPersonService
-    {
-        Task<IEnumerable<Person>?> GetPeopleAsync( int count );
-    }
+    Task<IEnumerable<Person>?> GetPeopleAsync( int count );
 }

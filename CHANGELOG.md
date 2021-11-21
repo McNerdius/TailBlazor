@@ -1,3 +1,9 @@
+# vNext
+
+- Sync csproj, namespace/using, top-level css, and template names
+- Add Blob Storage API to fetch markdown docs
+- Rough UI for above docs
+
 # 0.20
 
 - First steps toward a hybrid Reference/Template Pack approach. Making [Runnable Templates](https://github.com/dotnet/templating/wiki/Runnable-Project-Templates) limits the "configurability" of the template since no special syntax is introduced to the source files - meaning the projects can be run locally, as-is. This way the repo can serve both as a 1:1 reference, and be used to create a template pack for nuget.
