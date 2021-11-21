@@ -1,8 +1,9 @@
 
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 
-using TailBlazor.Core;
-using TailBlazor.Client;
+using SharedClassLibrary;
+
+using StaticWebAppsDemo;
 
 var builder = WebAssemblyHostBuilder.CreateDefault( args );
 builder.RootComponents.Add<App>( "#app" );

@@ -1,4 +1,4 @@
-@namespace TailBlazor.Shared.Components
+@namespace StaticWebAppsDemo.Components
 
 <div class="flex text-gray-900 rounded-full cursor-pointer dark:text-gray-100">
 
@@ -42,7 +42,7 @@
     [Inject] IJSRuntime JSRuntime { get; set; }
 
     private Task<IJSObjectReference> _module;
-    private Task<IJSObjectReference> Module => _module ??= JSRuntime.InvokeAsync<IJSObjectReference>("import", "./_content/RazorClassLibrary/Components/DarkSwitch/DarkSwitch.razor.js").AsTask();
+    private Task<IJSObjectReference> Module => _module ??= JSRuntime.InvokeAsync<IJSObjectReference>("import", "./Components/DarkSwitch/DarkSwitch.razor.js").AsTask();
 
     private string currentTheme = "";
 
