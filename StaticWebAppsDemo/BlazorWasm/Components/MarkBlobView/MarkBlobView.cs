@@ -26,7 +26,7 @@ public partial class MarkBlobView : ComponentBase
 
         found = null;
 
-        var response = await HttpClient.GetAsync( $"http://localhost:7071/api/blob/{Blob}" )
+        var response = await HttpClient.GetAsync( $"/api/blob/{Blob}" )
                                        .ConfigureAwait( false );
 
         if ( response.IsSuccessStatusCode )
