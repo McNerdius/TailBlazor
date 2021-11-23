@@ -1,0 +1,16 @@
+﻿@namespace StaticWebAppsDemo.Components
+
+<div class="m-auto p-auto">
+   @if (found is null)
+   {
+      <Loading />
+   }
+   else if (found is false)
+   {
+      <NotFound />
+   }
+   else
+   {
+        @((MarkupString)content)
+   } 
+</div>

@@ -3,6 +3,6 @@ start "dotnet" -ArgumentList "watch --project ./FunctionsAPI msbuild /t:RunFunct
 sleep 1
 start "dotnet" -ArgumentList "watch --project ./BlazorWasm/BlazorWasm.csproj run -- --property:TailwindBuild=false" # -NoNewWindow
 
-while (!(Test-Path "./RazorClassLibrary/obj/scopedcss/bundle/RazorClassLibrary.styles.css")) { sleep -ms 200 } # tailwind needs this file
+while (!(Test-Path "./BlazorWasm/obj/scopedcss/bundle/BlazorWasm.styles.css")) { sleep -ms 200 } # tailwind needs this file
 
 npm  run watch-wasm

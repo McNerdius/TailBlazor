@@ -4,9 +4,38 @@
 @inherits LayoutComponentBase
 @inject NavigationManager navManager
 
+<div class="fixed sm:block h-full z-10 left-0 top-0
+            overflow-x-hidden
+            rounded-r-md shadow-2xl
+            transition-transform ease-in-out duration-700
+            @(@hidden ? "w-0" : "w-64" )
+        dark:bg-gray-900 dark:text-gray-300">
+
+    <div class="relative p-2">
+
+        <div class="w-auto pb-1 border-b dark:border-gray-300">
+            <button @onclick="ToggleNavMenu" >
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+            </button>
+        </div>
+
+        <div class=@NavMenuCssClass @onclick="ToggleNavMenu">   
+            <NavLinks />
+        </div>
+
+    </div>
+</div>
+
 <div class="flex flex-col justify-between h-full select-none @accentColor" @onclick="changeAccent">
 
-    <div class="flex justify-center pt-[10px]">
+    <div class="flex flex-row p-2 justify-between">
+
+        <button class="flex" @onclick="ToggleNavMenu" >
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+        </button>
+        
+        <div class="text-2xl font-bold tracking-wide">WIP !!!</div>    
+
         <DarkSwitch />
     </div>
 
@@ -15,12 +44,12 @@
     </div>
 
     <div class="pb-8 mx-auto flex">
-        
-        <button type="button" 
+
+        <button type="button"
                 class="flex m-auto rounded-full px-1
                         ring-1 ring-accent
-                       dark:bg-gray-700 dark:text-gray-100
-                       bg-gray-100 text-gray-700
+                        dark:bg-gray-700 dark:text-gray-100
+                        bg-gray-100 text-gray-700
                         focus:outline-none group"
 
                 @onclick='() => navManager.NavigateTo("https://github.com/McNerdius/TailBlazor")'>
@@ -41,7 +70,10 @@
 @code 
 {
     private static Random random = new();
-    private string accentColor = "accent-green";
+    private string accentColor = "accent-blue";
+
+    private bool hidden = false;
+    private string? NavMenuCssClass => hidden ? "hidden sm:block" : null;
 
     void changeAccent()
     {
@@ -50,5 +82,11 @@
         accentColor = $"accent-{oneOf(colors.Except(new[]{accentColor}))}";
 
         T oneOf<T>(IEnumerable<T> items) => items.OrderBy(_ => random.Next()).First();
+    }
+
+    private void ToggleNavMenu()
+    {
+        hidden = !hidden;
+        Console.WriteLine(hidden);
     }
 }

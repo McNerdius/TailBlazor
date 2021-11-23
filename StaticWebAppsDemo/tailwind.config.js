@@ -2,9 +2,8 @@ const colors = require('tailwindcss/colors')
 
 module.exports = {
     content: [
-        './{BlazorWasm,BlazorServer,RazorClassLibrary}/**/*.{razor,html,cshtml}'
+        './BlazorWasm/**/*.{razor,html}'
     ],
-    // mode: 'jit',
     darkMode: 'class',
     theme: {
         extend: {
