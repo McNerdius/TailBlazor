@@ -3,6 +3,10 @@
 @import "tailwindcss/utilities";
 @import "./BlazorWasm/BlazorWasm.css";
 
+a.active {
+  @apply scale-110;
+}
+
 .accent-blue {
   --accent-color: theme("colors.blue.600");
 }
