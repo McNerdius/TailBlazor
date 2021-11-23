@@ -1,6 +1,6 @@
-# vNext
+# 0.21
 
-- Sync csproj, namespace/using, top-level css, and template names
+- Sync csproj, namespace/usings, top-level css, and template names
 - Add Blob Storage API to fetch markdown docs
 - Rough UI for above docs
 
