@@ -10,10 +10,10 @@ public partial class MarkBlobView : ComponentBase
     [Parameter] public string Blob { get; set; }
 
     [EditorRequired]
-    [Parameter] public RenderFragment Loading { get; set; }
+    [Parameter] public RenderFragment BlobLoading { get; set; }
 
     [EditorRequired]
-    [Parameter] public RenderFragment NotFound { get; set; }
+    [Parameter] public RenderFragment BlobNotFound { get; set; }
 
     private string? content = null;
 
@@ -26,7 +26,7 @@ public partial class MarkBlobView : ComponentBase
 
         found = null;
 
-        var response = await HttpClient.GetAsync( $"/api/blob/{Blob}" )
+        var response = await HttpClient.GetAsync( $"{HttpClient.BaseAddress}/blob/{Blob}.md" )
                                        .ConfigureAwait( false );
 
         if ( response.IsSuccessStatusCode )
