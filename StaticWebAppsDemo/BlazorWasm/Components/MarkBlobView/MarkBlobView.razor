@@ -1,6 +1,6 @@
 ﻿@namespace StaticWebAppsDemo.Components
 
-<div class="m-auto p-auto">
+<div class="h-full @(found is true ? "" : "flex")">
    @if (found is null)
    {
       <Loading />
