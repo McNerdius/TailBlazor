@@ -22,10 +22,6 @@
   top: 0.5rem;
 }
 
-a {
-  @apply active:scale-110 hover:scale-110 transition-transform;
-}
-
 .accent-blue {
   --accent-color: theme("colors.blue.600");
 }
