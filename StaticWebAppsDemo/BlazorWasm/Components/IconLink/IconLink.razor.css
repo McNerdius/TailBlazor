@@ -1,7 +1,7 @@
 .link-container {
   @apply font-semibold text-sm sm:text-base;
   @apply hover:no-underline;
-  @apply hover:scale-110 transition-transform ease-in-out;
+  @apply hover:scale-110;
 }
 
 ::deep a {
@@ -9,5 +9,5 @@
 }
 
 ::deep a.active {
-  @apply bg-gray-200 rounded-md;
+  @apply rounded-md bg-gray-300 dark:bg-gray-600;
 }
