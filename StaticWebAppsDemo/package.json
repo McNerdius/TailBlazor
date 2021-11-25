@@ -4,7 +4,8 @@
   "description": "template for using tailwind css in jit mode with blazor projects",
   "devDependencies": {
     "postcss-import": "^14.0.1",
-    "tailwindcss": "^3.0.0-alpha.2"
+    "tailwindcss": "^3.0.0-alpha.2",
+    "tailwindcss-debug-screens": "^2.2.0"
   },
   "scripts": {
     "build-wasm": "npx tailwindcss --config tailwind.config.js --postcss postcss.config.js -i StaticWebAppsDemo.css -o ./BlazorWasm/wwwroot/StaticWebAppsDemo.min.css",

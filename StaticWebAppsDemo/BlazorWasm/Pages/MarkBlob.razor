@@ -2,8 +2,15 @@
 
 @if (blob is not null)
 {
-    <div class="h-full p-4">
-        <MarkBlobView Blob="@(blob + ".md")" />
+    <div class="h-full">
+        <MarkBlobView Blob="@blob">
+            <BlobLoading>
+                <Loading/>
+            </BlobLoading>
+            <BlobNotFound>
+                <NotFound/>
+            </BlobNotFound>
+        </MarkBlobView>
     </div>
 }
 

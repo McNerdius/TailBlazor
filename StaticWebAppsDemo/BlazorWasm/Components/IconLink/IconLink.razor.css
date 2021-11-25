@@ -1,0 +1,13 @@
+.link-container {
+  @apply font-semibold text-sm sm:text-base;
+  @apply hover:no-underline;
+  @apply hover:scale-110 transition-transform ease-in-out;
+}
+
+::deep a {
+  @apply py-1 pl-px sm:pl-1;
+}
+
+::deep a.active {
+  @apply bg-gray-200 rounded-md;
+}
