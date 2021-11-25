@@ -22,6 +22,12 @@
   top: 0.5rem;
 }
 
+div {
+  @apply transition-all ease-in duration-100;
+  @apply text-gray-800 bg-gray-200;
+  @apply dark:text-gray-200 dark:bg-gray-800;
+}
+
 .accent-blue {
   --accent-color: theme("colors.blue.600");
 }
