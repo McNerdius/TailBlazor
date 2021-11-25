@@ -14,8 +14,6 @@
 
         <button type="button"
                 class="flex m-auto rounded-full px-4
-                        dark:bg-gray-700 dark:text-gray-100
-                        bg-gray-100 text-gray-700
                         focus:outline-none group"
 
                 @onclick='() => navManager.NavigateTo("https://github.com/McNerdius/TailBlazor")'>
@@ -32,14 +30,13 @@
 
         <div class="@NavMenuCssClass
                     pl-1 pr-2
-                    rounded-r-md
-                dark:bg-gray-900 dark:text-gray-300">
+                    rounded-r-md" >
 
             <NavLinks />
 
         </div>
 
-        <div class="overflow-auto h-full w-full px-px sm:pl-2 sm:pr-8 sm:pt-2 select-none @accentColor" @onclick="changeAccent">
+        <div class="overflow-auto h-full w-full px-px sm:pl-2 sm:pr-8 sm:pt-2 md:pr-16 lg:pr-32 select-none @accentColor" @onclick="changeAccent">
             @Body
         </div>
 

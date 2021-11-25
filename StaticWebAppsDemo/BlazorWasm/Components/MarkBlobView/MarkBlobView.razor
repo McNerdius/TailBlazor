@@ -1,6 +1,6 @@
 ﻿@namespace StaticWebAppsDemo.Components
 
-<div class="h-full max-w-[960px] text-lg @(found is true ? "" : "flex")">
+<div class="h-full max-w-[960px] text-lg dark:font-semibold @(found is true ? "" : "flex")">
    @if (found is null)
    {
       <Loading />
