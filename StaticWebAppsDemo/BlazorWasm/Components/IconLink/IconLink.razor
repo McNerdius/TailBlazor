@@ -1,11 +1,11 @@
 @namespace StaticWebAppsDemo.Components
 
-<div class=@Class>
-<NavLink class="px-4 py-2 hover:no-underline justify-start flex items-center" href=@Link Match=NavLinkMatch.All target=@(NewTab ? "_blank" : null)>
-    <span class="my-auto relative top-px @(Large ? "w-8" : "w-4 ml-4")" aria-hidden="true">
+<div class="link-container @Class">
+<NavLink class="justify-start flex items-center" href=@Link Match=NavLinkMatch.All target=@(NewTab ? "_blank" : null)>
+    <span class=" relative top-px @(Large ? "w-8" : "w-4 ml-4")" aria-hidden="true">
         @ChildContent
     </span> 
-    <span class="ml-4 my-auto">
+    <span class="ml-3">
         @Text
     </span>
 </NavLink>
