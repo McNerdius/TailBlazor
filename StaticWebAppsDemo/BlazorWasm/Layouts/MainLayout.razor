@@ -1,10 +1,11 @@
 
 @namespace StaticWebAppsDemo.Layouts
+@using Microsoft.AspNetCore.Components.WebAssembly.Hosting
 
 @inherits LayoutComponentBase
 @inject NavigationManager navManager
 
-<div class="h-full m-auto">
+<div class="h-full m-auto @debug">
 
     <div class="flex flex-row pl-4 pr-1 self-center justify-between">
 
@@ -61,6 +62,8 @@
 
 @code 
 {
+    [Inject] public IWebAssemblyHostEnvironment HostEnvironment { get; set; }
+    private string debug => HostEnvironment.IsDevelopment() ? "debug-screens" : "";
     private string accentColor = "accent-blue";
 
     private bool hidden = true;
