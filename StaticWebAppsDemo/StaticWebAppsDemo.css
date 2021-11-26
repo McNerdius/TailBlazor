@@ -2,6 +2,7 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 @import "./BlazorWasm/obj/scopedcss/bundle/BlazorWasm.styles.css";
+@import "MarkBlobView.unscoped.css";
 
 #blazor-error-ui {
   background: lightyellow;
