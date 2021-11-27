@@ -1,0 +1,51 @@
+p {
+  @apply indent-4 sm:indent-8;
+  @apply py-4 sm:py-4;
+}
+
+hr {
+  @apply bg-gray-500/40 h-px border-none;
+  @apply mx-4 sm:mx-16;
+  @apply mb-2 sm:mb-6;
+}
+
+h1 {
+  @apply font-bold text-2xl my-2 sm:mt-4;
+}
+
+h2 {
+  @apply font-bold text-xl my-2 sm:mt-4;
+}
+
+ul,
+ol {
+  @apply pl-6;
+  @apply mt-2 mb-6;
+}
+
+li {
+  @apply list-disc;
+}
+
+code,
+pre {
+  @apply font-mono font-semibold text-base;
+  @apply bg-gray-300 dark:bg-gray-600;
+  @apply px-2 rounded-md pt-[-1px] tracking-tight;
+}
+
+blockquote {
+  @apply bg-gray-300 dark:bg-gray-600;
+  @apply rounded-md pl-2 sm:pl-4;
+  @apply py-2;
+  @apply font-semibold;
+}
+
+blockquote > * {
+  @apply before:content-['\201C'];
+  @apply after:content-['\201D'];
+}
+
+img {
+  @apply m-auto;
+}

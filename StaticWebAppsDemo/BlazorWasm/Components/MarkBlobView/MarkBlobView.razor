@@ -1,13 +1,13 @@
 ﻿@namespace StaticWebAppsDemo.Components
 
-<div class="h-full max-w-[960px] text-lg dark:font-semibold @(found is true ? "" : "flex")">
+<div class="h-full max-w-[960px] text-lg dark:font-semibold @(found is true ? "" : "pt-24")">
    @if (found is null)
    {
-      <Loading />
+      @BlobLoading
    }
    else if (found is false)
    {
-      <NotFound />
+      @BlobNotFound
    }
    else
    {

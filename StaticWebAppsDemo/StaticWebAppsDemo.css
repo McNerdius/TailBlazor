@@ -2,6 +2,7 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 @import "./BlazorWasm/obj/scopedcss/bundle/BlazorWasm.styles.css";
+@import "MarkBlobView.unscoped.css";
 
 #blazor-error-ui {
   background: lightyellow;
@@ -20,6 +21,12 @@
   position: absolute;
   right: 0.75rem;
   top: 0.5rem;
+}
+
+div {
+  @apply transition-all ease-in duration-100;
+  @apply text-gray-800 bg-gray-200;
+  @apply dark:text-gray-200 dark:bg-gray-800;
 }
 
 .accent-blue {

@@ -2,18 +2,16 @@
 
 @if(Person is not null)
 {
-    <div class="personCard">
+    <div class="personCard ">
 
-        <div class="flex justify-between h-1/4 p-2
-                bg-secondary-100 dark:bg-primary-700 border-b border-accent
-                    rounded-t-lg md:rounded-t-xl">
+        <div class="personHeader dark:text-gray-800">
 
-            <div class="p-1 md:p-2 text-xl md:text-3xl self-center">@Person.Image</div>
+            <div class="p-1 md:p-2 md:text-3xl ">@Person.Image</div>
 
-            <div class="pr-2 md:pr-4 font-bold text-xl right-2 overflow-hidden self-center" >@Person.Name</div>
+            <div class="pr-2 md:pr-4 font-bold right-2 overflow-hidden dark:text-gray-800" >@Person.Name</div>
         </div>
 
-        <p class="px-3 pt-2 text-sm md:text-base italic line-clamp-5">@Person.Bio</p>
+        <p class="px-3 pt-2 text-sm md:text-base italic line-clamp-5 dark:text-gray-800">@Person.Bio</p>
 
     </div>
 }
