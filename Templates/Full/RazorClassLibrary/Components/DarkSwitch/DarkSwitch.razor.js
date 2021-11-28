@@ -3,15 +3,22 @@ darkQuery.addEventListener('change', e => listener(e));
 
 export function switchTheme(newTheme)
 {
-    if ("theme" in localStorage)
-        removeClassFromDocument(localStorage.theme);
-
     localStorage.theme = newTheme ?? localStorage.theme ?? "system";
 
-    if (localStorage.theme === 'system')
-        applySystemTheme();
-    else
-        addClassToDocument(localStorage.theme);
+    switch (localStorage.theme)
+    {
+        case 'system':
+            applySystemTheme();
+            break;
+        case 'light':
+            removeClassFromDocument('dark');
+            break;
+        case 'dark':
+            addClassToDocument('dark')
+            break;
+        default:
+            console.log('unsupported theme');
+    };
 
     return localStorage.theme;
 }
@@ -22,9 +29,13 @@ function removeClassFromDocument(theme) { document.documentElement.classList.rem
 function applySystemTheme()
 {
     if (darkQuery.matches)
+    {
         addClassToDocument('dark');
+    }
     else
+    {
         removeClassFromDocument('dark');
+    }
 }
 
 function listener(e)

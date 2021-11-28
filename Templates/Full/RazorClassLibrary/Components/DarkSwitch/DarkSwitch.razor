@@ -2,8 +2,8 @@
 
 <div class="flex text-gray-900 rounded-full cursor-pointer dark:text-gray-100">
 
-    <div title="light mode" class="p-2 rounded-tl rounded-bl focus:outline-none bg-gray-100 active:bg-gray-200 dark:bg-gray-600" @onclick='_ => setTheme("light")'>
-        <div class="m-auto hover:scale-150 w-4 h-4 @(currentTheme == "light" ? "" : "opacity-40")">
+    <div title="light mode" class="group p-2 rounded-tl rounded-bl focus:outline-none bg-gray-100 active:bg-gray-200 dark:bg-gray-600" @onclick='_ => setTheme("light")'>
+        <div class="m-auto group-hover:scale-150 w-4 h-4 @(currentTheme == "light" ? "" : "opacity-40")">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
             </svg>
@@ -13,8 +13,8 @@
         </div>
     </div>
 
-    <div title="system mode" class="p-2 focus:outline-none bg-gray-100 active:bg-gray-200 dark:bg-gray-600" @onclick='_ => setTheme("system")'>
-        <div class="m-auto hover:scale-150 w-4 h-4 @(currentTheme == "system" ? "" : "opacity-40")">
+    <div title="system mode" class="group p-2 focus:outline-none bg-gray-100 active:bg-gray-200 dark:bg-gray-600" @onclick='_ => setTheme("system")'>
+        <div class="m-auto group-hover:scale-150 w-4 h-4 @(currentTheme == "system" ? "" : "opacity-40")">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                 <path fill-rule="evenodd" d="M3 5a2 2 0 012-2h10a2 2 0 012 2v8a2 2 0 01-2 2h-2.22l.123.489.804.804A1 1 0 0113 18H7a1 1 0 01-.707-1.707l.804-.804L7.22 15H5a2 2 0 01-2-2V5zm5.771 7H5V5h10v7H8.771z" clip-rule="evenodd" />
             </svg>
@@ -24,8 +24,8 @@
         </div>
     </div>
 
-    <div title="dark mode" class="p-2 rounded-tr rounded-br focus:outline-none active:bg-gray-200 bg-gray-100 dark:bg-gray-600" @onclick='_ => setTheme("dark")'>
-        <div class="m-auto hover:scale-150 w-4 h-4 @(currentTheme == "dark" ? "" : "opacity-40")">
+    <div title="dark mode" class="group p-2 rounded-tr rounded-br focus:outline-none active:bg-gray-200 bg-gray-100 dark:bg-gray-600" @onclick='_ => setTheme("dark")'>
+        <div class="m-auto group-hover:scale-150 w-4 h-4 @(currentTheme == "dark" ? "" : "opacity-40")">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
             </svg>
