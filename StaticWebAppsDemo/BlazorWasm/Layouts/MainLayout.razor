@@ -5,11 +5,11 @@
 @inherits LayoutComponentBase
 @inject NavigationManager navManager
 
-<div class="h-full m-auto @debug">
+<div class="grid grid-cols-basic grid-rows-basic h-full @debug">
 
-    <div class="flex flex-row pl-4 pr-1 self-center justify-between">
+    <div class="col-span-2 flex flex-row pl-4 pr-1 self-center justify-between">
 
-        <div class="text-lg font-bold italic tracking-wide flex-grow self-center">WIP !</div>    
+        <div class="text-xl font-bold italic tracking-wide flex-grow self-center">WIP !</div>    
 
         <DarkSwitch />
 
@@ -22,35 +22,34 @@
 
     </div>
 
-    <div class="flex flex-row h-full">
+    <div class="@NavMenuCssClass 
+                pl-1 pr-2
+                rounded-r-md" >
 
-        <div class="@NavMenuCssClass
-                    pl-1 pr-2
-                    rounded-r-md" >
-
-            <NavLinks />
-
-        </div>
-
-        <div class="overflow-auto h-full w-full px-px sm:pl-2select-none @accentColor" @onclick="changeAccent">
-            @Body
-        </div>
+        <NavLinks />
 
     </div>
 
+    <div class="w-full px-px sm:pl-2 sm:pr-8 sm:pt-2 md:pr-16 lg:pr-32
+                overflow-x-hidden overflow-y-auto"
 
-    <div class="absolute w-14 h-14 sm:hidden bottom-4 right-8 bg-cyan-300 backdrop-blur-sm rounded-full p-2 shadow-md">
-        <button @onclick="ToggleNavMenu" >
-            @if (hidden)
-            {
-                <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7"></path></svg>
-            }
-            else
-            {
-                <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-            }
-        </button>
+         @onclick="changeAccent">
+        @Body
     </div>
+
+</div>
+
+<div class="absolute w-14 h-14 sm:hidden bottom-4 right-8 !bg-cyan-300 backdrop-blur-sm rounded-full p-2 shadow-md">
+    <button @onclick="ToggleNavMenu" >
+        @if (hidden)
+        {
+            <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7"></path></svg>
+        }
+        else
+        {
+            <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+        }
+    </button>
 </div>
 
 
@@ -62,7 +61,7 @@
     private string accentColor = "accent-blue";
 
     private bool hidden = true;
-    private string? NavMenuCssClass => hidden ? "hidden sm:block" : null;
+    private string? NavMenuCssClass => hidden ? "invisible sm:visible w-0 sm:w-auto" : null;
 
     void changeAccent()
     {

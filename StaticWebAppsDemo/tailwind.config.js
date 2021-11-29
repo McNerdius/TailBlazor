@@ -7,28 +7,18 @@ module.exports = {
     darkMode: 'class',
     theme: {
         extend: {
-            colors: {
-                primary: colors.blue,
-                secondary: colors.amber,
-                accent: "var(--accent-color)",
+            gridTemplateColumns: {
+                'basic': 'min-content auto'
             },
-            keyframes: {
-                hscroll: {
-                    '0%': { transform: 'translateX(10vw)' },
-                    '50%': { transform: 'translateX(calc(90vw - 100%))' },
-                    '100%': { transform: 'translateX(10vw)' },
-                }
-            },
-            animation: {
-                hscroll: 'hscroll 300s infinite linear'
-            },
-            screens: {
-                'no-hover': { 'raw': '(hover:none)' }
+            gridTemplateRows: {
+                'basic': 'min-content auto'
             }
         },
     },
     plugins: [
-        require('@tailwindcss/line-clamp'),
-        require('tailwindcss-debug-screens')
+        require('tailwindcss-debug-screens'),
     ],
+    // variants: {
+    //     scrollbar: ['dark']
+    // }
 }
