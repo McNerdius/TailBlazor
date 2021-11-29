@@ -1,16 +1,16 @@
 ﻿@namespace StaticWebAppsDemo.Components
 
-<div class="h-full max-w-[960px] text-lg dark:font-semibold @(found is true ? "" : "pt-24")">
-   @if (found is null)
-   {
-      @BlobLoading
-   }
-   else if (found is false)
-   {
-      @BlobNotFound
-   }
-   else
-   {
+@if (found is null)
+{
+    @BlobLoading
+}
+else if (found is false)
+{
+    @BlobNotFound
+}
+else
+{
+    <div class="w-full max-w-[960px] text-lg @(found is true ? "" : "pt-24")">
         @((MarkupString)content)
-   } 
-</div>
+    </div>
+} 
