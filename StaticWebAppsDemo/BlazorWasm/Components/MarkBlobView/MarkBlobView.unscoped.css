@@ -27,12 +27,18 @@ li {
   @apply list-disc;
 }
 
-code,
 pre {
-  @apply whitespace-pre-wrap;
+  @apply overflow-x-auto;
+  @apply py-2;
+}
+pre,
+code {
   @apply font-mono font-semibold text-base;
   @apply bg-gray-300 dark:bg-gray-600;
-  @apply px-2 rounded-md pt-[-1px] tracking-tight;
+  @apply px-2 rounded-md tracking-tight;
+}
+pre code {
+  @apply pl-0;
 }
 
 blockquote {
