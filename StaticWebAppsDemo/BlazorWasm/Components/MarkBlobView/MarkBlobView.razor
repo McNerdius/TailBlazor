@@ -2,15 +2,15 @@
 
 @if (found is null)
 {
-    @BlobLoading
+    <div class="flex h-full">@BlobLoading</div>
 }
 else if (found is false)
 {
-    @BlobNotFound
+    <div class="flex h-full">@BlobNotFound</div>
 }
 else
 {
-    <div class="w-full max-w-[960px] text-lg @(found is true ? "" : "pt-24")">
+    <div class="markblob w-full max-w-[960px]">
         @((MarkupString)content)
     </div>
 } 
