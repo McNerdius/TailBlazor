@@ -1,20 +1,28 @@
-@page "/{blob}"
+@page "/{blob?}"
 
-@if (blob is not null)
-{
-    <div class="h-full m-auto sm:pr-8 sm:pt-2 md:pr-16 lg:pr-32 ">
-        <MarkBlobView Blob="@blob">
-            <BlobLoading>
-                <Loading/>
-            </BlobLoading>
-            <BlobNotFound>
-                <NotFound/>
-            </BlobNotFound>
-        </MarkBlobView>
-    </div>
-}
+<div class="h-full pl-px pr-4 pt-4
+            sm:pl-4 sm:pr-8  
+            md:pl-8 md:pr-12  
+            lg:pl-12 lg:pr-16
+            xl:pl-16" >
+
+
+    <MarkBlobView Blob="@blob">
+        <BlobLoading>
+            <Loading/>
+        </BlobLoading>
+        <BlobNotFound>
+            <NotFound/>
+        </BlobNotFound>
+    </MarkBlobView>
+</div>
 
 @code
 {
     [Parameter] public string? blob { get; set; }
+    
+    protected override void OnParametersSet()
+    {
+        blob ??= "overview";
+    }
 }

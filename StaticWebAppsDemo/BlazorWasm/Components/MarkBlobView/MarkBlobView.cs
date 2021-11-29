@@ -16,15 +16,17 @@ public partial class MarkBlobView : ComponentBase
     [Parameter] public RenderFragment BlobNotFound { get; set; }
 
     private string? content = null;
-
     private bool? found { get; set; } = null;
+
+    private string? blob = null;
 
     protected override async Task OnParametersSetAsync()
     {
-        if ( string.IsNullOrEmpty( Blob ) )
+        if ( string.IsNullOrEmpty( Blob ) || blob == Blob )
             return;
 
         found = null;
+        blob = Blob;
 
         var response = await HttpClient.GetAsync( $"{HttpClient.BaseAddress}api/blob/{Blob}.md" )
                                        .ConfigureAwait( false );
