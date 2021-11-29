@@ -1,0 +1,64 @@
+.markblob {
+  @apply pb-8;
+
+  p {
+    @apply indent-4 sm:indent-8;
+    @apply py-4 sm:py-4;
+  }
+
+  hr {
+    @apply bg-gray-500/40 h-px border-none;
+    @apply mx-4 sm:mx-16;
+    @apply mb-2 sm:mb-6;
+  }
+
+  h1 {
+    @apply font-bold text-2xl my-2 sm:mt-4;
+  }
+
+  h2 {
+    @apply font-bold text-xl my-2 sm:mt-4;
+  }
+
+  ul,
+  ol {
+    @apply pl-6;
+    @apply mt-2 mb-6;
+  }
+
+  li {
+    @apply list-disc;
+  }
+
+  pre,
+  code {
+    @apply font-mono font-semibold text-base;
+    @apply bg-gray-300 dark:bg-gray-600;
+    @apply px-2 rounded-md tracking-tight;
+  }
+
+  pre {
+    @apply overflow-x-auto scrollbar-thin !scrollbar-thumb-slate-300 !scrollbar-track-gray-600;
+    @apply py-2 mr-4;
+
+    code {
+      @apply pl-0;
+    }
+  }
+
+  blockquote {
+    @apply bg-gray-300 dark:bg-gray-600;
+    @apply rounded-md pl-2 sm:pl-4;
+    @apply py-2;
+    @apply font-semibold;
+
+    > * {
+      @apply before:content-['\201C'];
+      @apply after:content-['\201D'];
+    }
+  }
+
+  img {
+    @apply m-auto;
+  }
+}

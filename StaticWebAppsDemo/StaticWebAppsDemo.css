@@ -2,7 +2,7 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 @import "./BlazorWasm/obj/scopedcss/bundle/BlazorWasm.styles.css";
-@import "MarkBlobView.unscoped.css";
+@import "./BlazorWasm/Components/MarkBlobView/MarkBlobView.nested.css";
 
 #blazor-error-ui {
   background: lightyellow;
@@ -24,35 +24,6 @@
 }
 
 div {
-  @apply transition-all ease-in duration-100;
-  @apply text-gray-800 bg-gray-200;
-  @apply dark:text-gray-200 dark:bg-gray-800;
-}
-
-.accent-blue {
-  --accent-color: theme("colors.blue.600");
-}
-
-.accent-green {
-  --accent-color: theme("colors.green.500");
-}
-
-.accent-yellow {
-  --accent-color: theme("colors.yellow.500");
-}
-
-.accent-indigo {
-  --accent-color: theme("colors.indigo.600");
-}
-
-.accent-pink {
-  --accent-color: theme("colors.pink.600");
-}
-
-.accent-black {
-  --accent-color: black;
-}
-
-.accent-white {
-  --accent-color: white;
+  @apply text-slate-900 bg-zinc-50;
+  @apply dark:text-zinc-50 dark:bg-zinc-800;
 }

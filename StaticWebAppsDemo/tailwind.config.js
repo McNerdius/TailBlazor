@@ -17,6 +17,8 @@ module.exports = {
     },
     plugins: [
         require('tailwindcss-debug-screens'),
+        require('tailwind-scrollbar'),
+        require('tailwindcss/nesting')
     ],
     // variants: {
     //     scrollbar: ['dark']
