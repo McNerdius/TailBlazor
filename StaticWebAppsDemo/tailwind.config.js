@@ -6,14 +6,7 @@ module.exports = {
     ],
     darkMode: 'class',
     theme: {
-        extend: {
-            gridTemplateColumns: {
-                'basic': 'min-content auto'
-            },
-            gridTemplateRows: {
-                'basic': 'min-content auto'
-            }
-        },
+
     },
     plugins: [
         require('tailwindcss-debug-screens'),
