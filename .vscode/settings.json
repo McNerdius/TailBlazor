@@ -13,5 +13,6 @@
   "omnisharp.enableImportCompletion": true,
   "omnisharp.enableRoslynAnalyzers": true,
   "csharp.semanticHighlighting.enabled": true,
-  "csharp.suppressHiddenDiagnostics": false
+  "csharp.suppressHiddenDiagnostics": false,
+  "azureFunctions.projectSubpath": "StaticWebAppsDemo/FunctionsAPI"
 }
