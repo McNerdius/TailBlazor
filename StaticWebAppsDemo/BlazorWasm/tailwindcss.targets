@@ -12,6 +12,7 @@
     </Target>
     <Target Name="tailwind build" AfterTargets="AfterBuild" Condition="'$(TailwindBuild)' == 'true'">
         <Message Text="tailwind build target running..." Importance="high"></Message>
-        <Exec Command="npm run build" />
+        <Exec Command="npm run build" Condition="'$(Configuration)' == 'Debug'"/>
+        <Exec Command="npm run publish" Condition="'$(Configuration)' == 'Release'"/>
     </Target>
 </Project>
