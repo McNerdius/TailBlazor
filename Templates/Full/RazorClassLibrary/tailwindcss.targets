@@ -12,9 +12,6 @@
     </Target>
     <Target Name="tailwind build" AfterTargets="AfterBuild" Condition="'$(TailwindBuild)' == 'true'">
         <Message Text="tailwind build target running..." Importance="high"></Message>
-        <Exec Command="npm run build-server" Condition="'$(Configuration)' == 'Debug'"/>
-        <Exec Command="npm run build-wasm" Condition="'$(Configuration)' == 'Debug'"/>
-        <!-- <Exec Command="npm run build-maui" Condition="'$(Configuration)' == 'Debug'"/>
-        <Exec Command="npm run build-pages" Condition="'$(Configuration)' == 'Debug'"/> -->
+        <Exec Command="npm run build" Condition="'$(Configuration)' == 'Debug'"/>
     </Target>
 </Project>
