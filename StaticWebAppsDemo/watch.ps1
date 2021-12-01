@@ -5,4 +5,4 @@ start "dotnet" -ArgumentList "watch --project ./BlazorWasm/BlazorWasm.csproj run
 
 while (!(Test-Path "./BlazorWasm/obj/scopedcss/bundle/BlazorWasm.styles.css")) { sleep -ms 200 } # tailwind needs this file
 
-npm  run watch-wasm
+npm run watch
