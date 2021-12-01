@@ -10,7 +10,7 @@
       "args": [
         "watch",
         "run",
-        "-- -property TailwindBuild=false"
+        "-- -p:TailwindBuild=false"
       ],
       "cwd": "${workspaceFolder}/",
       "preLaunchTask": "build & start tailwind jit/watch",

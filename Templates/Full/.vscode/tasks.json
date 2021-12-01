@@ -16,7 +16,7 @@
     {
       "label": "wasm - build & watch tailwind",
       "type": "shell",
-      "command": "dotnet build -property TailwindBuild=false && npm run watch-wasm",
+      "command": "dotnet build -p:TailwindBuild=false && npm run watch-wasm",
       "isBackground": true,
       "presentation": {
         "echo": false,
@@ -34,7 +34,7 @@
     {
       "label": "server - build & watch tailwind",
       "type": "shell",
-      "command": "dotnet build -property TailwindBuild=false && npm run watch-server",
+      "command": "dotnet build -p:TailwindBuild=false && npm run watch-server",
       "isBackground": true,
       "presentation": {
         "echo": false,

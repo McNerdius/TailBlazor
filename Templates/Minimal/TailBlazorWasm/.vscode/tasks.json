@@ -16,7 +16,7 @@
     {
       "label": "build & start tailwind jit/watch",
       "type": "shell",
-      "command": "dotnet build -property TailwindBuild=false && npm run watch",
+      "command": "dotnet build -p:TailwindBuild=false && npm run watch",
       "isBackground": true,
       "presentation": {
         "echo": false,

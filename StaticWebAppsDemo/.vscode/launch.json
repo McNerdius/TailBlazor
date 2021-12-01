@@ -32,18 +32,18 @@
       "internalConsoleOptions": "neverOpen"
     },
     {
-      "name": "WASM ONLY: Watch",
+      "name": "Client: Watch",
       "type": "coreclr",
       "request": "launch",
       "program": "dotnet",
       "console": "integratedTerminal",
       "internalConsoleOptions": "neverOpen",
-      "preLaunchTask": "wasm - build & watch tailwind",
+      "preLaunchTask": "dotnet build & watch tailwind",
       "postDebugTask": "stop wasm watch",
       "args": [
         "watch",
         "run",
-        "-- -property TailwindBuild=false"
+        "-- -p:TailwindBuild=false"
       ],
       "cwd": "${workspaceFolder}/BlazorWasm",
       "presentation": {
@@ -52,11 +52,11 @@
       }
     },
     {
-      "name": "WASM ONLY: Debug",
+      "name": "Client: Debug",
       "type": "blazorwasm",
       "request": "launch",
       "cwd": "${workspaceFolder}/BlazorWasm",
-      "preLaunchTask": "wasm - build & watch tailwind",
+      "preLaunchTask": "dotnet build & watch tailwind",
       "postDebugTask": "stop wasm watch",
       "presentation": {
         "close": true,
@@ -67,10 +67,10 @@
   ],
   "compounds": [
     {
-      "name": "WASM+API: Watch",
+      "name": "API & Client: Watch",
       "configurations": [
         "API: Watch",
-        "WASM ONLY: Watch"
+        "Client: Watch"
       ],
       "presentation": {
         "group": "0",
@@ -79,10 +79,10 @@
       "stopAll": true
     },
     {
-      "name": "WASM+API: Debug",
+      "name": "API & Client: Debug",
       "configurations": [
         "API: Debug",
-        "WASM ONLY: Debug"
+        "Client: Debug"
       ],
       "presentation": {
         "group": "0",
