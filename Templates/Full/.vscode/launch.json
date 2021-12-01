@@ -13,7 +13,7 @@
       "args": [
         "watch",
         "run",
-        "-- -property TailwindBuild=false"
+        "-- -p:TailwindBuild=false"
       ],
       "cwd": "${workspaceFolder}/BlazorWasm",
       "presentation": {
@@ -44,7 +44,7 @@
       "args": [
         "watch",
         "run",
-        "-- -property TailwindBuild=false"
+        "-- -p:TailwindBuild=false"
       ],
       "cwd": "${workspaceFolder}/BlazorServer",
       "presentation": {

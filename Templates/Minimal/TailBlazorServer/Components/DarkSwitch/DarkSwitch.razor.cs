@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 
-namespace TailBlazorWasm.Components;
+namespace TailBlazorServer.Components;
 
 public partial class DarkSwitch : ComponentBase
 {

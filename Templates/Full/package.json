@@ -7,12 +7,9 @@
     "tailwindcss": "^3.0.0-alpha.2"
   },
   "scripts": {
-    "build-wasm": "npx tailwindcss --config tailwind.config.js --postcss postcss.config.js -i TailBlazor.css -o ./BlazorWasm/wwwroot/TailBlazor.min.css",
-    "watch-wasm": "npx tailwindcss --watch --config tailwind.config.js --postcss postcss.config.js -i TailBlazor.css -o ./BlazorWasm/wwwroot/TailBlazor.min.css",
-    "publish-wasm": "npx tailwindcss --minify --config tailwind.config.js --postcss postcss.config.js -i TailBlazor.css -o ./BlazorWasm/wwwroot/TailBlazor.min.css",
-    "build-server": "npx tailwindcss --config tailwind.config.js --postcss postcss.config.js -i TailBlazor.css -o ./BlazorServer/wwwroot/TailBlazor.min.css",
-    "watch-server": "npx tailwindcss --watch --config tailwind.config.js --postcss postcss.config.js -i TailBlazor.css -o ./BlazorServer/wwwroot/TailBlazor.min.css",
-    "publish-server": "npx tailwindcss --minify --config tailwind.config.js --postcss postcss.config.js -i TailBlazor.css -o ./BlazorServer/wwwroot/TailBlazor.min.css"
+    "build": "npx tailwindcss --config tailwind.config.js --postcss postcss.config.js -i TailBlazor.css -o ./RazorClassLibrary/wwwroot/TailBlazor.min.css",
+    "watch": "npx tailwindcss --watch --config tailwind.config.js --postcss postcss.config.js -i TailBlazor.css -o ./RazorClassLibrary/wwwroot/TailBlazor.min.css",
+    "publish": "npx tailwindcss --minify --config tailwind.config.js --postcss postcss.config.js -i TailBlazor.css -o ./RazorClassLibrary/wwwroot/TailBlazor.min.css"
   },
   "keywords": [
     "tailwindcss",

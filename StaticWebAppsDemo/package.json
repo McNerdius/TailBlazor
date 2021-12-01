@@ -9,9 +9,9 @@
     "tailwindcss-debug-screens": "^2.2.0"
   },
   "scripts": {
-    "build-wasm": "npx tailwindcss --config tailwind.config.js --postcss postcss.config.js -i StaticWebAppsDemo.css -o ./BlazorWasm/wwwroot/StaticWebAppsDemo.min.css",
-    "watch-wasm": "npx tailwindcss --watch --config tailwind.config.js --postcss postcss.config.js -i StaticWebAppsDemo.css -o ./BlazorWasm/wwwroot/StaticWebAppsDemo.min.css",
-    "publish-wasm": "npx tailwindcss --minify --config tailwind.config.js --postcss postcss.config.js -i StaticWebAppsDemo.css -o ./BlazorWasm/wwwroot/StaticWebAppsDemo.min.css"
+    "build": "npx tailwindcss --config tailwind.config.js --postcss postcss.config.js -i StaticWebAppsDemo.css -o ./BlazorWasm/wwwroot/StaticWebAppsDemo.min.css",
+    "watch": "npx tailwindcss --watch --config tailwind.config.js --postcss postcss.config.js -i StaticWebAppsDemo.css -o ./BlazorWasm/wwwroot/StaticWebAppsDemo.min.css",
+    "publish": "npx tailwindcss --minify --config tailwind.config.js --postcss postcss.config.js -i StaticWebAppsDemo.css -o ./BlazorWasm/wwwroot/StaticWebAppsDemo.min.css"
   },
   "keywords": [
     "tailwindcss",

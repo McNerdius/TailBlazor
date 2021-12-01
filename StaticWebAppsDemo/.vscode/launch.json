@@ -19,31 +19,31 @@
         "close": true
       }
     },
+    // {
+    //   "name": "API: Debug",
+    //   "type": "coreclr",
+    //   "request": "attach",
+    //   "processId": "${command:azureFunctions.pickProcess}",
+    //   "cwd": "${workspaceFolder}/FunctionsAPI",
+    //   "presentation": {
+    //     "group": "1",
+    //     "close": true
+    //   },
+    //   "internalConsoleOptions": "neverOpen"
+    // },
     {
-      "name": "API: Debug",
-      "type": "coreclr",
-      "request": "attach",
-      "processId": "${command:azureFunctions.pickProcess}",
-      "cwd": "${workspaceFolder}/FunctionsAPI",
-      "presentation": {
-        "group": "1",
-        "close": true
-      },
-      "internalConsoleOptions": "neverOpen"
-    },
-    {
-      "name": "WASM ONLY: Watch",
+      "name": "Client: Watch",
       "type": "coreclr",
       "request": "launch",
       "program": "dotnet",
       "console": "integratedTerminal",
       "internalConsoleOptions": "neverOpen",
-      "preLaunchTask": "wasm - build & watch tailwind",
-      "postDebugTask": "stop wasm watch",
+      "preLaunchTask": "dotnet build & watch tailwind",
+      "postDebugTask": "stop watching",
       "args": [
         "watch",
         "run",
-        "-- -property TailwindBuild=false"
+        "-- -p:TailwindBuild=false"
       ],
       "cwd": "${workspaceFolder}/BlazorWasm",
       "presentation": {
@@ -51,26 +51,26 @@
         "group": "2"
       }
     },
-    {
-      "name": "WASM ONLY: Debug",
-      "type": "blazorwasm",
-      "request": "launch",
-      "cwd": "${workspaceFolder}/BlazorWasm",
-      "preLaunchTask": "wasm - build & watch tailwind",
-      "postDebugTask": "stop wasm watch",
-      "presentation": {
-        "close": true,
-        "group": "2"
-      },
-      "internalConsoleOptions": "neverOpen"
-    },
+    // {
+    //   "name": "Client: Debug",
+    //   "type": "blazorwasm",
+    //   "request": "launch",
+    //   "cwd": "${workspaceFolder}/BlazorWasm",
+    //   "preLaunchTask": "dotnet build & watch tailwind",
+    //   "postDebugTask": "stop watching",
+    //   "presentation": {
+    //     "close": true,
+    //     "group": "2"
+    //   },
+    //   "internalConsoleOptions": "neverOpen"
+    // },
   ],
   "compounds": [
     {
-      "name": "WASM+API: Watch",
+      "name": "API & Client: Watch",
       "configurations": [
         "API: Watch",
-        "WASM ONLY: Watch"
+        "Client: Watch"
       ],
       "presentation": {
         "group": "0",
@@ -78,17 +78,17 @@
       },
       "stopAll": true
     },
-    {
-      "name": "WASM+API: Debug",
-      "configurations": [
-        "API: Debug",
-        "WASM ONLY: Debug"
-      ],
-      "presentation": {
-        "group": "0",
-        "close": true,
-      },
-      "stopAll": true
-    }
+    // {
+    //   "name": "API & Client: Debug",
+    //   "configurations": [
+    //     "API: Debug",
+    //     "Client: Debug"
+    //   ],
+    //   "presentation": {
+    //     "group": "0",
+    //     "close": true,
+    //   },
+    //   "stopAll": true
+    // }
   ]
 }

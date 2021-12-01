@@ -6,7 +6,7 @@
         <Exec Command="npm -v" ContinueOnError="true">
             <Output TaskParameter="ExitCode" PropertyName="error" />
         </Exec>
-        <Error Condition="'$(error)' != '0'" Text="install npm please !" />
+        <Error Condition="'$(error)' != '0'" Text="install node.js please !" />
         <Exec Command="npm install"/>
         <Touch Files="node_modules/.install-stamp" AlwaysCreate="true" />
     </Target>

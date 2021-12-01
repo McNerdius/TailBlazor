@@ -19,13 +19,6 @@
         "close": true,
       },
       "internalConsoleOptions": "neverOpen"
-    },
-    // {
-    //   "name": "Debug",
-    //   "type": "blazorwasm",
-    //   "request": "launch",
-    //   "cwd": "${workspaceFolder}/",
-    //   "preLaunchTask": "build",
-    // },
+    }
   ]
 }

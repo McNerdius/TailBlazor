@@ -6,12 +6,13 @@
         <Exec Command="npm -v" ContinueOnError="true">
             <Output TaskParameter="ExitCode" PropertyName="error" />
         </Exec>
-        <Error Condition="'$(error)' != '0'" Text="install npm please !" />
+        <Error Condition="'$(error)' != '0'" Text="install node.js please !" />
         <Exec Command="npm install" />
         <Touch Files="../node_modules/.install-stamp" AlwaysCreate="true" />
     </Target>
     <Target Name="tailwind build" AfterTargets="AfterBuild" Condition="'$(TailwindBuild)' == 'true'">
         <Message Text="tailwind build target running..." Importance="high"></Message>
-        <Exec Command="npm run build-wasm" Condition="'$(Configuration)' == 'Debug'"/>
+        <Exec Command="npm run build" Condition="'$(Configuration)' == 'Debug'"/>
+        <Exec Command="npm run publish" Condition="'$(Configuration)' == 'Release'"/>
     </Target>
 </Project>

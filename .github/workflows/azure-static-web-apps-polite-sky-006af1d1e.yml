@@ -24,20 +24,20 @@ jobs:
         with:
           dotnet-version: "6.0.x"
 
-      - name: Install Node 16
-        uses: actions/setup-node@v2
-        with:
-          node-version: "16"
+      # - name: Install Node 16
+      #   uses: actions/setup-node@v2
+      #   with:
+      #     node-version: "16"
 
-      - name: Build Razor CSS
-        run: dotnet build ./StaticWebAppsDemo/BlazorWasm -c Release
+      # - name: Build Razor CSS
+      #   run: dotnet build ./StaticWebAppsDemo/BlazorWasm -c Release
 
-      - name: Build Tailwind CSS
-        run: |
-          cd ./StaticWebAppsDemo/
-          npm install -g npm@latest
-          npm install
-          npm run publish-wasm
+      # - name: Build Tailwind CSS
+      #   run: |
+      #     cd ./StaticWebAppsDemo/
+      #     npm install -g npm@latest
+      #     npm install
+      #     npm run publish-wasm
 
       - name: Publish Site
         run: dotnet publish ./StaticWebAppsDemo/BlazorWasm -c Release
