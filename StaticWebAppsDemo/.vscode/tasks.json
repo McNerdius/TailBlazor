@@ -11,7 +11,8 @@
         "panel": "shared",
         "clear": true
       },
-      "group": "build"
+      "group": "build",
+      "problemMatcher": "$msCompile"
     },
     {
       "label": "dotnet build & watch tailwind",
@@ -23,18 +24,18 @@
         "reveal": "never",
         "panel": "shared",
         "clear": true
-      },
+      }
     },
     {
-      "label": "stop wasm watch",
+      "label": "stop watching",
       "command": "echo ${input:terminate}",
       "type": "shell",
-      "problemMatcher": []
+      "problemMatcher": "$msCompile"
     },
   ],
   "inputs": [
     {
-      "id": "terminate-wasm",
+      "id": "terminate",
       "type": "command",
       "command": "workbench.action.tasks.terminate",
       "args": "dotnet build & watch tailwind"
