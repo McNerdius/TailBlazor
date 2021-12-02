@@ -14,7 +14,7 @@
       "group": "build"
     },
     {
-      "label": "wasm - build & watch tailwind",
+      "label": "BlazorWasm - build & watch tailwind",
       "type": "shell",
       "command": "dotnet build -p:TailwindBuild=false && npm run watch",
       "isBackground": true,
@@ -26,13 +26,13 @@
       },
     },
     {
-      "label": "stop wasm watch",
+      "label": "stop BlazorWasm watch",
       "command": "echo ${input:terminate-wasm}",
       "type": "shell",
       "problemMatcher": []
     },
     {
-      "label": "server - build & watch tailwind",
+      "label": "BlazorServer - build & watch tailwind",
       "type": "shell",
       "command": "dotnet build -p:TailwindBuild=false && npm run watch",
       "isBackground": true,
@@ -66,13 +66,13 @@
       "id": "terminate-wasm",
       "type": "command",
       "command": "workbench.action.tasks.terminate",
-      "args": "wasm - build & watch tailwind"
+      "args": "BlazorWasm - build & watch tailwind"
     },
     {
       "id": "terminate-server",
       "type": "command",
       "command": "workbench.action.tasks.terminate",
-      "args": "server - build & watch tailwind"
+      "args": "BlazorServer - build & watch tailwind"
     }
   ]
 }

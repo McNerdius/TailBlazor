@@ -41,9 +41,7 @@
       "preLaunchTask": "dotnet build & watch tailwind",
       "postDebugTask": "stop watching",
       "args": [
-        "watch",
-        "run",
-        "-- -p:TailwindBuild=false"
+        "watch"
       ],
       "cwd": "${workspaceFolder}/BlazorWasm",
       "presentation": {

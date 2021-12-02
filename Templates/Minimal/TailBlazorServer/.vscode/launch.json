@@ -9,8 +9,7 @@
       "console": "integratedTerminal",
       "args": [
         "watch",
-        "run",
-        "-- -p:TailwindBuild=false"
+        "run"
       ],
       "cwd": "${workspaceFolder}/",
       "preLaunchTask": "dotnet build & watch tailwind",
