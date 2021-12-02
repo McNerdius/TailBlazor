@@ -2,7 +2,7 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "WASM: Watch",
+      "name": "BlazorWasm: Watch",
       "type": "coreclr",
       "request": "launch",
       "program": "dotnet",
@@ -11,9 +11,7 @@
       "preLaunchTask": "wasm - build & watch tailwind",
       "postDebugTask": "stop wasm watch",
       "args": [
-        "watch",
-        "run",
-        "-- -p:TailwindBuild=false"
+        "watch"
       ],
       "cwd": "${workspaceFolder}/BlazorWasm",
       "presentation": {
@@ -22,7 +20,7 @@
       }
     },
     {
-      "name": "WASM: Debug",
+      "name": "BlazorWasm: Debug",
       "type": "blazorwasm",
       "request": "launch",
       "cwd": "${workspaceFolder}/BlazorWasm",
@@ -35,16 +33,14 @@
       "internalConsoleOptions": "neverOpen"
     },
     {
-      "name": "Server: Watch",
+      "name": "BlazorServer: Watch",
       "type": "coreclr",
       "request": "launch",
       "program": "dotnet",
       "console": "integratedTerminal",
       "internalConsoleOptions": "neverOpen",
       "args": [
-        "watch",
-        "run",
-        "-- -p:TailwindBuild=false"
+        "watch"
       ],
       "cwd": "${workspaceFolder}/BlazorServer",
       "presentation": {
@@ -58,7 +54,7 @@
       // Use IntelliSense to find out which attributes exist for C# debugging
       // Use hover for the description of the existing attributes
       // For further information visit https://github.com/OmniSharp/omnisharp-vscode/blob/master/debugger-launchjson.md
-      "name": "Server: Debug",
+      "name": "BlazorServer: Debug",
       "type": "coreclr",
       "request": "launch",
       // If you have changed target frameworks, make sure to update the program path.
