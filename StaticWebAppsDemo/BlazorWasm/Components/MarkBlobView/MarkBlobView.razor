@@ -10,7 +10,13 @@ else if (found is false)
 }
 else
 {
-    <div class="markblob w-full max-w-[960px]">
+    <div class="markblob w-full max-w-[960px]
+                pl-px pr-4 pt-4
+                sm:pl-4 sm:pr-8  
+                md:pl-8 md:pr-12  
+                lg:pl-12 lg:pr-16
+                xl:pl-16">
+                
         @((MarkupString)content)
     </div>
 } 
