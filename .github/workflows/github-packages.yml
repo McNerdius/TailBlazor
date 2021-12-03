@@ -18,16 +18,10 @@ jobs:
         with:
           dotnet-version: "6.0.x"
 
-      # why am i doing things with ./Source ?
-      - name: Restore dependencies
-        run: dotnet restore "./Source"
-      - name: Build
-        run: dotnet build "./Source" --configuration Release --no-restore
-
       - name: Pack
         run: |
-          dotnet restore
-          dotnet pack ./Template.csproj --no-build --output .\
+          # dotnet restore
+          dotnet pack ./Template.csproj --no-build --output ./
 
       - name: Push
         run: |
