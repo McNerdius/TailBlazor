@@ -5,3 +5,4 @@
 **/*.min.css
 local/**
 **/.vs/*
+Templates/Minimal/TailBlazorPages/appsettings.Development.json

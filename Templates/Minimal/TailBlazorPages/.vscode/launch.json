@@ -1,0 +1,23 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Watch",
+      "type": "coreclr",
+      "request": "launch",
+      "program": "dotnet",
+      "console": "integratedTerminal",
+      "args": [
+        "watch",
+        "run"
+      ],
+      "cwd": "${workspaceFolder}/",
+      "preLaunchTask": "dotnet build & watch tailwind",
+      "postDebugTask": "stop watching",
+      "presentation": {
+        "close": true,
+      },
+      "internalConsoleOptions": "neverOpen"
+    }
+  ]
+}
