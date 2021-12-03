@@ -8,7 +8,7 @@
     "Tailwind CSS"
   ],
   "identity": "McNerdius.TailBlazor.Wasm",
-  "groupIdentity": "McNerdius.TailBlazor",
+  "groupIdentity": "McNerdius.TailBlazor.Wasm",
   "name": "Blazor WASM + Tailwind 3 template",
   "description": "Blazor WASM + Tailwind 3 template",
   "shortName": "tailblazor-wasm",

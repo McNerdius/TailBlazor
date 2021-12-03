@@ -7,8 +7,8 @@
     "Blazor Server",
     "Tailwind CSS"
   ],
-  "identity": "McNerdius.TailBlazor.Wasm",
-  "groupIdentity": "McNerdius.TailBlazor",
+  "identity": "McNerdius.TailBlazor.Server",
+  "groupIdentity": "McNerdius.TailBlazor.Server",
   "name": "Blazor Server + Tailwind 3 template",
   "description": "Blazor Server + Tailwind 3 template",
   "shortName": "tailblazor-server",

@@ -12,8 +12,8 @@
     // "MAUI"
   ],
   "identity": "McNerdius.TailBlazor.Full",
-  "groupIdentity": "McNerdius.TailBlazor",
-  "name": "Full Blazor + Tailwind 3 template",
+  "groupIdentity": "McNerdius.TailBlazor.Full",
+  "name": "Multi-Project Blazor + Tailwind 3 template",
   "description": "Full Blazor + Tailwind 3 template",
   "shortName": "tailblazor-full",
   "tags": {
