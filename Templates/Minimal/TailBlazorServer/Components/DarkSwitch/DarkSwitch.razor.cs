@@ -14,19 +14,20 @@ public partial class DarkSwitch : ComponentBase
     private Task<IJSObjectReference> _module;
     private Task<IJSObjectReference> Module => _module ??= JSRuntime.InvokeAsync<IJSObjectReference>( "import", "./Components/DarkSwitch/DarkSwitch.razor.js" ).AsTask();
 
-    private string currentTheme = "light";
-    private bool isLightMode => currentTheme == "light";
-
     private async Task switchTheme()
     {
         var module = await Module;
+        await module.InvokeAsync<object>( "toggleTheme" );
 
-        currentTheme = currentTheme switch
+    }
+
+    protected override async void OnAfterRender( bool firstRender )
+    {
+        if ( firstRender )
         {
-            "light" => "dark",
-            _ => "light"
-        };
-
-        await module.InvokeAsync<string>( "switchTheme", currentTheme );
+            var module = await Module;
+            await module.InvokeAsync<object>( "loadTheme" );
+        }
     }
 }
+

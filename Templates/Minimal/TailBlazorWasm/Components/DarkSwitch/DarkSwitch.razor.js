@@ -1,12 +1,40 @@
-export function switchTheme(newTheme)
+export function toggleTheme()
 {
-    if ("theme" in localStorage)
-        removeClassFromDocument(localStorage.theme);
+    var theme = localStorage.getItem('theme') ??
+        (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
 
-    localStorage.theme = newTheme;
+    switch (theme)
+    {
+        case 'light':
+            document.documentElement.classList.add('dark');
+            localStorage.theme = 'dark';
+            break;
+        case 'dark':
+            document.documentElement.classList.remove('dark');
+            localStorage.theme = 'light';
+            break;
+        default:
+            console.log('unsupported theme');
+    };
 
-    addClassToDocument(localStorage.theme);
 }
 
-function addClassToDocument(theme) { document.documentElement.classList.add(theme); }
-function removeClassFromDocument(theme) { document.documentElement.classList.remove(theme); }
+export function loadTheme()
+{
+    var theme = localStorage.getItem('theme') ??
+        (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+
+    switch (theme)
+    {
+        case 'light':
+            document.documentElement.classList.remove('dark');
+            break;
+        case 'dark':
+            document.documentElement.classList.add('dark');
+            break;
+        default:
+            console.log('unsupported theme');
+    };
+
+    localStorage.theme = theme;
+}
