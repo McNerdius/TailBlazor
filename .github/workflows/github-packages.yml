@@ -22,7 +22,7 @@ jobs:
 
       - name: Pack
         run: |
-          # dotnet restore
+          dotnet restore
           dotnet pack ./Template.csproj --no-build --output ./
 
       - name: Push
