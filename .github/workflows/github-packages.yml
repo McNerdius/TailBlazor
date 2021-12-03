@@ -1,0 +1,36 @@
+name: Github Packages
+
+on:
+  push:
+    branches: [main]
+  # pull_request:
+  #   branches: [main]
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: "6.0.x"
+
+      # why am i doing things with ./Source ?
+      - name: Restore dependencies
+        run: dotnet restore "./Source"
+      - name: Build
+        run: dotnet build "./Source" --configuration Release --no-restore
+
+      - name: Pack
+        run: |
+          dotnet restore
+          dotnet pack ./Template.csproj --no-build --output .\
+
+      - name: Push
+        run: |
+          ls
+          dotnet nuget add source "https://nuget.pkg.github.com/McNerdius/index.json" --name "github" --store-password-in-clear-text --username McNerdius --password ${{ secrets.GITHUB_TOKEN }}
+          dotnet nuget push "*.nupkg" --source "github" --api-key ${{ secrets.GHTOKEN }}
