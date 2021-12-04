@@ -1,3 +1,21 @@
+# 0.30
+
+- Improve docs site css a bit: responsive, dark mode, grid layout, ...
+- Replace the Dark Mode toggler for Minimal templates
+  - Originally a [fluent-ui web component](https://fluent-components.azurewebsites.net/?path=/docs/components-switch--switch), it's now a razor component lookalike of one spotted on OhMyPosh.dev.
+- Fix up Full template's CSS mess: one set of `npm` scripts for all projects, and it still works with Hot Reload / Tailwind JIT+Incremental builds.
+- Dial back usage of `TailwindBuild=false` msbuild property from pre-Hot-Reload days. See [issue #86](https://github.com/McNerdius/TailBlazor/issues/86).
+  - random PSA: In pinning this issue down i realized that passing msbuild parameters is inconsistent between `dotnet run` and `dotnet build`. `run` expects `--property`, build OTOH takes `-property` and passes it on to msbuild. The short form `-p` shared - [See here](https://docs.microsoft.com/en-us/dotnet/core/compatibility/sdk/6.0/deprecate-p-option-dotnet-run).
+- tweak template generation and ensure first-run functionality
+  - _On My Machine_: After running `PackTemplates.ps1` / `dotnet new --install <generated .nupkg>` - all of the templates' `watch.ps1` work as expected. VS + NPM Task Runner should function fine, but VSC watch/debug tasks are still a todo.
+  - templates pushed to GitHub Packages for now, NuGet.org soon.
+- Add Razor Pages + Blazor Minimal template.
+- Update readme, roadmap
+
+Known Issue:
+
+- In fixing issue #89, the minimal dark mode toggler's state is now only persisted client-side (localStorage and DOM), so As-Is there will be flicker when navigating between pages for server-side rendering.
+
 # 0.21
 
 - Sync csproj, namespace/usings, top-level css, and template names

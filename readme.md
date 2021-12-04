@@ -2,8 +2,9 @@
 
 # NOTE:
 
-2021/11/19 - A bit of an overhaul going on, converting the repo to a set of [Runnable Templates](https://github.com/dotnet/templating/wiki/Runnable-Project-Templates). Things may be buggy and the readme will be a bit stale, but the [demo site](https://polite-sky-006af1d1e.azurestaticapps.net/) will soon replace its long-rambliness. Still debating naming, but eventually it'll resemble the following:
+2021/12/4 - Writing is hard ! Another few days and the site's content will be updated and the first template package pushed to nuget.org !
 
+2021/11/19 - A bit of an overhaul going on, converting the repo to a set of [Runnable Templates](https://github.com/dotnet/templating/wiki/Runnable-Project-Templates). Things may be buggy and the readme will be a bit stale, but the [demo site](https://polite-sky-006af1d1e.azurestaticapps.net/) will soon replace its long-rambliness. Still debating naming, but eventually it'll resemble the following:
 
 | Path                       |    template name    |                      description                       |
 | :------------------------- | :-----------------: | :----------------------------------------------------: |
@@ -18,7 +19,6 @@
 | -- TailBlazorServer        | `tailblazor-server` |                      `dotnet new`                      |
 | -- TailBlazorMaui          |  `tailblazor-maui`  |                       templates                        |
 | -- TailBlazorPages         | `tailblazor-pages`  |                     (for now (?))                      |
-
 
 I figure a week or two of ironing things out and rehashing the readme into useful docs/howto and this should be up on nuget ! Any comments/suggestions/feedback/whatever on the template transition, path/template/project naming, toss it [in here](https://github.com/McNerdius/TailBlazor/issues/64) !
 

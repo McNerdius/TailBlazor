@@ -16,7 +16,7 @@
         <IncludeBuildOutput>false</IncludeBuildOutput>
         <ContentTargetFolders>content</ContentTargetFolders>
         <NoDefaultExcludes>true</NoDefaultExcludes>
-        <RepositoryUrl>https://github.com/McNerdius/TailBlazorLite</RepositoryUrl>
+        <RepositoryUrl>https://github.com/McNerdius/TailBlazor</RepositoryUrl>
         <RepositoryType>git</RepositoryType>
     </PropertyGroup>
     <ItemGroup>
