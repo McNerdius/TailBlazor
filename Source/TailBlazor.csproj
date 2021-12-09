@@ -12,11 +12,11 @@
         <SupportedPlatform Include="browser" />
     </ItemGroup>
     <ItemGroup Condition="'$(Configuration)' == 'Release'">
-        <Compile Remove="LocalMarkdownReader.cs" />
+        <Compile Remove="LocalMarkdownProvider.cs" />
         <EmbeddedResource Include=".\wwwroot\content\**\*.html" />
     </ItemGroup>
     <ItemGroup Condition="'$(Configuration)' == 'Debug'">
-        <Compile Remove="HtmlResourceReader.cs" />
+        <Compile Remove="HtmlResourceProvider.cs" />
         <PackageReference Include="markdig" Version="0.26.0" />
     </ItemGroup>
     <ItemGroup>
