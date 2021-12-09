@@ -10,7 +10,7 @@ public sealed class EmbeddedHtmlProvider : IMarkdownContentProvider
     {
         assembly = Assembly.GetExecutingAssembly();
         // TODO: magic string
-        prefix = $"BlazorWasm.wwwroot.{Path}.";
+        prefix = $"TailBlazor.wwwroot.{Path}.";
         resources = assembly.GetManifestResourceNames()
                             .Select( name => name.Replace( prefix, "" ) )
                             .ToList();
