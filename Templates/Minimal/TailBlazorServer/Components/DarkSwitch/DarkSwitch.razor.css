@@ -1,7 +1,0 @@
-.theme-knob {
-  @apply absolute h-5 w-5 rounded-full top-2 left-2 mt-0.5 ml-0.5;
-  @apply bg-gray-200 dark:bg-gray-900;
-  @apply ring-blue-600/95;
-  @apply group-hover:ring-2 group-hover:scale-110;
-  @apply transition-all delay-75 duration-300;
-}

@@ -1,0 +1,48 @@
+@namespace TailBlazor.Components
+
+<div class="link-container @(Large?"":"ml-2")">
+
+@if (Link is string)
+{
+    <NavLink class="justify-start flex items-center" href=@Link Match=NavLinkMatch.All target=@(NewTab ? "_blank" : null)>
+        @Inner
+    </NavLink>
+}
+else
+{
+    <div class="justify-start flex items-center">
+        @Inner
+    </div>
+}
+
+</div>
+
+@code 
+{
+    RenderFragment Inner => __builder =>
+    {
+        <span class=" relative @(Large ? "w-6" : "w-4 ml-2")" aria-hidden="true">
+            @ChildContent
+        </span> 
+        <span class="ml-3">
+            @Text
+        </span>
+    };
+    
+    [Parameter]
+    public bool NewTab { get; set; }
+    
+    [Parameter]
+    public bool Large { get; set; }
+
+    [Parameter]
+    [EditorRequired]
+    public string Text { get; set; }
+
+    [Parameter]
+    public string Link { get; set; }
+
+    [Parameter]
+    [EditorRequired]
+    public RenderFragment ChildContent { get; set; }
+}

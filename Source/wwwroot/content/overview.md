@@ -1,0 +1,9 @@
+[Blazor](https://dotnet.microsoft.com/apps/aspnet/web-apps/blazor) is a component-based paradigm for building interactive UIs with .NET/C#. These components can be used server-side via ASP.NET Core and client-side via WebAssembly, and there's preview support for <abbr title="native rendering, not a 'bundled browser'; native API access">native integration</abbr> with iOS/macOS, Windows, and Android apps via [.NET MAUI](https://docs.microsoft.com/en-us/dotnet/maui/).  There are also a couple [experimental methods](https://docs.microsoft.com/en-us/aspnet/core/blazor/components/?view=aspnetcore-6.0#blazor-custom-elements) of using Razor Components with other frameworks, such as Angular or React.
+
+[Tailwind CSS](https://tailwindcss.com/) is a utility-first CSS framework & class generator, and pairs quite well with Blazor's component-oriented design and CSS isolation, IMHO. Being able to put **_usage_** of CSS styles _**first**_ has made learning CSS much more approachable for me. The [documentation](https://tailwindcss.com/docs/utility-first) is great as well, but see [here](/notes#CLI) for some notes regarding preview & alpha features not reflected in the current docs.
+
+---
+
+Here, i'll be sharing my approach to pairing Tailwind CSS with Blazor by transforming a standard `dotnet new` template and adding in the `npm` bits. The [TailBlazor Repo](https://github.com/McNerdius/TailBlazor/) contains a set of dotnet [templates](/templates), as well as the code to this site.
+
+I'll try to cover all the basics without being too verbose. I'll likely be more detail-oriented regarding the JS tooling side of things - this is about adding Tailwind CSS to a C# developer's toolbelt after all. Feel free to [submit](https://github.com/McNerdius/TailBlazor/issues) any clarification requests or suggestions.
