@@ -33,4 +33,4 @@ See [tailblazor.net](https://www.tailblazor.net){ target="_blank"} for a preview
 | -- RazorPages           |                     |
 +-------------------------+---------------------+
 
-Any comments/suggestions/feedback/whatever on the templates, path/template/project naming, toss it [in here](https://github.com/McNerdius/TailBlazor/issues/64) !
+Any comments/suggestions/feedback/whatever on the templates, path/template/project naming, toss it [in here](https://github.com/McNerdius/TailBlazor/issues/64){ target="_blank"} !

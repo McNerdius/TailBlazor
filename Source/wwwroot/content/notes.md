@@ -5,16 +5,16 @@ The docs mention installing `autoprefixer` and `postcss` as peer-dependencies of
 
 ## autoprefixer (and cssnano)
 
-* [`autoprefixer`](https://autoprefixer.github.io/) is both installed and applied automatically, zero keystrokes required.  Passing `--no-autoprefixer` to `tailwindcss` will disable it.
+* [`autoprefixer`](https://autoprefixer.github.io/) is both installed and applied automatically, zero keystrokes required.  *(Passing `--no-autoprefixer` to `tailwindcss` will disable it.)*
 * [`cssnano`]() is installed automatically and run if you pass `--minify` to `tailwindcss`.  (Or if it's listed in `postcss.config.js`).
 
 ---
 
 # A bit more on PostCSS {#postcss}
 
-todo: `@tailwind base` vs `@import "tailwindcss/base"`
+More about `@tailwind`, `base`, and `components` can be found [here](https://tailwindcss.com/docs/functions-and-directives#tailwind){ target="_blank"}.  More about the PostCSS side of things can be found [here](https://tailwindcss.com/docs/using-with-preprocessors#using-post-css-as-your-preprocessor){ target="_blank"}
 
-> More about `@tailwind`, `base`, and `components` can be found [here](https://tailwindcss.com/docs/functions-and-directives#tailwind){ target="_blank"}.  More about the PostCSS side of things can be found [here](https://tailwindcss.com/docs/using-with-preprocessors#using-post-css-as-your-preprocessor){ target="_blank"}
+todo: `@tailwind base` vs `@import "tailwindcss/base"`
 
 ## Tailwind's Default `init --postcss` Config
 
@@ -57,7 +57,7 @@ module.exports = {
 
 # VS Code {#VSCode}
 
-The [Tailwind CSS Extension](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss){ target="_blank"} is incredible.  Its intellisense is dynamic: it will pick up on new or overridden values in `tailwind.config.js` as well any [utility classes](https://tailwindcss.com/docs/adding-new-utilities){ target="_blank"} or [plugins](https://tailwindcss.com/docs/plugins){ target="_blank"} you've added.  It also provides previews of generated classes on hover.  To skeptics and critics who get squinty-eyed or cringe when i mention Tailwind makes learning vanilla CSS more approachable: The vanilla CSS is right there to look at and applied directly to an element.  It is transparent and cuts down on potential hangups as i learn the ins and outs of syntax, cascade, inheritance, specificity, and so much memorizing.
+The [Tailwind CSS Extension](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss){ target="_blank"} is incredible.  Its intellisense is dynamic: it will pick up on new or overridden values in `tailwind.config.js` as well any [utility classes](https://tailwindcss.com/docs/adding-new-utilities){ target="_blank"} or [plugins](https://tailwindcss.com/docs/plugins){ target="_blank"} you've added.  It also provides previews of generated classes on hover.  To skeptics and critics who get squinty-eyed or cringe when i mention Tailwind CSS makes learning Vanilla CSS more approachable: The vanilla CSS is right there to look at and applied directly to an element.  It is transparent and cuts down on potential hangups as i learn the ins and outs of syntax, cascade, inheritance, specificity, and so much memorizing.
 
 
 # Icons {#HeroIcons}

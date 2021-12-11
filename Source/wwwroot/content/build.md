@@ -84,7 +84,7 @@ To actually make use of this in your Blazor project, add it to your `*.csproj`, 
 
 The site repo and [tailblazor-templates](https://github.com/McNerdius/TailBlazor-Templates){ target="_blank"} include scripts to fire off `dotnet watch`, wait for `*.styles.css` to build & Tailwind dependencies to install (if missing), and finally `tailwindcss --watch` (via `npm run watch`).
 
-The best option i've found to integrate this with Visual Studio UI is to use the [NPM Task Runner](https://marketplace.visualstudio.com/items?itemName=MadsKristensen.NpmTaskRunner64){ target="_blank"}, and bind the relevant `watch` script to "Project Open". (Not "After Build", see below.)
+The best option i've found to integrate `tailwindcss --watch` with Visual Studio UI is to use the [NPM Task Runner](https://marketplace.visualstudio.com/items?itemName=MadsKristensen.NpmTaskRunner64){ target="_blank"}, and bind the relevant `watch` script to "Project Open". (Not "After Build", see below.)
 
 Other approaches:
 
@@ -94,7 +94,7 @@ This places an MSBuild Target in the `.csproj` - `<Target Name="PostBuild" After
 
 - More advanced uses of MSBuild Targets
 
-One example is using [Inline Tasks](https://docs.microsoft.com/en-us/visualstudio/msbuild/msbuild-inline-tasks) - essentially embedding code within the `.csproj` (or more ideally, the `tailwindcss.targets` it points to) to kick off the npm task. It works but it's a bit ugly IMO. Visit [See Also](/seealso) for a link to a project using this approach.
+One example is using [Inline Tasks](https://docs.microsoft.com/en-us/visualstudio/msbuild/msbuild-inline-tasks) - essentially embedding code within the `.csproj` (or more ideally, the `tailwindcss.targets` it points to) to kick off the npm task. It works but it's a bit ugly IMO. Visit [See Also](/also) for a project using this approach.
 
 - Using Visual Studio Folders View's "Configure Tasks" / `tasks.vs.json`
 
@@ -102,7 +102,7 @@ This can be used to expose the needed scripts in a right-click menu in the Folde
 
 - You have to be in Folder View
 - You still have to kick it off manually. (Arguably easier than doing so via CLI though.)
-- I couldn't get it to work. Tried feeding it various combinations of working directories, no dice.
+- **I couldn't get it to work.** Tried feeding it various combinations of working directories, no dice.
 
 ---
 

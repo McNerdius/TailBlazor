@@ -17,7 +17,7 @@ The repo and this site are geared toward .NET 6 and Tailwind 3. Older versions o
 
 ## SDKs:
 
-- [.NET 6 SDK](https://dotnet.microsoft.com/download/dotnet/6.0){ target="_blank"}, included with the VS install. If you're like me and use both VS and VSCode - VSCode [will use](/wwwroot/images/vscode_msbuild_bits.png){ target="_blank"} Visual Studio's bits.
+- [.NET 6 SDK](https://dotnet.microsoft.com/download/dotnet/6.0){ target="_blank"}, included with the VS install. If you're like me and use both VS and VSCode - VSCode [will use](/images/vscode_msbuild_bits.png){ target="_blank"} Visual Studio's bits.
 - If using CLI and Blazor/Maui is of interest, use `dotnet workload search maui` to list the workloads that may be of interest to you and `dotnet workload install` one or more.
 - [Node.js 12+](https://nodejs.org/en/download/){ target="_blank"}.
 
@@ -72,7 +72,7 @@ Last for scaffolding, make a "root" CSS file next to the config files, say `site
 @import "tailwindcss/utilities";
 ```
 
-This is what you'll feed the `tailwindcss` CLI, and where you'll import any of your project's CSS later.  Note this syntax is different from what you'll see in the docs (`@tailwind ...`).  I've found it's what works best when using `postcss-import` and is easier to reason about when new to either Vanilla CSS or Tailwind CSS.  See [some notes](/notes/#postcss){ target="_blank"}.
+This is what you'll feed the `tailwindcss` CLI, and where you'll import any of your project's CSS later.  Note this syntax is different from what you'll see in the docs (`@tailwind ...`).  I've found it's what works best when using `postcss-import` and is easier to reason about when new to either Vanilla CSS or Tailwind CSS.  See [some notes](/notes#postcss){ target="_blank"}.
 
 # Configure {#configure}
 
@@ -155,7 +155,7 @@ Just connecting the dots here - pointing the `tailwindcss` CLI at the relevant c
 
 ---
 
-Finally !  Having set up the config and `site.css`, running `npm run build` will take the Tailwind-flavored `site.css` and feeds it through whatever tools are listed in `postcss.config.js` top-down and output vanilla CSS to `site.min.css`
+Finally !  Having set up the configs and `site.css`, running `npm run build` will take the Tailwind-flavored `site.css` and feeds it through whatever tools are listed in `postcss.config.js` top-down and output vanilla CSS to `site.min.css`
 
 ---
 
@@ -165,9 +165,8 @@ We've come full circle - time to link the generated CSS in your markup files: ad
 
 Again, for other project types the proper place(s) to link this will be different.
 
----
 
-# Hooking up CSS Isolation {#scopedcss}
+### Hooking up CSS Isolation {#scopedcss}
 
 Idiomatic usage of Tailwind puts the bulk of CSS into your markup's `class=""` attributes, but it also features an `@apply` directive to easily pull out lengthy or frequently used class strings into a CSS class.
 
@@ -249,15 +248,15 @@ First a quick tweak to the `csproj` file:
 
 ::: pre
 `<PropertyGroup>` \
-    `<TargetFramework>net6.0</TargetFramework>` \
-    `<Nullable>enable</Nullable>` \
-    `<ImplicitUsings>enable</ImplicitUsings>` \
-    ++`    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>`++ \
-    ++`    <IntermediateOutputPath>obj</IntermediateOutputPath>`++ \
+`    <TargetFramework>net6.0</TargetFramework>` \
+`    <Nullable>enable</Nullable>` \
+`    <ImplicitUsings>enable</ImplicitUsings>` \
+++`    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>`++ \
+++`    <IntermediateOutputPath>obj</IntermediateOutputPath>`++ \
 `</PropertyGroup>`
 :::
 
-This changes the output path of the project's Scoped CSS bundle from `\obj\net6.0\{Debug|Release}\scopedcss\bundle` to a constant `\obj\scopedcss\bundle`.  Now, running a `dotnet build`, it'll output the Scoped CSS bundle to `\obj\scopedcss\bundle\site.styles.css`.  (Assuming a project named `site.csproj`)  Add this file to the root CSS created earler, `site.css` here:
+This changes the output path of the project's Scoped CSS bundle from `\obj\net6.0\{Debug|Release}\scopedcss\bundle` to a constant `\obj\scopedcss\bundle`.  Now, running a `dotnet build`, it'll output the Scoped CSS bundle to `\obj\scopedcss\bundle\site.styles.css`.  (Assuming a project named `site.csproj`)  Add this file to the root CSS created earler, `site.css`:
 
 <pre>
 <code>@import "tailwindcss/base";</code>
@@ -272,13 +271,13 @@ And voila, consequent `npm run` commands will transform it to vanilla CSS for yo
 
 Some Footnotes...
 
-- `npm install` vs `dotnet` `package`/`tool` {#npm-install .md-footnote}
+- `npm install` vs `dotnet` `package`/`tool`: {#npm-install .md-footnote}
 
-  `npm install` is analogous to a `dotnet add package` for most use cases. But here we're using `npm install -D` *(`-D` being short for `--save-dev`)* - which is more like a [`dotnet tool install`](https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-tool-install){ target="_blank"}. These are used when the packages being installed are _development tools_, not _project dependencies_. `dotnet tool install` isn't used nearly as much as `npm install -D`, much less with _local_ tools. You may remember when `dotnet watch` was a global tool that needed [to be installed](https://www.nuget.org/packages/dotnet-watch){ target="_blank"}. Some handy dotnet global tools are [`dotnet format`](https://www.nuget.org/packages/dotnet-format/){ target="_blank"}, [`dotnet outdated`](https://www.nuget.org/packages/dotnet-outdated-tool/){ target="_blank"}, and [`dotnet script`](https://www.nuget.org/packages/dotnet-script/){ target="_blank"} for C# scripting and a REPL, with VSCode debugging support. [back to text](/setup#f1){.md-footnote .return}
+  `npm install foo` is analogous to a `dotnet add package foo` for most use cases. But here we're using `npm install -D` *(`-D` being short for `--save-dev`)* - which is more like a [`dotnet tool install`](https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-tool-install){ target="_blank"}. These are used when the packages being installed are _development tools_, not _project dependencies_. `dotnet tool install` isn't used nearly as much as `npm install -D`, much less with _local_ tools. You may remember when `dotnet watch` was a global tool that needed [to be installed](https://www.nuget.org/packages/dotnet-watch){ target="_blank"}. Some handy dotnet global tools are [`dotnet format`](https://www.nuget.org/packages/dotnet-format/){ target="_blank"}, [`dotnet outdated`](https://www.nuget.org/packages/dotnet-outdated-tool/){ target="_blank"}, and [`dotnet script`](https://www.nuget.org/packages/dotnet-script/){ target="_blank"} for C# scripting and a REPL, with VSCode debugging support. [back to text](/setup#f1){.md-footnote .return}
 
 - Special PostCSS Plugins {#postcss-plugins .md-footnote}
 
-  Along with `autoprefixer` and optionally `cssnano`. Again, see [notes](/notes#CLI){ target="_blank"}. [back to text](/setup#f2){.md-footnote .return}
+  Along with `autoprefixer` and optionally `cssnano`. Again, see [notes](/notes){ target="_blank"}. [back to text](/setup#f2){.md-footnote .return}
 
 ---
 
