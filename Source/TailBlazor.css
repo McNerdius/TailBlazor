@@ -1,6 +1,7 @@
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
+
 @import "./obj/scopedcss/bundle/TailBlazor.styles.css";
 @import "./Pages/Markdown.nested.css";
 

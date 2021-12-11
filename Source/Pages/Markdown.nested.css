@@ -1,6 +1,11 @@
 .markdown {
+  @apply 2xl:max-w-4xl;
+
   a {
-    @apply !text-blue-600;
+    @apply text-blue-600 no-underline;
+    /* &:tech {
+      @apply text-black decoration-blue-600 decoration-wavy;
+    } */
   }
 
   .md-footnote {
@@ -9,28 +14,37 @@
     }
   }
 
+  td {
+    @apply align-middle;
+  }
+
   pre,
+  .pre,
   code {
-    @apply leading-[1.22] tracking-tighter text-sm;
+    @apply !leading-[1.22] tracking-tight
+           !font-light
+           text-sm sm:text-base md:text-lg;
+  }
+
+  del {
+    @apply bg-red-400/30 no-underline;
+    /* before:content-['-']  */
+  }
+  ins {
+    @apply bg-green-300/30 no-underline;
+    /* before:content-['+']  */
   }
 
   code {
-    del {
-      @apply bg-red-400/30 before:content-['-'] no-underline;
-      /* no-underline	=> text-decoration: none; */
-    }
-    ins {
-      @apply bg-green-300/30 before:content-['+'] no-underline;
-    }
-    &:not(pre *) {
+    @apply whitespace-pre;
+    @apply before:!content-none after:!content-none;
+    &:not(pre *, .pre *) {
       /* more like ohmyposh.dev, less like tailwindcss.com */
-      @apply before:!content-none after:!content-none;
 
-      @apply !font-medium
-             bg-slate-100 dark:bg-slate-700;
+      @apply bg-slate-100 dark:bg-slate-700;
 
       @apply px-[0.3rem] py-px mx-1 rounded-md 
-      !ring-1 !ring-slate-300 dark:!ring-0;
+             ring-1 ring-slate-300 dark:ring-0;
     }
   }
 
@@ -38,13 +52,28 @@
     @apply cursor-pointer;
   }
 
-  pre {
+  details {
+    @apply p-2 m-2 rounded-md
+           shadow-sm shadow-dotnet-blurple;
+
+    & summary {
+      @apply text-xl font-bold italic cursor-pointer;
+    }
+  }
+
+  pre,
+  .pre {
     @apply p-2 pb-4 mr-4 overflow-auto rounded-md
            bg-stone-200/30 dark:bg-slate-700
            text-black dark:text-white
            overflow-x-auto
             scrollbar-thin !scrollbar-thumb-neutral-400 !scrollbar-track-neutral-200;
   }
+
+  img {
+    @apply m-auto bg-neutral-700 rounded-md p-2;
+  }
+
   /*
 
   blockquote {
@@ -59,8 +88,5 @@
     }
   }
 
-  img {
-    @apply m-auto;
-  }
 */
 }
