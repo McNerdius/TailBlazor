@@ -14,5 +14,5 @@
   "omnisharp.enableRoslynAnalyzers": true,
   "csharp.semanticHighlighting.enabled": true,
   "csharp.suppressHiddenDiagnostics": false,
-  "azureFunctions.projectSubpath": "StaticWebAppsDemo/FunctionsAPI"
+  "azureFunctions.projectSubpath": "TailBlazor/FunctionsAPI"
 }

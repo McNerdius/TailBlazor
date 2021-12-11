@@ -1,3 +1,10 @@
+# 0.40
+
+- Begin moving Templates to [TailBlazor-Templates](https://github.com/McNerdius/TailBlazor-Templates).
+  I was originally thinking of adjusting StaticWebAppsDemo to be a Template as well, but it's too purpose-built for that now as a "docs" sort of thing.
+- Bundle the content rather than serving from Azure Functions.
+  Going back to the Azure Static Web App as a Template or Demo, i was taking advantage of its Functions API to serve content. New versions of `tailblazor.dev` will convert the markdown & bundle it into the site's binary as a deployment step. See [MarkDigger](https://github.com/McNerdius/MarkDigger).
+
 # 0.30
 
 - Improve docs site css a bit: responsive, dark mode, grid layout, ...

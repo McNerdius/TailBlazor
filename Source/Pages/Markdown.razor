@@ -1,0 +1,60 @@
+@page "/{*page}"
+
+<AnchorNavigationHook />
+
+<div class="h-full">
+
+    @if (found is null)
+    {
+        <div class="flex" > <Loading /></div>   
+    }
+    else if (found is false)
+    {
+        <div class="flex" ><NotFound /></div>    
+    }
+    else
+    {
+        <div class="prose prose-sm sm:prose-md lg:prose-xl dark:prose-invert 
+                    markdown pb-8" >
+                @((MarkupString)content)
+        </div>
+    } 
+    
+</div>
+
+@code
+{
+    [Parameter] public string? page { get; set; }
+
+    [Inject] public IMarkdownContentProvider MarkdownContentProvider { get; set; }
+
+    private string? content = null;
+    private bool? found { get; set; } = null;
+
+    protected override async Task OnParametersSetAsync()
+    {
+        page = page switch
+        {
+            null => "overview",
+            string _ when page.Contains('#') => page[..page.IndexOf('#')],
+            _ => page
+        };
+     
+        if (string.IsNullOrEmpty(page))
+            return;
+
+        found = null;
+
+        var markdown = await MarkdownContentProvider.GetMarkdownContent(page);
+
+        if (markdown is not null)
+        {
+            found = true;
+            content = markdown;
+        }
+        else
+        {
+            found = false;
+        }
+    }
+}

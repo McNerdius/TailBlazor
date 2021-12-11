@@ -1,8 +1,0 @@
-<Project Sdk="Microsoft.NET.Sdk">
-    <PropertyGroup>
-        <TargetFramework>net6.0</TargetFramework>
-        <Nullable>Enable</Nullable>
-        <RootNamespace>SharedClassLibrary</RootNamespace>
-        <ImplicitUsings>Enable</ImplicitUsings>
-    </PropertyGroup>
-</Project>

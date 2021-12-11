@@ -1,0 +1,19 @@
+.link-container {
+  @apply font-semibold text-sm sm:text-base lg:text-lg;
+
+  &:hover {
+    @apply no-underline bg-neutral-200/80 dark:bg-neutral-700/70;
+  }
+
+  @apply rounded-[4px] stroke-black dark:stroke-white;
+}
+
+::deep a {
+  @apply py-px my-1 pl-px sm:pl-1 sm:py-1
+         dark:text-neutral-200;
+}
+
+::deep a.active {
+  @apply bg-neutral-200/80 rounded-[4px]
+        dark:bg-neutral-700/70 dark:text-blue-600;
+}
