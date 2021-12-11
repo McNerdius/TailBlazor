@@ -2,20 +2,20 @@
 
 <AnchorNavigationHook />
 
-<div class="h-full flex">
+<div class="h-full">
 
     @if (found is null)
     {
-        <Loading />
+        <div class="flex" > <Loading /></div>   
     }
     else if (found is false)
     {
-        <NotFound />
+        <div class="flex" ><NotFound /></div>    
     }
     else
     {
         <div class="prose prose-sm sm:prose-md lg:prose-xl dark:prose-invert 
-                    markdown" >
+                    markdown pb-8" >
                 @((MarkupString)content)
         </div>
     } 
@@ -49,8 +49,8 @@
 
         if (markdown is not null)
         {
-            content = markdown;
             found = true;
+            content = markdown;
         }
         else
         {
