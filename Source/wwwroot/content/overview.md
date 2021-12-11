@@ -1,4 +1,4 @@
-# Tailwind CSS + Blazor = 🥰
+# Tailwind CSS + Blazor = 😃
 
 [Blazor](https://dotnet.microsoft.com/apps/aspnet/web-apps/blazor){ target="_blank"} is a new feature of ASP.NET, used for building interactive components with C#. These can be used server-side, or client-side via WebAssembly, and there's preview support for <abbr title="native rendering, not a 'bundled browser'; native API access">native integration</abbr> with iOS/macOS, Windows, and Android apps via [.NET MAUI](https://docs.microsoft.com/en-us/dotnet/maui/){ target="_blank"}.  **There are also a couple [experimental methods](https://docs.microsoft.com/en-us/aspnet/core/blazor/components/?view=aspnetcore-6.0#blazor-custom-elements){ target="_blank"} of using Razor Components with other frameworks, such as Angular or React.**
 
