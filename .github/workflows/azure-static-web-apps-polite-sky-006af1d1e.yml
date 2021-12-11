@@ -30,7 +30,7 @@ jobs:
         id: generate
         with:
           path: "Source/wwwroot/content"
-          extensions: "abbreviations+customcontainers+emphasisextras+pipetables+tasklists+attributes"
+          extensions: "abbreviations+customcontainers+emphasisextras+pipetables+gridtables+tasklists+attributes"
 
       - name: Get the output files
         run: echo "generated ${{ steps.generate.outputs.files }}"
