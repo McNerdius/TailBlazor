@@ -159,14 +159,14 @@ Finally !  Having set up the configs and `site.css`, running `npm run build` wil
 
 ---
 
-## .NET/Blazor configuration
+## .NET/Blazor configuration {#scopedcss}
 
 We've come full circle - time to link the generated CSS in your markup files: add `<link href="./wwwroot/site.min.css" rel="stylesheet">` to `index.html`.
 
 Again, for other project types the proper place(s) to link this will be different.
 
 
-### Hooking up CSS Isolation {#scopedcss}
+### Hooking up CSS Isolation 
 
 Idiomatic usage of Tailwind puts the bulk of CSS into your markup's `class=""` attributes, but it also features an `@apply` directive to easily pull out lengthy or frequently used class strings into a CSS class.
 
