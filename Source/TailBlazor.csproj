@@ -6,6 +6,8 @@
         <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
         <IntermediateOutputPath>obj</IntermediateOutputPath>
         <RootNamespace>TailBlazor</RootNamespace>
+        <InvariantGlobalization>true</InvariantGlobalization>
+        <BlazorEnableTimeZoneSupport>false</BlazorEnableTimeZoneSupport>
     </PropertyGroup>
     <Import Project="tailwindcss.targets" />
     <ItemGroup>
