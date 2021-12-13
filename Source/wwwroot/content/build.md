@@ -86,6 +86,8 @@ The site repo and [tailblazor-templates](https://github.com/McNerdius/TailBlazor
 
 The best option i've found to integrate `tailwindcss --watch` with Visual Studio UI is to use the [NPM Task Runner](https://marketplace.visualstudio.com/items?itemName=MadsKristensen.NpmTaskRunner64){ target="_blank"}, and bind the relevant `watch` script to "Project Open". (Not "After Build", see below.)
 
+Keep in mind: one-off `tailwindcss` builds are not ideal.  The long-running ***`tailwindcss --watch` is the only way to take advantage of Tailwind's super-fast incremental builds.***.
+
 Other approaches:
 
 - Using a "Post Build Event" in Visual Studio's project properties.
