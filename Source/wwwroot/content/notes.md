@@ -1,7 +1,7 @@
 
 # Installation
 
-The docs mention installing `autoprefixer` and `postcss` as peer-dependencies of `tailwindcss` , but that's not needed if you're using the new `tailwindcss` CLI directly, it integrates `postcss`, `autoprefixer` and `cssnano`, no need to add those manually.  If you're using other JS tooling you won't get this automagically, or incremental builds via its `--watch` mode.
+The docs mention installing `autoprefixer` and `postcss` as peer-dependencies of `tailwindcss` , but that's not needed if you're using the new `tailwindcss` CLI directly, it integrates `postcss`, `autoprefixer` and `cssnano`, no need to add those manually.  If you're using other JS tooling you won't get this automagically, nor incremental builds via its `--watch` mode.
 
 ## autoprefixer (and cssnano)
 
@@ -14,7 +14,7 @@ The docs mention installing `autoprefixer` and `postcss` as peer-dependencies of
 
 More about `@tailwind`, `base`, and `components` can be found [here](https://tailwindcss.com/docs/functions-and-directives#tailwind){ target="_blank"}.  More about the PostCSS side of things can be found [here](https://tailwindcss.com/docs/using-with-preprocessors#using-post-css-as-your-preprocessor){ target="_blank"}
 
-todo: `@tailwind base` vs `@import "tailwindcss/base"`
+todo: more on `@tailwind base` vs `@import "tailwindcss/base"`
 
 ## Tailwind's Default `init --postcss` Config
 

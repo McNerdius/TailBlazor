@@ -3,7 +3,7 @@
 You'll need the .NET 6 SDK, Node.JS, and of course a development environment — _PowerShell optional_
 
 ::: info
-The repo and this site are geared toward .NET 6 and Tailwind 3. Older versions of .NET would work too, but the build steps may be subtly different for Blazor.
+TailBlazor is geared toward .NET 6 and Tailwind 3. Older versions of .NET would work too, but the build steps may be subtly different for Blazor.
 :::
 
 ## Development Environment:
@@ -29,26 +29,22 @@ The repo and this site are geared toward .NET 6 and Tailwind 3. Older versions o
 
 # Scaffold {#scaffold}
 
-I'll be scaffolding and tweaking a Blazor WebAssembly project here - the steps are largely the same for other project types and i'll do my best to call out any differences.
-
----
-
 ## .NET/Blazor scaffolding
 
 ::: info
-Yes, i'm using the CLI to scaffold projects. Each IDE does things differently and may change from version to version, but the CLI is a constant.
+I'll be scaffolding and tweaking a Blazor WebAssembly project here - the steps are largely the same for other project types and i'll do my best to call out any differences.  I'll be using the `dotnet` CLI: each IDE does things differently and may change from version to version, but the CLI is a constant.
 :::
 
 After creating the Blazor WebAssembly project using `dotnet new blazorwasm`, remove the following:
 
-- The Bootstrap/Open-Iconic bits at `wwwroot/css/*`. Note that at the bottom of `app.css` there are some Blazor-specific bits (`blazor-error-ui` and so on) that are worth taking a look at / keeping around. See [here](https://docs.microsoft.com/en-us/aspnet/core/blazor/fundamentals/handle-errors?view=aspnetcore-6.0#detailed-errors-during-development-for-blazor-webassembly-apps){ target="_blank"} and [here](https://docs.microsoft.com/en-us/aspnet/core/blazor/fundamentals/handle-errors?view=aspnetcore-6.0#error-boundaries){ target="_blank"} for more info.
+- The Bootstrap/Open-Iconic bits at `wwwroot/css/*`. \
+  Note that at the bottom of `app.css` there are some Blazor-specific bits (`blazor-error-ui` and so on) that are worth taking a look at / keeping around. See [here](https://docs.microsoft.com/en-us/aspnet/core/blazor/fundamentals/handle-errors?view=aspnetcore-6.0#detailed-errors-during-development-for-blazor-webassembly-apps){ target="_blank"} and [here](https://docs.microsoft.com/en-us/aspnet/core/blazor/fundamentals/handle-errors?view=aspnetcore-6.0#error-boundaries){ target="_blank"} for more info.
 - The `<link href="..." rel="stylesheet">` references to Bootstrap/Open-Iconic in `index.html`.
 
 Same basic steps for other project types: Nuke the default CSS and references to it, they're just in different locations.
 
-Of course the `html`/`razor`/`cshtml` classes are littered with Bootstrap classes, but, moving on...
+Of course the `html`/`razor`/`cshtml` files are littered with Bootstrap classes, but, moving on...
 
----
 
 ## Tailwind CSS scaffolding
 
@@ -94,20 +90,20 @@ module.exports = {
 
 Tailwind is massively [configurable](https://tailwindcss.com/docs/configuration){ target="_blank"}, letting you override and extend values used when generating classes, and even [add your own](https://tailwindcss.com/docs/adding-new-utilities){ target="_blank"} utility classes to participate in the CSS generation process.
 
-However, there's only one tweak needed to get started: `content` is where the magic happens. Here you point Tailwind at the _markup_ files where the yet-to-be-generated classes are being _used_. (Hence the "JIT" in "Tailwind JIT"). It supports globbing - so for a simple Blazor Wasm project: `content: [ './**/*.{razor,html}' ]`. For Blazor Server or Razor Pages/MVC, `cshtml` would be added in. It may be better to explicitly list subdirectories but i've been lazy and kept it as `**` with no perceptible repercussions. (Perhaps there's a syntax to _exclude_ paths ? 🤔)
+However, there's only one tweak needed to get started: `content` is where the magic happens. Here you point Tailwind at the _markup_ files where the yet-to-be-generated CSS is being _used_. (Hence the "JIT" in "Tailwind JIT"). It supports globbing - so for a simple Blazor Wasm project: `content: [ './**/*.{razor,html}' ]`. For Blazor Server or Razor Pages/MVC, `cshtml` would be added in. It may be better to explicitly list subdirectories but i've been lazy and kept it as `**` with no perceptible repercussions. (Perhaps there's a syntax to _exclude_ paths ? 🤔)
 
 Easy peasy:
 
-<pre>
-<code>module.exports = {</code>
-<code><del>    content: [],</del></code>
-<code><ins>    content: [ './**/*.{razor,html}' ],</ins></code>
-<code>    theme: {</code>
-<code>        extend: {},</code>
-<code>    },</code>
-<code>    plugins: []</code>
-<code>}</code>
-</pre>
+::: pre
+`module.exports = {` \
+~~`   content: [],`~~ \
+++`   content: [ './**/*.{razor,html}' ],`++ \
+`    theme: {` \
+`        extend: {},` \
+`    },` \
+`    plugins: []` \
+`}`
+:::
 
 ### postcss.config.js - the CSS pipeline
 
@@ -140,28 +136,26 @@ In `package.json` you'll see the following:
 
 Dump the `"test"` line and add the following:
 
-<pre>
-<code>"scripts": {</code>
-<code><del>  "test": "echo \"Error: no test specified\" && exit 1"</del></code>
-<code><ins>  "build": "npx tailwindcss --config tailwind.config.js --postcss postcss.config.js -i site.css -o ./wwwroot/site.min.css",</ins></code>
-<code><ins>  "watch": "npx tailwindcss --config tailwind.config.js --postcss postcss.config.js -i site.css -o ./wwwroot/site.min.css --watch",</ins></code>
-<code><ins>  "publish": "npx tailwindcss --config tailwind.config.js --postcss postcss.config.js -i site.css -o ./wwwroot/site.min.css --minify",</ins></code>
-<code>}</code>
-</pre>
+::: pre
+`"scripts": {` \
+~~`  "test": "echo \"Error: no test specified\" && exit 1"`~~
+++`  "build": "npx tailwindcss --config tailwind.config.js --postcss postcss.config.js -i site.css -o ./wwwroot/site.min.css",`++
+++`  "watch": "npx tailwindcss --config tailwind.config.js --postcss postcss.config.js -i site.css -o ./wwwroot/site.min.css --watch",`++
+++`  "publish": "npx tailwindcss --config tailwind.config.js --postcss postcss.config.js -i site.css -o ./wwwroot/site.min.css --minify",`++
+`}`
+:::
 
 _(Yes, that is `npx` not `npm`)_
 
 Just connecting the dots here - pointing the `tailwindcss` CLI at the relevant config, input, and output files. It's only minified in the case of `publish` but i like to use a `*.min.css` extension to more easily distinguish the files.
 
----
-
+::: info
 Finally !  Having set up the configs and `site.css`, running `npm run build` will take the Tailwind-flavored `site.css` and feeds it through whatever tools are listed in `postcss.config.js` top-down and output vanilla CSS to `site.min.css`
-
----
+:::
 
 ## .NET/Blazor configuration {#scopedcss}
 
-We've come full circle - time to link the generated CSS in your markup files: add `<link href="./wwwroot/site.min.css" rel="stylesheet">` to `index.html`.
+We've come full circle - time to link the generated CSS in your markup: add `<link href="./wwwroot/site.min.css" rel="stylesheet">` to `index.html`.
 
 Again, for other project types the proper place(s) to link this will be different.
 
@@ -181,7 +175,7 @@ Idiomatic usage of Tailwind puts the bulk of CSS into your markup's `class=""` a
 
 </details>
 
-<details open>
+<details>
     <summary>After</summary>
 
 `foo.html`:
@@ -213,7 +207,7 @@ Moving on. Blazor has a handy feature, [CSS Isolation](https://docs.microsoft.co
 <h1 class="long list of utility classes we want to extract for whatever reason">Hello World</h1>
 ```
 </details>
-<details open>
+<details>
     <summary>After</summary>
     
 `Foo.razor`:
@@ -236,7 +230,7 @@ Styles applied to `h1` only apply to the `Foo` component. From the docs:
 
 > For each styled component, an HTML attribute is appended with the format b-{STRING}, where the {STRING} placeholder is a ten-character string generated by the framework. The identifier is unique for each app. In the rendered Counter component, Blazor appends a scope identifier to the h1 element: `<h1 b-3xxtam6d07>`
 
-<br/>
+  
 
 > CSS isolation occurs at build time. Blazor rewrites CSS selectors to match markup rendered by the component. The rewritten CSS styles are bundled and produced as a static asset.
 
@@ -256,20 +250,21 @@ First a quick tweak to the `csproj` file:
 `</PropertyGroup>`
 :::
 
-This changes the output path of the project's Scoped CSS bundle from `\obj\net6.0\{Debug|Release}\scopedcss\bundle` to a constant `\obj\scopedcss\bundle`.  Now, running a `dotnet build`, it'll output the Scoped CSS bundle to `\obj\scopedcss\bundle\site.styles.css`.  (Assuming a project named `site.csproj`)  Add this file to the root CSS created earler, `site.css`:
+This changes the output path of the project's Scoped CSS bundle from `\obj\net6.0\{Debug|Release}\scopedcss\bundle` to a constant `\obj\scopedcss\bundle`.  Assuming a project `site.csproj`, running `dotnet build` will output the Scoped CSS bundle to `\obj\scopedcss\bundle\site.styles.css`.  Add this file to the root CSS created earler, `site.css`:
 
-<pre>
-<code>@import "tailwindcss/base";</code>
-<code>@import "tailwindcss/components";</code>
-<code>@import "tailwindcss/utilities";</code>
-<code><ins>@import "./obj/scopedcss/bundle/site.styles.css";</ins></code>
-</pre>
+::: pre
+`@import "tailwindcss/base";` \
+`@import "tailwindcss/components";` \
+`@import "tailwindcss/utilities";` \
+++`@import "./obj/scopedcss/bundle/site.styles.css";`++
+:::
 
-And voila, consequent `npm run` commands will transform it to vanilla CSS for you and bundle it up in `site.min.css` - no need to link it on its own as the docs describe.
+::: info
+Voila, consequent `npm run` commands will transform `site.styles.css` to vanilla CSS for you and bundle it up in `site.min.css` - no need to link `site.styles.css` on its own as the docs describe.
+:::
 
----
 
-Some Footnotes...
+### Some Footnotes...
 
 - `npm install` vs `dotnet` `package`/`tool`: {#npm-install .md-footnote}
 

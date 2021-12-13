@@ -65,7 +65,7 @@ The next (optional) snippet, also cleverly named `npm install`, actually runs in
 </Target>
 ```
 
-If Node.js/npm isn't installed, `npm -v` will fail and you'll get a build error. Otherwise `npm install` will install the dependencies in `package.json` - akin to a `dotnet restore` when used without parameters, but slower.  The `Inputs`/`Outputs`/`Touch` is MSBuild [incremental build](https://docs.microsoft.com/en-us/visualstudio/msbuild/how-to-build-incrementally?view=vs-2022){ target="_blank"} magic, preventing this from running **every. single. build.**  Just when `package.json` is out of sync with packages actually installed.  (A fresh clone, for instance.)  See [here](https://stackoverflow.com/questions/35435041/run-npm-install-only-when-needed-and-or-partially?answertab=active#tab-top){ target="_blank"} for the StackOverflow-sauce.  Assuming no errors, things will continue on with the `tailwind build` target.  
+If Node.js/npm isn't installed, `npm -v` will fail and you'll get a build error. Otherwise `npm install` will install the dependencies in `package.json` - akin to a `dotnet restore` when used without parameters, but slower.  The `Inputs`/`Outputs`/`Touch` is MSBuild [incremental build](https://docs.microsoft.com/en-us/visualstudio/msbuild/how-to-build-incrementally?view=vs-2022){ target="_blank"} magic, preventing this from running **every. single. build.**  -  Just when `package.json` is out of sync with `.install-stamp`.  (A fresh clone, for instance.)  See [here](https://stackoverflow.com/questions/35435041/run-npm-install-only-when-needed-and-or-partially?answertab=active#tab-top){ target="_blank"} for the StackOverflow-sauce.  Assuming no errors, things will continue with the `tailwind build` target.  
 
 
 To actually make use of this in your Blazor project, add it to your `*.csproj`, top-level:
@@ -106,9 +106,9 @@ This can be used to expose the needed scripts in a right-click menu in the Folde
 - You still have to kick it off manually. (Arguably easier than doing so via CLI though.)
 - **I couldn't get it to work.** Tried feeding it various combinations of working directories, no dice.
 
----
-
-All in all, using the NPM Task Runner takes little effort and Just Works, without injecting long-running tasks into the `.csproj`/`.targets` **build** files. I'll look at Inline Tasks again at another time.
+::: info
+All in all, using the NPM Task Runner takes little effort and Just Works, without injecting long-running tasks into the `.csproj`/`.targets` **build** files.
+:::
 
 ---
 
