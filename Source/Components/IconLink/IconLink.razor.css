@@ -1,5 +1,5 @@
 .link-container {
-  @apply font-semibold text-sm sm:text-base lg:text-lg;
+  @apply font-semibold text-base xl:text-lg leading-none transition-[font-size,width];
 
   &:hover {
     @apply no-underline bg-neutral-200/80 dark:bg-neutral-700/70;
@@ -9,7 +9,7 @@
 }
 
 ::deep a {
-  @apply py-px my-1 pl-px sm:pl-1 sm:py-1
+  @apply py-1 my-1 pl-px sm:pl-1
          dark:text-neutral-200;
 }
 

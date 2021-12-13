@@ -1,5 +1,7 @@
 .markdown {
-  @apply 2xl:max-w-4xl;
+  @apply pb-8;
+  @apply max-w-3xl 2xl:max-w-4xl;
+  @apply transition-[font-size,width];
 
   a {
     @apply text-blue-600 no-underline;
@@ -16,6 +18,15 @@
 
   td {
     @apply align-middle;
+  }
+
+  pre,
+  .pre {
+    @apply p-2 pb-4 mr-4 overflow-auto rounded-md
+           bg-stone-200/30 dark:bg-slate-700
+           text-black dark:text-white
+           overflow-x-auto
+            scrollbar-thin !scrollbar-thumb-neutral-400 !scrollbar-track-neutral-200;
   }
 
   pre,
@@ -37,10 +48,10 @@
 
   code {
     @apply whitespace-pre;
+
+    /* more like ohmyposh.dev, less like tailwindcss.com */
     @apply before:!content-none after:!content-none;
     &:not(pre *, .pre *) {
-      /* more like ohmyposh.dev, less like tailwindcss.com */
-
       @apply bg-slate-100 dark:bg-slate-700;
 
       @apply px-[0.3rem] py-px mx-1 rounded-md 
@@ -59,15 +70,6 @@
     & summary {
       @apply text-xl font-bold italic cursor-pointer;
     }
-  }
-
-  pre,
-  .pre {
-    @apply p-2 pb-4 mr-4 overflow-auto rounded-md
-           bg-stone-200/30 dark:bg-slate-700
-           text-black dark:text-white
-           overflow-x-auto
-            scrollbar-thin !scrollbar-thumb-neutral-400 !scrollbar-track-neutral-200;
   }
 
   img {
