@@ -18,7 +18,11 @@
       class="bg-white dark:bg-neutral-900 w-full h-full overflow-hidden"
       id="app"
     >
-      <div class="flex h-full">
+      <div class="flex flex-col h-full justify-center 
+                    text-black dark:text-white
+                    text-center font-mono tracking-widest
+                    text-lg sm:text-xl md:text-2xl lg:text-3xl
+                    ">
         <div
           style="
             background-image: repeating-conic-gradient(
@@ -26,7 +30,7 @@
               #0576f8 12deg 24deg
             );
           "
-          class="rounded-full flex w-24 h-24 m-auto animate-spin"
+          class="rounded-full flex w-24 h-24 mx-auto my-8 animate-spin"
         >
           <p class="absolute w-full h-full p-3 rounded-full hover:scale-110">
             <svg
@@ -64,7 +68,10 @@
             </svg>
           </p>
         </div>
+      <div>pardon the delay,</div>
+      <div>Blazor initializing...</div>
       </div>
+
     </div>
 
     <div id="blazor-error-ui">
