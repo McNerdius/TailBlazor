@@ -4,7 +4,7 @@ The docs mention installing [autoprefixer](https://autoprefixer.github.io/){targ
 
 # A bit more on PostCSS {#postcss}
 
-- `autoprefixer` and `cssnano` are both PostCSS plugins, and the new `tailwindcss` CLI "wraps" the `postcss` pipeline, inserting itself first and `autoprefixer` last by default. Passing `--no-autoprefixer` to `tailwindcss` will disable `autoprefixer`, and passing `--minify` will enable `ccsnano`.
+`autoprefixer` and `cssnano` are both PostCSS plugins, and the new `tailwindcss` CLI "wraps" the `postcss` pipeline, inserting itself first and `autoprefixer` last by default. Passing `--no-autoprefixer` to `tailwindcss` will disable `autoprefixer`, and passing `--minify` will enable `ccsnano`.
 
 ## Tailwind's Default `init --postcss` Config
 
@@ -34,11 +34,11 @@ module.exports = {
 }
 ```
 
-## `@tailwind` and `@layer`
+# Using @tailwind and @layer {#layer}
 
-More about `@tailwind`, `base`, and `components` can be found [here](https://tailwindcss.com/docs/functions-and-directives#tailwind){target="_blank"}. More about the PostCSS side of things can be found [here](https://tailwindcss.com/docs/using-with-preprocessors#using-post-css-as-your-preprocessor){target="_blank"}
+More about `@tailwind`, `base`, and `components` can be found [here](https://tailwindcss.com/docs/functions-and-directives#tailwind){target="_blank"}. More about the PostCSS side of things can be found [here](https://tailwindcss.com/docs/using-with-preprocessors#:~:text=your%20%40tailwind%20declarations.-,Won%27t%20work%2C%20%60%40import%60%20statements%20must%20come%20first,-%40tailwind%20base%3B%0A%40import){target="_blank"}
 
-todo: more on `@tailwind base` vs `@import "tailwindcss/base"`
+todo: more on `@tailwind base` vs `@import "tailwindcss/base"` and the other "layers" - the whole point of this section really.  The above sets context to go a bit more into the differences between `@tailwind {layer}` and `@import tailwindcss/{layer}`.
 
 ---
 
@@ -49,8 +49,7 @@ todo: more on `@tailwind base` vs `@import "tailwindcss/base"`
 
 # Visual Studio {#VS}
 
-- I've mentioned it before but worth repeating: the [NPM Task Runner](https://marketplace.visualstudio.com/items?itemName=MadsKristensen.NpmTaskRunner64){target="_blank"} seems to be the ideal way to take full advantage of Tailwind's watch & incremental builds within Visual Studio.
--
+I've mentioned it before but worth repeating: the [NPM Task Runner](https://marketplace.visualstudio.com/items?itemName=MadsKristensen.NpmTaskRunner64){target="_blank"} seems to be the ideal way to take full advantage of Tailwind's watch & incremental builds within Visual Studio.
 
 # VS Code {#VSCode}
 

@@ -8,7 +8,7 @@ TailBlazor is geared toward .NET 6 and Tailwind 3. Older versions of .NET would 
 
 ## Development Environment:
 
-- Visual Studio 2022 and the "ASP.NET and web development" workload
+- Visual Studio 2022 with "ASP.NET and web development" workload; [NPM Task Runner](https://marketplace.visualstudio.com/items?itemName=MadsKristensen.NpmTaskRunner64){target="_blank"} is handy.
 - VS Code with some handy extensions:
   - The [C# Extension](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp){target="_blank"}.
   - The [Blazor-wasm debugger](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.blazorwasm-companion){target="_blank"}, if applicable.
@@ -52,7 +52,7 @@ The [documentation](https://tailwindcss.com/docs/installation){target="_blank"} 
 - In the Blazor project folder, run `npm init --yes` to initialize a `package.json` using defaults. These are analogous to a `dotnet new` & `*.csproj`.
 - Next run `npm install -D tailwindcss postcss-import`, similar to[^1^](/setup#npm-install){#f1} a `dotnet add package`.
   - `postcss-import` will be used to aggregate all of your project's CSS files into one in-memory file which `tailwindcss` will then process.
-- Next, `npx tailwind init --postcss` which will write the default `tailwind.config.js` and `postcss.config.js` files to disk.
+- Next, `npx tailwindcss init --postcss` which will write the default `tailwind.config.js` and `postcss.config.js` files to disk.
 
 Last for scaffolding, make a "root" CSS file next to the config files, say `site.css`, and add the following:
 
@@ -62,7 +62,7 @@ Last for scaffolding, make a "root" CSS file next to the config files, say `site
 @import "tailwindcss/utilities";
 ```
 
-This is what you'll feed the `tailwindcss` CLI, and where you'll import any of your project's CSS later.  Note this syntax is different from what you'll see in the docs (`@tailwind ...`).  I've found it's what works best when using `postcss-import` and is easier to reason about when new to either Vanilla CSS or Tailwind CSS.  See [some notes](/notes#postcss){target="_blank"}.
+This is what you'll feed the `tailwindcss` CLI, and where you'll import any of your project's CSS later.  Note this syntax is different from what you'll see in the docs (`@tailwind ...`).  I've found it's what works best when using `postcss-import` and is easier to reason about when new to either Vanilla CSS or Tailwind CSS.  See [some notes](/notes#layer){target="_blank"}.
 
 # Configure {#configure}
 
@@ -251,7 +251,7 @@ This changes the output path of the project's Scoped CSS bundle from `/obj/net6.
 :::
 
 ::: info
-Voila, you can now [use Tailwind/PostCSS](https://github.com/McNerdius/TailBlazor/blob/main/Source/Components/IconLink/IconLink.razor.css){target="_blank"} in your `*.razor.css` and consequent `npm run` commands will transform the generated `site.styles.css` CSS Isolation bundle into vanilla CSS for you and bundle it up in `site.min.css` - no need to link `site.styles.css` on its own as the docs describe.
+Voila, you can now [use Tailwind/PostCSS](https://raw.githubusercontent.com/McNerdius/TailBlazor/main/Source/Components/IconLink/IconLink.razor.css){target="_blank"} in your `*.razor.css` and consequent `npm run` commands will transform the generated `site.styles.css` CSS Isolation bundle into vanilla CSS for you and bundle it up in `site.min.css` - no need to link `site.styles.css` on its own as the docs describe.
 :::
 
 ---
