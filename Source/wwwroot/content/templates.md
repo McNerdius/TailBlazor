@@ -1,6 +1,6 @@
-# Page is WIP !!!
+### WIP
 
-See [tailblazor.net](https://www.tailblazor.net){ target="_blank"} for a preview of [tailblazor-templates](https://github.com/McNerdius/TailBlazor-Templates){ target="_blank"}'s content.  The template pack is still growing and naming is still up in the air, but eventually it'll resemble the following:
+See [tailblazor.net](https://www.tailblazor.net){target="_blank"} for a preview of [tailblazor-templates](https://github.com/McNerdius/TailBlazor-Templates){target="_blank"}'s content.  The template pack will grow, naming is still up in the air, but the near-future plan looks something like this:
 
 +:------------------------+:-------------------------:+
 | single-project templates                            |
@@ -33,4 +33,4 @@ See [tailblazor.net](https://www.tailblazor.net){ target="_blank"} for a preview
 | -- RazorPages           |                     |
 +-------------------------+---------------------+
 
-Any comments/suggestions/feedback/whatever on the templates, path/template/project naming, toss it [in here](https://github.com/McNerdius/TailBlazor/issues/64){ target="_blank"} !
+Any comments/suggestions/feedback/whatever on the templates, path/template/project naming, toss it [in here](https://github.com/McNerdius/TailBlazor/issues/64){target="_blank"} !

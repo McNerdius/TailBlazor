@@ -1,6 +1,6 @@
 # NuGet tools / MSBuild wizardry in place of `npm` scripts.
 
-- See [NPM Task Runner](https://marketplace.visualstudio.com/items?itemName=MadsKristensen.NpmTaskRunner64){target="\_blank"}. Adding dependencies or nontrivial MSBuild Targets/Tasks to abstract what translates to `npm` one-liners seems odd.
+- See [NPM Task Runner](https://marketplace.visualstudio.com/items?itemName=MadsKristensen.NpmTaskRunner64){target="_blank"}. Adding dependencies or nontrivial MSBuild Targets/Tasks to abstract what translates to `npm` one-liners seems odd.
 
 ---
 

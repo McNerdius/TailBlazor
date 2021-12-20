@@ -1,6 +1,6 @@
 # Connecting the dots for build and watch {#top}
 
-To recap there are two build steps: `dotnet build` followed by `npm run build`.  `dotnet build` must run first, as it generates the `*.styles.css` that's referenced in the "root" CSS file `npm run build` points at.
+To recap there are two build steps: `dotnet build` followed by `npm run build`.  `dotnet build` must run first, as it generates the `*.styles.css` that's referenced in `site.css` which `npm run build` takes as input.
 
 ![build](/images/simple.drawio.png)
 
@@ -38,7 +38,7 @@ Let's break it down.
 </PropertyGroup>
 ```
 
-This just defines an MSBuild property we can use like so: `dotnet build -p:TailwindBuild=false`, used in the following snippet to let us opt out of running the Tailwind build with every `dotnet build`.
+This just defines an MSBuild property we can use like so: `dotnet build -p:TailwindBuild=false` to let us opt out of running the Tailwind build.  Note its use in the following:
 
 ```
 <Target Name="tailwind build" AfterTargets="AfterBuild" Condition="'$(TailwindBuild)' == 'true'">
@@ -48,11 +48,10 @@ This just defines an MSBuild property we can use like so: `dotnet build -p:Tailw
 </Target>
 ```
 
-`AfterBuild` is a standard MSBuild "Target", and this snippet creates our own which runs after it, cleverly named `tailwind build`.
+`AfterBuild` is a standard MSBuild "Target".  This snippet creates our own cleverly named `tailwind build` Target which runs after `AfterBuild`.  Building in `Release` mode results in a `cssnano`-minified output CSS file, thanks to the `publish` script found in `package.json` using `tailwindcss --minify`.
 
-### NPM Checks {#npm}
 
-The next (optional) snippet, also cleverly named `npm install`, actually runs in-between `AfterBuild` and `tailwind build`, doing a sanity check on `npm` stuff:
+The next (kinda optional) snippet, also cleverly named `npm install`, actually runs in-between `AfterBuild` and `tailwind build`, doing a sanity check on `npm` stuff:
 
 ```
 <Target Name="npm install" BeforeTargets="tailwind build" Inputs="./package.json" Outputs="./node_modules/.install-stamp">
@@ -65,7 +64,7 @@ The next (optional) snippet, also cleverly named `npm install`, actually runs in
 </Target>
 ```
 
-If Node.js/npm isn't installed, `npm -v` will fail and you'll get a build error. Otherwise `npm install` will install the dependencies in `package.json` - akin to a `dotnet restore` when used without parameters, but slower.  The `Inputs`/`Outputs`/`Touch` is MSBuild [incremental build](https://docs.microsoft.com/en-us/visualstudio/msbuild/how-to-build-incrementally?view=vs-2022){ target="_blank"} magic, preventing this from running **every. single. build.**  -  Just when `package.json` is out of sync with `.install-stamp`.  (A fresh clone, for instance.)  See [here](https://stackoverflow.com/questions/35435041/run-npm-install-only-when-needed-and-or-partially?answertab=active#tab-top){ target="_blank"} for the StackOverflow-sauce.  Assuming no errors, things will continue with the `tailwind build` target.  
+If Node.js/npm isn't installed, `npm -v` will fail and you'll get a build error. Otherwise `npm install` will install the dependencies in `package.json` - akin to a `dotnet restore` when used without parameters, but slower.  The `Inputs`/`Outputs`/`Touch` is MSBuild [incremental build](https://docs.microsoft.com/en-us/visualstudio/msbuild/how-to-build-incrementally?view=vs-2022){target="_blank"} magic, preventing this from running **every. single. build.**  -  Just when `package.json` is out of sync with `.install-stamp`.  (A fresh clone, for instance.)  See [here](https://stackoverflow.com/questions/35435041/run-npm-install-only-when-needed-and-or-partially?answertab=active#tab-top){target="_blank"} for the StackOverflow-sauce.  Assuming no errors, things will continue with the `tailwind build` target.  
 
 
 To actually make use of this in your Blazor project, add it to your `*.csproj`, top-level:
@@ -80,19 +79,31 @@ To actually make use of this in your Blazor project, add it to your `*.csproj`, 
 
 ## Watch {#watch}
 
-### Integrating `tailwindcss --watch`
+### Script
 
-The site repo and [tailblazor-templates](https://github.com/McNerdius/TailBlazor-Templates){ target="_blank"} include scripts to fire off `dotnet watch`, wait for `*.styles.css` to build & Tailwind dependencies to install (if missing), and finally `tailwindcss --watch` (via `npm run watch`).
+A simple, sanity-checks-included powershell script:
 
-The best option i've found to integrate `tailwindcss --watch` with Visual Studio UI is to use the [NPM Task Runner](https://marketplace.visualstudio.com/items?itemName=MadsKristensen.NpmTaskRunner64){ target="_blank"}, and bind the relevant `watch` script to "Project Open". (Not "After Build", see below.)
+```
+dotnet build -p:TailwindBuild=false
+start "dotnet" -ArgumentList "watch" 
+while (!(Test-Path "./obj/scopedcss/bundle/site.styles.css")) { sleep -ms 100 } 
+while (!(Test-Path "./node_modules/.install-stamp")) { sleep -ms 100 } 
+npm run watch
+```
 
-Keep in mind: one-off `tailwindcss` builds are not ideal.  The long-running ***`tailwindcss --watch` is the only way to take advantage of Tailwind's super-fast incremental builds.***.
+Breaking it down:  I've found `dotnet watch` without a proper `dotnet build` beforehand can do strange things sometimes.  It's only once, so whatever.  Using `start` launches `dotnet watch` in its own process, eventually outputting `site.styles.css` as part of the normal build process.  Later on the `tailwind build` Target kicks in, possibly doing an `npm install` for the first time.  Only after `site.styles.css` is generated and `.install-stamp` provides evidence of an `npm install` is it OK to kick off `tailwindcss` via `npm run watch`.  At this point both .NET's Hot Reload and Tailwind's incremental build mode are watching for relevant changes.
 
-Other approaches:
+### Visual Studio
+
+The best option i've found to integrate `tailwindcss --watch` with Visual Studio UI is to use the [NPM Task Runner](https://marketplace.visualstudio.com/items?itemName=MadsKristensen.NpmTaskRunner64){target="_blank"}, and bind the relevant `watch` script to "Project Open". (Not "After Build", see below.)
+
+Keep in mind: one-off `tailwindcss` builds are not ideal.  The long-running ***`tailwindcss --watch` is the only way to take advantage of Tailwind's super-fast incremental builds and other goodies built into the CLI.***.
+
+### Other approaches
 
 - Using a "Post Build Event" in Visual Studio's project properties.
 
-This places an MSBuild Target in the `.csproj` - `<Target Name="PostBuild" AfterTargets="PostBuildEvent">`. **This and similar simple MSBuild Target based approaches do one of two things: terminate immediately or hang the build.**
+This places an MSBuild Target in the `.csproj` - `<Target Name="PostBuild" AfterTargets="PostBuildEvent">`. This is a no-go for long-running tasks: **this and similar simple MSBuild Target based approaches do one of two things: terminate immediately or (more likely) hang the build.**
 
 - More advanced uses of MSBuild Targets
 
@@ -100,16 +111,8 @@ One example is using [Inline Tasks](https://docs.microsoft.com/en-us/visualstudi
 
 - Using Visual Studio Folders View's "Configure Tasks" / `tasks.vs.json`
 
-This can be used to expose the needed scripts in a right-click menu in the Folder View. A few issues:
-
-- You have to be in Folder View
-- You still have to kick it off manually. (Arguably easier than doing so via CLI though.)
-- **I couldn't get it to work.** Tried feeding it various combinations of working directories, no dice.
+This can be used to expose the needed scripts in a right-click menu in the Folder View. A few issues: You have to be in Folder View;  You still have to kick it off manually;  **I couldn't get it to work.** Tried feeding it various combinations of working directories, no dice.
 
 ::: info
-All in all, using the NPM Task Runner takes little effort and Just Works, without injecting long-running tasks into the `.csproj`/`.targets` **build** files.
+All in all, using the NPM Task Runner takes little effort and Just Works, without injecting long-running tasks into the `.csproj`/`.targets` build files.
 :::
-
----
-
-<br>
