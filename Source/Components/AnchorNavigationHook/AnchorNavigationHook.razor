@@ -36,6 +36,7 @@
     {
         var uri = new Uri(NavigationManager.Uri, UriKind.Absolute);
         var fragment = uri.Fragment;
+        var module = await Module;
         if (fragment.StartsWith('#'))
         {
             // Handle text fragment (https://example.org/#test:~:text=foo)
@@ -49,9 +50,12 @@
 
             if (!string.IsNullOrEmpty(elementId))
             {
-                var module = await Module;
-                await module.InvokeAsync<string>("BlazorScrollToId", elementId);
+                await module.InvokeAsync<string>("scrollToId", elementId);
             }
+        }
+        else
+        {
+            await module.InvokeAsync<string>("scrollToId", "");
         }
     }
 }
