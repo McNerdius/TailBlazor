@@ -1,13 +1,27 @@
-export function BlazorScrollToId(id)
+export function scrollToId(id)
 {
-    const element = document.getElementById(id);
-    if (element instanceof HTMLElement)
+    if (id === "")
     {
-        element.scrollIntoView({
-            behavior: "smooth",
-            block: "start",
-            inline: "nearest"
-        });
+        const element = document.getElementById("body");
+        element.scroll(
+            {
+                top: 0,
+                behavior: "smooth"
+            }
+        );
     }
-    return id;
+    else
+    {
+
+        const element = document.getElementById(id);
+
+        if (element instanceof HTMLElement)
+        {
+            element.scrollIntoView({
+                behavior: "smooth",
+                block: "start",
+                inline: "nearest"
+            });
+        }
+    }
 }

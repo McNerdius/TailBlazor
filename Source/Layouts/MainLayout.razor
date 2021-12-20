@@ -6,13 +6,13 @@
 
 <div class="grid grid-cols-[min-content,auto] grid-rows-[min-content,auto] h-full @debug">
 
-    <div class="col-span-2 flex flex-row pl-4 pr-2 
+    <div class="col-span-2 flex flex-row pl-6 pr-2 h-14
                 items-center
                 self-center justify-between
-                border-b border-neutral-800
+                border-b border-neutral-300 dark:border-0
                 dark:bg-neutral-800">
 
-        <div class="!text-blue-600 text-3xl font-extrabold italic tracking-widest flex-grow">WIP!</div>    
+        <div class="!text-blue-600 text-3xl font-extrabold italic tracking-widest flex-grow">WIP !</div>    
 
         <a href="https://github.com/McNerdius/TailBlazor/" target="_blank" class="pr-1">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"
@@ -25,18 +25,20 @@
 
     </div>
 
-    <div class="@nav 
-                px-2 pt-2
-                border-r border-x-neutral-500" >
+    <div class="@nav pt-6 pr-2
+                pl-2 sm:pl-4 md:pl-6 
+                transition-[padding]
+                border-r-2 border-neutral-300 dark:border-neutral-600" >
 
         <NavLinks />
 
     </div>
 
-    <div class="w-full h-full pt-8
-                px-2 sm:px-4 md:px-6 
-                overflow-x-hidden overflow-y-auto
-                scrollbar-thin !scrollbar-thumb-neutral-400 !scrollbar-track-neutral-200">
+    <div id="body" class="w-full h-full pt-8
+                            px-2 sm:px-4 md:px-8 lg:px-16 xl:px-24 2xl:px-32
+                            transition-[padding]
+                            overflow-x-hidden overflow-y-auto
+                            scrollbar-thin !scrollbar-thumb-neutral-400 !scrollbar-track-neutral-200">
         @Body
     </div>
 

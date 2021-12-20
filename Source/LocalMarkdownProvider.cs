@@ -13,7 +13,7 @@ public class LocalMarkdownProvider : IMarkdownContentProvider
                     .UsePipeTables()
                     //    .UseMediaLinks()
                     .UseTaskLists()
-                    //    .UseAutoLinks()
+                    .UseAutoLinks()
                     //    .UseEmojiAndSmiley()
                     //    .UseAutoIdentifiers()
                     .UseGenericAttributes() // Must be last as it is one parser that is modifying other parsers
