@@ -77,11 +77,11 @@ To actually make use of this in your Blazor project, add it to your `*.csproj`, 
 
 ---
 
-## Watch {#watch}
+## Hot Reload + Tailwind CSS Incremental Builds {#watch}
 
-### Script
+### Using `dotnet watch`
 
-A simple, sanity-checks-included powershell script:
+A simple, sanity-checks-included PowerShell script:
 
 ```
 dotnet build -p:TailwindBuild=false
@@ -93,7 +93,7 @@ npm run watch
 
 Breaking it down:  I've found `dotnet watch` without a proper `dotnet build` beforehand can do strange things sometimes.  It's only once, so whatever.  Using `start` launches `dotnet watch` in its own process, eventually outputting `site.styles.css` as part of the normal build process.  Later on the `tailwind build` Target kicks in, possibly doing an `npm install` for the first time.  Only after `site.styles.css` is generated and `.install-stamp` provides evidence of an `npm install` is it OK to kick off `tailwindcss` via `npm run watch`.  At this point both .NET's Hot Reload and Tailwind's incremental build mode are watching for relevant changes.
 
-### Visual Studio
+### In Visual Studio
 
 The best option i've found to integrate `tailwindcss --watch` with Visual Studio UI is to use the [NPM Task Runner](https://marketplace.visualstudio.com/items?itemName=MadsKristensen.NpmTaskRunner64){target="_blank"}, and bind the relevant `watch` script to "Project Open". (Not "After Build", see below.)
 
