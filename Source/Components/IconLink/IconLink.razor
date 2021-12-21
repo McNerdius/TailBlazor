@@ -1,6 +1,6 @@
 @namespace TailBlazor.Components
 
-<div class="link-container first:mt-0 @(Large? "mt-2" :"ml-2")">
+<div class="link-container first:mt-4 @(Large? "mt-0" :"ml-2")">
 
 @if (Link is string)
 {
@@ -21,7 +21,7 @@ else
 {
     RenderFragment Inner => __builder =>
     {
-        <span class=" relative @(Large ? "w-6" : "w-4 ml-2")" aria-hidden="true">
+        <span class=" relative @(Large ? "w-6 ml-1" : "w-4 ml-2")" aria-hidden="true">
             @ChildContent
         </span> 
         <span class="ml-3">
