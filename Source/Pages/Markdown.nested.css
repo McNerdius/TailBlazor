@@ -50,7 +50,8 @@
 
   pre,
   .pre {
-    @apply p-2 pb-4 mr-4 overflow-auto rounded-md
+    @apply p-2 pb-4 mr-4 
+           rounded-md
            bg-zinc-200 dark:bg-zinc-700
            text-black dark:text-white
            overflow-x-auto
@@ -65,7 +66,7 @@
   .pre,
   code {
     @apply !leading-[1.22] tracking-tight
-           text-sm sm:text-base !font-mono font-normal;
+           !font-mono font-normal;
   }
 
   .pre p {
@@ -82,15 +83,14 @@
   }
 
   code {
-    @apply whitespace-pre;
+    @apply whitespace-pre-wrap;
 
     /* more like ohmyposh.dev, less like tailwindcss.com */
     @apply before:!content-none after:!content-none;
     &:not(pre *, .pre *) {
-      @apply bg-zinc-200 dark:bg-zinc-700;
+      @apply bg-zinc-100 dark:bg-zinc-800;
 
-      @apply px-[0.3rem] py-px mx-1 rounded-md 
-             ring-1 ring-neutral-300 dark:ring-0;
+      @apply px-1 py-px rounded-[4px];
     }
   }
 
