@@ -54,7 +54,7 @@
            rounded-md
            bg-zinc-200 dark:bg-zinc-700
            text-black dark:text-white
-           overflow-x-auto
+           overflow-auto
            scrollbar-thin !scrollbar-thumb-neutral-400 !scrollbar-track-neutral-200;
   }
 
@@ -83,8 +83,8 @@
   }
 
   code {
-    @apply whitespace-pre-wrap;
 
+  @apply whitespace-pre;
     /* more like ohmyposh.dev, less like tailwindcss.com */
     @apply before:!content-none after:!content-none;
     &:not(pre *, .pre *) {

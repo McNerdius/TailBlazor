@@ -136,10 +136,10 @@ Dump the `"test"` line and add the following:
 
 ::: pre
 `"scripts": {` \
-~~`  "test": "echo \"Error: no test specified\" && exit 1"`~~
-++`  "build": "npx tailwindcss --config tailwind.config.js --postcss postcss.config.js -i site.css -o ./wwwroot/site.min.css",`++
-++`  "watch": "npx tailwindcss --config tailwind.config.js --postcss postcss.config.js -i site.css -o ./wwwroot/site.min.css --watch",`++
-++`  "publish": "npx tailwindcss --config tailwind.config.js --postcss postcss.config.js -i site.css -o ./wwwroot/site.min.css --minify",`++
+~~`  "test": "echo \"Error: no test specified\" && exit 1"`~~ \
+++`  "build": "npx tailwindcss --config tailwind.config.js --postcss postcss.config.js -i site.css -o ./wwwroot/site.min.css",`++ \
+++`  "watch": "npx tailwindcss --config tailwind.config.js --postcss postcss.config.js -i site.css -o ./wwwroot/site.min.css --watch",`++ \
+++`  "publish": "npx tailwindcss --config tailwind.config.js --postcss postcss.config.js -i site.css -o ./wwwroot/site.min.css --minify",`++ \
 `}`
 :::
 
