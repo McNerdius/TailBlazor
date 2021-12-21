@@ -6,7 +6,7 @@ The docs mention installing [autoprefixer](https://autoprefixer.github.io/){targ
 
 `autoprefixer` and `cssnano` are both PostCSS plugins, and the new `tailwindcss` CLI "wraps" the `postcss` pipeline, inserting itself first and `autoprefixer` last by default. Passing `--no-autoprefixer` to `tailwindcss` will disable `autoprefixer`, and passing `--minify` will enable `ccsnano`.
 
-## Tailwind's Default `init --postcss` Config
+## Tailwind's Default `init --postcss` Config {#postcssconfig}
 
 The default `postcss.config.json` includes itself and `autoprefixer` explicitly:
 

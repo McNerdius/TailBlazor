@@ -264,4 +264,4 @@ Voila, you can now [use Tailwind/PostCSS](https://raw.githubusercontent.com/McNe
 
 - Special PostCSS Plugins {#postcss-plugins .md-footnote}
 
-  Along with `autoprefixer` and optionally `cssnano`. Again, see [notes](/notes#postcss){target="_blank"}. [back to text](/setup#f2){.md-footnote .return}
+  Along with `autoprefixer` and optionally `cssnano`. Again, see [notes](/notes#postcssconfig   ){target="_blank"}. [back to text](/setup#f2){.md-footnote .return}
