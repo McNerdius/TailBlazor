@@ -19,6 +19,7 @@
     </ItemGroup>
     <ItemGroup Condition="'$(Configuration)' == 'Debug'">
         <Compile Remove="HtmlResourceProvider.cs" />
+        <ProjectReference Include="..\..\MarkDigger\HighlighterExtension\HighlighterExtension\HighlighterExtension.csproj" />
         <PackageReference Include="markdig" Version="0.26.0" />
     </ItemGroup>
     <ItemGroup>

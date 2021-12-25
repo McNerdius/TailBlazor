@@ -4,6 +4,25 @@
 
 @import "./obj/scopedcss/bundle/TailBlazor.styles.css";
 @import "./Pages/Markdown.nested.css";
+@import "./prism.css";
+
+.mc-code-block {
+  @apply grid-cols-[min-content,auto];
+}
+
+.mc-code-filename {
+  @apply col-span-2;
+}
+
+.mc-code-ins {
+      @apply bg-green-300/30 no-underline;
+    before:content-['+'] ;
+}
+
+.mc-code-del {
+      @apply bg-red-400/30 no-underline;
+    before:content-['-'] ;
+}
 
 #blazor-error-ui {
   background: lightyellow;
