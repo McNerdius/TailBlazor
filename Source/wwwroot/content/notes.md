@@ -8,14 +8,14 @@ The docs mention installing [autoprefixer](https://autoprefixer.github.io/){targ
 
 ## Tailwind's Default `init --postcss` Config {#postcssconfig}
 
-The default `postcss.config.json` includes itself and `autoprefixer` explicitly:
+The default `postcss.config.js` includes itself and `autoprefixer` explicitly:
 
-```
+```javascript:postcss.config.js
 module.exports = {
   plugins: {
     tailwindcss: {},
     autoprefixer: {},
-  },
+  }
 }
 ```
 
@@ -24,7 +24,7 @@ This file, as-is, is only needed _if you're not using `tailwindcss` directly_. I
 - `autoprefixer` never needs to be listed, as it is and should always be run last.
 - `tailwindcss` only needs to be listed if it's not running first, as is the case when using `postcss-import` or [`tailwindcss/nesting`](/next#nesting). So here's what my default `postcss.config.js` looks like when i'm using the nifty nesting plugin:
 
-```
+```javascript:postcss.config.js
 module.exports = {
     plugins: {
         'postcss-import': {},

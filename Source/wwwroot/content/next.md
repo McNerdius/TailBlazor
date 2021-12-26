@@ -7,16 +7,16 @@ Like Bootstrap, Tailwind CSS is [responsive](https://tailwindcss.com/docs/respon
 
 You'll have to run `npm install -D tailwindcss-debug-screens` and add it to your `tailwind.config.js`:
 
-::: pre
-`module.exports = {` \
-`    content: [ './**/*.{razor,html}' ],` \
-`    ...` \
-`    plugins: [` \
-++`        require('tailwindcss-debug-screens'),`++ \
-`        ...` \
-`    ]` \
-`}` 
-:::
+```javascript:tailwind.config.js
+module.exports = {
+    content: [ './**/*.{razor,html}' ],
+    ...
+    plugins: [
++        require('tailwindcss-debug-screens'),
+        ...
+    ]
+}
+```
 
 ### Others
 
@@ -30,15 +30,15 @@ Also nifty is [tailwind-scrollbar](https://github.com/adoxography/tailwind-scrol
 
 Tailwind has a built-in PostCSS plugin, [tailwindcss/nesting](https://tailwindcss.com/docs/using-with-preprocessors#nesting){target="_blank"} that allows for, well, CSS nesting.  No install needed, just add it to your `postcss.config.js` and nest away:
 
-::: pre
-`module.exports = {` \
-`    plugins: {` \
-`        'postcss-import': {},` \
-++`        'tailwindcss/nesting': {},`++ \
-`        tailwindcss: {}` \
-`    }` \
-`};`
-:::
+```javascript:postcss.config.js
+module.exports = {
+    plugins: {
+        'postcss-import': {},
++        'tailwindcss/nesting': {},
+        tailwindcss: {}
+    }
+};
+```
 
 Note the placement: after `postcss-import` inlines your files, but before `tailwindcss` does its magic.
 

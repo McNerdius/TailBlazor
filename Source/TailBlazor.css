@@ -4,6 +4,49 @@
 
 @import "./obj/scopedcss/bundle/TailBlazor.styles.css";
 @import "./Pages/Markdown.nested.css";
+@import "./prism.css";
+
+.mc-code-block {
+  @apply font-mono font-bold
+         mr-4 my-6 rounded-t-lg
+         bg-zinc-200 dark:bg-zinc-700
+         text-black dark:text-white;
+
+  .mc-code-lines {
+    @apply grid grid-cols-[min-content,auto]
+           text-[95%] font-light tracking-tight leading-[1.22]
+           pb-6 pt-3 overflow-auto
+           scrollbar-thin !scrollbar-thumb-neutral-400 !scrollbar-track-neutral-200;  
+  }
+
+  .mc-code
+  {
+    @apply pr-6;
+  }
+    
+  .mc-code-filename {
+    @apply bg-blue-500 text-center rounded-t-lg;
+  }
+
+  .mc-diff
+  {
+    @apply w-6 text-center;
+  }         
+
+  .mc-ins {
+      @apply bg-green-300/30 no-underline;
+      &.mc-diff {
+        @apply before:content-['+'];
+      }
+  }
+
+  .mc-del {
+      @apply bg-red-400/30 no-underline;
+      &.mc-diff {
+        @apply before:content-['-'];
+      }
+  }
+}
 
 #blazor-error-ui {
   background: lightyellow;

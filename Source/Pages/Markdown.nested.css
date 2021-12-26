@@ -48,50 +48,16 @@
     @apply align-middle;
   }
 
-  pre,
-  .pre {
-    @apply p-2 pb-4 mr-4 
-           rounded-md
-           bg-zinc-200 dark:bg-zinc-700
-           text-black dark:text-white
-           overflow-auto
-           scrollbar-thin !scrollbar-thumb-neutral-400 !scrollbar-track-neutral-200;
-  }
-
-  .mono {
-    @apply font-mono;
-  }
-
-  pre,
-  .pre,
-  code {
-    @apply !leading-[1.22] tracking-tight
-           !font-mono font-normal;
-  }
-
-  .pre p {
-    @apply my-0;
-  }
-
-  del {
-    @apply bg-red-400/30 no-underline;
-    /* before:content-['-']  */
-  }
-  ins {
-    @apply bg-green-300/30 no-underline;
-    /* before:content-['+']  */
-  }
-
   code {
 
-  @apply whitespace-pre;
-    /* more like ohmyposh.dev, less like tailwindcss.com */
-    @apply before:!content-none after:!content-none;
-    &:not(pre *, .pre *) {
-      @apply bg-zinc-100 dark:bg-zinc-800;
+    @apply whitespace-pre-wrap;
+      /* more like ohmyposh.dev, less like tailwindcss.com */
+      @apply before:!content-none after:!content-none;
+      &:not(pre *, .pre *) {
+        @apply bg-zinc-200/50 dark:bg-zinc-700/60;
 
-      @apply px-1 py-px rounded-[4px];
-    }
+        @apply px-1 py-px rounded-[4px];
+      }
   }
 
   abbr {
