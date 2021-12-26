@@ -22,7 +22,9 @@ function grammar(name)
         'javascript': Prism.languages.javascript,
         'json': Prism.languages.json,
         'xml': Prism.languages.xml,
-        'powershell': Prism.languages.powershell
+        'powershell': Prism.languages.powershell,
+        'css': Prism.languages.css,
+        'html': Prism.languages.html
     };
 
     return grammars[name] || "csharp";
