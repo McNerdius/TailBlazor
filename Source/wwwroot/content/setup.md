@@ -56,7 +56,7 @@ The [documentation](https://tailwindcss.com/docs/installation){target="_blank"} 
 
 Last for scaffolding, make a "root" CSS file next to the config files, say `site.css`, and add the following:
 
-```
+```css:site.css
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
@@ -80,7 +80,7 @@ There are now three files on the JS-tooling side of things to tweak:
 
 As of Tailwind CSS v3, the default `tailwind.config.js` file:
 
-```
+```javascript:tailwind.config.js
 module.exports = {
   content: [],
   theme: {
@@ -96,22 +96,21 @@ However, there's only one tweak needed to get started: `content` is where the ma
 
 Easy peasy:
 
-::: pre
-`module.exports = {` \
-~~`   content: [],`~~ \
-++`   content: [ './**/*.{razor,html}' ],`++ \
-`    theme: {` \
-`        extend: {},` \
-`    },` \
-`    plugins: []` \
-`}`
-:::
+```javascript:tailwind.config.js
+module.exports = { 
+-    content: [], 
++    content: [ './**/*.{razor,html}' ],
+    theme: { 
+        extend: {}, 
+    }, 
+    plugins: [] 
+```
 
 ### postcss.config.js - the CSS pipeline
 
 This is the tiny bit beyond the "simplest and fastest" method described in the Tailwind docs - using a `postcss.config.js` file.  Note `postcss` isn't explicitly installed or used anywhere - passing our `postcss.config.js` file to the `tailwindcss` CLI is all that's needed.  I'll put the boring details [over here](/notes#postcss){target="_blank"}, but for now just replace its contents with the following:
 
-```
+```javascript:postcss.config.js
 module.exports = {
     plugins: {
         'postcss-import': {},
@@ -126,7 +125,7 @@ A bit of an expanding-brain meme here: When using the `tailwindcss` CLI, we'll p
 
 In `package.json` you'll see the following:
 
-```
+```json:package.json
 "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
 },
@@ -134,14 +133,14 @@ In `package.json` you'll see the following:
 
 Dump the `"test"` line and add the following:
 
-::: pre
-`"scripts": {` \
-~~`  "test": "echo \"Error: no test specified\" && exit 1"`~~ \
-++`  "build": "npx tailwindcss --config tailwind.config.js --postcss postcss.config.js -i site.css -o ./wwwroot/site.min.css",`++ \
-++`  "watch": "npx tailwindcss --config tailwind.config.js --postcss postcss.config.js -i site.css -o ./wwwroot/site.min.css --watch",`++ \
-++`  "publish": "npx tailwindcss --config tailwind.config.js --postcss postcss.config.js -i site.css -o ./wwwroot/site.min.css --minify",`++ \
-`}`
-:::
+```json:package.json
+"scripts": { 
+-  "test": "echo \"Error: no test specified\" && exit 1"
++  "build": "npx tailwindcss --config tailwind.config.js --postcss postcss.config.js -i site.css -o ./wwwroot/site.min.css",
++  "watch": "npx tailwindcss --config tailwind.config.js --postcss postcss.config.js -i site.css -o ./wwwroot/site.min.css --watch",
++  "publish": "npx tailwindcss --config tailwind.config.js --postcss postcss.config.js -i site.css -o ./wwwroot/site.min.css --minify"
+}
+```
 
 _(Yes, that is `npx` not `npm`)_
 
@@ -165,9 +164,7 @@ Idiomatic usage of Tailwind puts the bulk of CSS into your markup's `class=""` a
 <details open>
     <summary>Before</summary>
 
-foo.html:
-
-```
+```html:foo.html
 <h1 class="long list of utility classes we want to extract for whatever reason">Hello World</h1>
 ```
 
@@ -176,15 +173,11 @@ foo.html:
 <details>
     <summary>After</summary>
 
-foo.html:
-
-```
+```html:foo.html
 <h1 class="special-name">Hello World</h1>
 ```
 
-foo.css:
-
-```
+```css:foo.css
 .special-name {
     @apply long list of utility classes we want to extract for whatever reason;
 }
@@ -198,16 +191,12 @@ Moving on. Using Blazor's handy [CSS Isolation](https://docs.microsoft.com/en-us
 
 <details open>
     <summary>After</summary>
-    
-Foo.razor:
 
-```
+```html:Foo.razor
 <h1>Hello World</h1>
 ```
 
-Foo.razor.css:
-
-```
+```css:Foo.razor.css
 h1 {
     @apply long list of utility classes we want to extract for whatever reason;
 }
@@ -231,24 +220,24 @@ The generated bundle of interest is by default output to `obj/{CONFIGURATION}/{T
 
 First a quick tweak to the `csproj` file:
 
-::: pre
-`<PropertyGroup>` \
-`    <TargetFramework>net6.0</TargetFramework>` \
-`    <Nullable>enable</Nullable>` \
-`    <ImplicitUsings>enable</ImplicitUsings>` \
-++`    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>`++ \
-++`    <IntermediateOutputPath>obj</IntermediateOutputPath>`++ \
-`</PropertyGroup>`
-:::
+```xml:site.csproj
+<PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
++    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
++    <IntermediateOutputPath>obj</IntermediateOutputPath>
+</PropertyGroup>
+```
 
 This changes the output path of the project's Scoped CSS bundle from `/obj/net6.0/{Debug|Release}/scopedcss/bundle` to a constant `/obj/scopedcss/bundle`.  Assuming a project `site.csproj`, running `dotnet build` will output the Scoped CSS bundle to `/obj/scopedcss/bundle/site.styles.css`.  Add this file to the root CSS created earler, `site.css`:
 
-::: pre
-`@import "tailwindcss/base";` \
-`@import "tailwindcss/components";` \
-`@import "tailwindcss/utilities";` \
-++`@import "./obj/scopedcss/bundle/site.styles.css";`++
-:::
+```css:site.css
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
++@import "./obj/scopedcss/bundle/site.styles.css";
+```
 
 ::: info
 Voila, you can now [use Tailwind/PostCSS](https://raw.githubusercontent.com/McNerdius/TailBlazor/main/Source/Components/IconLink/IconLink.razor.css){target="_blank"} in your `*.razor.css` and consequent `npm run` commands will transform the generated `site.styles.css` CSS Isolation bundle into vanilla CSS for you and bundle it up in `site.min.css` - no need to link `site.styles.css` on its own as the docs describe.

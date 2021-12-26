@@ -10,7 +10,7 @@ Let's set it up so that `dotnet build` takes care of the `npm run build` for us.
 
 To keep the `*.csproj` clean, i use a special MSBuild "Targets" file, which i cleverly name `tailwindcss.targets`.  Here's an example file:
 
-```
+```xml:tailwindcss.targets
 <Project>
     <PropertyGroup>
         <TailwindBuild>true</TailwindBuild>
@@ -32,7 +32,7 @@ To keep the `*.csproj` clean, i use a special MSBuild "Targets" file, which i cl
 
 Let's break it down.
 
-```
+```xml:tailwindcss.targets-p1
 <PropertyGroup>
     <TailwindBuild>true</TailwindBuild>
 </PropertyGroup>
@@ -40,7 +40,7 @@ Let's break it down.
 
 This just defines an MSBuild property we can use like so: `dotnet build -p:TailwindBuild=false` to let us opt out of running the Tailwind build.  Note its use in the following:
 
-```
+```xml:tailwindcss.targets-p2
 <Target Name="tailwind build" AfterTargets="AfterBuild" Condition="'$(TailwindBuild)' == 'true'">
     <Message Text="tailwind build target running..." Importance="high"></Message>
     <Exec Command="npm run build" Condition="'$(Configuration)' == 'Debug'"/>
@@ -53,7 +53,7 @@ This just defines an MSBuild property we can use like so: `dotnet build -p:Tailw
 
 The next (kinda optional) snippet, also cleverly named `npm install`, actually runs in-between `AfterBuild` and `tailwind build`, doing a sanity check on `npm` stuff:
 
-```
+```xml:tailwindcss.targets-p3
 <Target Name="npm install" BeforeTargets="tailwind build" Inputs="./package.json" Outputs="./node_modules/.install-stamp">
     <Exec Command="npm -v" ContinueOnError="true">
         <Output TaskParameter="ExitCode" PropertyName="error" />
@@ -69,11 +69,11 @@ If Node.js/npm isn't installed, `npm -v` will fail and you'll get a build error.
 
 To actually make use of this in your Blazor project, add it to your `*.csproj`, top-level:
 
-::: pre
-`<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">` \
-    ++`    <Import Project="tailwindcss.targets" />`++ \
-`</Project>`
-:::
+```xml:site.csproj
+<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
++    <Import Project="tailwindcss.targets" />
+</Project>
+```
 
 ---
 
@@ -83,7 +83,7 @@ To actually make use of this in your Blazor project, add it to your `*.csproj`, 
 
 A simple, sanity-checks-included PowerShell script:
 
-```
+```ps1:watch.ps1
 dotnet build -p:TailwindBuild=false
 start "dotnet" -ArgumentList "watch" 
 while (!(Test-Path "./obj/scopedcss/bundle/site.styles.css")) { sleep -ms 100 } 
