@@ -83,7 +83,7 @@ To actually make use of this in your Blazor project, add it to your `*.csproj`, 
 
 A simple, sanity-checks-included PowerShell script:
 
-```ps1:watch.ps1
+```powershell:watch.ps1
 dotnet build -p:TailwindBuild=false
 start "dotnet" -ArgumentList "watch" 
 while (!(Test-Path "./obj/scopedcss/bundle/site.styles.css")) { sleep -ms 100 } 
