@@ -104,6 +104,7 @@ module.exports = {
         extend: {}, 
     }, 
     plugins: [] 
+}
 ```
 
 ### postcss.config.js - the CSS pipeline
