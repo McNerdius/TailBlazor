@@ -4,13 +4,12 @@
 
 @import "./obj/scopedcss/bundle/TailBlazor.styles.css";
 @import "./Pages/Markdown.nested.css";
-@import "./prism.css";
+@import "./prism-vsc-dark-plus";
 
 .mc-code-block {
   @apply font-mono font-bold
          mr-4 my-6 rounded-t-lg
-         bg-zinc-200 dark:bg-zinc-700
-         text-black dark:text-white;
+         bg-zinc-800 text-neutral-200;
 
   .mc-code-lines {
     @apply grid grid-cols-[min-content,auto]
@@ -25,7 +24,7 @@
   }
     
   .mc-code-filename {
-    @apply bg-blue-500 text-center rounded-t-lg;
+    @apply bg-blue-500 text-black text-lg italic pl-6 rounded-t-lg;
   }
 
   .mc-diff
@@ -34,14 +33,14 @@
   }         
 
   .mc-ins {
-      @apply bg-green-300/30 no-underline;
+      @apply bg-green-300/20 no-underline;
       &.mc-diff {
         @apply before:content-['+'];
       }
   }
 
   .mc-del {
-      @apply bg-red-400/30 no-underline;
+      @apply bg-red-400/20 no-underline;
       &.mc-diff {
         @apply before:content-['-'];
       }

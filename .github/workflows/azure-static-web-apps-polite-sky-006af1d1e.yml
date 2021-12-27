@@ -25,8 +25,8 @@ jobs:
         with:
           dotnet-version: "6.0.x"
 
-      # - name: Install PrismJs
-      #   run: npm install prismjs yargs
+      - name: Install PrismJs
+        run: npm install prismjs yargs
 
       - name: Generate Markdown
         uses: McNerdius/MarkDigger@main
