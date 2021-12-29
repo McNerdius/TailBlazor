@@ -1,7 +1,23 @@
+
+const mdRegex = RegExp(/{\s*([^}]*)}/);
+
 module.exports = {
-    content: [
-        './**/*.{razor,html}'
-    ],
+    content: {
+        'files': [
+            './{Components,Layouts,Pages,wwwroot}/**/*.{razor,html,svg}',
+            './wwwroot/content/**/*.md'
+        ],
+        'extract': {
+            'md': (content) =>
+            {
+                const matches = content.match(mdRegex);
+                const classes = matches
+                    ? matches[1].split(' ').filter(i => i.startsWith('.')).map(i => i.slice(1,))
+                    : [];
+                return classes;
+            }
+        }
+    },
     darkMode: 'class',
     theme: {
         extend:
