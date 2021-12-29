@@ -1,5 +1,5 @@
 
-const mdRegex = RegExp(/{\s*([^}]*)}/);
+const mdRegex = new RegExp(/{\s*([^}])*}/g);
 
 module.exports = {
     content: {
@@ -11,9 +11,15 @@ module.exports = {
             'md': (content) =>
             {
                 const matches = content.match(mdRegex);
+
                 const classes = matches
-                    ? matches[1].split(' ').filter(i => i.startsWith('.')).map(i => i.slice(1,))
+                    ? matches
+                        .map(m => m.split(' '))
+                        .flat()
+                        .filter(i => i.startsWith('.'))
+                        .map(i => i.slice(1,))
                     : [];
+
                 return classes;
             }
         }
