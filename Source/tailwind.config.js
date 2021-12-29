@@ -14,11 +14,13 @@ module.exports = {
 
                 const classes = matches
                     ? matches
-                        .map(m => m.split(' '))
+                        .map(m => m.slice(1, -1).split(' '))
                         .flat()
                         .filter(i => i.startsWith('.'))
                         .map(i => i.slice(1,))
                     : [];
+
+                // if (classes.length > 0) console.log(classes);
 
                 return classes;
             }
