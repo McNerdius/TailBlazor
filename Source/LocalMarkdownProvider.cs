@@ -1,5 +1,5 @@
 using Markdig;
-using Markdig.CodeBlockHighlighter;
+using Markdig.CodeBlockFormatter;
 
 public class LocalMarkdownProvider : IMarkdownContentProvider
 {
@@ -17,7 +17,7 @@ public class LocalMarkdownProvider : IMarkdownContentProvider
                     .UseAutoLinks()
                     //    .UseEmojiAndSmiley()
                     //    .UseAutoIdentifiers()
-                    .UseCodeBlockHighlighter()
+                    .UseCodeBlockFormatter()
                     .UseGenericAttributes() // Must be last as it is one parser that is modifying other parsers
                     .Build();
 
