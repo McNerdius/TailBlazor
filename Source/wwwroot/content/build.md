@@ -1,12 +1,48 @@
-# Connecting the dots for build and watch {#top}
 
-To recap there are two build steps: `dotnet build` followed by `npm run build`.  `dotnet build` must run first, as it generates the `*.styles.css` that's referenced in `site.css` which `npm run build` takes as input.
+# Tailwind Incremental Builds, and maybe Hot Reload
 
-![build](/images/simple.drawio.png)
+So far we've put four more-or-less boilerplate files on disk and installed two packages from `npm` to add Tailwind CSS to the `blazorwasm` template.  Not too shabby.  Getting build & watch set up is pretty easy too, but unfortunately Hot Reload support is inconsistent between .NET project types.
 
-Let's set it up so that `dotnet build` takes care of the `npm run build` for us.  This covers `dotnet run` and `F5` as well.
+Ideally Hot Reload would ensure you're seeing latest version of your Components and CSS.  For most projects this is the case, but some are ... less Hot Reloady than others.  Having to do a full rebuild to see Razor Component updates for some project types is unfortunate, but also outside the scope of integrating Tailwind CSS into those projects.  Hopefully Hot Reload improves in that regard.
 
-## Build/Publish {#build}
+On the Tailwind side of things, nothing fancy is happening - just a fresh CSS file being output to `wwwroot` as needed.  For some project types, Hot Reload doesn't refresh the browser when it sees these changes (yet) - hopefully a fix for this seemingly-trivial issue will come soon.  This [GitHub Issue](https://github.com/dotnet/aspnetcore/issues/37496){target="_blank"} shows a script that reloads the CSS file on a timer.  I think it'd be interesting to make that into a Component - definitely on the todo list.
+
+## Building your CSS with `npm` helper scripts 
+
+In the default `package.json` you'll see the following:
+
+```json:package.json
+"scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+},
+```
+
+Swap the `"test"` line for the following:
+
+```json:package.json
+"scripts": { 
+-  "test": "echo \"Error: no test specified\" && exit 1",
++  "build": "npx tailwindcss --config tailwind.config.js --postcss postcss.config.js -i site.css -o ./wwwroot/site.min.css",
++  "watch": "npx tailwindcss --config tailwind.config.js --postcss postcss.config.js -i site.css -o ./wwwroot/site.min.css --watch",
++  "publish": "npx tailwindcss --config tailwind.config.js --postcss postcss.config.js -i site.css -o ./wwwroot/site.min.css --minify"
+}
+```
+
+_(Yes, that is `npx` not `npm`)_
+
+Just connecting the dots here - pointing the `tailwindcss` CLI at the relevant config, input, and output files. It's only minified in the case of `publish` but i like to use a `*.min.css` extension to more easily distinguish the files.  `npm run build` will do a one-off build, `npm run watch` is what gives us the quick incremental builds akin to Hot Reload, and `npm run publish` will do a one-off build, plus `cssnano` minification.
+
+::: info
+Finally !  Having created `site.css` and done the initial configuration, running `npm run build` will run `tailwindcss`, using `site.css` and markup specified in `tailwind.config.js`'s `content` section to generate a "vanilla" `site.min.css`.
+:::
+
+---
+
+## Automating the `npm` helper scripts
+
+Next, Let's set it up so that `dotnet` CLI - and by extension, your IDE - can care of some of the `npm` stuff for us.
+
+### Build/Publish
 
 To keep the `*.csproj` clean, i use a special MSBuild "Targets" file, which i cleverly name `tailwindcss.targets`.  Here's an example file:
 
@@ -64,7 +100,7 @@ The next (kinda optional) snippet, also cleverly named `npm install`, actually r
 </Target>
 ```
 
-If Node.js/npm isn't installed, `npm -v` will fail and you'll get a build error. Otherwise `npm install` will install the dependencies in `package.json` - akin to a `dotnet restore` when used without parameters, but slower.  The `Inputs`/`Outputs`/`Touch` is MSBuild [incremental build](https://docs.microsoft.com/en-us/visualstudio/msbuild/how-to-build-incrementally?view=vs-2022){target="_blank"} magic, preventing this from running **every. single. build.**  -  Just when `package.json` is out of sync with `.install-stamp`.  (A fresh clone, for instance.)  See [here](https://stackoverflow.com/questions/35435041/run-npm-install-only-when-needed-and-or-partially?answertab=active#tab-top){target="_blank"} for the StackOverflow-sauce.  Assuming no errors, things will continue with the `tailwind build` target.  
+If Node.js/npm isn't installed, `npm -v` will fail and you'll get a build error. Otherwise `npm install` will install the dependencies in `package.json` - akin to a `dotnet restore` when used without parameters, but slower.  The `Inputs`/`Outputs`/`Touch` is MSBuild [incremental build](https://docs.microsoft.com/en-us/visualstudio/msbuild/how-to-build-incrementally?view=vs-2022){target="_blank"} magic, preventing this from running **every. single. build.**  -  Just when `package.json` is out of sync with `.install-stamp`.  (A fresh clone, for instance.)  See [here](https://stackoverflow.com/questions/35435041/run-npm-install-only-when-needed-and-or-partially?answertab=active#tab-top){target="_blank"} for the StackOverflow-sauce.  _(note: my experience with this has been inconsistent and i haven't been able to pin it down.  it's not a big productivity hit though, with full builds being so rare.  if you have any info, [please share](https://github.com/McNerdius/TailBlazor/discussions){target="_blank"}!)_  Assuming no errors, things will continue with the `tailwind build` target.  
 
 
 To actually make use of this in your Blazor project, add it to your `*.csproj`, top-level:
@@ -77,27 +113,27 @@ To actually make use of this in your Blazor project, add it to your `*.csproj`, 
 
 ---
 
-## Hot Reload + Tailwind CSS Incremental Builds {#watch}
 
-### Using `dotnet watch`
+## Using `dotnet watch` & PowerShell
 
 A simple, sanity-checks-included PowerShell script:
 
 ```powershell:watch.ps1
 dotnet build -p:TailwindBuild=false
 start "dotnet" -ArgumentList "watch" 
-while (!(Test-Path "./obj/scopedcss/bundle/site.styles.css")) { sleep -ms 100 } 
 while (!(Test-Path "./node_modules/.install-stamp")) { sleep -ms 100 } 
 npm run watch
 ```
 
-Breaking it down:  I've found `dotnet watch` without a proper `dotnet build` beforehand can do strange things sometimes.  It's only once, so whatever.  Using `start` launches `dotnet watch` in its own process, eventually outputting `site.styles.css` as part of the normal build process.  Later on the `tailwind build` Target kicks in, possibly doing an `npm install` for the first time.  Only after `site.styles.css` is generated and `.install-stamp` provides evidence of an `npm install` is it OK to kick off `tailwindcss` via `npm run watch`.  At this point both .NET's Hot Reload and Tailwind's incremental build mode are watching for relevant changes.
+Breaking it down:  I've found `dotnet watch` without a proper `dotnet build` beforehand can do strange things sometimes.  It's only once, so whatever.  Using `start` launches `dotnet watch` in its own process.  Unlike the first line in the script, this build will include the `tailwind build` Target, possibly doing an `npm install` for the first time.  Only after `.install-stamp` provides evidence of an `npm install` is it OK to kick off `tailwindcss` via `npm run watch`.  At this point, both .NET's Hot Reload and Tailwind's incremental build mode are watching for relevant changes.
 
-### In Visual Studio
+---
+
+## Using Visual Studio
 
 The best option i've found to integrate `tailwindcss --watch` with Visual Studio UI is to use the [NPM Task Runner](https://marketplace.visualstudio.com/items?itemName=MadsKristensen.NpmTaskRunner64){target="_blank"}, and bind the relevant `watch` script to "Project Open". (Not "After Build", see below.)
 
-Keep in mind: one-off `tailwindcss` builds are not ideal.  The long-running ***`tailwindcss --watch` is the only way to take advantage of Tailwind's super-fast incremental builds and other goodies built into the CLI.***.
+Keep in mind: one-off `tailwindcss` builds are not ideal.  ***The long-running `tailwindcss --watch` is the only way to take advantage of Tailwind's super-fast incremental builds.***
 
 ### Other approaches
 
@@ -116,3 +152,15 @@ This can be used to expose the needed scripts in a right-click menu in the Folde
 ::: info
 All in all, using the NPM Task Runner takes little effort and Just Works, without injecting long-running tasks into the `.csproj`/`.targets` build files.
 :::
+
+---
+
+## Using VS Code
+
+See the [tailblazor-templates](https://github.com/McNerdius/TailBlazor-Templates/tree/main/Templates/SingleProject/TailBlazorWasm/.vscode){target="_blank"} repo to see launch tasks/configs for various project types.  It's a bit more robust than the `watch.ps1` script but pretty involved.
+
+---
+
+::: {.text-xl .italic .light .text-right .pr-6 }
+[next: tidy css](/tidy_css)
+::: 

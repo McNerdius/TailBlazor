@@ -1,11 +1,12 @@
-### WIP
 
-See [templates.tailblazor.dev](https://templates.tailblazor.dev){target="_blank"} for a preview of [tailblazor-templates](https://github.com/McNerdius/TailBlazor-Templates){target="_blank"}'s content.  The template pack will grow, naming is still up in the air, but the near-future plan looks something like this:
+Take the default `dotnet new` templates and apply the steps described on this site, and you get [tailblazor-templates](https://github.com/McNerdius/TailBlazor-Templates){target="_blank"}.  The `tailblazor-wasm` template is hosted at [templates.tailblazor.dev](https://templates.tailblazor.dev){target="_blank"}.
+
+ The template pack will grow, naming is still up in the air, but the near-future plan looks something like this:
 
 +:------------------------+:-------------------------:+
 | single-project templates                            |
 +=========================+===========================+
-| Template/Minimal/                                  |
+| Template/Minimal/                                   |
 +=========================+===========================+
 | -- TailBlazorWasm       |  `tailblazor-wasm`        |
 +-------------------------+---------------------------+
