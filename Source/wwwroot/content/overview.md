@@ -10,7 +10,7 @@ Getting the best out of both takes a couple `csproj` tweaks and a bit of config.
 
 ---
 
-## "Inner Loop" goodies {.italic}
+## "Inner Loop" goodies
 
 Blazor's [Hot Reload](https://docs.microsoft.com/en-us/aspnet/core/test/hot-reload?view=aspnetcore-6.0){target="_blank"} is an evolution of Visual Studio's Edit & Continue feature and the `dotnet watch` command, allowing edits to be applied immediately without needing to pause or restart a running app.  This includes edits to code as well as markup and CSS.  Hot Reload is still newish and not fully supported for all project types, unfortunately.
 
@@ -20,7 +20,7 @@ Hot Reload and `tailwindcss --watch` do their work independently - all that's ne
 
 ---
 
-## Tidy CSS {.italic}
+## Tidy CSS
 
 Blazor's [CSS Isolation](https://docs.microsoft.com/en-us/aspnet/core/blazor/components/css-isolation?view=aspnetcore-6.0){target="_blank"} is a simple way to limit the scope of styles to a particular Razor Component: by convention, styles defined in `.razor.css` (Scoped CSS) files will be rewritten at build time so they only apply to their associated `.razor` Component. 
 
@@ -65,5 +65,8 @@ Hopefully, i won't miss any steps or be overly verbose in this howto. It'll be m
 
 To fast forward through this howto and see what it looks like "on disk", see the the `tailblazor-wasm` template found in my [tailblazor-templates repository](https://www.github.com/McNerdius/tailblazor-templates){target="_blank"}.  It's hosted at [templates.tailblazor.dev](https://templates.tailblazor.dev/){target="_blank"} and the content is essentially a tl;dr of this site.
 
+---
 
-
+::: {.text-xl .italic .light .text-right .pr-6 }
+[next: setup](/setup)
+::: 
