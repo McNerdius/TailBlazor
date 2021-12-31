@@ -4,48 +4,8 @@
 
 @import "./obj/scopedcss/bundle/TailBlazor.styles.css";
 @import "./Pages/Markdown.nested.css";
-@import "./prism-vsc-dark-plus";
-
-.mc-code-block {
-  @apply font-mono font-bold
-         mr-4 my-6 rounded-t-lg
-         bg-zinc-800 text-neutral-200;
-
-  .mc-code-lines {
-    @apply grid grid-cols-[min-content,auto]
-           text-[95%] font-light tracking-tight leading-[1.22]
-           pb-6 pt-3 overflow-auto
-           scrollbar-thin !scrollbar-thumb-neutral-400 !scrollbar-track-neutral-200;  
-  }
-
-  .mc-code
-  {
-    @apply pr-6;
-  }
-    
-  .mc-code-filename {
-    @apply bg-blue-500 text-black text-lg italic pl-6 rounded-t-lg;
-  }
-
-  .mc-diff
-  {
-    @apply w-6 text-center;
-  }         
-
-  .mc-ins {
-      @apply bg-green-300/20 no-underline;
-      &.mc-diff {
-        @apply before:content-['+'];
-      }
-  }
-
-  .mc-del {
-      @apply bg-red-400/20 no-underline;
-      &.mc-diff {
-        @apply before:content-['-'];
-      }
-  }
-}
+@import "prism-vsc-dark-plus";
+@import "codeblock.nested.css";
 
 #blazor-error-ui {
   background: lightyellow;
