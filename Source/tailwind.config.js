@@ -1,7 +1,21 @@
-
+const colors = require('tailwindcss/colors');
 const mdRegex = new RegExp(/{\s*([^}])*}/g);
 
 module.exports = {
+    darkMode: 'class',
+    theme: {
+        extend:
+        {
+            colors:
+            {
+                'dotnet-blurple': '#512DB4',
+                'link-blue': colors.blue[600],
+            },
+            animation: {
+                'spin-slow': 'spin 7s linear infinite',
+            }
+        }
+    },
     content: {
         'files': [
             './{Components,Layouts,Pages,wwwroot}/**/*.{razor,html,svg}',
@@ -23,19 +37,6 @@ module.exports = {
                 // if (classes.length > 0) console.log(classes);
 
                 return classes;
-            }
-        }
-    },
-    darkMode: 'class',
-    theme: {
-        extend:
-        {
-            colors:
-            {
-                'dotnet-blurple': '#512DB4'
-            },
-            animation: {
-                'spin-slow': 'spin 7s linear infinite',
             }
         }
     },
