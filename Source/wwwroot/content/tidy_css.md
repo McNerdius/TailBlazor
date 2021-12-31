@@ -91,7 +91,7 @@ A simple cut-paste is all it takes.  Without using `@apply` that'd translate to 
 }
 ```
 
-Note i've put this in a `*.razor.css` file.  **You could also just drop the `razor.` and `@import` the file directly in `site.css` and the Blazor integration steps that follow.**  But it only takes a couple edits to take advantage of CSS Isolation and only have to `@import` the Blazor-generated `site.styles.css` bundle.
+Note i've put this in a `*.razor.css` file.  **You could also just drop the `razor.` and `@import` the file directly in `site.css` and skip the Blazor integration steps that follow.**  But it only takes a couple edits to take advantage of CSS Isolation and only have to `@import` the Blazor-generated `site.styles.css` bundle.
 
 ### Enter `postcss-import`
 
