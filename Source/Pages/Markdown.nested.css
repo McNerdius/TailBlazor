@@ -4,15 +4,11 @@
   @apply transition-[font-size,width];
 
   .emoji {
-    @apply inline font-normal;
-  }
-
-  .intro {
-    @apply indent-6;
+    @apply inline font-normal text-[120%];
   }
 
   a {
-    @apply text-blue-600 no-underline;
+    @apply text-link-blue no-underline;
     &.tech {
       @apply text-2xl italic font-extrabold;
     }
@@ -34,46 +30,37 @@
     }
   }
 
-  hr {
-    @apply !my-8;
-  }
-
-  .md-footnote {
-    &.return {
-      @apply text-xs pl-4;
-    }
-  }
-
-  td {
-    @apply align-middle;
-  }
+  /* td {
+      @apply align-middle;
+    } */
 
   code {
 
     @apply whitespace-pre-wrap;
-      /* more like ohmyposh.dev, less like tailwindcss.com */
-      @apply before:!content-none after:!content-none;
-      &:not(pre *, .pre *) {
-        @apply bg-zinc-200/50 dark:bg-zinc-700/60;
+    /* more like ohmyposh.dev, less like tailwindcss.com */
+    @apply before:!content-none after:!content-none;
 
-        @apply px-1 py-px rounded-[4px];
-      }
+    &:not(pre *, .pre *) {
+      @apply bg-zinc-200/50 dark:bg-zinc-700/60;
+
+      @apply px-1 py-px rounded-[4px];
+    }
   }
 
   abbr {
     @apply cursor-pointer;
   }
 
-  details {
-    @apply p-2 m-2 rounded-md
-           shadow-sm shadow-dotnet-blurple;
+  /* details {
+    @apply p-2 m-2 rounded-md shadow-sm shadow-dotnet-blurple;
 
     & summary {
       @apply text-xl font-bold italic cursor-pointer;
     }
-  }
+  } */
 
   img {
-    @apply m-auto bg-neutral-500 rounded-md p-2;
+    @apply m-auto bg-neutral-400 rounded-md;
   }
+
 }
