@@ -25,13 +25,12 @@ A tiny rant about tidy HTML then i'll get back to the tidy CSS bits.  A relevant
 
 A common, valid criticism of the utility-class approach is that long strings of class names gets hard to read, requiring "horizontal panning" of the eyes.  What i don't understand is - why in all of the Tailwind CSS samples i see are all of the class strings on one line ?  In C# (and other languages of course), if a method has more than a few parameters, we format & indent them to look pretty.  This is an option in HTML class strings as well.  If my HTML is getting messy, i group my classes over multiple lines, grouping classes semantically.  Maybe i put font size/color classes on one line, padding/margins on the next, dark mode on another, give each responsive breakpoint a line of their own, and so on.  A line becomes a rectangle.  
 
-OK with that out of my system, back to `@apply`, which lets us cut long class strings out of our HTML and paste them into a `css` file and go on our way.  Let's look at this site's [IconLink](https://github.com/McNerdius/TailBlazor/tree/main/Source/Components/IconLink){target="_blank"} Component as an example.  Without using `@apply` it would look something like this:
+OK with that out of my system, back to `@apply`, which lets us cut long class strings out of our HTML and paste them into a `css` file and go on our way.  Let's look at this site's [IconLink](https://github.com/McNerdius/TailBlazor/tree/main/Source/Components/IconLink){target="_blank"} Component as an example.  Without using `@apply` you'd see something like this:
 
 ```html:IconLink.razor
 <div class="font-semibold text-base 
             leading-none 
             rounded-[4px]
-            transition[font-size,width]
             stroke-black dark:stroke-white 
             hover:no-underline 
             hover:bg-neutral-200/80
@@ -53,7 +52,6 @@ I had to create a `.css` file for this component to style Blazor's `NavLink`, so
   @apply font-semibold text-base 
          leading-none 
          rounded-[4px] 
-         transition-[font-size,width]
          stroke-black dark:stroke-white
          hover:no-underline 
          hover:bg-neutral-200/80
@@ -61,35 +59,7 @@ I had to create a `.css` file for this component to style Blazor's `NavLink`, so
 }
 ```
 
-A simple cut-paste is all it takes.  Without using `@apply` that'd translate to something like:
-
-```css:IconLink.razor.css
-.link-container {
-  border-radius: 4px;
-  stroke: #000;
-  font-size: 1rem;
-  font-weight: 600;
-  line-height: 1;
-  transition-property: font-size,width;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms
-}
-@media (prefers-color-scheme: dark) {
-  .link-container {
-    stroke: #fff
-  }
-}
-.link-container:hover {
-  background-color: rgb(229 229 229 / 0.8);
-  -webkit-text-decoration-line: none;
-          text-decoration-line: none
-}
-@media (prefers-color-scheme: dark) {
-  .link-container:hover {
-    background-color: rgb(64 64 64 / 0.7)
-  }
-}
-```
+A simple cut-paste is all it takes.
 
 Note i've put this in a `*.razor.css` file.  **You could also just drop the `razor.` and `@import` the file directly in `site.css` and skip the Blazor integration steps that follow.**  But it only takes a couple edits to take advantage of CSS Isolation and only have to `@import` the Blazor-generated `site.styles.css` bundle.
 
@@ -185,7 +155,6 @@ A couple scenarios where i use nesting:
   @apply font-semibold text-base 
          leading-none 
          rounded-[4px] 
-         transition-[font-size,width]
          stroke-black dark:stroke-white
          hover:no-underline 
          hover:bg-neutral-200/80
@@ -200,15 +169,44 @@ What you'll find i'm actually using is:
   @apply font-semibold text-base 
          leading-none 
          rounded-[4px] 
-         transition-[font-size,width]
          stroke-black dark:stroke-white;
   &:hover {
-    @apply no-underline bg-neutral-200/80 dark:bg-neutral-700/70;
+    @apply no-underline bg-neutral-200/80 
+                   dark:bg-neutral-700/70;
   }
 }
 ```
 
 Because why not ?
+
+---
+
+`IconLink.razor` is an odd beast.  It supports large or small icons sizes, and the links don't have to be links.  Enough was already going on in the 16 lines of Razor Lasagna™ that pulling out the 7-line (151 characters if you do that single-line thing) chunk of CSS classes made sense.  FWIW, here's what `tailwindcss` generates for us given any of these nicely formatted, ~9*35 character rectangles of text:
+
+```css
+.link-container {
+  border-radius: 4px;
+  stroke: #000;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1;
+}
+@media (prefers-color-scheme: dark) {
+  .link-container {
+    stroke: #fff
+  }
+}
+.link-container:hover {
+  background-color: rgb(229 229 229 / 0.8);
+  -webkit-text-decoration-line: none;
+          text-decoration-line: none
+}
+@media (prefers-color-scheme: dark) {
+  .link-container:hover {
+    background-color: rgb(64 64 64 / 0.7)
+  }
+}
+```
 
 ---
 

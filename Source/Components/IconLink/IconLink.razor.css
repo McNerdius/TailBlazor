@@ -2,14 +2,14 @@
   @apply font-semibold text-base 
          leading-none 
          rounded-[4px] 
-         transition-[font-size,width]
          stroke-black dark:stroke-white;
 
   &:hover {
-    @apply no-underline bg-neutral-200/80 dark:bg-neutral-700/70;
+    @apply no-underline bg-neutral-200/80 
+                   dark:bg-neutral-700/70;
   }
-}
 
+}
 ::deep a {
   @apply py-1 my-1 pl-px
          dark:text-neutral-200;
