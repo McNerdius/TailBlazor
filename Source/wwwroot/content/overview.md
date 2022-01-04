@@ -35,7 +35,7 @@ To use Tailwind CSS features within your Scoped CSS files takes as little as thr
 You'll need the .NET 6 SDK, Node.JS, and of course a development environment — _PowerShell optional_
 
 ::: info
-TailBlazor is geared toward .NET 6 and Tailwind 3. Older versions of .NET would work too, but the build steps may be subtly different for Blazor.
+TailBlazor is geared toward .NET 6 and Tailwind 3. Older versions would work too, but the build steps and config would be a bit different.  Hot Reload & Tailwind CSS "JIT" were in preview prior to these versions.
 :::
 
 ## Development Environment:
