@@ -43,14 +43,15 @@ module.exports = {
 
 Tailwind is massively [configurable](https://tailwindcss.com/docs/configuration){target="_blank"}, letting you override and extend values used when generating classes, and even [add your own](https://tailwindcss.com/docs/adding-new-utilities){target="_blank"} utility classes to participate in the CSS generation process.
 
-However, there's only one tweak needed to get started: `content` is where the magic happens. Here you point Tailwind at any _markup_ files where its yet-to-be-generated CSS is being _used_. (Hence the "JIT" in "Tailwind JIT"). It supports globbing - so for a simple Blazor Wasm project: `content: [ './**/*.{razor,html}' ]`. For Blazor Server or Razor Pages/MVC, `cshtml` would be added in.  It's a good idea to be more specific than `**` so that things like `node_modules` or `bin`/`obj` aren't included in the file-watching - see [here](https://tailwindcss.com/docs/content-configuration#configuring-source-paths){target="_blank"} for more info.
-
-This will get you started though, and you can dial in the `**` path glob as you wish later:
+However, there's only one tweak needed to get started: `content` is where the magic happens. Here you point Tailwind at any _markup_ files where its yet-to-be-generated CSS is being _used_. (Hence the "JIT" in "Tailwind JIT").  More specific configuration translates to better performance, but you don't want to miss any files either.  A decent starter for a WebAssembly project, taking advantage of its globbing and negation/exclusion:
 
 ```javascript:tailwind.config.js
 module.exports = { 
 -    content: [], 
-+    content: [ './**/*.{razor,html}' ],
++    content: [
++        '!**/{bin,obj,node_modules}/**',
++        '**/*.{razor,html}',
++    ],
     theme: { 
         extend: {}, 
     }, 
@@ -58,7 +59,7 @@ module.exports = {
 }
 ```
 
-[todo: a bit about classes/`content` in `svg`, `cs`, `md` sort of stuff ?]
+For Blazor Server or Razor Pages/MVC, `cshtml` would be added in.  There also may be cases where you use Tailwind CSS classes in `.razor.cs` backing code, `svg` files, or elsewhere.  See [here](https://tailwindcss.com/docs/content-configuration#configuring-source-paths){target="_blank"} for more info on `content`.
 
 ## PostCSS Config
 
