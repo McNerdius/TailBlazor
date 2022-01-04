@@ -52,7 +52,7 @@ There are *[loads](https://www.postcss.parts/){target="_blank"}* of other PostCS
 
 More to come on this topic, but for now...
 
-By putting all or most of your UI into a [Razor Class Library](https://docs.microsoft.com/en-us/aspnet/core/razor-pages/ui-class?view=aspnetcore-6.0&tabs=visual-studio){target="_blank}, you can share Components, Pages / Routable Components, even your Layouts and `App.razor` with other Blazor-capable projects.  See [tailblazor-templates](https://github.com/McNerdius/TailBlazor-Templates/tree/main/Templates/MultiProject){target="_blank}'s MutliProject template to see this in action.  
+By putting all or most of your UI into a [Razor Class Library](https://docs.microsoft.com/en-us/aspnet/core/razor-pages/ui-class?view=aspnetcore-6.0&tabs=visual-studio){target="_blank"}, you can share Components, Pages / Routable Components, even your Layouts and `App.razor` with other Blazor-capable projects.  See [tailblazor-templates](https://github.com/McNerdius/TailBlazor-Templates/tree/main/Templates/MultiProject){target="_blank"}'s MutliProject template to see this in action.  
 
 Here's some notes on how i set up a solution, using a shared `RazorClassLibrary.csproj`:
 
