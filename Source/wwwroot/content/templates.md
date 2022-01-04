@@ -34,4 +34,10 @@ Take the default `dotnet new` templates and apply the steps described on this si
 | -- RazorPages           |                     |
 +-------------------------+---------------------+
 
+There's not much different between the `Server` and `Pages` flavors:
+* `Server` is made from `dotnet new blazorserver`
+* `Pages` is made from `dotnet new razor` (aka Razor Pages)
+* `Server` templates use `MainLayout.razor` as layout, and `Pages` uses `_Layout.cshtml`, skipping Blazor's LayoutComponent approach.
+* `Server` templates have a `razor` landing page, `Pages` uses `cshtml`.  The only real difference at this point is the file extension, but this along with using `_Layout.cshtml` should make it clear that intermingling Razor Components, Routable Components, and Razor Pages is the point of the `Pages` templates.
+
 Any comments / suggestions / feedback / whatever on the templates, path / template / project naming, toss it [in here](https://github.com/McNerdius/TailBlazor/issues/64){target="_blank"} !
