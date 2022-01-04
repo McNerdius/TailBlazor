@@ -16,6 +16,6 @@
 
   &.active {
     @apply bg-neutral-200/80 rounded-[4px]
-         dark:bg-neutral-700/70 dark:text-blue-600;
+         dark:bg-neutral-700/70 ;
   }
 }
