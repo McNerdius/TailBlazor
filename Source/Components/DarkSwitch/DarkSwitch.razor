@@ -1,11 +1,11 @@
 @namespace TailBlazor.Components
 
-<div class="relative">
-<button class="p-2 group max-w-min select-none focus:outline-none" @onclick="switchTheme">
-    <div class="px-[2px] flex justify-between  h-6 w-12 bg-gray-600 rounded-full ">
-        <div class="group duration-100 opacity-0 dark:opacity-100">🌜</div>
-        <div class="group duration-100 opacity-100 dark:opacity-0">🌞</div>
+<div class="relative text-[16px] leading-[22px]">
+<button class="group max-w-min select-none focus:outline-none" @onclick="switchTheme">
+    <div class="flex px-[2px] h-[24px] w-[48px] bg-[rgb(75,85,99)] rounded-full">
+        <div class="group opacity-0 dark:opacity-100">🌜</div>
+        <div class="group opacity-100 dark:opacity-0">🌞</div>
     </div>
-    <div class="group absolute theme-knob dark:translate-x-6"></div>
+    <div class="group absolute theme-knob dark:translate-x-[24px]"></div>
 </button>
 </div>
