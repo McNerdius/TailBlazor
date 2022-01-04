@@ -14,11 +14,11 @@
         <SupportedPlatform Include="browser" />
     </ItemGroup>
     <ItemGroup Condition="'$(Configuration)' == 'Release'">
-        <Compile Remove="LocalMarkdownProvider.cs" />
+        <Compile Remove=".\ContentProviders\LocalMarkdownProvider.cs" />
         <EmbeddedResource Include=".\wwwroot\content\**\*.html" />
     </ItemGroup>
     <ItemGroup Condition="'$(Configuration)' == 'Debug'">
-        <Compile Remove="HtmlResourceProvider.cs" />
+        <Compile Remove=".\ContentProviders\HtmlResourceProvider.cs" />
         <ProjectReference Include="..\..\MarkDigger\CodeBlockFormatter\CodeBlockFormatter\CodeBlockFormatter.csproj" />
         <PackageReference Include="markdig" Version="0.26.0" />
     </ItemGroup>
