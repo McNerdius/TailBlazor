@@ -57,7 +57,7 @@ todo: more on `@tailwind base` vs `@import "tailwindcss/base"` and the other "la
 
 # Tailwind Standalone CLI {#CLI}
 
-Tailwind 3.0 offers a [standalone CLI](https://tailwindcss.com/blog/standalone-cli){target="_blank"}.  At the time of writing, the singular advantage is that `node.js` isn't required.  Unfortunately, third party PostCSS or Tailwind plugins (such as `debug-screens`) can't be used with it.  Since `postcss-import` can't be used, thus we can't `@import` a CSS Isolation bundle or other CSS.  No-go, for now.
+Tailwind 3.0 offers a [standalone CLI](https://tailwindcss.com/blog/standalone-cli){target="_blank"}.  At the time of writing, the singular advantage is that `node.js` isn't required.  Unfortunately, third party PostCSS or Tailwind plugins (such as `debug-screens`) can't be used with it.  Since `postcss-import` can't be used, we can't `@import` a CSS Isolation bundle or other CSS.  No-go, for now.
 
 Even when/if third-party plugins are supported, the CLI and plugins will have to be acquired/installed somehow.  Will this be a better developer experience than doing so via `npm` ?  Who knows.
 
@@ -73,7 +73,9 @@ I've mentioned it before but worth repeating: the [NPM Task Runner](https://mark
 
 # VS Code {#VSCode}
 
-The [Tailwind CSS Extension](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss){target="_blank"} is incredible. Its intellisense is dynamic: it will pick up on new or overridden values in `tailwind.config.js` as well any [utility classes](https://tailwindcss.com/docs/adding-new-utilities){target="_blank"} or [plugins](https://tailwindcss.com/docs/plugins){target="_blank"} you've added. It also provides [previews](/images/hover.png){target="_blank"} of the generated vanilla CSS on hover in the same dynamic manner.
+The [Tailwind CSS Extension](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss){target="_blank"} is incredible. Its intellisense is dynamic: it will pick up on new or overridden values in `tailwind.config.js` as well any [utility classes](https://tailwindcss.com/docs/adding-new-utilities){target="_blank"} or [plugins](https://tailwindcss.com/docs/plugins){target="_blank"} you've added. It also provides previews of the generated vanilla CSS on hover in the same dynamic manner:
+
+ ![previews](/images/hover.png)
 
 ---
 
