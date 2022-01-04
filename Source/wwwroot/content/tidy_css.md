@@ -71,15 +71,13 @@ Without `postcss-import`:
 
 [![without-postcss-import](/images/without_postcss_import.png)](./images/without_postcss_import.png){target="_blank"}
 
-The output is valid, vanilla CSS, but it's not what we're after.  `test.css` hasn't been processed by `tailwindcss`.
+The output is valid, vanilla CSS, but it's not what we're after.  `IconLink.razor.css` hasn't been processed by `tailwindcss`.
 
 With `postcss-import`:
 
 [![with-postcss-import](/images/with_postcss_import.png)](./images/with_postcss_import.png){target="_blank"}
 
-That `test.css` is using `@apply` is actually irrelevant: without using `postcss-import`, any `@import` other than an `@import "tailwindcss/{layer}";` goes unprocessed by the `tailwindcss` CLI.  It's not included in the `site.min.css` bundle.  So even if you're only ever going to `@import` vanilla CSS, if you want `tailwindcss` to it run through `autoprefixer` & `cssnano` then bundle it into `site.min.css`, you'll be using `postcss-import`.  The likelihood that you'll import more than zero CSS files at some point is good enough that i advise including it from the start.  It's 40kb on disk and costs nothing more if you don't end up taking advantage of it.
-
-[todo: better example/added clarity]
+That `IconLink.razor.css` is using `@apply` is actually irrelevant: without using `postcss-import`, any `@import` other than an `@import "tailwindcss/{layer}";` goes unprocessed by the `tailwindcss` CLI.  It's not included in the `site.min.css` bundle.  So even if you're only ever going to `@import` vanilla CSS, if you want `tailwindcss` to it run through `autoprefixer` & `cssnano` then bundle it into `site.min.css`, you'll be using `postcss-import`.  The likelihood that you'll import more than zero CSS files at some point is good enough that i advise including it from the start.  It's 40kb on disk and costs nothing more if you don't end up taking advantage of it.
 
 ::: info
 Here comes the necessary tweaks:  When we use `@apply` in a Scoped CSS file, the Blazor-generated `Site.styles.css` is no longer Vanilla CSS, and can't be linked directly in your HTML as shown [in the docs](https://docs.microsoft.com/en-us/aspnet/core/blazor/components/css-isolation?view=aspnetcore-6.0#css-isolation-bundling){target="_blank"}.
@@ -181,7 +179,7 @@ Because why not ?
 
 ---
 
-`IconLink.razor` is an odd beast.  It supports large or small icons sizes, and the links don't have to be links.  Enough was already going on in the 16 lines of Razor Lasagna™ that pulling out the 7-line (151 characters if you do that single-line thing) chunk of CSS classes made sense.  FWIW, here's what `tailwindcss` generates for us given any of these nicely formatted, ~9*35 character rectangles of text:
+[IconLink.razor](https://raw.githubusercontent.com/McNerdius/TailBlazor/main/Source/Components/IconLink/IconLink.razor){target="_blank"} is an odd beast.  It supports large or small icons sizes, and the links don't have to be links.  Enough was already going on in the 16 lines of Razor Lasagna™ that pulling out the 7-line (151 characters if you do that single-line thing) chunk of CSS classes made sense.  FWIW, here's what `tailwindcss` generates for us by default, given any of these nicely formatted, ~9*35 character rectangles of text:
 
 ```css
 .link-container {
