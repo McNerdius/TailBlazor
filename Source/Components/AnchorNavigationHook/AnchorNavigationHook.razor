@@ -41,7 +41,7 @@
         {
             // Handle text fragment (https://example.org/#test:~:text=foo)
             // https://github.com/WICG/scroll-to-text-fragment/
-            var elementId = fragment.[1..];
+            var elementId = fragment[1..];
             var index = elementId.IndexOf(":~:", StringComparison.Ordinal);
             if (index > 0)
             {
