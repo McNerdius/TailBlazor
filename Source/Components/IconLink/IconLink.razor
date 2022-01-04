@@ -4,9 +4,9 @@
 
     @if (Link is string)
     {
-        <NavLink class="justify-start flex items-center" href=@Link Match=NavLinkMatch.All target=@(NewTab ? "_blank" : null)>
+        <McNavLink class="justify-start flex items-center" href=@Link target=@(NewTab ? "_blank" : null)>
             @Inner
-        </NavLink>
+        </McNavLink>
     }
     else
     {
