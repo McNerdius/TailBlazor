@@ -13,9 +13,11 @@
 
   .info {
     @apply p-2 my-8 ml-1 rounded-md 
-           italic font-semibold
-           bg-yellow-50 ring-1 ring-orange-300 
-           dark:bg-amber-400 dark:text-black;
+           italic font-semibold dark:text-black
+
+           bg-yellow-50 dark:bg-amber-300
+           
+            ring-1 dark:ring-2 ring-orange-600;
 
     &:before {
       content: url("info.svg");
