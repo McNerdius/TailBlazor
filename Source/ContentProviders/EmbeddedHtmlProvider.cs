@@ -1,6 +1,8 @@
 using System.Reflection;
 
-public sealed class EmbeddedHtmlProvider : IMarkdownContentProvider
+namespace TailBlazor.ContentProviders;
+
+public sealed class EmbeddedHtmlProvider : IContentProvider
 {
     Assembly assembly;
     string prefix;
@@ -18,7 +20,7 @@ public sealed class EmbeddedHtmlProvider : IMarkdownContentProvider
 
     public string Path { get; init; } = "content";
 
-    public async Task<string?> GetMarkdownContent( string name )
+    public async Task<string?> GetContent( string name )
     {
         if ( resources.Contains( $"{name}.html" ) is false )
             return null;
