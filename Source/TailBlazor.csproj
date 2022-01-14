@@ -19,7 +19,7 @@
     </ItemGroup>
     <ItemGroup Condition="'$(Configuration)' == 'Debug'">
         <Compile Remove=".\ContentProviders\HtmlResourceProvider.cs" />
-        <ProjectReference Include="..\..\MarkDigger\CodeBlockFormatter\CodeBlockFormatter\CodeBlockFormatter.csproj" />
+        <ProjectReference Include="..\..\CodeBlockFormatter\Source\CodeBlockFormatter\CodeBlockFormatter.csproj" />
         <PackageReference Include="markdig" Version="0.26.0" />
     </ItemGroup>
     <ItemGroup>
