@@ -1,5 +1,5 @@
 .markdown {
-  @apply pb-8 sm:pb-14 md:pb-20;
+  @apply pb-16;
   @apply max-w-3xl 2xl:max-w-4xl;
   @apply transition-all duration-300;
 
