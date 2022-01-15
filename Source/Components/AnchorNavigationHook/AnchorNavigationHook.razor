@@ -43,6 +43,8 @@
 
         @* Console.WriteLine($"@ScrollToFragment: {fragment}"); *@
 
+        var module = await Module;
+        
         if (fragment.StartsWith('#'))
         {
             var elementId = fragment[1..];
@@ -57,7 +59,6 @@
 
             if (!string.IsNullOrEmpty(elementId))
             {
-                var module = await Module;
                 await module.InvokeAsync<string>("scrollToId", elementId);
             }
         }
