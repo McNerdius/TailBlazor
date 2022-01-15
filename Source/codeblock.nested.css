@@ -6,7 +6,7 @@
 
   .mc-code-lines {
     @apply grid grid-cols-[min-content,auto]
-           text-[95%] font-light tracking-tight leading-[1.22]
+           text-[95%] font-extralight leading-normal
            pb-6 pt-3 overflow-auto
            scrollbar-thin !scrollbar-thumb-neutral-400 !scrollbar-track-neutral-200;  
   }
