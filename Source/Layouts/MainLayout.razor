@@ -7,13 +7,20 @@
 <div class="grid grid-cols-[min-content,auto] grid-rows-[min-content,auto] h-full @debug">
 
     @* top nav *@
-    <div class="col-span-2 flex flex-row pl-6 pr-2 h-14
+    <div class="col-span-2 flex flex-row pr-2 h-14
                 items-center
                 self-center justify-between
                 border-b border-neutral-300 dark:border-0
                 dark:bg-neutral-800">
 
-        <div class="!text-blue-600 text-3xl font-extrabold italic tracking-widest flex-grow">WIP !</div>    
+        <div class="w-44 md:w-48 lg:w-52 text-center
+                 text-blue-600 font-extrabold italic tracking-widest
+                    text-2xl sm:text-3xl lg:text-4xl
+                    transition-[font-size,line-height] duration-300">
+            WIP !
+        </div>    
+
+        <div class="flex-grow"></div>
 
         <a href="https://github.com/McNerdius/TailBlazor/" target="_blank" class="pr-1">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"
