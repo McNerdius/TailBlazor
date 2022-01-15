@@ -1,4 +1,4 @@
-@* sauce:   https://www.meziantou.net/anchor-navigation-in-a-blazor-application.htm
+@* sauce:       https://www.meziantou.net/anchor-navigation-in-a-blazor-application.htm
    see also https://github.com/DevExpress/Blazor/tree/master/tools/DevExpress.Blazor.AnchorUtils *@
 
 @namespace TailBlazor.Components
@@ -36,26 +36,26 @@
     {
         var uri = new Uri(NavigationManager.Uri, UriKind.Absolute);
         var fragment = uri.Fragment;
-        var module = await Module;
+
+        @* Console.WriteLine($"@ScrollToFragment: {fragment}"); *@
+
         if (fragment.StartsWith('#'))
         {
-            // Handle text fragment (https://example.org/#test:~:text=foo)
-            // https://github.com/WICG/scroll-to-text-fragment/
             var elementId = fragment[1..];
+            
+            @* // Handle text fragment (https://example.org/#test:~:text=foo)
+            // https://github.com/WICG/scroll-to-text-fragment/
             var index = elementId.IndexOf(":~:", StringComparison.Ordinal);
             if (index > 0)
             {
                 elementId = elementId[..index];
-            }
+            } *@
 
             if (!string.IsNullOrEmpty(elementId))
             {
+                var module = await Module;
                 await module.InvokeAsync<string>("scrollToId", elementId);
             }
-        }
-        else
-        {
-            await module.InvokeAsync<string>("scrollToId", "");
         }
     }
 }
