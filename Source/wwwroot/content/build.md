@@ -1,5 +1,5 @@
 
-# Tailwind Incremental Builds, and maybe Hot Reload
+# Tailwind Incremental Builds, and maybe Hot Reload {#intro}
 
 So far we've put four more-or-less boilerplate files on disk and installed two packages from `npm` to add Tailwind CSS to the `blazorwasm` template.  Not too shabby.  Getting build & watch set up is pretty easy too, but unfortunately Hot Reload support is inconsistent between .NET project types.
 
@@ -7,7 +7,7 @@ Ideally Hot Reload would ensure you're seeing latest version of your Components 
 
 On the Tailwind side of things, nothing fancy is happening - just a fresh CSS file being output to `wwwroot` as needed.  For some project types, Hot Reload doesn't refresh the browser when it sees these changes (yet) - hopefully a fix for this seemingly-trivial issue will come soon.  This [GitHub Issue](https://github.com/dotnet/aspnetcore/issues/37496){target="_blank"} shows a script that reloads the CSS file on a timer.  I think it'd be interesting to make that into a Component - definitely on the todo list.
 
-## Building your CSS with `npm` helper scripts 
+## Building your CSS with `npm` helper scripts {#helpers}
 
 In the default `package.json` you'll see the following:
 
@@ -38,7 +38,7 @@ Finally !  Having created `site.css` and done the initial configuration, running
 
 ---
 
-## Automating the `npm` helper scripts
+## Automating the `npm` helper scripts {#targets}
 
 Next, Let's set it up so that `dotnet` CLI - and by extension, your IDE - can care of some of the `npm` stuff for us.
 
@@ -124,8 +124,7 @@ To actually make use of this in your Blazor project, add it to your `*.csproj`, 
 
 ---
 
-
-## Using `dotnet watch` & PowerShell
+## Using `dotnet watch` & PowerShell {#dotnetwatch}
 
 A simple, sanity-checks-included PowerShell script:
 
@@ -140,13 +139,19 @@ Breaking it down:  I've found `dotnet watch` without a proper `dotnet build` bef
 
 ---
 
-## Using Visual Studio
+## Using VS Code {#vsc}
+
+See the [tailblazor-templates](https://github.com/McNerdius/TailBlazor-Templates/tree/main/Templates/SingleProject/TailBlazorWasm/.vscode){target="_blank"} repo to see launch tasks/configs for various project types.  It's a bit more robust than the `watch.ps1` script but pretty involved.
+
+---
+
+## Using Visual Studio {#vs}
 
 The best option i've found to integrate `tailwindcss --watch` with Visual Studio UI is to use the [NPM Task Runner](https://marketplace.visualstudio.com/items?itemName=MadsKristensen.NpmTaskRunner64){target="_blank"}, and bind the relevant `watch` script to "Project Open". (Not "After Build", see below.)
 
 Keep in mind: one-off `tailwindcss` builds are not ideal.  ***The long-running `tailwindcss --watch` is the only way to take advantage of Tailwind's super-fast incremental builds.***
 
-### Other approaches
+### Other approaches {#vs-other}
 
 - Using a "Post Build Event" in Visual Studio's project properties.
 
@@ -164,11 +169,6 @@ This can be used to expose the needed scripts in a right-click menu in the Folde
 All in all, using the NPM Task Runner takes little effort and Just Works, without injecting long-running tasks into the `.csproj`/`.targets` build files.
 :::
 
----
-
-## Using VS Code
-
-See the [tailblazor-templates](https://github.com/McNerdius/TailBlazor-Templates/tree/main/Templates/SingleProject/TailBlazorWasm/.vscode){target="_blank"} repo to see launch tasks/configs for various project types.  It's a bit more robust than the `watch.ps1` script but pretty involved.
 
 ---
 
