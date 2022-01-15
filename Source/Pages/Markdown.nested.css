@@ -12,7 +12,7 @@
   }
 
   .info {
-    @apply p-2 my-8 ml-1 rounded-md 
+    @apply p-2 md:p-4 my-8 ml-1 rounded-md 
            italic font-semibold dark:text-black
 
            bg-yellow-50 dark:bg-amber-300
@@ -31,7 +31,7 @@
 
   code {
 
-    @apply whitespace-pre-wrap;
+    @apply whitespace-pre-wrap font-medium;
     /* more like ohmyposh.dev, less like tailwindcss.com */
     @apply before:!content-none after:!content-none;
 

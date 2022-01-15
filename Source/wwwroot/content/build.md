@@ -1,5 +1,5 @@
 
-# Tailwind Incremental Builds, and maybe Hot Reload
+# Tailwind Incremental Builds, and maybe Hot Reload {#intro}
 
 So far we've put four more-or-less boilerplate files on disk and installed two packages from `npm` to add Tailwind CSS to the `blazorwasm` template.  Not too shabby.  Getting build & watch set up is pretty easy too, but unfortunately Hot Reload support is inconsistent between .NET project types.
 
@@ -7,7 +7,7 @@ Ideally Hot Reload would ensure you're seeing latest version of your Components 
 
 On the Tailwind side of things, nothing fancy is happening - just a fresh CSS file being output to `wwwroot` as needed.  For some project types, Hot Reload doesn't refresh the browser when it sees these changes (yet) - hopefully a fix for this seemingly-trivial issue will come soon.  This [GitHub Issue](https://github.com/dotnet/aspnetcore/issues/37496){target="_blank"} shows a script that reloads the CSS file on a timer.  I think it'd be interesting to make that into a Component - definitely on the todo list.
 
-## Building your CSS with `npm` helper scripts 
+## Building your CSS with `npm` helper scripts {#helpers}
 
 In the default `package.json` you'll see the following:
 
@@ -38,7 +38,7 @@ Finally !  Having created `site.css` and done the initial configuration, running
 
 ---
 
-## Automating the `npm` helper scripts
+## Automating the `npm` helper scripts {#targets}
 
 Next, Let's set it up so that `dotnet` CLI - and by extension, your IDE - can care of some of the `npm` stuff for us.
 
@@ -51,17 +51,20 @@ To keep the `*.csproj` clean, i use a special MSBuild "Targets" file, which i cl
     <PropertyGroup>
         <TailwindBuild>true</TailwindBuild>
     </PropertyGroup>
-    <Target Name="npm install" BeforeTargets="tailwind build" Inputs="./package.json" Outputs="./node_modules/.install-stamp">
-        <Exec Command="npm -v" ContinueOnError="true">
+    <Target Name="NpmInstallCheck" BeforeTargets="TailwindCSS" Inputs="./package.json" Outputs="./node_modules/.package-lock.json">
+        <Message Text="NpmInstallCheck Starting..." Importance="high"></Message>
+        <Exec Command="npm -v" ContinueOnError="true" StandardOutputImportance="low">
             <Output TaskParameter="ExitCode" PropertyName="error" />
         </Exec>
-        <Error Condition="'$(error)' != '0'" Text="install node please !" />
+        <Error Condition="'$(error)' != '0'" Text="install node.js please !" />
         <Exec Command="npm install" />
-        <Touch Files="./node_modules/.install-stamp" AlwaysCreate="true" />
+        <Message Text="NpmInstallCheck Finished !" Importance="high"></Message>
     </Target>
-    <Target Name="tailwind build" AfterTargets="AfterBuild" Condition="'$(TailwindBuild)' == 'true'">
-        <Message Text="tailwind build target running.." Importance="high"></Message>
+    <Target Name="TailwindCSS" AfterTargets="AfterBuild" Condition="'$(TailwindBuild)' == 'true'">
+        <Message Text="TailwindCSS Starting..." Importance="high"></Message>
         <Exec Command="npm run build" Condition="'$(Configuration)' == 'Debug'"/>
+        <Exec Command="npm run publish" Condition="'$(Configuration)' == 'Release'"/>
+        <Message Text="TailwindCSS Finished !" Importance="high"></Message>
     </Target>
 </Project>
 ```
@@ -77,30 +80,37 @@ Let's break it down.
 This just defines an MSBuild property we can use like so: `dotnet build -p:TailwindBuild=false` to let us opt out of running the Tailwind build.  Note its use in the following:
 
 ```xml:tailwindcss.targets-p2
-<Target Name="tailwind build" AfterTargets="AfterBuild" Condition="'$(TailwindBuild)' == 'true'">
-    <Message Text="tailwind build target running..." Importance="high"></Message>
+<Target Name="TailwindCSS" AfterTargets="AfterBuild" Condition="'$(TailwindBuild)' == 'true'">
+    <Message Text="TailwindCSS Starting..." Importance="high"></Message>
     <Exec Command="npm run build" Condition="'$(Configuration)' == 'Debug'"/>
     <Exec Command="npm run publish" Condition="'$(Configuration)' == 'Release'"/>
+    <Message Text="TailwindCSS Finished !" Importance="high"></Message>
 </Target>
 ```
 
-`AfterBuild` is a standard MSBuild "Target".  This snippet creates our own cleverly named `tailwind build` Target which runs after `AfterBuild`.  Building in `Release` mode results in a `cssnano`-minified output CSS file, thanks to the `publish` script found in `package.json` using `tailwindcss --minify`.
+`AfterBuild` is a standard [MSBuild Target](https://docs.microsoft.com/en-us/visualstudio/msbuild/target-element-msbuild){target="_blank"}.  This snippet creates our own Target which runs after `AfterBuild`.  Building in `Debug` does a one-off `tailwindcss` build, and `Release` mode results in a `cssnano`-minified build, thanks to their respective `build` and `publish` scripts found in `package.json`.
 
-
-The next (kinda optional) snippet, also cleverly named `npm install`, actually runs in-between `AfterBuild` and `tailwind build`, doing a sanity check on `npm` stuff:
+The next (kinda optional) snippet actually runs in-between `AfterBuild` and `TailwindCSS` from above, doing a sanity check on `npm` stuff:
 
 ```xml:tailwindcss.targets-p3
-<Target Name="npm install" BeforeTargets="tailwind build" Inputs="./package.json" Outputs="./node_modules/.install-stamp">
-    <Exec Command="npm -v" ContinueOnError="true">
+<Target Name="NpmInstallCheck" BeforeTargets="TailwindCSS" Inputs="./package.json" Outputs="./node_modules/.package-lock.json">
+    <Message Text="NpmInstallCheck Starting..." Importance="high"></Message>
+    <Exec Command="npm --version" ContinueOnError="true" StandardOutputImportance="low">
         <Output TaskParameter="ExitCode" PropertyName="error" />
     </Exec>
-    <Error Condition="'$(error)' != '0'" Text="install node.js please !" />
+    <Error Condition="'$(error)' != '0'" Text="install node.js please ! https://nodejs.org/" />
     <Exec Command="npm install" />
-    <Touch Files="./node_modules/.install-stamp" AlwaysCreate="true" />
+    <Message Text="NpmInstallCheck Finished !" Importance="high"></Message>
 </Target>
 ```
 
-If Node.js/npm isn't installed, `npm -v` will fail and you'll get a build error. Otherwise `npm install` will install the dependencies in `package.json` - akin to a `dotnet restore` when used without parameters, but slower.  The `Inputs`/`Outputs`/`Touch` is MSBuild [incremental build](https://docs.microsoft.com/en-us/visualstudio/msbuild/how-to-build-incrementally?view=vs-2022){target="_blank"} magic, preventing this from running **every. single. build.**  -  Just when `package.json` is out of sync with `.install-stamp`.  (A fresh clone, for instance.)  See [here](https://stackoverflow.com/questions/35435041/run-npm-install-only-when-needed-and-or-partially?answertab=active#tab-top){target="_blank"} for the StackOverflow-sauce.  _(note: my experience with this has been inconsistent and i haven't been able to pin it down.  it's not a big productivity hit though, with full builds being so rare.  if you have any info, [please share](https://github.com/McNerdius/TailBlazor/discussions){target="_blank"}!)_  Assuming no errors, things will continue with the `tailwind build` target.  
+The `npm --version` command is there to verify Node.js/npm is installed: if it's not, the command will fail and you'll get a build error prompting to install node.js.  Otherwise `npm install` runs.  (When used without parameters, `npm install` is akin to a `dotnet restore`, installing dependencies listed in `package.json`.)
+
+The `Inputs` & `Outputs` are for MSBuild [incremental build](https://docs.microsoft.com/en-us/visualstudio/msbuild/how-to-build-incrementally?view=vs-2022){target="_blank"} magic, preventing this from running **every. single. build.**  It's an interesting, flexible abstraction: If `Inputs` (`package.json`) is newer than `Outputs` (`.package-lock.json`), or `Outputs` doesn't yet exist, the Target is run, otherwise it will be skipped.  Using the `npm` CLI to install/update/remove dependencies or otherwise edit `package.json` will keep the `.package-lock.json` file up to date (`Outputs` newer than `Inputs`), but editing `package.json` manually will leave `Inputs` newer than `Outputs`, making the `NpmInstallCheck` Target "eligible" to run.
+
+See [here](https://stackoverflow.com/questions/35435041/run-npm-install-only-when-needed-and-or-partially?answertab=active#tab-top){target="_blank"} for the StackOverflow-sauce, and [here](https://github.com/McNerdius/TailBlazor/discussions/107){target="_blank"} for some notes on the changes made to the StackOverflow version.
+
+Assuming no errors, things will continue with the `TailwindCSS` target.  
 
 
 To actually make use of this in your Blazor project, add it to your `*.csproj`, top-level:
@@ -113,29 +123,34 @@ To actually make use of this in your Blazor project, add it to your `*.csproj`, 
 
 ---
 
-
-## Using `dotnet watch` & PowerShell
+## Using `dotnet watch` & PowerShell {#dotnetwatch}
 
 A simple, sanity-checks-included PowerShell script:
 
 ```powershell:watch.ps1
 dotnet build -p:TailwindBuild=false
 start "dotnet" -ArgumentList "watch" 
-while (!(Test-Path "./node_modules/.install-stamp")) { sleep -ms 100 } 
+while (!(Test-Path "./node_modules/.package-lock.json")) { sleep -ms 100 } 
 npm run watch
 ```
 
-Breaking it down:  I've found `dotnet watch` without a proper `dotnet build` beforehand can do strange things sometimes.  It's only once, so whatever.  Using `start` launches `dotnet watch` in its own process.  Unlike the first line in the script, this build will include the `tailwind build` Target, possibly doing an `npm install` for the first time.  Only after `.install-stamp` provides evidence of an `npm install` is it OK to kick off `tailwindcss` via `npm run watch`.  At this point, both .NET's Hot Reload and Tailwind's incremental build mode are watching for relevant changes.
+Breaking it down:  I've found `dotnet watch` without a proper `dotnet build` beforehand can do strange things sometimes.  It's only once, so whatever.  Using `start` launches `dotnet watch` in its own process.  Unlike the first line in the script, this build will include the `tailwind build` Target, possibly doing an `npm install` for the first time.  Only after `.package-lock.json` provides evidence of an `npm install` is it OK to kick off `tailwindcss` via `npm run watch`.  At this point, both .NET's Hot Reload and Tailwind's incremental build mode are watching for relevant changes.
 
 ---
 
-## Using Visual Studio
+## Using VS Code {#vsc}
+
+See the [tailblazor-templates](https://github.com/McNerdius/TailBlazor-Templates/tree/main/Templates/SingleProject/TailBlazorWasm/.vscode){target="_blank"} repo to see launch tasks/configs for various project types.  It's a bit more robust than the `watch.ps1` script but pretty involved.
+
+---
+
+## Using Visual Studio {#vs}
 
 The best option i've found to integrate `tailwindcss --watch` with Visual Studio UI is to use the [NPM Task Runner](https://marketplace.visualstudio.com/items?itemName=MadsKristensen.NpmTaskRunner64){target="_blank"}, and bind the relevant `watch` script to "Project Open". (Not "After Build", see below.)
 
 Keep in mind: one-off `tailwindcss` builds are not ideal.  ***The long-running `tailwindcss --watch` is the only way to take advantage of Tailwind's super-fast incremental builds.***
 
-### Other approaches
+### Other approaches {#vs-other}
 
 - Using a "Post Build Event" in Visual Studio's project properties.
 
@@ -153,11 +168,6 @@ This can be used to expose the needed scripts in a right-click menu in the Folde
 All in all, using the NPM Task Runner takes little effort and Just Works, without injecting long-running tasks into the `.csproj`/`.targets` build files.
 :::
 
----
-
-## Using VS Code
-
-See the [tailblazor-templates](https://github.com/McNerdius/TailBlazor-Templates/tree/main/Templates/SingleProject/TailBlazorWasm/.vscode){target="_blank"} repo to see launch tasks/configs for various project types.  It's a bit more robust than the `watch.ps1` script but pretty involved.
 
 ---
 

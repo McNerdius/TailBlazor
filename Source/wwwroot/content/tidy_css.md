@@ -118,7 +118,7 @@ If you're using a `watch` script, it's a good idea to wait on `site.styles.css` 
 dotnet build -p:TailwindBuild=false
 start "dotnet" -ArgumentList "watch" 
 +while (!(Test-Path "./obj/net6.0/scopedcss/bundle/site.styles.css")) { sleep -ms 100 } 
-while (!(Test-Path "./node_modules/.install-stamp")) { sleep -ms 100 } 
+while (!(Test-Path "./node_modules/.package-lock.json")) { sleep -ms 100 } 
 npm run watch
 ```
 
