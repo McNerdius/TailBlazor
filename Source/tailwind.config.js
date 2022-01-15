@@ -8,7 +8,7 @@ module.exports = {
         {
             colors:
             {
-                'dotnet-blurple': '#512DB4',
+                'dotnet-blurple': '#512BD4',
                 'link-blue': colors.blue[600],
             },
             animation: {
