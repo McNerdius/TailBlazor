@@ -8,7 +8,7 @@
   }
 
   a {
-    @apply text-link-blue no-underline;
+    @apply text-link-blue;
   }
 
   .info {
