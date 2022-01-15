@@ -12,9 +12,12 @@
     private Task<IJSObjectReference> _module;
     private Task<IJSObjectReference> Module => _module ??= JSRuntime.InvokeAsync<IJSObjectReference>("import", "./Components/AnchorNavigationHook/AnchorNavigationHook.razor.js").AsTask();
 
+    [Parameter]
+    public EventCallback OnLocationChanged {get; set; }= new();
+
     protected override void OnInitialized()
     {
-        NavigationManager.LocationChanged += OnLocationChanged;
+        NavigationManager.LocationChanged += onLocationChanged;
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -24,12 +27,13 @@
 
     public void Dispose()
     {
-        NavigationManager.LocationChanged -= OnLocationChanged;
+        NavigationManager.LocationChanged -= onLocationChanged;
     }
 
-    private async void OnLocationChanged(object sender, LocationChangedEventArgs e)
+    private async void onLocationChanged(object sender, LocationChangedEventArgs e)
     {
         await ScrollToFragment();
+        await OnLocationChanged.InvokeAsync();
     }
 
     private async Task ScrollToFragment()
@@ -39,6 +43,8 @@
 
         @* Console.WriteLine($"@ScrollToFragment: {fragment}"); *@
 
+        var module = await Module;
+        
         if (fragment.StartsWith('#'))
         {
             var elementId = fragment[1..];
@@ -53,9 +59,13 @@
 
             if (!string.IsNullOrEmpty(elementId))
             {
-                var module = await Module;
                 await module.InvokeAsync<string>("scrollToId", elementId);
             }
+        }
+        else
+        {
+            // empty string == scroll to top
+            await module.InvokeAsync<string>("scrollToId", "");
         }
     }
 }
