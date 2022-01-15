@@ -88,8 +88,7 @@ This just defines an MSBuild property we can use like so: `dotnet build -p:Tailw
 </Target>
 ```
 
-`AfterBuild` is a standard [MSBuild Target](https://docs.microsoft.com/en-us/visualstudio/msbuild/target-element-msbuild){target="_blank"}.  This snippet creates our own Target which runs after `AfterBuild`.  Building in `Release` mode results in a `cssnano`-minified output CSS file, thanks to the `publish` script found in `package.json` using `tailwindcss --minify`.
-
+`AfterBuild` is a standard [MSBuild Target](https://docs.microsoft.com/en-us/visualstudio/msbuild/target-element-msbuild){target="_blank"}.  This snippet creates our own Target which runs after `AfterBuild`.  Building in `Debug` does a one-off `tailwindcss` build, and `Release` mode results in a `cssnano`-minified build, thanks to their respective `build` and `publish` scripts found in `package.json`.
 
 The next (kinda optional) snippet actually runs in-between `AfterBuild` and `TailwindCSS` from above, doing a sanity check on `npm` stuff:
 
