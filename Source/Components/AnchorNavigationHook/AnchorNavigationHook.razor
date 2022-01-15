@@ -61,5 +61,10 @@
                 await module.InvokeAsync<string>("scrollToId", elementId);
             }
         }
+        else
+        {
+            // empty string == scroll to top
+            await module.InvokeAsync<string>("scrollToId", "");
+        }
     }
 }

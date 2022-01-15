@@ -12,7 +12,6 @@ export function scrollToId(id)
     }
     else
     {
-
         const element = document.getElementById(id);
 
         if (element instanceof HTMLElement)
