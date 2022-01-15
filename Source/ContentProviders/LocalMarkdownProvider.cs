@@ -1,7 +1,9 @@
 using Markdig;
 using Markdig.CodeBlockFormatter;
 
-public class LocalMarkdownProvider : IMarkdownContentProvider
+namespace TailBlazor.ContentProviders;
+
+public class LocalMarkdownProvider : IContentProvider
 {
     private readonly HttpClient httpClient;
     private readonly static MarkdownPipeline markdownPipeline = new MarkdownPipelineBuilder()
@@ -27,7 +29,7 @@ public class LocalMarkdownProvider : IMarkdownContentProvider
 
     public string Path { get; init; } = "content";
 
-    public async Task<string?> GetMarkdownContent( string name )
+    public async Task<string?> GetContent( string name )
     {
         var response = await httpClient.GetAsync( $"{httpClient.BaseAddress}/{Path}/{name}.md" )
                                        .ConfigureAwait( false );

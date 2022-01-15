@@ -5,7 +5,8 @@
 
 @if (found is null)
 {
-    @* <div class="flex flex-col h-full" > <Loading /></div>    *@
+    @* nav is now near-instant, raw html is in memory *@
+    @* <div class="flex flex-col h-full" > <Loading /></div> *@
 }
 else if (found is false)
 {
@@ -17,14 +18,13 @@ else
                 markdown" > 
             @((MarkupString)content)
     </div>
-} 
-    
+}
 
 @code
 {
     [Parameter] public string? page { get; set; }
 
-    [Inject] public IMarkdownContentProvider MarkdownContentProvider { get; set; }
+    [Inject] public IContentProvider ContentProvider { get; set; }
 
     private string? content = null;
     private bool? found { get; set; } = null;
@@ -37,13 +37,13 @@ else
             string _ when page.Contains('#') => page[..page.IndexOf('#')],
             _ => page
         };
-     
-        if (string.IsNullOrEmpty(page))
-            return;
+
+        // redundant ?     
+        if (page == "") page = "overview";
 
         found = null;
 
-        var markdown = await MarkdownContentProvider.GetMarkdownContent(page);
+        var markdown = await ContentProvider.GetContent(page);
 
         if (markdown is not null)
         {
