@@ -4,7 +4,7 @@
 @inherits LayoutComponentBase
 @* @inject NavigationManager navManager *@
 
-<AnchorNavigationHook />
+<AnchorNavigationHook OnLocationChanged=@(_ => hidden=true) />
 
 <div class="grid grid-cols-[min-content,auto] grid-rows-[min-content,auto] h-full @debug">
 
