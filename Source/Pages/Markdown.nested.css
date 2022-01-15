@@ -12,7 +12,7 @@
   }
 
   .info {
-    @apply p-2 my-8 ml-1 rounded-md 
+    @apply p-2 md:p-4 my-8 ml-1 rounded-md 
            italic font-semibold dark:text-black
 
            bg-yellow-50 dark:bg-amber-300
