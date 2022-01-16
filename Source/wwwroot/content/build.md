@@ -1,3 +1,20 @@
+:::: nav
+
+[Intro](build)
+[NPM helper scripts](build#helpers)
+[MSBuild targets](build#targets)
+:::
+- [Build or Publish](build#build)
+- [Install check](build#install)
+- [Opting Out](build#optout)
+:::
+[CLI](build#cli)
+[VS Code](build#vsc)
+[Visual Studio](build#vs)
+
+::::
+
+:::: content
 
 # Tailwind Incremental Builds, and maybe Hot Reload {#intro}
 
@@ -7,7 +24,7 @@ Ideally Hot Reload would ensure you're seeing latest version of your Components 
 
 On the Tailwind side of things, nothing fancy is happening - just a fresh CSS file being output to `wwwroot` as needed.  For some project types, Hot Reload doesn't refresh the browser when it sees these changes (yet) - hopefully a fix for this seemingly-trivial issue will come soon.  This [GitHub Issue](https://github.com/dotnet/aspnetcore/issues/37496){target="_blank"} shows a script that reloads the CSS file on a timer.  I think it'd be interesting to make that into a Component - definitely on the todo list.
 
-## Building your CSS with `npm` helper scripts {#helpers}
+## Define `npm` helper scripts {#helpers}
 
 In the default `package.json` you'll see the following:
 
@@ -38,11 +55,9 @@ Finally !  Having created `site.css` and done the initial configuration, running
 
 ---
 
-## Automating the `npm` helper scripts {#targets}
+## Automate `npm` scripts & installation {#targets}
 
 Next, Let's set it up so that `dotnet` CLI - and by extension, your IDE - can care of some of the `npm` stuff for us.
-
-### Build/Publish
 
 To keep the `*.csproj` clean, i use a special MSBuild "Targets" file, which i cleverly name `tailwindcss.targets`.  Here's an example file:
 
@@ -69,15 +84,19 @@ To keep the `*.csproj` clean, i use a special MSBuild "Targets" file, which i cl
 </Project>
 ```
 
-Let's break it down.
+To actually make use of this in your Blazor project, add it to your `*.csproj`, top-level:
 
-```xml:tailwindcss.targets-p1
-<PropertyGroup>
-    <TailwindBuild>true</TailwindBuild>
-</PropertyGroup>
+```xml:site.csproj
+<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
++    <Import Project="tailwindcss.targets" />
+</Project>
 ```
 
-This just defines an MSBuild property we can use like so: `dotnet build -p:TailwindBuild=false` to let us opt out of running the Tailwind build.  Note its use in the following:
+---
+
+### The TailwindCSS Target { #build }
+
+This is the most important section:
 
 ```xml:tailwindcss.targets-p2
 <Target Name="TailwindCSS" AfterTargets="AfterBuild" Condition="'$(TailwindBuild)' == 'true'">
@@ -88,7 +107,10 @@ This just defines an MSBuild property we can use like so: `dotnet build -p:Tailw
 </Target>
 ```
 
-`AfterBuild` is a standard [MSBuild Target](https://docs.microsoft.com/en-us/visualstudio/msbuild/target-element-msbuild){target="_blank"}.  This snippet creates our own Target which runs after `AfterBuild`.  Building in `Debug` does a one-off `tailwindcss` build, and `Release` mode results in a `cssnano`-minified build, thanks to their respective `build` and `publish` scripts found in `package.json`.
+`AfterBuild` is a standard [MSBuild Target](https://docs.microsoft.com/en-us/visualstudio/msbuild/target-element-msbuild){target="_blank"}.  This section defines our own `TailwindCSS` Target which runs after `AfterBuild`.  Building the Blazor project in `Debug` mode does a one-off `tailwindcss` build, and `Release` mode results in a `cssnano`-minified build, thanks to their respective `build` and `publish` scripts found in `package.json`.
+
+
+### The NpmInstallCheck Target { #install }
 
 The next (kinda optional) snippet actually runs in-between `AfterBuild` and `TailwindCSS` from above, doing a sanity check on `npm` stuff:
 
@@ -104,7 +126,7 @@ The next (kinda optional) snippet actually runs in-between `AfterBuild` and `Tai
 </Target>
 ```
 
-The `npm --version` command is there to verify Node.js/npm is installed: if it's not, the command will fail and you'll get a build error prompting to install node.js.  Otherwise `npm install` runs.  (When used without parameters, `npm install` is akin to a `dotnet restore`, installing dependencies listed in `package.json`.)
+The `npm --version` command is there to verify Node.js/npm is installed: if it's not, the command will fail and you'll get a build error prompting to install node.js.  Otherwise `npm install` runs.  (When used without parameters, `npm install` is akin to a `dotnet restore`, installing/updating dependencies listed in `package.json`.)
 
 The `Inputs` & `Outputs` are for MSBuild [incremental build](https://docs.microsoft.com/en-us/visualstudio/msbuild/how-to-build-incrementally?view=vs-2022){target="_blank"} magic, preventing this from running **every. single. build.**  It's an interesting, flexible abstraction: If `Inputs` (`package.json`) is newer than `Outputs` (`.package-lock.json`), or `Outputs` doesn't yet exist, the Target is run, otherwise it will be skipped.  Using the `npm` CLI to install/update/remove dependencies or otherwise edit `package.json` will keep the `.package-lock.json` file up to date (`Outputs` newer than `Inputs`), but editing `package.json` manually will leave `Inputs` newer than `Outputs`, making the `NpmInstallCheck` Target "eligible" to run.
 
@@ -112,18 +134,19 @@ See [here](https://stackoverflow.com/questions/35435041/run-npm-install-only-whe
 
 Assuming no errors, things will continue with the `TailwindCSS` target.  
 
+### Opting out { #optout }
 
-To actually make use of this in your Blazor project, add it to your `*.csproj`, top-level:
+The top section just defines an MSBuild property we can use like so: `dotnet build -p:TailwindBuild=false` to let us opt out of running the Tailwind build.  Note its use in the next section.
 
-```xml:site.csproj
-<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
-+    <Import Project="tailwindcss.targets" />
-</Project>
+```xml:tailwindcss.targets-p1 
+<PropertyGroup>
+    <TailwindBuild>true</TailwindBuild>
+</PropertyGroup>
 ```
 
 ---
 
-## Using `dotnet watch` & PowerShell {#dotnetwatch}
+## Using `dotnet watch` & PowerShell {#cli}
 
 A simple, sanity-checks-included PowerShell script:
 
@@ -165,7 +188,7 @@ One example is using [Inline Tasks](https://docs.microsoft.com/en-us/visualstudi
 This can be used to expose the needed scripts in a right-click menu in the Folder View. A few issues: You have to be in Folder View;  You still have to kick it off manually;  **I couldn't get it to work.** Tried feeding it various combinations of working directories, no dice.
 
 ::: info
-All in all, using the NPM Task Runner takes little effort and Just Works, without injecting long-running tasks into the `.csproj`/`.targets` build files.
+All in all, using the NPM Task Runner with Visual Studio takes little effort and Just Works, without injecting long-running tasks into the `.csproj`/`.targets` build files.
 :::
 
 
@@ -174,3 +197,5 @@ All in all, using the NPM Task Runner takes little effort and Just Works, withou
 ::: {.text-xl .italic .light .text-right .pr-6 }
 [next: tidy css](/tidy_css)
 ::: 
+
+::::

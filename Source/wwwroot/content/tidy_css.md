@@ -1,11 +1,24 @@
-# Options for tidy CSS files
+:::: nav
+
+[Intro](/tidy_css)
+[CSS Isolation](/tidy_css#isolation)
+[@apply](/tidy_css#apply)
+- [postcss-import](/tidy_css#import)
+  
+[Nesting](/tidy_css#nesting)
+
+::::
+
+:::: content
+
+# Options for tidy CSS files {#intro}
 ## Scoped CSS, `@apply`, and nesting
 
 Idiomatic usage of Tailwind puts the bulk of CSS styling directly in your component's HTML, but you'll probably end up having some CSS files around.  Let's look at some Blazor and Tailwind CSS features that can help us out, and how to set things up so they can work together.
 
 ---
 
-## Blazor's CSS Isolation
+## Blazor's CSS Isolation {#isolation}
 
 Using [CSS Isolation](https://docs.microsoft.com/en-us/aspnet/core/blazor/components/css-isolation?view=aspnetcore-6.0){target="_blank"} does a couple things for us.  First, it is a bit like a C# `namespace` for our Components' CSS.  For a component `Foo.razor`, any CSS file named  using the convention `Foo.razor.css` will be a "Scoped CSS" file.  CSS in this file will be preprocessed so as to only apply to `Foo.razor`.  From the docs:
 
@@ -17,7 +30,7 @@ The bundling is handy even if the Scoping/Isolation doesn't add much value for a
 
 ---
 
-## Tailwind's `@apply` directive
+## Tailwind's `@apply` directive {#apply}
 
 A tiny rant about tidy HTML then i'll get back to the tidy CSS bits.  A relevant snippet from [the docs](https://tailwindcss.com/docs/reusing-styles#extracting-classes-with-apply){target="_blank"}:
 
@@ -63,7 +76,7 @@ A simple cut-paste is all it takes.
 
 Note i've put this in a `*.razor.css` file.  **You could also just drop the `razor.` and `@import` the file directly in `site.css` and skip the Blazor integration steps that follow.**  But it only takes a couple edits to take advantage of CSS Isolation and only have to `@import` the Blazor-generated `site.styles.css` bundle.
 
-### Enter `postcss-import`
+### Enter `postcss-import` {#import}
 
 Rewind back to the initial `npm install`, i advised including `postcss-import`.  Here's why.  
 
@@ -126,7 +139,7 @@ Both files need to be on disk or `npm run watch` will fail.
 
 ---
 
-## Nesting - there if you want it
+## Nesting - there if you want it {#nesting}
 
 Sass-like [nesting is included](https://tailwindcss.com/docs/using-with-preprocessors#nesting){target="_blank"} with `tailwindcss` and enabled by adding a line to your `postcss.config.js`:
 
@@ -212,15 +225,4 @@ Because why not ?
 [next: more fun](/next)
 ::: 
 
-
-
-
-
-
-
-
-
-
-
-
-
+::::
