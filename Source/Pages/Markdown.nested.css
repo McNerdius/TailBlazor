@@ -1,6 +1,6 @@
 .markdown {
   @apply pb-16;
-  @apply max-w-3xl 2xl:max-w-4xl;
+  @apply max-w-[50rem] 2xl:max-w-[60rem];
   @apply transition-all duration-300;
 
   .emoji {
@@ -9,6 +9,19 @@
 
   a {
     @apply text-link-blue;
+  }
+
+  .nav
+  {
+    @apply hidden xl:block absolute right-16 h-min;
+    @apply border-l border-neutral-300 dark:border-neutral-600;
+    @apply text-base;
+    @apply pl-4;
+    
+    p, li { @apply my-0 py-0; }
+
+    ul { @apply list-none px-2; }
+    a { @apply block no-underline; }
   }
 
   .info {
