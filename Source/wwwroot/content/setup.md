@@ -1,5 +1,22 @@
+:::: nav
 
-# .NET/Blazor setup
+Setup
+:::
+- [Blazor](setup)
+- [Tailwind](setup#twsetup)
+:::
+Config
+:::
+- [Tailwind](setup#twconfig)
+- [PostCSS](setup#postcss)
+:::
+[Boilerplate CSS](setup#boilerplate)
+
+::::
+
+:::: content
+
+# .NET/Blazor setup {#blazor}
 
 ::: info
 I'll be tweaking a default Blazor WebAssembly project here - the steps are largely the same for other project types and i'll do my best to call out any differences.  I'll be using the `dotnet` CLI: each IDE does things differently and may change from version to version, but the CLI is a constant.
@@ -17,7 +34,7 @@ Same basic steps for other project types: Nuke the default CSS and references to
 
 ---
 
-# Tailwind CSS setup
+# Tailwind CSS setup {#twsetup}
 
 The [documentation](https://tailwindcss.com/docs/installation){target="_blank"} shows two installation approaches.  The common denominator is PostCSS, which is a general-purpose orchestrator for purpose-built CSS transformation plugins.  I use the default "Tailwind CLI" method but add in one PostCSS plugin - `postcss-import`.
 
@@ -27,7 +44,7 @@ The [documentation](https://tailwindcss.com/docs/installation){target="_blank"} 
 - Next run `npm install -D tailwindcss postcss-import`, similar to[^1^](/setup#npm-install) a `dotnet add package`.
 - Next, `npx tailwindcss init --postcss` which will write default `tailwind.config.js` and `postcss.config.js` files to disk.
 
-## Tailwind CSS Config
+# Tailwind CSS Config {#twconfig}
 
 As of Tailwind CSS v3, the default `tailwind.config.js` file:
 
@@ -61,7 +78,7 @@ module.exports = {
 
 For Blazor Server or Razor Pages/MVC, `cshtml` would be added in.  There also may be cases where you use Tailwind CSS classes in `.razor.cs` backing code, `svg` files, or elsewhere.  See [here](https://tailwindcss.com/docs/content-configuration#configuring-source-paths){target="_blank"} for more info on `content`.
 
-## PostCSS Config
+# PostCSS Config {#postcss}
 
 I'll get back to this on the next page but for now just swap the contents of `postcss.config.js` with the following:
 
@@ -74,7 +91,7 @@ module.exports = {
 };
 ```
 
-## Tailwind CSS Boilerplate
+# Tailwind CSS Boilerplate {#boilerplate}
 
 Lastly, make a "root" CSS file next to the config files, say `site.css`, and add the following:
 
@@ -86,7 +103,7 @@ Lastly, make a "root" CSS file next to the config files, say `site.css`, and add
 
 This is what you'll feed the `tailwindcss` CLI, and where you'll import any of your project's CSS later.  Note this syntax is different from what you'll see in the docs (`@tailwind ...`).  I've found it's what works best when using `postcss-import` and is easier to reason about when new to either Vanilla CSS or Tailwind CSS.
 
-### Behind the boilerplate CSS
+## Behind the boilerplate CSS
 
 A quick aside while we're dealing with Tailwind's boilerplate CSS.  Base, Components, and Utilities are "layers" in Tailwind CSS parlance.  It's an abstraction of CSS top-down precedence and not limited to Tailwind's own CSS.  Here's what Tailwind contributes to these layers:
 
@@ -110,3 +127,5 @@ When Tailwind sees these layers, either using `@tailwind ...` or `@import "tailw
 ::: {.text-xl .italic .light .text-right .pr-6 }
 [next: build & watch](/build)
 ::: 
+
+::::

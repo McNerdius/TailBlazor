@@ -1,7 +1,19 @@
+:::: nav
 
-# Tailwind Plugins
+Plugins
+- [Tailwind](/next)
+- [PostCSS](/next#postcss)
+  
+  
+[Razor Class Libraries](/next#rcl)
+[MS Web Components](/next#components)
 
-## tailwindcss-debug-screens {.mono}
+::::
+
+:::: content
+# Tailwind Plugins {#tailwind}
+
+## `tailwindcss-debug-screens`
 
 Like Bootstrap, Tailwind CSS is [responsive](https://tailwindcss.com/docs/responsive-design){target="_blank"} and mobile-first: when you use `class="lg:text-2xl"`, text will be default-sized up until the `lg` media query kicks in.  The [debug-screens](https://github.com/jorenvanhee/tailwindcss-debug-screens){target="_blank"} Tailwind plugin makes designing for this a breeze (no pun intended...), letting you know which screen/breakpoint is currently active.
 
@@ -26,9 +38,9 @@ Also nifty is [tailwind-scrollbar](https://github.com/adoxography/tailwind-scrol
 
 ---
 
-# PostCSS Plugins
+# PostCSS Plugins {#postcss}
 
-## tailwindcss/nesting {.mono #nesting}
+## `tailwindcss/nesting` {#nesting}
 
 Worth mentioning twice, Tailwind has a built-in PostCSS plugin, [tailwindcss/nesting](https://tailwindcss.com/docs/using-with-preprocessors#nesting){target="_blank"} that allows for, well, CSS nesting.  No install needed, just add it to your `postcss.config.js` and nest away:
 
@@ -48,7 +60,7 @@ There are *[loads](https://www.postcss.parts/){target="_blank"}* of other PostCS
 
 ---
 
-# Razor Class Libraries: Sharing Razor Components
+# Razor Class Libraries: Sharing Razor Components {#rcl}
 
 More to come on this topic, but for now...
 
@@ -65,12 +77,13 @@ Here's some notes on how i set up a solution, using a shared `RazorClassLibrary.
 
 ---
 
-# Fluent UI Web Components: Easy drop-ins while prototyping
+# Fluent UI Web Components: Easy drop-ins while prototyping {#components}
 
 Blazor and Tailwind CSS are both component-oriented, but neither provides components. Rather than resorting to using something like Bootstrap alongside Tailwind, i've been using Microsoft's [Fluent UI Web Components](https://fluent-components.azurewebsites.net/?path=/docs/getting-started-overview--page){target="_blank"} via [the CDN](https://github.com/microsoft/fluentui/tree/master/packages/web-components#from-cdn){target="_blank"} to start, phasing in my own components as a project progresses until i can eliminate the ~85kb dependency. Notice there is a [Blazor NuGet Package](https://github.com/microsoft/fast-blazor){target="_blank"} but there is a [fundamental issue](https://github.com/microsoft/fast-blazor/issues/125){target="_blank"} with styling the Razor Components. (You may have experienced this sort of thing with NavLink.)  Since i typically use them as stand-ins while i build my own, i take the quick and dirty Web Components CDN route.
 
 ---
 
 ::: {.text-xl .italic .light .text-right .pr-6 }
-[next: templates](/templates)
+[next: notes](/notes)
 ::: 
+::::

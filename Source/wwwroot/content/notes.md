@@ -1,4 +1,19 @@
-# Installation
+:::: nav
+
+[Installation](/notes)
+[PostCSS](/notes#postcss)
+[Tailwind Directives](/notes#directives)
+[CDN](/notes#CDN)
+[Standalone CLI](/notes#CLI)
+[Visual Studio](/notes#VS)
+[VS Code](/notes#VSCode)
+[Icons](/notes#HeroIcons)
+
+::::
+
+:::: content
+
+# Installation {#installation}
 
 The docs mention installing [autoprefixer](https://autoprefixer.github.io/){target="_blank"} and `postcss` as peer-dependencies of `tailwindcss` , but that's not needed if you're using the new `tailwindcss` CLI directly because it integrates `postcss`, `autoprefixer` and [cssnano](https://cssnano.co/){target="_blank"} . If you're using other JS tooling you won't get this automagically, nor incremental builds via its `--watch` mode.
 
@@ -38,7 +53,9 @@ module.exports = {
 
 ---
 
-# Using @tailwind and @layer with `postcss-import` {#layer}
+# Tailwind Directives  {#directives}
+
+## Using @tailwind and @layer with `postcss-import`
 
 More about `@tailwind`, `base`, and `components` can be found [here](https://tailwindcss.com/docs/functions-and-directives#tailwind){target="_blank"}. More about the PostCSS side of things can be found [here](https://tailwindcss.com/docs/using-with-preprocessors#:~:text=your%20%40tailwind%20declarations.-,Won%27t%20work%2C%20%60%40import%60%20statements%20must%20come%20first,-%40tailwind%20base%3B%0A%40import){target="_blank"}
 
@@ -82,3 +99,5 @@ The [Tailwind CSS Extension](https://marketplace.visualstudio.com/items?itemName
 # Icons {#HeroIcons}
 
 I've no opinion on Open Iconic, i just nuke it out of habit. I've been using inline SVG rather than icon fonts - [HeroIcons](https://heroicons.com/){target="_blank"} in particular. (See [heroicons.dev](https://heroicons.dev/){target="_blank"} for an unofficial, improved (IMO) "picker" UI.)
+
+::::
