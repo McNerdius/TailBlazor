@@ -1,6 +1,6 @@
 :::: nav
 
-[Inner Loop](/overview)
+[Inner Loop](/overview#innerloop)
 [Tidy CSS](/overview#tidy)
 [Prerequisites](/overview#prerequisites)
 :::
