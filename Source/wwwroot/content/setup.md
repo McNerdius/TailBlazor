@@ -80,7 +80,7 @@ For Blazor Server or Razor Pages/MVC, `cshtml` would be added in.  There also ma
 
 # PostCSS Config {#postcss}
 
-I'll get back to this on the next page but for now just swap the contents of `postcss.config.js` with the following:
+I'll come back to PostCSS later but for now just swap the contents of `postcss.config.js` with the following:
 
 ```javascript:postcss.config.js
 module.exports = {

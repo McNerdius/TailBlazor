@@ -36,7 +36,7 @@ A tiny rant about tidy HTML then i'll get back to the tidy CSS bits.  A relevant
 
 > Whatever you do, don’t use @apply just to make things look “cleaner”. Yes, HTML templates littered with Tailwind classes are kind of ugly. Making changes in a project that has tons of custom CSS is worse.
 
-A common, valid criticism of the utility-class approach is that long strings of class names gets hard to read, requiring "horizontal panning" of the eyes.  What i don't understand is - why in all of the Tailwind CSS samples i see are all of the class strings on one line ?  In C# (and other languages of course), if a method has more than a few parameters, we format & indent them to look pretty.  This is an option in HTML class strings as well.  If my HTML is getting messy, i group my classes over multiple lines, grouping classes semantically.  Maybe i put font size/color classes on one line, padding/margins on the next, dark mode on another, give each responsive breakpoint a line of their own, and so on.  A line becomes a rectangle.  
+A common criticism of the utility-class approach is that long strings of class names gets hard to read, requiring "horizontal panning" of the eyes.  What i don't understand is - why in all of the Tailwind CSS samples i see are all of the class strings on one line ?  In C# (and other languages of course), if a method has more than a few parameters, we format & indent them to look pretty.  This is an option in HTML class strings as well.  If my HTML is getting messy, i group my classes over multiple lines semantically.  Maybe i put font size/color classes on one line, padding/margins on the next, dark mode on another, give each responsive breakpoint a line of their own, and so on.  A line becomes a rectangle.  
 
 OK with that out of my system, back to `@apply`, which lets us cut long class strings out of our HTML and paste them into a `css` file and go on our way.  Let's look at this site's [IconLink](https://github.com/McNerdius/TailBlazor/tree/main/Source/Components/IconLink){target="_blank"} Component as an example.  Without using `@apply` you'd see something like this:
 
@@ -74,7 +74,7 @@ I had to create a `.css` file for this component to style Blazor's `NavLink`, so
 
 A simple cut-paste is all it takes.
 
-Note i've put this in a `*.razor.css` file.  **You could also just drop the `razor.` and `@import` the file directly in `site.css` and skip the Blazor integration steps that follow.**  But it only takes a couple edits to take advantage of CSS Isolation and only have to `@import` the Blazor-generated `site.styles.css` bundle.
+Note i've put this in `IconLink.razor.css` - a Scope CSS file.  **You could also just name it `IconLink.css`, `@import` the file directly in `site.css` and skip the Blazor integration steps that follow.**  But it only takes a couple edits to take advantage of CSS Isolation and only have to `@import` the Blazor-generated `site.styles.css` bundle.
 
 ### Enter `postcss-import` {#import}
 
