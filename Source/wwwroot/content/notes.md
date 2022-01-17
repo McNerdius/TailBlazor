@@ -62,7 +62,7 @@ module.exports = {
 Let's take a look at how `postcss-import` influences the way we use Tailwind's [`@layer` and `@tailwind` directives](https://tailwindcss.com/docs/functions-and-directives#directives){target="_blank"}.
 
 ## The `@layer` directive {#layer}
-In short, the [`@layer` directive](https://tailwindcss.com/docs/adding-custom-styles#using-css-and-layer){target="_blank"} tells the Tailwind CLI to give your CSS a bit of extra attention.  It will be output along with the associated layer ([recap](setup#boilerplate-bg){target="_blank"}) rather than inline, and be usable with modifiers like `hover`, dark mode, responsive breakpoints, etc.
+In short, the [`@layer` directive](https://tailwindcss.com/docs/adding-custom-styles#using-css-and-layer){target="_blank"} tells the Tailwind CLI to give your CSS a bit of extra attention.  It will be output along with the associated layer ([recap](setup#boilerplate-bg){target="_blank"}) rather than inline, and be usable with modifiers like `hover`, dark mode, responsive breakpoints, etc.  (For the following examples i've overriden `screens` in `tailwind.config.js` to only include a single `1024px` breakpoint.  Better quality images at some point, 4 bit is a bit ugly, eh. 🤔)
 
 Here's example without use of layers: note the ordering, and that while `dark-utility` is generated, but `dark:dark-utility` won't *actually work*:
 
@@ -89,11 +89,11 @@ Revisiting a basic `Site.css` boilerplate:
 
 Some notes:
 
-- We have to use `@import` to use Blazor's generated `site.styles.css` CSS Isolation bundle.
+- We have to `@import` to use Blazor's generated CSS Isolation bundle.
 - All `@import` directives have to be at the top of the file.
-- Tailwind's layers could be imported at the bottom using the `@tailwind` directive.
+- Tailwind's layers *could be* imported at the bottom using the `@tailwind` directive.
 - `site.styles.css` is really more of a "components" thing, and could be moved up a line.
-- Moving it up a line would *require* `@import` syntax for the `utilities` layer.
+- Moving it up a line would *require* `@import "tailwindcss/utilities";`, as opposed to `@tailwind utilities`.
 
 While it's not *always* necessary to use `@import` syntax versus `@tailwind` syntax when using `postcss-import`, i like to stick with the one syntax that works in all cases.  See more about this sort of thing on Tailwind's [build time imports](https://tailwindcss.com/docs/using-with-preprocessors#build-time-imports){target="_blank"} docs section.
 
