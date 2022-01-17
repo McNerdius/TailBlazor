@@ -103,7 +103,7 @@ Lastly, make a "root" CSS file next to the config files, say `site.css`, and add
 
 This is what you'll feed the `tailwindcss` CLI, and where you'll import any of your project's CSS later.  Note this syntax is different from what you'll see in the docs (`@tailwind ...`).  I've found it's what works best when using `postcss-import` and is easier to reason about when new to either Vanilla CSS or Tailwind CSS.
 
-## Behind the boilerplate CSS
+## Behind the boilerplate CSS {#boilerplate-bg}
 
 A quick aside while we're dealing with Tailwind's boilerplate CSS.  Base, Components, and Utilities are "layers" in Tailwind CSS parlance.  It's an abstraction of CSS top-down precedence and not limited to Tailwind's own CSS.  Here's what Tailwind contributes to these layers:
 
