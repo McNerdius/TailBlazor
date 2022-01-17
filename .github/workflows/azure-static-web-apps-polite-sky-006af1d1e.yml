@@ -29,7 +29,7 @@ jobs:
         run: npm install prismjs yargs
 
       - name: Generate Markdown
-        uses: McNerdius/MarkDigger@main
+        uses: McNerdius/CodeBlockHighlighter@main
         id: generate
         with:
           path: "Source/wwwroot/content"
