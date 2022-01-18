@@ -45,8 +45,10 @@
 
     </div>
 
+
+    @{ /* buggy: @onclick=@(_ => hidden = true) */ }
+
     <div id="body"
-         @onclick=@(_ => hidden = true) 
          class="w-full h-full pt-8
                 overflow-x-hidden overflow-y-auto
                 scrollbar-thin !scrollbar-thumb-neutral-400 !scrollbar-track-neutral-200">
@@ -85,6 +87,6 @@
     private void ToggleNavMenu()
     {
         hidden = !hidden;
-        ShouldRender();
+        @* ShouldRender(); *@
     }
 }
