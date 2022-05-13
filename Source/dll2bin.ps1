@@ -1,11 +1,11 @@
-$path = $pwd.Path + "\bin\Release\publish\wwwroot\_framework\"
+$path = $pwd.Path + "/bin/Release/publish/wwwroot/_framework/"
 $bootJson = $path + "blazor.boot.json"
 
 # remove old bin files, if any
 
-Remove-Item $path\*.bin
-Remove-Item $path\*.bin.gz
-Remove-Item $path\*.bin.br
+Remove-Item $path/*.bin
+Remove-Item $path/*.bin.gz
+Remove-Item $path/*.bin.br
 
 # rename dll files
 
@@ -19,7 +19,7 @@ $source = New-Object System.IO.FileStream($bootJson, ([IO.FileMode]::Open),([IO.
 ## gzip
 
 $bootGzip = $path + "blazor.boot.json.gz"
-rm $bootGzip -force -ErrorAction SilentlyContinue
+Remove-Item $bootGzip -force -ErrorAction SilentlyContinue
 
 $destination = New-Object System.IO.FileStream($bootGzip, ([IO.FileMode]::Create),([IO.FileAccess]::Write),([IO.FileShare]::None))
 
@@ -30,7 +30,7 @@ $gzip.Dispose()
 ## brotli
 
 $bootBrotli = $path + "blazor.boot.json.br"
-rm $bootBrotli -force -ErrorAction SilentlyContinue
+Remove-Item $bootBrotli -force -ErrorAction SilentlyContinue
 
 $source.Seek(0,[System.IO.SeekOrigin]::Begin)
 
