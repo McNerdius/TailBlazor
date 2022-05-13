@@ -28,4 +28,7 @@
         <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="6.0.0" PrivateAssets="all" />
         <PackageReference Include="System.Net.Http.Json" Version="6.0.0" />
     </ItemGroup>
+    <Target Name="dll2bin" AfterTargets="AfterPublish" Condition="'$(Configuration)'=='Release'">
+        <Exec Command="pwsh .\dll2bin.ps1" />
+    </Target>
 </Project>
