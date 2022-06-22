@@ -2,36 +2,6 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "API: Watch",
-      "type": "coreclr",
-      "request": "launch",
-      "program": "dotnet",
-      "console": "integratedTerminal",
-      "internalConsoleOptions": "neverOpen",
-      "args": [
-        "watch",
-        "msbuild",
-        "/t:RunFunctions"
-      ],
-      "cwd": "${workspaceFolder}/FunctionsAPI",
-      "presentation": {
-        "group": "1",
-        "close": true
-      }
-    },
-    // {
-    //   "name": "API: Debug",
-    //   "type": "coreclr",
-    //   "request": "attach",
-    //   "processId": "${command:azureFunctions.pickProcess}",
-    //   "cwd": "${workspaceFolder}/FunctionsAPI",
-    //   "presentation": {
-    //     "group": "1",
-    //     "close": true
-    //   },
-    //   "internalConsoleOptions": "neverOpen"
-    // },
-    {
       "name": "Client: Watch",
       "type": "coreclr",
       "request": "launch",
@@ -43,50 +13,24 @@
       "args": [
         "watch"
       ],
-      "cwd": "${workspaceFolder}/BlazorWasm",
+      "cwd": "${workspaceFolder}/",
       "presentation": {
         "close": true,
         "group": "2"
       }
     },
-    // {
-    //   "name": "Client: Debug",
-    //   "type": "blazorwasm",
-    //   "request": "launch",
-    //   "cwd": "${workspaceFolder}/BlazorWasm",
-    //   "preLaunchTask": "dotnet build & watch tailwind",
-    //   "postDebugTask": "stop watching",
-    //   "presentation": {
-    //     "close": true,
-    //     "group": "2"
-    //   },
-    //   "internalConsoleOptions": "neverOpen"
-    // },
-  ],
-  "compounds": [
     {
-      "name": "API & Client: Watch",
-      "configurations": [
-        "API: Watch",
-        "Client: Watch"
-      ],
+      "name": "Client: Debug",
+      "type": "blazorwasm",
+      "request": "launch",
+      "cwd": "${workspaceFolder}/",
+      "preLaunchTask": "dotnet build & watch tailwind",
+      "postDebugTask": "stop watching",
       "presentation": {
-        "group": "0",
-        "close": true
+        "close": true,
+        "group": "2"
       },
-      "stopAll": true
+      "internalConsoleOptions": "neverOpen"
     },
-    // {
-    //   "name": "API & Client: Debug",
-    //   "configurations": [
-    //     "API: Debug",
-    //     "Client: Debug"
-    //   ],
-    //   "presentation": {
-    //     "group": "0",
-    //     "close": true,
-    //   },
-    //   "stopAll": true
-    // }
   ]
 }
