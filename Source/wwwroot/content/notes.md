@@ -40,9 +40,9 @@ module.exports = {
 }
 ```
 
-This file, as-is, is only needed _if you're not using `tailwindcss` directly_. If one were to use other JS tooling, it would be needed. Otherwise:
+This file, as-is, is only needed _if you're not using `tailwindcss` directly_. If one were to use other JS tooling, it would be needed. When using the `tailwindcss` CLI directly:
 
-- `autoprefixer` never needs to be listed, as it is and should always be run last.
+- `autoprefixer` never needs to be listed, `tailwindcss` will do that for us.
 - `tailwindcss` only needs to be listed if it's not running first, as is the case when using `postcss-import` or [`tailwindcss/nesting`](/next#nesting). So here's what my default `postcss.config.js` looks like when i'm using the nifty nesting plugin:
 
 ```javascript:postcss.config.js
@@ -108,6 +108,12 @@ While it's not *always* necessary to use `@import` syntax versus `@tailwind` syn
 
 # Tailwind Standalone CLI {#CLI}
 
+::: info
+
+Tailwind 3.1's standalone CLI has improved a bit in regard to `postcss-import` but the third party plugin issue remains, as well as the question of "is it a better option ?"
+
+:::
+
 Tailwind 3.0 offers a [standalone CLI](https://tailwindcss.com/blog/standalone-cli){target="_blank"}.  At the time of writing, the singular advantage is that `node.js` isn't required.  Unfortunately, third party PostCSS or Tailwind plugins (such as `debug-screens`) can't be used with it.  Since `postcss-import` can't be used, we can't `@import` a CSS Isolation bundle or other CSS.  No-go, for now.
 
 Even when/if third-party plugins are supported, the CLI and plugins will have to be acquired/installed somehow.  Will this be a better developer experience than doing so via `npm` ?  Who knows.
@@ -132,6 +138,6 @@ The [Tailwind CSS Extension](https://marketplace.visualstudio.com/items?itemName
 
 # Icons {#HeroIcons}
 
-I've no opinion on Open Iconic, i just nuke it out of habit. I've been using inline SVG rather than icon fonts - [HeroIcons](https://heroicons.com/){target="_blank"} in particular. (See [heroicons.dev](https://heroicons.dev/){target="_blank"} for an unofficial, improved (IMO) "picker" UI.)
+I've no opinion on the templates' default Open Iconic, i just nuke it out of habit. I've been using inline SVG rather than icon fonts - [HeroIcons](https://heroicons.com/){target="_blank"} in particular. (See [heroicons.dev](https://heroicons.dev/){target="_blank"} for an unofficial, improved (IMO) "picker" UI.)
 
 ::::
