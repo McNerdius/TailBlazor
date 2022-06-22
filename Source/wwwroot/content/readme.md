@@ -3,11 +3,11 @@
 
 # Changes
 
-6/21/2022
+6/22/2022
 
 * Update content to reflect state of MAUI & release of Tailwind 3.1
 * Apply dll renaming workaround mentioned below
-* This file
+* This page
 
 ---
 
