@@ -91,6 +91,12 @@ module.exports = {
 };
 ```
 
+::: info
+
+Tailwind 3.1 bakes in `postcss-import` so the above isn't strictly necessary, but taking advantage of this here means rewriting several areas of this guide, which is a WIP.
+
+:::
+
 # Tailwind CSS Boilerplate {#boilerplate}
 
 Lastly, make a "root" CSS file next to the config files, say `site.css`, and add the following:

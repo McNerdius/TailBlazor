@@ -78,6 +78,12 @@ Note i've put this in `IconLink.razor.css` - a Scoped CSS file.  **You could als
 
 ### Enter `postcss-import` {#import}
 
+::: info
+
+Tailwind 3.1 bakes in `postcss-import`, rendering this section obsolete and due for removal.
+
+:::
+
 Rewind back to the initial `npm install`, i advised including `postcss-import`.  Here's why.  
 
 Without `postcss-import`:
