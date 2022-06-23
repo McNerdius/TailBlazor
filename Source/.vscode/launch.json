@@ -23,6 +23,7 @@
       "name": "Client: Debug",
       "type": "blazorwasm",
       "request": "launch",
+      "browser": "edge",
       "cwd": "${workspaceFolder}/",
       "preLaunchTask": "dotnet build & watch tailwind",
       "postDebugTask": "stop watching",
