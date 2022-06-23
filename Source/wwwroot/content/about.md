@@ -1,1 +1,0 @@
-Site design inspired by [ohmyposh.dev docs](https://ohmyposh.dev/docs/){target="_blank"}

@@ -2,21 +2,27 @@
 
 Take the default `dotnet new` templates and apply the steps described on this site, and you get [tailblazor-templates](https://github.com/McNerdius/TailBlazor-Templates){target="_blank"}.  The `tailblazor-wasm` template is hosted at [templates.tailblazor.dev](https://templates.tailblazor.dev){target="_blank"}.
 
+::: info
+
+With MAUI/Blazor Hybrid not being what i'd hoped, a `tailblazor-maui` template won't be happening anytime soon, if ever.  (The setup process is much like that of a WASM project.)  This voids one of the `tailblazor-templates` goals: to be a complete Blazor + Tailwind template package.  
+
+:::
+
  The template pack will grow, naming is still up in the air, but the near-future plan looks something like this:
 
-+:------------------------+:-------------------------:+
-| single-project templates                            |
-+=========================+===========================+
-| Template/Minimal/                                   |
-+=========================+===========================+
-| -- TailBlazorWasm       |  `tailblazor-wasm`        |
-+-------------------------+---------------------------+
-| -- TailBlazorServer     | `tailblazor-server`       |
-+-------------------------+---------------------------+
-| -- TailBlazorMaui       |  `tailblazor-maui`        |
-+-------------------------+---------------------------+
-| -- TailBlazorPages      | `tailblazor-pages`        |
-+-------------------------+---------------------------+
++:------------------------------+:-------------------------:+
+| single-project templates                                  |
++===============================+===========================+
+| Template/Minimal/                                         |
++===============================+===========================+
+| -- TailBlazorWasm             |  `tailblazor-wasm`        |
++-------------------------------+---------------------------+
+| -- TailBlazorServer           |  `tailblazor-server`      |
++-------------------------------+---------------------------+
+| -- ~~TailBlazorMaui~~         |                           |
++-------------------------------+---------------------------+
+| -- TailBlazorPages            |  `tailblazor-pages`       |
++-------------------------------+---------------------------+
 
 +-------------------------+:-------------------:+
 |  multi-project template                       |
@@ -30,7 +36,7 @@ Take the default `dotnet new` templates and apply the steps described on this si
 +-------------------------+ shares UI with RCL  |
 | -- BlazorServer         |                     |
 +-------------------------+                     |
-| -- BlazorMaui           |                     |
+| -- ~~BlazorMaui~~       |                     |
 +-------------------------+                     |
 | -- RazorPages           |                     |
 +-------------------------+---------------------+

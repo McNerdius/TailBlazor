@@ -60,7 +60,7 @@ module.exports = {
 
 Tailwind is massively [configurable](https://tailwindcss.com/docs/configuration){target="_blank"}, letting you override and extend values used when generating classes, and even [add your own](https://tailwindcss.com/docs/adding-new-utilities){target="_blank"} utility classes to participate in the CSS generation process.
 
-However, there's only one tweak needed to get started: `content` is where the magic happens. Here you point Tailwind at any _markup_ files where its yet-to-be-generated CSS is being _used_. (Hence the "JIT" in "Tailwind JIT").  More specific configuration translates to better performance, but you don't want to miss any files either.  A decent starter for a WebAssembly project, taking advantage of its globbing and negation/exclusion:
+However, there's only one tweak needed to get started: `content` is how the JIT magic happens. Here you point Tailwind at any _markup_ files where its yet-to-be-generated CSS is being _used_. (Hence the "JIT" in "Tailwind JIT").  More specific configuration translates to better performance, but you don't want to miss any files either.  A decent starter for a WebAssembly project, taking advantage of globbing and negation/exclusion:
 
 ```javascript:tailwind.config.js
 module.exports = { 
@@ -90,6 +90,12 @@ module.exports = {
     }
 };
 ```
+
+::: info
+
+Tailwind 3.1 bakes in `postcss-import` so the above isn't strictly necessary, but taking advantage of this here means rewriting several areas of this guide, which is a WIP.
+
+:::
 
 # Tailwind CSS Boilerplate {#boilerplate}
 

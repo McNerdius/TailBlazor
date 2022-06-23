@@ -20,7 +20,7 @@ Getting the best out of both takes a couple `csproj` tweaks and a bit of config.
 
 ---
 
-[Blazor](https://dotnet.microsoft.com/apps/aspnet/web-apps/blazor){target="_blank" .text-2xl .italic .font-extrabold} is a new feature of .NET, used for building interactive UI components with C# using the [well-estabished](https://weblogs.asp.net/scottgu/introducing-razor){target="_blank"} Razor syntax. These components can be used client-side via WebAssembly or server-side via ASP.NET Core. <abbr title="native rendering, not a 'bundled browser'; native API access">Native integration</abbr> with iOS/macOS, Windows, and Android apps via [.NET MAUI](https://docs.microsoft.com/en-us/dotnet/maui/){target="_blank"} is in preview.
+[Blazor](https://dotnet.microsoft.com/apps/aspnet/web-apps/blazor){target="_blank" .text-2xl .italic .font-extrabold} - first shipped with .NET Core 3 - is used for building interactive UI components with C# using the [well-estabished](https://weblogs.asp.net/scottgu/introducing-razor){target="_blank"} Razor syntax. These components can be used client-side via WebAssembly or server-side via ASP.NET Core. <abbr title="native rendering, not a 'bundled browser'; native API access">Native integration</abbr> with iOS/macOS, Windows, and Android apps via [.NET MAUI](https://docs.microsoft.com/en-us/dotnet/maui/){target="_blank"} is also possible.
 
 [Tailwind CSS](https://tailwindcss.com/){target="_blank" .text-2xl .italic .font-extrabold} is a utility-first CSS framework.  Rather than a set of static utility classes, it is effectively a CSS generator, building classes on demand based on an overridable and extendable base set of values and utilities.  It pairs quite well with Blazor, being component oriented.  The [documentation](https://tailwindcss.com/docs/utility-first){target="_blank"} is great as well. (Random example: [position](https://tailwindcss.com/docs/position){target="_blank"}.)  
 
@@ -28,11 +28,11 @@ Getting the best out of both takes a couple `csproj` tweaks and a bit of config.
 
 ## "Inner Loop" goodies {#innerloop}
 
-Blazor's [Hot Reload](https://docs.microsoft.com/en-us/aspnet/core/test/hot-reload?view=aspnetcore-6.0){target="_blank"} is an evolution of Visual Studio's Edit & Continue feature and the `dotnet watch` command, allowing edits to be applied immediately without needing to pause or restart a running app.  This includes edits to code as well as markup and CSS.  Hot Reload is still newish and not fully supported for all project types, unfortunately.
+Blazor's [Hot Reload](https://docs.microsoft.com/en-us/aspnet/core/test/hot-reload?view=aspnetcore-6.0){target="_blank"} is an evolution of Visual Studio's Edit & Continue feature and `dotnet watch`, allowing edits to be applied immediately without needing to pause or restart a running app.  This includes edits to code as well as markup and CSS.  It's still newish and not fully supported for all project types or code edits.
 
 Similar to .NET's Hot Reload, Tailwind's [Just-In-Time](https://tailwindcss.com/blog/tailwindcss-v3#just-in-time-all-the-time){target="_blank"} CSS generation is the primary goodness Tailwind CSS 3 brings.  Initially it generates only what CSS is relevant to your markup and CSS, subsequently performing much faster incremental builds when changes are spotted.  Also newish, it works well until it doesn't - for me it gets "stuck" during a build and runs out of memory once every 2-3 hours.
 
-Hot Reload and `tailwindcss --watch` do their work independently - all that's needed from us is to point `tailwindcss` at our input markup/CSS, and our Blazor project at the `tailwindcss` output.
+Hot Reload and `tailwindcss --watch` do their work independently - what's needed from us is to point `tailwindcss` at our input markup/CSS, and our Blazor project at the `tailwindcss` output.
 
 ---
 
@@ -48,10 +48,10 @@ To use Tailwind CSS features within your Scoped CSS files takes as little as thr
 
 # Prerequisites {#prerequisites}
 
-You'll need the .NET 6 SDK, Node.JS, and of course a development environment — _PowerShell optional_
+You'll need the .NET 6+ SDK, Node.JS, and of course a development environment — _PowerShell optional_
 
 ::: info
-TailBlazor is geared toward .NET 6 and Tailwind 3. Older versions would work too, but the build steps and config would be a bit different.  Hot Reload & Tailwind CSS "JIT" were in preview prior to these versions.
+TailBlazor is geared toward .NET 6+ and Tailwind 3+. Older versions would work too, but the build steps and config would be a bit different.  Hot Reload & Tailwind CSS "JIT" were in preview prior to these versions.
 :::
 
 ## Development Environment: {#de}
@@ -62,7 +62,6 @@ TailBlazor is geared toward .NET 6 and Tailwind 3. Older versions would work too
   - The [Blazor-wasm debugger](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.blazorwasm-companion){target="_blank"}, if applicable.
   - The [Tailwind CSS Extension](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss){target="_blank"}.  Adds Intellisense and shows generated CSS on hover.  Awesome.  [Notes](/notes#VSCode){target="_blank"}
 - Other - Rider ? VS for Mac ? Sublime Text ? Fleet ? Butterfly operated punchcards ? You do you !
-
 
 ## SDKs: {#sdk}
 
