@@ -10,19 +10,19 @@ With MAUI/Blazor Hybrid not being what i'd hoped, a `tailblazor-maui` template w
 
  The template pack will grow, naming is still up in the air, but the near-future plan looks something like this:
 
-+:------------------------+:-------------------------:+
-| single-project templates                            |
-+=========================+===========================+
-| Template/Minimal/                                   |
-+=========================+===========================+
-| -- TailBlazorWasm       |  `tailblazor-wasm`        |
-+-------------------------+---------------------------+
-| -- TailBlazorServer     | `tailblazor-server`       |
-+-------------------------+---------------------------+
-| -- ~~~TailBlazorMaui~~~       |  ~~~`tailblazor-maui`~~~        |
-+-------------------------+---------------------------+
-| -- TailBlazorPages      | `tailblazor-pages`        |
-+-------------------------+---------------------------+
++:------------------------------+:-------------------------:+
+| single-project templates                                  |
++===============================+===========================+
+| Template/Minimal/                                         |
++===============================+===========================+
+| -- TailBlazorWasm             |  `tailblazor-wasm`        |
++-------------------------------+---------------------------+
+| -- TailBlazorServer           |  `tailblazor-server`      |
++-------------------------------+---------------------------+
+| -- ~~TailBlazorMaui~~         |                           |
++-------------------------------+---------------------------+
+| -- TailBlazorPages            |  `tailblazor-pages`       |
++-------------------------------+---------------------------+
 
 +-------------------------+:-------------------:+
 |  multi-project template                       |
@@ -36,7 +36,7 @@ With MAUI/Blazor Hybrid not being what i'd hoped, a `tailblazor-maui` template w
 +-------------------------+ shares UI with RCL  |
 | -- BlazorServer         |                     |
 +-------------------------+                     |
-| -- ~~~BlazorMaui~~~           |                     |
+| -- ~~BlazorMaui~~       |                     |
 +-------------------------+                     |
 | -- RazorPages           |                     |
 +-------------------------+---------------------+
