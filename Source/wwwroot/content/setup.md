@@ -36,12 +36,12 @@ Same basic steps for other project types: Nuke the default CSS and references to
 
 # Tailwind CSS setup {#twsetup}
 
-The [documentation](https://tailwindcss.com/docs/installation){target="_blank"} shows two installation approaches.  The common denominator is PostCSS, which is a general-purpose orchestrator for purpose-built CSS transformation plugins.  I use the default "Tailwind CLI" method but add in one PostCSS plugin - `postcss-import`.
+The [documentation](https://tailwindcss.com/docs/installation){target="_blank"} shows two installation approaches.  The common denominator is PostCSS, which is a general-purpose orchestrator for purpose-built CSS transformation plugins.  I use the default "Tailwind CLI" method - more on PostCSS later.
 
 ## Install & Initialize {#f1}
 
 - In the Blazor project folder, run `npm init --yes` to initialize a `package.json` using defaults. These are analogous to a `dotnet new` & `*.csproj`.
-- Next run `npm install -D tailwindcss postcss-import`, similar to[^1^](/setup#npm-install) a `dotnet add package`.
+- Next run `npm install -D tailwindcss`, similar to[^1^](/setup#npm-install) a `dotnet add package`.
 - Next, `npx tailwindcss init --postcss` which will write default `tailwind.config.js` and `postcss.config.js` files to disk.
 
 # Tailwind CSS Config {#twconfig}

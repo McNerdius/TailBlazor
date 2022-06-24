@@ -19,7 +19,7 @@
 
 # Installation {#installation}
 
-The docs mention installing [autoprefixer](https://autoprefixer.github.io/){target="_blank"} and `postcss` as peer-dependencies of `tailwindcss` , but that's not needed if you're using the new `tailwindcss` CLI directly because it integrates `postcss`, `autoprefixer` and [cssnano](https://cssnano.co/){target="_blank"} . If you're using other JS tooling you won't get this automagically, nor incremental builds via its `--watch` mode.
+The docs mention installing [autoprefixer](https://autoprefixer.github.io/){target="_blank"} and `postcss` as peer-dependencies of `tailwindcss`, but that's not needed if you're using the new `tailwindcss` CLI directly because it integrates `postcss`, `autoprefixer`, [cssnano](https://cssnano.co/){target="_blank"} as well as `postcss-import`. If you're using other JS tooling you won't get this automagically, nor incremental builds via its `--watch` mode.
 
 ---
 
