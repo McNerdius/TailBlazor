@@ -76,27 +76,6 @@ A simple cut-paste is all it takes.
 
 Note i've put this in `IconLink.razor.css` - a Scoped CSS file.  **You could also just name it `IconLink.css`, `@import` the file directly in `site.css` and skip the Blazor integration steps that follow.**  But it only takes a couple edits to take advantage of CSS Isolation and only have to `@import` the Blazor-generated `Site.styles.css` bundle.
 
-### Enter `postcss-import` {#import}
-
-::: info
-
-Tailwind 3.1 bakes in `postcss-import`, rendering this section obsolete and due for removal.
-
-:::
-
-Rewind back to the initial `npm install`, i advised including `postcss-import`.  Here's why.  
-
-Without `postcss-import`:
-
-[![without-postcss-import](/images/without_postcss_import.png)](./images/without_postcss_import.png){target="_blank"}
-
-The output is valid, vanilla CSS, but it's not what we're after.  `IconLink.razor.css` hasn't been processed by `tailwindcss`.
-
-With `postcss-import`:
-
-[![with-postcss-import](/images/with_postcss_import.png)](./images/with_postcss_import.png){target="_blank"}
-
-Without using `postcss-import`, any `@import` other than an `@import "tailwindcss/{layer}";` goes unprocessed by the `tailwindcss` CLI.  It's not included in the `site.min.css` bundle.  So even if you're only ever going to `@import` vanilla CSS, if you want `tailwindcss` to it run through `autoprefixer` & `cssnano` then bundle it into `site.min.css`, you'll be using `postcss-import`.  The likelihood that you'll import more than zero CSS files at some point is good enough that i advise including it from the start.  It's 40kb on disk and costs nothing more if you don't end up taking advantage of it.
 
 ::: info
 Here comes the necessary tweaks:  When we use `@apply` in a Scoped CSS file, the Blazor-generated `Site.styles.css` is no longer Vanilla CSS, and can't be linked directly in your HTML as shown [in the docs](https://docs.microsoft.com/en-us/aspnet/core/blazor/components/css-isolation?view=aspnetcore-6.0#css-isolation-bundling){target="_blank"}.
@@ -114,7 +93,6 @@ By default, for a project `Site.csproj`, the CSS Isolation will be output to `ob
 ```
 
 The bundle will now be output to `/obj/net6.0/scopedcss/bundle` for both `build` and `publish`.  Add this file to the root CSS created earler, `site.css`:
-
 
 ```css:site.css
 @import "tailwindcss/base";
