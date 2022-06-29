@@ -20,7 +20,7 @@ Getting the best out of both takes a couple `csproj` tweaks and a bit of config.
 
 ---
 
-[Blazor](https://dotnet.microsoft.com/apps/aspnet/web-apps/blazor){target="_blank" .text-2xl .italic .font-extrabold} - first shipped with .NET Core 3 - is used for building interactive UI components with C# using the [well-estabished](https://weblogs.asp.net/scottgu/introducing-razor){target="_blank"} Razor syntax. These components can be used client-side via WebAssembly or server-side via ASP.NET Core. <abbr title="native rendering, not a 'bundled browser'; native API access">Native integration</abbr> with iOS/macOS, Windows, and Android apps via [.NET MAUI](https://docs.microsoft.com/en-us/dotnet/maui/){target="_blank"} is also possible.
+[Blazor](https://dotnet.microsoft.com/apps/aspnet/web-apps/blazor){target="_blank" .text-2xl .italic .font-extrabold} - first shipped with .NET Core 3 - is used for building interactive UI components with C# using the [well-estabished](https://weblogs.asp.net/scottgu/introducing-razor){target="_blank"} Razor syntax.
 
 [Tailwind CSS](https://tailwindcss.com/){target="_blank" .text-2xl .italic .font-extrabold} is a utility-first CSS framework.  Rather than a set of static utility classes, it is effectively a CSS generator, building classes on demand based on an overridable and extendable base set of values and utilities.  It pairs quite well with Blazor, being component oriented.  The [documentation](https://tailwindcss.com/docs/utility-first){target="_blank"} is great as well. (Random example: [position](https://tailwindcss.com/docs/position){target="_blank"}.)  
 
@@ -51,7 +51,7 @@ To use Tailwind CSS features within your Scoped CSS files takes as little as thr
 You'll need the .NET 6+ SDK, Node.JS, and of course a development environment — _PowerShell optional_
 
 ::: info
-TailBlazor is geared toward .NET 6+ and Tailwind 3+. Older versions would work too, but the build steps and config would be a bit different.  Hot Reload & Tailwind CSS "JIT" were in preview prior to these versions.
+TailBlazor is geared toward .NET 6+ and Tailwind 3+. Older versions would work too, but the build steps and config would be a bit different.
 :::
 
 ## Development Environment: {#de}
