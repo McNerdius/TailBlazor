@@ -18,11 +18,11 @@
 
 # Tailwind Incremental Builds, and maybe Hot Reload {#intro}
 
-So far we've put four more-or-less boilerplate files on disk and installed two packages from `npm` to add Tailwind CSS to the `blazorwasm` template.  Not too shabby.  Getting build & watch set up is pretty easy too, but unfortunately Hot Reload support is inconsistent between .NET project types.
+So far we've put four more-or-less boilerplate files on disk and installed a single package from `npm` to add Tailwind CSS to the `blazorwasm` template.  Not too shabby.  Getting build & watch set up is pretty easy too, but unfortunately Hot Reload support is inconsistent between .NET project types.
 
 On the Tailwind side of things, nothing fancy is happening - just a fresh CSS file being output to `wwwroot` as needed.  For some project types, Hot Reload doesn't refresh the browser when it sees these changes (yet) - hopefully a fix for this seemingly-trivial issue will come soon.  This [GitHub Issue](https://github.com/dotnet/aspnetcore/issues/37496){target="_blank"} shows a script that reloads the CSS file on a timer.  I think it'd be interesting to make that into a Component - definitely on the todo list.
 
-Ideally Hot Reload would ensure you're seeing latest version of both your Components and CSS.  For most projects this is the case, but some are... less Hot Reloady than others.  Having to do a full rebuild or browser refresh to see updates for some project types is unfortunate, but also outside the scope of integrating Tailwind CSS into those projects.  Hopefully Hot Reload improves in that regard.
+Ideally Hot Reload would ensure you're seeing latest version of both your Components and CSS.  For some project types this is the case, but some are... less Hot Reloady than others.  Having to do a full rebuild or browser refresh to see updates for some project types is unfortunate, but also outside the scope of integrating Tailwind CSS into those projects.  Hopefully Hot Reload improves in that regard.
 
 ## Define `npm` helper scripts {#helpers}
 
@@ -96,7 +96,7 @@ To actually make use of this in your Blazor project, add it to your `*.csproj`, 
 
 ### The TailwindCSS Target { #build }
 
-This is the important section:
+This is the essential section:
 
 ```xml:tailwindcss.targets-p2
 <Target Name="TailwindCSS" AfterTargets="AfterBuild" Condition="'$(TailwindBuild)' == 'true'">
@@ -179,7 +179,7 @@ One-off `tailwindcss` builds are not ideal.  The long-running `tailwindcss --wat
 
 - **Using a "Post Build Event" in Visual Studio's project properties.**
 
-This places an MSBuild Target in the `.csproj` - `<Target Name="PostBuild" AfterTargets="PostBuildEvent">`. This is a no-go for long-running tasks: **this and similar simple MSBuild Target based approaches do one of two things: terminate immediately or (more likely) hang the build.**
+This places an MSBuild Target in the `.csproj` - `<Target Name="PostBuild" AfterTargets="PostBuildEvent">`. **This is a no-go for long-running tasks:** this and similar simple MSBuild Target based approaches do one of two things: terminate immediately or (more likely) hang the build.
 
 - **More advanced uses of MSBuild Targets**
 

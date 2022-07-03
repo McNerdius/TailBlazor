@@ -28,7 +28,7 @@ Getting the best out of both takes a couple `csproj` tweaks and a bit of config.
 
 ## "Inner Loop" goodies {#innerloop}
 
-Blazor's [Hot Reload](https://docs.microsoft.com/en-us/aspnet/core/test/hot-reload?view=aspnetcore-6.0){target="_blank"} is an evolution of Visual Studio's Edit & Continue feature and `dotnet watch`, allowing edits to be applied immediately without needing to pause or restart a running app.  This includes edits to code as well as markup and CSS.  It's still newish and not fully supported for all project types or code edits.
+Blazor's [Hot Reload](https://docs.microsoft.com/en-us/aspnet/core/test/hot-reload?view=aspnetcore-6.0){target="_blank"} allows edits to be applied immediately without needing to pause or restart a running app.  This includes edits to code as well as markup and CSS.  It's still newish and not fully supported for all project types or code edits.
 
 Similar to .NET's Hot Reload, Tailwind's [Just-In-Time](https://tailwindcss.com/blog/tailwindcss-v3#just-in-time-all-the-time){target="_blank"} CSS generation is the primary goodness Tailwind CSS 3 brings.  Initially it generates only what CSS is relevant to your markup and CSS, subsequently performing much faster incremental builds when changes are spotted.  Also newish, it works well until it doesn't - for me it gets "stuck" during a build and runs out of memory once every 2-3 hours.
 
@@ -38,7 +38,7 @@ Hot Reload and `tailwindcss --watch` do their work independently - what's needed
 
 ## Tidy CSS {#tidy}
 
-Blazor's [CSS Isolation](https://docs.microsoft.com/en-us/aspnet/core/blazor/components/css-isolation?view=aspnetcore-6.0){target="_blank"} is a simple way to limit the scope of styles to a particular Razor Component: by convention, styles defined in `.razor.css` (Scoped CSS) files will be rewritten at build time so they only apply to their associated `.razor` Component. 
+Blazor's take on [CSS Isolation](https://docs.microsoft.com/en-us/aspnet/core/blazor/components/css-isolation?view=aspnetcore-6.0){target="_blank"} is a simple way to limit the scope of styles to a particular Razor Component: by convention, styles defined in `.razor.css` (Scoped CSS) files will be rewritten at build time so they only apply to their associated `.razor` Component. 
 
 In addition to generating classes for us, Tailwind CSS offers an [`@apply` directive](https://tailwindcss.com/docs/functions-and-directives#apply){target="_blank"}, and built-in support for Sass-like nesting is easily enabled.  
 

@@ -1,37 +1,40 @@
 :::: nav
 
-[Installation](/notes)
 [PostCSS](/notes#postcss)
 [Tailwind Directives](/notes#directives)
 :::
 - [@layer](/notes#layer)
 - [@tailwind](/notes#tailwind)
 :::
-[CDN](/notes#CDN)
-[Standalone CLI](/notes#CLI)
+[`npm` Alternatives](/notes#NPM)
+:::
+- [Standalone CLI](/notes#CLI)
+- [CDN](/notes#CDN)
+:::
 [Visual Studio](/notes#VS)
 [VS Code](/notes#VSCode)
-[Icons](/notes#HeroIcons)
 
 ::::
 
 :::: content
 
-# Installation {#installation}
-
-The docs mention installing [autoprefixer](https://autoprefixer.github.io/){target="_blank"} and `postcss` as peer-dependencies of `tailwindcss`, but that's not needed if you're using the new `tailwindcss` CLI directly because it integrates `postcss`, `autoprefixer`, [cssnano](https://cssnano.co/){target="_blank"} as well as `postcss-import`. If you're using other JS tooling you won't get this automagically, nor incremental builds via its `--watch` mode.
-
----
-
 # A bit more on PostCSS {#postcss}
 
-::: info
+As mentioned in [setup](/setup#postcss), the `tailwindcss` CLI wraps PostCSS functionality and bundles a few essential plugins: `postcss-import`, `autoprefixer`, and `cssnano`.  They don't need to be installed manually, and will be applied automatically if you don't pass a `postcss.config.js` file to the CLI.
 
-Tailwind 3.1 bakes in `postcss-import` so this section is due for an update.
+The essential plugins, in the order they should be run:
 
-:::
+- [`postcss-import`](https://github.com/postcss/postcss-import) mimics vanilla CSS `@import` by inlining the contents of the css files being imported.  As such, it should always be the first plugin applied to your input CSS.
 
-`autoprefixer` and `cssnano` are both PostCSS plugins, and the new `tailwindcss` CLI "wraps" the `postcss` pipeline, inserting itself first and `autoprefixer` last by default. Passing `--no-autoprefixer` to `tailwindcss` will disable `autoprefixer`, and passing `--minify` will enable `ccsnano`.
+- `tailwindcss` - yep, `tailwindcss` itself is a PostCSS plugin.  
+
+- [`autoprefixer`](https://github.com/postcss/autoprefixer) applies "vendor prefixes" to your CSS to accommodate vendor-specific implementations of CSS features.  This should run second-to-last, after all CSS is built up.
+
+- [`cssnano`](https://cssnano.co/docs/introduction/) optionally minifies your output CSS, if you pass `--minify` to the CLI.  Obviously this needs to be run last !
+
+The above is how it works without passing `--postcss postcss.config.js` to the `tailwindcss` CLI.  Opting for a `postcss.config.js` means we have to spell things out a bit, which is what i've shown in [setup](/setup#postcss) and [nesting](/tidy_css#nesting).  Here's a simplified view of things - noting that if you do use a `postcss.config.js`, the extra plugins you're using should be sandwiched between `postcss-import` at the top, and `tailwindcss` at the bottom.
+
+[![postcss](images/postcss.drawio.svg)](images/postcss.drawio.svg){target="_blank"}
 
 ## Tailwind's Default `init --postcss` Config {#postcssconfig}
 
@@ -46,10 +49,10 @@ module.exports = {
 }
 ```
 
-This file, as-is, is only needed _if you're not using `tailwindcss` directly_. If one were to use other JS tooling, it would be needed. When using the `tailwindcss` CLI directly:
+This file, as-is, is only needed _if you're not using the `tailwindcss` CLI directly_. If one were to use other JS tooling, it would be needed. When using the `tailwindcss` CLI directly:
 
 - `autoprefixer` never needs to be listed, `tailwindcss` will do that for us.
-- `tailwindcss` only needs to be listed if it's not running first, as is the case when using `postcss-import` or [`tailwindcss/nesting`](/next#nesting). So here's what my default `postcss.config.js` looks like when i'm using the nifty nesting plugin:
+- `tailwindcss` only needs to be listed if it's not running first, as is the case with `postcss-import` or [`tailwindcss/nesting`](/next#nesting). So here's what my default `postcss.config.js` looks like when i'm using the nifty nesting plugin:
 
 ```javascript:postcss.config.js
 module.exports = {
@@ -61,6 +64,12 @@ module.exports = {
 }
 ```
 
+::: info
+
+Tailwind CSS v3.1 ["bakes in" `postcss-import`](https://tailwindcss.com/blog/tailwindcss-v3-1#built-in-support-for-css-imports-in-the-cli), but not to the same degree as `autoprefixer` and `cssnano`.  Those two never need to be listed in `postcss.config.js`, whereas `postcss-import` still needs to be listed first.  So it's, uh, half-baked-in, one could say.
+
+:::
+
 ---
 
 # Tailwind CSS Directives  {#directives}
@@ -70,7 +79,7 @@ Let's take a look at how `postcss-import` influences the way we use Tailwind's [
 ## The `@layer` directive {#layer}
 In short, the [`@layer` directive](https://tailwindcss.com/docs/adding-custom-styles#using-css-and-layer){target="_blank"} tells the Tailwind CLI to give your CSS a bit of extra attention.  It will be output along with the associated layer ([recap](setup#boilerplate-bg){target="_blank"}) rather than inline, and be usable with modifiers like `hover`, dark mode, responsive breakpoints, etc.  (For the following examples i've overriden `screens` in `tailwind.config.js` to only include a single `1024px` breakpoint.  Better quality images at some point, 4 bit is a bit ugly, eh. 🤔)
 
-Here's example without use of layers: note the ordering, and that while `dark-utility` is generated, but `dark:dark-utility` won't *actually work*:
+Here's example without use of layers: note the ordering, and that while `dark-utility` is generated, `dark:dark-utility` won't *actually work*:
 
 [![step1-vanilla](images/step1-vanilla.png)](images/step1-vanilla.png){target="_blank"}
 
@@ -105,26 +114,24 @@ While it's not *always* necessary to use `@import` syntax versus `@tailwind` syn
 
 ---
 
-# Tailwind CDN {#CDN}
+# `npm` Alternatives
 
-- Old: Don't use it
-- [New](https://www.youtube.com/watch?v=mSC6GwizOag){target="_blank"}: Nifty, but not for production.
+I'm not a web developer, and the JS ecosystem is a bit churny and disjointed for me to keep up with.  Using vanilla CSS wouldn't require any of that, but it is my biggest source of frustration in learning front-end development.  Tailwind CSS just "clicks" for me.  
+
+The way i've shown how to set things up on this site requires installation of Node.js, `tailwindcss` itself, maintaining a few config files, etc.  Several steps but it really is one "real" install (`tailwindcss` CLI being more of a dependency) and boilerplate.  Once it's in place, you'll rarely have to think about `npm` or other JS tooling - `MSBuild` takes care of all that for us behind the scenes.  That said - is there a *better*, Node.js-free alternative ?  Emphasis on *better*.
+
+## Tailwind Standalone CLI {#CLI}
+
+Tailwind 3+ offers a [standalone CLI](https://tailwindcss.com/blog/standalone-cli){target="_blank"} - not to be confused with the ordinary `tailwindcss` CLI.  At the time of writing, the singular advantage is that Node.js isn't required.  Unfortunately, third party PostCSS or Tailwind plugins (such as `debug-screens`) can't be used with it, nor can the `npm` build scripts (`npm run build` etc).
+
+Even when/if third-party plugins are supported, the standalone CLI and plugins will have to be acquired/installed somehow.  Will this be a better developer experience than doing so via `npm` ?  Consider continuous deployment - most if not all virtual machines will have Node.js preinstalled.
 
 ---
 
-# Tailwind Standalone CLI {#CLI}
+## Tailwind CDN {#CDN}
 
-::: info
-
-Tailwind 3.1's standalone CLI has improved a bit in regard to `postcss-import` but the third party plugin issue remains, as well as the question of "is it a better option ?"
-
-:::
-
-Tailwind 3.0 offers a [standalone CLI](https://tailwindcss.com/blog/standalone-cli){target="_blank"}.  At the time of writing, the singular advantage is that `node.js` isn't required.  Unfortunately, third party PostCSS or Tailwind plugins (such as `debug-screens`) can't be used with it.  Since `postcss-import` can't be used, we can't `@import` a CSS Isolation bundle or other CSS.  No-go, for now.
-
-Even when/if third-party plugins are supported, the CLI and plugins will have to be acquired/installed somehow.  Will this be a better developer experience than doing so via `npm` ?  Who knows.
-
-On the other hand, [this](https://twitter.com/malfaitrobin/status/1446905317825069063){target="_blank"} would certainly improve things. 🤞
+- Old: Don't use it
+- [New](https://www.youtube.com/watch?v=mSC6GwizOag){target="_blank"}: Nifty, but not for production.
 
 ---
 
@@ -140,10 +147,9 @@ The [Tailwind CSS Extension](https://marketplace.visualstudio.com/items?itemName
 
  ![previews](/images/hover.png)
 
+ Version 3.1 of Tailwind CSS brings "[First-party TypeScript types
+](https://tailwindcss.com/blog/tailwindcss-v3-1#first-party-type-script-types)", which improves the intellisense experience further.
+
 ---
-
-# Icons {#HeroIcons}
-
-I've no opinion on the templates' default Open Iconic, i just nuke it out of habit. I've been using inline SVG rather than icon fonts - [HeroIcons](https://heroicons.com/){target="_blank"} in particular. (See [heroicons.dev](https://heroicons.dev/){target="_blank"} for an unofficial, improved (IMO) "picker" UI.)
 
 ::::
