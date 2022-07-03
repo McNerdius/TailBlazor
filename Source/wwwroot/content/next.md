@@ -1,6 +1,6 @@
 :::: nav
 
-Plugins
+Plugins { .font-bold }
 - [Tailwind](/next)
 - [PostCSS](/next#postcss)
   
@@ -34,7 +34,7 @@ module.exports = {
 
 There are some [official plugins](https://tailwindcss.com/docs/plugins#official-plugins){target="_blank"}; i'm using `tailwindcss/typography` (with some tweaks) both here and in the [tailblazor templates](https://www.tailblazor.net){target="_blank"}.  *Note you'll need 0.5.x+ for Tailwind 3+.*
 
-Also nifty is [tailwind-scrollbar](https://github.com/adoxography/tailwind-scrollbar){target="_blank"}.
+Also nifty is [tailwind-scrollbar](https://github.com/adoxography/tailwind-scrollbar){target="_blank"}, which i'm using for the code block containers.
 
 ---
 
