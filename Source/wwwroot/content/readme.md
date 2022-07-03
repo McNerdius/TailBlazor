@@ -6,8 +6,6 @@
 2022-7-3
 
 * Rewrite content regarding PostCSS and `postcss-import` for clarity and to reflect the changes in Tailwind 3.1
-* 
-
 
 2022-6-22
 
