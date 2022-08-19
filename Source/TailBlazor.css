@@ -4,7 +4,7 @@
 
 @import "./obj/scopedcss/bundle/TailBlazor.styles.css";
 @import "./Pages/Markdown.nested.css";
-@import "prism-vsc-dark-plus";
+@import "prism-vsc-dark-plus.css";
 @import "codeblock.nested.css";
 
 #blazor-error-ui {
