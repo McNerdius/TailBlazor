@@ -11,8 +11,17 @@ module.exports = {
                 'dotnet-blurple': '#512BD4',
                 'link-blue': colors.blue[600],
             },
-            animation: {
+            animation:
+            {
                 'spin-slow': 'spin 7s linear infinite',
+            },
+            width:
+            {
+                'blazor-load-percentage': "var(--blazor-load-percentage,0%)"
+            },
+            content:
+            {
+                'blazor-load-percentage-text': "var(--blazor-load-percentage-text,'0%')"
             }
         }
     },

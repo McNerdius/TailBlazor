@@ -39,8 +39,14 @@
                 </svg>
             </div>
         
-            pardon the delay, <br>
-            Blazor initializing...
+            <div class="flex flex-col">
+                <div class="text-center font-bold after:content-blazor-load-percentage-text">loading: </div>
+                <div class="w-56 h-4 m-auto rounded-md ring-1 ring-black shadow-sm">
+                    <div class="bg-blue-400 h-full rounded-md w-blazor-load-percentage"></div>
+                </div>
+            </div>
+
+
         </div>
 
     </div>
