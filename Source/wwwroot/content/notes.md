@@ -18,19 +18,30 @@
 
 :::: content
 
+# .NET 7 / Tailwind CSS 3.2 migration
+
+As i work on rehashing the site for these updates, i'll be using this section as a dumping ground for new content that should find a more appropriate home later on.  See the [readme](https://github.com/McNerdius/TailBlazor/blob/main/readme.md){target="_blank"} to see how that's going.
+
+* The new `blazor*-empty` templates are a great addition to .NET 7, as are the new [loading progress properties](https://devblogs.microsoft.com/dotnet/asp-net-core-updates-in-dotnet-7-preview-7/#new-blazor-loading-page){target="_blank"}.  But the `-empty` templates don't show off tese additions.  I've updated the `tailblazor.dev` awesomeface-loader to show progress by extending `width` and `content` in tailwind config, wrapping the new CSS properties/variables.  In `tailblazor-templates` i will stick to the .NET 7 "full" template's design, with some Tailwind peppered in.
+*  
+
+
+
+
+
 # A bit more on PostCSS {#postcss}
 
 As mentioned in [setup](/setup#postcss), the `tailwindcss` CLI wraps PostCSS functionality and bundles a few essential plugins: `postcss-import`, `autoprefixer`, and `cssnano`.  They don't need to be installed manually, and will be applied automatically if you don't pass a `postcss.config.js` file to the CLI.
 
 The essential plugins, in the order they should be run:
 
-- [`postcss-import`](https://github.com/postcss/postcss-import) mimics vanilla CSS `@import` by inlining the contents of the css files being imported.  As such, it should always be the first plugin applied to your input CSS.
+- [`postcss-import`](https://github.com/postcss/postcss-import){target="_blank"} mimics vanilla CSS `@import` by inlining the contents of the css files being imported.  As such, it should always be the first plugin applied to your input CSS.
 
 - `tailwindcss` - yep, `tailwindcss` itself is a PostCSS plugin.  
 
-- [`autoprefixer`](https://github.com/postcss/autoprefixer) applies "vendor prefixes" to your CSS to accommodate vendor-specific implementations of CSS features.  This should run second-to-last, after all CSS is built up.
+- [`autoprefixer`](https://github.com/postcss/autoprefixer){target="_blank"} applies "vendor prefixes" to your CSS to accommodate vendor-specific implementations of CSS features.  This should run second-to-last, after all CSS is built up.
 
-- [`cssnano`](https://cssnano.co/docs/introduction/) optionally minifies your output CSS, if you pass `--minify` to the CLI.  Obviously this needs to be run last !
+- [`cssnano`](https://cssnano.co/docs/introduction/){target="_blank"} optionally minifies your output CSS, if you pass `--minify` to the CLI.  Obviously this needs to be run last !
 
 The above is how it works without passing `--postcss postcss.config.js` to the `tailwindcss` CLI.  Opting for a `postcss.config.js` means we have to spell things out a bit, which is what i've shown in [setup](/setup#postcss) and [nesting](/tidy_css#nesting).  Here's a simplified view of things - noting that if you do use a `postcss.config.js`, the extra plugins you're using should be sandwiched between `postcss-import` at the top, and `tailwindcss` at the bottom.
 
