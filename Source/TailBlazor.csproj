@@ -23,10 +23,10 @@
         <PackageReference Include="markdig" Version="0.26.0" />
     </ItemGroup>
     <ItemGroup>
-        <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="7.0.0-rc.1.*" />
-        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="7.0.0-rc.1.*" />
-        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="7.0.0-rc.1.*" PrivateAssets="all" />
-        <PackageReference Include="System.Net.Http.Json" Version="7.0.0-rc.1.*" />
+        <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="7.0.0-rc.2.*" />
+        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="7.0.0-rc.2.*" />
+        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="7.0.0-rc.2.*" PrivateAssets="all" />
+        <PackageReference Include="System.Net.Http.Json" Version="7.0.0-rc.2.*" />
     </ItemGroup>
     <Target Name="dll2bin" AfterTargets="AfterPublish" Condition="'$(Configuration)'=='Release'">
         <Exec Command="pwsh ./dll2bin.ps1" />
