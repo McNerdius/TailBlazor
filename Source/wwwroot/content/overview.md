@@ -18,11 +18,17 @@
 
 Getting the best out of both takes a couple `csproj` tweaks and a bit of config. {.text-lg .font-bold .italic}
 
+
+::: info
+
+Keep an eye on [notes](notes) as i shift to .NET 7 & Tailwind CSS 3.2.
+
+:::
+
 ---
 
-[Blazor](https://dotnet.microsoft.com/apps/aspnet/web-apps/blazor){target="_blank" .text-2xl .italic .font-extrabold} - first shipped with .NET Core 3 - is used for building interactive UI components with C# using the [well-estabished](https://weblogs.asp.net/scottgu/introducing-razor){target="_blank"} Razor syntax.
 
-[Tailwind CSS](https://tailwindcss.com/){target="_blank" .text-2xl .italic .font-extrabold} is a utility-first CSS framework.  Rather than a set of static utility classes, it is effectively a CSS generator, building classes on demand based on an overridable and extendable base set of values and utilities.  It pairs quite well with Blazor, being component oriented.  The [documentation](https://tailwindcss.com/docs/utility-first){target="_blank"} is great as well. (Random example: [position](https://tailwindcss.com/docs/position){target="_blank"}.)  
+[Blazor](https://dotnet.microsoft.com/apps/aspnet/web-apps/blazor){target="_blank" .text-2xl .italic .font-extrabold} is a fresh take on the [well-estabished](https://weblogs.asp.net/scottgu/introducing-razor){target="_blank"} Razor/C# combo for building UI components.  It pairs quite well with [Tailwind CSS](https://tailwindcss.com/){target="_blank" .text-2xl .italic .font-extrabold}, which will significantly reduce the amount of custom CSS you have to write, keep styling local to your Razor components, while also allowing for things like themes, variables, and nesting.  Rather than a set of static utility classes, it is effectively a CSS generator, building classes on demand based on an overridable and extendable base set of values and utilities.  The [documentation](https://tailwindcss.com/docs/utility-first){target="_blank"} is great as well. (Random example: [position](https://tailwindcss.com/docs/position){target="_blank"}.)  
 
 ---
 
@@ -51,7 +57,7 @@ To use Tailwind CSS features within your Scoped CSS files takes as little as thr
 You'll need the .NET 6+ SDK, Node.JS, and of course a development environment — _PowerShell optional_
 
 ::: info
-TailBlazor is geared toward .NET 6+ and Tailwind 3+. Older versions would work too, but the build steps and config would be a bit different.
+TailBlazor is geared toward .NET 6+ and Tailwind 3+. Older versions would work too, but the build steps and config would be a bit different.  I'm currently rehashing this site and the associated templates, updating them for .NET 7.  The only incompatibilities i forsee will be usage of .NET 7's "empty" (bootstrap-free) templates, and the `--blazor-load-progress` variables.
 :::
 
 ## Development Environment: {#de}

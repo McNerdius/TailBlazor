@@ -20,10 +20,10 @@ jobs:
         with:
           submodules: true
 
-      - name: Install .NET 6
-        uses: actions/setup-dotnet@v1
+      - name: Install .NET SDK
+        uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: "6.0.x"
+          global-json-file: global.json
 
       - name: Install PrismJs
         run: npm install prismjs yargs
