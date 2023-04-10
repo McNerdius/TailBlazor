@@ -9,9 +9,9 @@
     "tailwindcss-debug-screens": "^2.2.0"
   },
   "scripts": {
-    "build": "npx tailwindcss --config tailwind.config.js --postcss postcss.config.js -i TailBlazor.css -o ./wwwroot/TailBlazor.min.css",
-    "watch": "npx tailwindcss --watch --config tailwind.config.js --postcss postcss.config.js -i TailBlazor.css -o ./wwwroot/TailBlazor.min.css",
-    "publish": "npx tailwindcss --minify --config tailwind.config.js --postcss postcss.config.js -i TailBlazor.css -o ./wwwroot/TailBlazor.min.css"
+    "build": "npx tailwindcss --postcss postcss.config.js -i TailBlazor.css -o ./wwwroot/TailBlazor.min.css",
+    "watch": "npx tailwindcss --watch --postcss postcss.config.js -i TailBlazor.css -o ./wwwroot/TailBlazor.min.css",
+    "publish": "npx tailwindcss --minify --postcss postcss.config.js -i TailBlazor.css -o ./wwwroot/TailBlazor.min.css"
   },
   "keywords": [
     "tailwindcss",
