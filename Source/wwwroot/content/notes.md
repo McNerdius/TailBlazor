@@ -36,11 +36,13 @@ As mentioned in [setup](/setup#postcss), the `tailwindcss` CLI wraps PostCSS fun
 The essential plugins, in the order they should be run:
 
 - [`postcss-import`](https://github.com/postcss/postcss-import){target="_blank"} mimics vanilla CSS `@import` by inlining the contents of the css files being imported.  As such, it should always be the first plugin applied to your input CSS.
+- [`postcss-import`](https://github.com/postcss/postcss-import){target="_blank"} mimics vanilla CSS `@import` by inlining the contents of the css files being imported.  As such, it should always be the first plugin applied to your input CSS.
 
 - `tailwindcss` - yep, `tailwindcss` itself is a PostCSS plugin.  
 
 - [`autoprefixer`](https://github.com/postcss/autoprefixer){target="_blank"} applies "vendor prefixes" to your CSS to accommodate vendor-specific implementations of CSS features.  This is run second-to-last, after all CSS is built up.
 
+- [`cssnano`](https://cssnano.co/docs/introduction/){target="_blank"} optionally minifies your output CSS, if you pass `--minify` to the CLI.  Obviously this needs to be run last !
 - [`cssnano`](https://cssnano.co/docs/introduction/){target="_blank"} optionally minifies your output CSS, if you pass `--minify` to the CLI.  Obviously this needs to be run last !
 
 The above is how it works without passing `--postcss postcss.config.js` to the `tailwindcss` CLI.  Opting for a `postcss.config.js` means we have to spell things out a bit, which is what i've shown in [setup](/setup#postcss) and [nesting](/tidy_css#nesting).  Here's a simplified view of things - noting that if you do use a `postcss.config.js`, the extra plugins you're using should be sandwiched between `postcss-import` at the top, and `tailwindcss` at the bottom.
@@ -163,3 +165,4 @@ The [Tailwind CSS Extension](https://marketplace.visualstudio.com/items?itemName
 ---
 
 ::::
+
