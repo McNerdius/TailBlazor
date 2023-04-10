@@ -57,7 +57,7 @@ To use Tailwind CSS features within your Scoped CSS files takes as little as thr
 You'll need the .NET 6+ SDK, Node.JS, and of course a development environment — _PowerShell optional_
 
 ::: info
-TailBlazor is geared toward .NET 6+ and Tailwind 3+. Older versions would work too, but the build steps and config would be a bit different.  I'm currently rehashing this site and the associated templates, updating them for .NET 7.  The only incompatibilities i forsee will be usage of .NET 7's "empty" (bootstrap-free) templates, and the `--blazor-load-progress` variables.
+Older Tailwind CSS versions would work too, but the build steps and config would be a bit different.  This site and `tailblazor-templates` take advantage of .NET 7's "empty" (bootstrap-free) templates, and the `--blazor-load-progress` variables.  Everything else should be the same for .NET 6.
 :::
 
 ## Development Environment: {#de}

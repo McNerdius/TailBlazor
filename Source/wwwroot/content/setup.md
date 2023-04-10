@@ -18,39 +18,42 @@ Config { .font-bold }
 
 # .NET/Blazor setup {#blazor}
 
+I'll be tweaking a default .NET 7 Blazor Empty WebAssembly project here - the steps are largely the same for other project types and i'll do my best to call out any differences.  I'll be using the `dotnet` CLI: each IDE does things differently and may change from version to version, but the CLI is a constant.
+
 ::: info
-I'll be tweaking a default .NET 6 Blazor WebAssembly project here - the steps are largely the same for other project types and i'll do my best to call out any differences.  I'll be using the `dotnet` CLI: each IDE does things differently and may change from version to version, but the CLI is a constant.
+
+Running `dotnet workload install wasm-tools` (".NET WebAssembly build tools" in Visual Studio installer) is required if your project will use AOT or native dependencies.  It's not required for basic projects, but installing it will enable [runtime relinking](https://learn.microsoft.com/en-us/aspnet/core/blazor/host-and-deploy/webassembly?view=aspnetcore-7.0#runtime-relinking).  It is quite large though, about 1.5GB
+
 :::
 
-## Install & Nuke
+## Scaffold & Tweak
 
-After creating the Blazor WebAssembly project using `dotnet new blazorwasm`, i remove the following:
+* Run `dotnet new blazorwasm-empty`:
+* Move `wwwroot/css/app.css` up to project root, rename it `site.css`
+* Change `index.html` stylesheet link to `site.min.css`
 
-- The Bootstrap/Open-Iconic bits at `wwwroot/css/*`. \
-  Note that at the bottom of `app.css` there are some Blazor-specific bits (`blazor-error-ui` and so on) that are worth taking a look at / keeping around. See [here](https://docs.microsoft.com/en-us/aspnet/core/blazor/fundamentals/handle-errors?view=aspnetcore-6.0#detailed-errors-during-development-for-blazor-webassembly-apps){target="_blank"} and [here](https://docs.microsoft.com/en-us/aspnet/core/blazor/fundamentals/handle-errors?view=aspnetcore-6.0#error-boundaries){target="_blank"} for more info.
-- The `<link href="..." rel="stylesheet">` references to Bootstrap/Open-Iconic in `index.html`.
-
-Same basic steps for other project types: Nuke the default CSS and references to it, they're just in different locations.
+These are just my go-to generic filenames of course.
 
 ---
 
 # Tailwind CSS setup {#twsetup}
 
-The [documentation](https://tailwindcss.com/docs/installation){target="_blank"} shows two main installation approaches.  The default "Tailwind CLI" method is the way to go as we're not dealing with JS tooling or edge cases the other option may be suited for.  The common denominator is PostCSS - more on this below.
+The [documentation](https://tailwindcss.com/docs/installation){target="_blank"} shows two main installation approaches.  I use the "Tailwind CLI" option, as invoking the CLI directly is the only way to take advantage of its super-fast incremental builds.
 
 ## Install & Initialize {#init}
 
 - In the Blazor project folder, run `npm init --yes` to initialize a `package.json` using defaults. These are analogous to a `dotnet new` & `*.csproj`.
 - Next run `npm install -D tailwindcss`, similar to[^1^](/setup#npm-install) a `dotnet add package`.
-- Next, `npx tailwindcss init --postcss` which will write default `tailwind.config.js` and `postcss.config.js` files to disk.  (Note that this differs from the installation docs: adding `--postcss` which outputs a default `postcss.config.js`)
+- Next, `npx tailwindcss init --postcss` which will write default `tailwind.config.js` and `postcss.config.js` files to disk.  (Note that this differs from the installation docs: adding `--postcss` which outputs a default `postcss.config.js` - more below.)
 
 ---
 
 # Tailwind CSS Config {#twconfig}
 
-As of Tailwind CSS v3, the default `tailwind.config.js` file:
+As of Tailwind CSS v3.2, the default `tailwind.config.js` file:
 
 ```javascript:tailwind.config.js
+/** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [],
   theme: {
@@ -60,9 +63,8 @@ module.exports = {
 }
 ```
 
-Tailwind is massively [configurable](https://tailwindcss.com/docs/configuration){target="_blank"}, letting you override and extend values used when generating classes, and even [add your own](https://tailwindcss.com/docs/adding-new-utilities){target="_blank"} utility classes to participate in the CSS generation process.
 
-However, there's only one tweak needed to get started: `content` is how the JIT magic happens. Here you point Tailwind at any _markup_ files where its yet-to-be-generated CSS is being _used_. (Hence the "JIT" in "Tailwind JIT").  More specific configuration translates to better performance, but you don't want to miss any files either.  A decent starter for a Blazor project, taking advantage of globbing and negation/exclusion:
+To get started, `content` must point Tailwind at any _markup_ files where its yet-to-be-generated CSS is being _used_. (Hence the "JIT" in "Tailwind JIT").  More specific configuration translates to better performance, but you don't want to miss any files either.  A decent starter for a Blazor project, taking advantage of globbing and negation/exclusion:
 
 ```javascript:tailwind.config.js
 module.exports = { 
@@ -113,7 +115,7 @@ This is what you'll feed the `tailwindcss` CLI, and where you'll import any of y
 
 ## Behind the boilerplate CSS {#boilerplate-bg}
 
-A quick aside while we're dealing with Tailwind's boilerplate CSS.  Base, Components, and Utilities are CSS precedence layers.  Now, CSS has [its own `@layer` feature](https://developer.mozilla.org/en-US/docs/Web/CSS/@layer), but this is a bit different.  Here's what Tailwind contributes to these layers:
+A quick aside while we're dealing with Tailwind's boilerplate CSS.  Base, Components, and Utilities are "layers" - looking at the [tailwind docs](https://tailwindcss.com/docs/functions-and-directives){target="_blank"}: "Directives are custom Tailwind-specific at-rules you can use in your CSS that offer special functionality for Tailwind CSS projects."  How/if Tailwind's `@layer` differs from [vanilla CSS](https://developer.mozilla.org/en-US/docs/Web/CSS/@layer){target="_blank"} i do not know.  Here's what Tailwind contributes to these layers:
 
 * `base` is a slim set of [base styles](https://tailwindcss.com/docs/preflight){target="_blank"}.  It aims to reset styles to reasonable and consistent defaults.  Excluding this is handy when you want to see *only* what Tailwind is generating based on what it sees in your `content` and similar demo/troubleshooting scenarios.
 * `components` - as far as i know, [`container`](https://tailwindcss.com/docs/container){target="_blank"} is the only thing Tailwind outputs here (if you use it).  Plugins can add add styles here (or elsewhere) though.
@@ -129,8 +131,7 @@ More about layers in [notes](notes#layer).
 
 [[1]](/setup#init){.pl-4 .inline} `npm install` vs `dotnet add package`/`dotnet tool install`: {#npm-install}
 
-  `npm install foo` is analogous to a `dotnet add package foo` for most use cases. But here we're using `npm install -D` *(`-D` being short for `--save-dev`)* - which is more like a [`dotnet tool install`](https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-tool-install){target="_blank"}. These are used when the packages being installed are _development tools_, not _project dependencies_. `dotnet tool install` isn't used nearly as much as `npm install -D`, much less with _local_ tools. (You may remember when `dotnet watch` needed to be [installed](https://www.nuget.org/packages/dotnet-watch){target="_blank"}.) Some handy dotnet global tools are [dotnet format](https://www.nuget.org/packages/dotnet-format/){target="_blank"}, [dotnet outdated](https://www.nuget.org/packages/dotnet-outdated-tool/){target="_blank"}, and finally [dotnet script](https://www.nuget.org/packages/dotnet-script/){target="_blank"} for C# scripting and a REPL, with VSCode debugging support. {.text-base }    
-
+  `npm install foo` is analogous to a `dotnet add package foo` for most use cases. But here we're using `npm install -D` *(`-D` being short for `--save-dev`)* - which is more like a [`dotnet tool install`](https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-tool-install){target="_blank"}. These are used when the packages being installed are _development tools_, not _project dependencies_.
 ---
 
 ::: {.text-xl .italic .light .text-right .pr-6 }

@@ -60,23 +60,6 @@ There are *[loads](https://www.postcss.parts/){target="_blank"}* of other PostCS
 
 ---
 
-# Razor Class Libraries: Sharing Razor Components {#rcl}
-
-More to come on this topic, but for now...
-
-By putting all or most of your UI into a [Razor Class Library](https://docs.microsoft.com/en-us/aspnet/core/razor-pages/ui-class?view=aspnetcore-6.0&tabs=visual-studio){target="_blank"}, you can share Components, Pages / Routable Components, even your Layouts and `App.razor` with other Blazor-capable projects.  See [tailblazor-templates](https://github.com/McNerdius/TailBlazor-Templates/tree/main/Templates/MultiProject){target="_blank"}'s MutliProject template to see this in action.  
-
-Here's some notes on how i set up a solution, using a shared `RazorClassLibrary.csproj`:
-
-* I keep the `npm` related files at the root of the solution, not in the Razor Class Library's folder.  This includes `package.json`, `tailwind.config.js`, `postcss.config.js`, `node-modules`, the root CSS file (call it `site.css` for these notes), and so on.
-* `site.css` will reference the Razor Class Library's `*.styles.css` bundle: `@import "./RazorClassLibrary/obj/scopedcss/bundle/RazorClassLibrary.styles.css";`,
-* and `package.json` will output to `RazorClassLibrary`: `./RazorClassLibrary/wwwroot/css/site.min.css`.  This folder will automatically get pulled into other projects, and placed at `wwwroot/_content/RazorClassLibrary`.
-* This means that any references to these shared files must be prefixed with `./_content/RazorClassLibrary/`.  For instance, a Blazor Wasm project consuming the Razor Class Library will need to use `<link rel="stylesheet" href="./_content/RazorClassLibrary/css/site.min.css"/>`, any Components using [JavaScript Isolation](https://docs.microsoft.com/en-us/aspnet/core/blazor/javascript-interoperability/call-javascript-from-dotnet?view=aspnetcore-6.0#javascript-isolation-in-javascript-modules){target="_blank"} will use JSRuntime to import their scripts from `"./_content/RazorClassLibrary/Components/{ComponentName}/{ComponentName}.razor.js"`.
-* While i avoid placing Components and the like in projects that reference the Razor Class Library, i still set up the `contents` value in `tailwind.config.js` to look at the solution as a whole, not just the Razor Class Library on the off chance i'm using Tailwind CSS classes in non-shared UI.  Also, be sure to include `cshtml` if relevant:  `content: [ './**/*.{razor,html,cshtml}' ]`.
-* ... i'm probably forgetting stuff ...
-
----
-
 # Fluent UI Web Components: Easy drop-ins while prototyping {#components}
 
 Rather than resorting to using something like Bootstrap alongside Tailwind/Blazor, i've been using Microsoft's [Fluent UI Web Components](https://fluent-components.azurewebsites.net/?path=/docs/getting-started-overview--page){target="_blank"} via [the CDN](https://github.com/microsoft/fluentui/tree/master/packages/web-components#from-cdn){target="_blank"} to start, phasing in my own components as a project progresses until i can eliminate the ~85kb dependency. Notice there is a [Blazor NuGet Package](https://github.com/microsoft/fast-blazor){target="_blank"} but there is a [fundamental issue](https://github.com/microsoft/fast-blazor/issues/125){target="_blank"} with styling the Razor Components. (You may have experienced this sort of thing with NavLink.)  Since i typically use them as stand-ins while i build my own, i take the quick and dirty Web Components CDN route.

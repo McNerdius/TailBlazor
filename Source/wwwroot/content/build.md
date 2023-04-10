@@ -18,7 +18,7 @@
 
 # Tailwind Incremental Builds, and maybe Hot Reload {#intro}
 
-So far we've put four more-or-less boilerplate files on disk and installed a single package from `npm` to add Tailwind CSS to the `blazorwasm` template.  Not too shabby.  Getting build & watch set up is pretty easy too, but unfortunately Hot Reload support is inconsistent between .NET project types.
+So far we've put four more-or-less boilerplate files on disk and installed a single package from `npm` to add Tailwind CSS to the `blazorwasm-empty` template.  Not too shabby.  Getting build & watch set up is pretty easy too, but unfortunately Hot Reload support is inconsistent between .NET project types.
 
 On the Tailwind side of things, nothing fancy is happening - just a fresh CSS file being output to `wwwroot` as needed.  For some project types, Hot Reload doesn't refresh the browser when it sees these changes (yet) - hopefully a fix for this seemingly-trivial issue will come soon.  This [GitHub Issue](https://github.com/dotnet/aspnetcore/issues/37496){target="_blank"} shows a script that reloads the CSS file on a timer.  I think it'd be interesting to make that into a Component - definitely on the todo list.
 
@@ -39,9 +39,9 @@ Swap the `"test"` line for the following:
 ```json:package.json
 "scripts": { 
 -  "test": "echo \"Error: no test specified\" && exit 1",
-+  "build": "npx tailwindcss --config tailwind.config.js --postcss postcss.config.js -i site.css -o ./wwwroot/site.min.css",
-+  "watch": "npx tailwindcss --config tailwind.config.js --postcss postcss.config.js -i site.css -o ./wwwroot/site.min.css --watch",
-+  "publish": "npx tailwindcss --config tailwind.config.js --postcss postcss.config.js -i site.css -o ./wwwroot/site.min.css --minify"
++  "build": "npx tailwindcss --postcss postcss.config.js -i site.css -o ./wwwroot/site.min.css",
++  "watch": "npx tailwindcss --postcss postcss.config.js -i site.css -o ./wwwroot/site.min.css --watch",
++  "publish": "npx tailwindcss --postcss postcss.config.js -i site.css -o ./wwwroot/site.min.css --minify"
 }
 ```
 

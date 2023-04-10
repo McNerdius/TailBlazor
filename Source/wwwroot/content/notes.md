@@ -22,7 +22,7 @@
 
 As i work on rehashing the site for these updates, i'll be using this section as a dumping ground for new content that should find a more appropriate home later on.  See the [readme](https://github.com/McNerdius/TailBlazor/blob/main/readme.md){target="_blank"} to see how that's going.
 
-* The new `blazor*-empty` templates are a great addition to .NET 7, as are the new [loading progress properties](https://devblogs.microsoft.com/dotnet/asp-net-core-updates-in-dotnet-7-preview-7/#new-blazor-loading-page){target="_blank"}.  But the `-empty` templates don't show off tese additions.  I've updated the `tailblazor.dev` awesomeface-loader to show progress by extending `width` and `content` in tailwind config, wrapping the new CSS properties/variables.  In `tailblazor-templates` i will stick to the .NET 7 "full" template's design, with some Tailwind peppered in.
+* The new `blazor*-empty` templates are a great addition to .NET 7, as are the new [loading progress properties](https://devblogs.microsoft.com/dotnet/asp-net-core-updates-in-dotnet-7-preview-7/#new-blazor-loading-page){target="_blank"}.  But the `-empty` templates don't show off these additions.  I've updated the `tailblazor.dev` awesomeface-loader to show progress by extending `width` and `content` in [tailwind.config.js](https://github.com/McNerdius/TailBlazor/blob/main/Source/tailwind.config.js), wrapping the new CSS properties/variables.  In `tailblazor-templates` i will stick to the .NET 7 "full" template's design, with some tailwind css peppered in.
 *  
 
 
@@ -39,7 +39,7 @@ The essential plugins, in the order they should be run:
 
 - `tailwindcss` - yep, `tailwindcss` itself is a PostCSS plugin.  
 
-- [`autoprefixer`](https://github.com/postcss/autoprefixer){target="_blank"} applies "vendor prefixes" to your CSS to accommodate vendor-specific implementations of CSS features.  This should run second-to-last, after all CSS is built up.
+- [`autoprefixer`](https://github.com/postcss/autoprefixer){target="_blank"} applies "vendor prefixes" to your CSS to accommodate vendor-specific implementations of CSS features.  This is run second-to-last, after all CSS is built up.
 
 - [`cssnano`](https://cssnano.co/docs/introduction/){target="_blank"} optionally minifies your output CSS, if you pass `--minify` to the CLI.  Obviously this needs to be run last !
 
@@ -139,10 +139,9 @@ Even when/if third-party plugins are supported, the standalone CLI and plugins w
 
 ---
 
-## Tailwind CDN {#CDN}
+## Tailwind Play {#CDN}
 
-- Old: Don't use it
-- [New](https://www.youtube.com/watch?v=mSC6GwizOag){target="_blank"}: Nifty, but not for production.
+GOOD STUFF
 
 ---
 
