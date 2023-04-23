@@ -3,6 +3,11 @@
 
 # Changes
 
+2022-4-23
+
+* Update to .NET 7 & Tailwind 3.3
+* Rewrite content, using `blazorwasm-empty` as the starting template (yay) and adding in a page load indicator as it is omitted from the `empty` template.
+
 2022-7-3
 
 * Rewrite content regarding PostCSS and `postcss-import` for clarity and to reflect the changes in Tailwind 3.1

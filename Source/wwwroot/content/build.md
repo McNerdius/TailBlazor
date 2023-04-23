@@ -50,7 +50,7 @@ _(Yes, that is `npx` not `npm`)_
 Connecting the dots here: point the `tailwindcss` CLI at the relevant config, input, and output files.  `npm run build` will do a one-off build, `npm run watch` is what gives us the quick incremental builds akin to Hot Reload, and `npm run publish` will do a one-off build, plus `cssnano` minification.
 
 ::: info
-Finally !  Having created `site.css` and done the initial configuration, running `npm run build` will run `tailwindcss`, using `site.css` and markup specified in `tailwind.config.js`'s `content` section to generate a vanilla `site.min.css`.
+Finally !  Having created `site.css` and done the initial configuration, running `npm run build` will run `tailwindcss`, using `site.css` and markup specified in `tailwind.config.ts`'s `content` section to generate a vanilla `site.min.css`.
 :::
 
 ---

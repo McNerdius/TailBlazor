@@ -32,55 +32,62 @@ Running `dotnet workload install wasm-tools` (".NET WebAssembly build tools" in 
 * Move `wwwroot/css/app.css` up to project root, rename it `site.css`
 * Change `index.html` stylesheet link to `site.min.css`
 
-These are just my go-to generic filenames of course.
+Mind that these are just generic filenames/paths to demonstrate the setup, not best practices or anything.
 
 ---
 
 # Tailwind CSS setup {#twsetup}
 
-The [documentation](https://tailwindcss.com/docs/installation){target="_blank"} shows two main installation approaches.  I use the "Tailwind CLI" option, as invoking the CLI directly is the only way to take advantage of its super-fast incremental builds.
+The [documentation](https://tailwindcss.com/docs/installation){target="_blank"} shows two main installation approaches.  I use the "Tailwind CLI" option, as invoking the CLI directly is the only way to take advantage of its super-fast incremental builds.  Again, bear with me - there are nuget packages and a standalone executable, but the node/`npm` approach wins, IMO.  See [notes](TODO) for details.
 
 ## Install & Initialize {#init}
 
 - In the Blazor project folder, run `npm init --yes` to initialize a `package.json` using defaults. These are analogous to a `dotnet new` & `*.csproj`.
 - Next run `npm install -D tailwindcss`, similar to[^1^](/setup#npm-install) a `dotnet add package`.
-- Next, `npx tailwindcss init --postcss` which will write default `tailwind.config.js` and `postcss.config.js` files to disk.  (Note that this differs from the installation docs: adding `--postcss` which outputs a default `postcss.config.js` - more below.)
+- Next, `npx tailwindcss init --postcss --ts` which will write default `tailwind.config.ts` and `postcss.config.js` files to disk.  (Note that this differs from the installation docs: adding `--postcss` which outputs a default `postcss.config.js` - more below.)
 
+::: info
+
+note the use of `npx`, similar in purpose to [`dotnet tool`](https://learn.microsoft.com/en-us/dotnet/core/tools/global-tools#invoke-a-global-tool){target="_blank"}.
+
+:::
 ---
 
 # Tailwind CSS Config {#twconfig}
 
-As of Tailwind CSS v3.2, the default `tailwind.config.js` file:
+As of Tailwind CSS v3.3, the default `tailwind.config.ts` file:
 
-```javascript:tailwind.config.js
-/** @type {import('tailwindcss').Config} */
-module.exports = {
+```typescript:tailwind.config.ts
+import type { Config } from 'tailwindcss'
+
+export default {
   content: [],
   theme: {
     extend: {},
   },
   plugins: [],
-}
+} satisfies Config
 ```
-
 
 To get started, `content` must point Tailwind at any _markup_ files where its yet-to-be-generated CSS is being _used_. (Hence the "JIT" in "Tailwind JIT").  More specific configuration translates to better performance, but you don't want to miss any files either.  A decent starter for a Blazor project, taking advantage of globbing and negation/exclusion:
 
-```javascript:tailwind.config.js
-module.exports = { 
+```typescript:tailwind.config.ts
+import type { Config } from 'tailwindcss'
+
+export default {
 -    content: [], 
 +    content: [
 +        '!**/{bin,obj,node_modules}/**',
 +        '**/*.{razor,html,cshtml}',
 +    ],
-    theme: { 
-        extend: {}, 
-    }, 
-    plugins: [] 
-}
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+} satisfies Config
 ```
 
-Of course for Blazor WebAssembly, `cshtml` would be excluded.  Also consider that there may be cases where you use Tailwind-generated classes in `.razor.cs` backing code, `svg` files, or elsewhere.  See [here](https://tailwindcss.com/docs/content-configuration#configuring-source-paths){target="_blank"} for more info on `content`.
+Consider that there may be cases where you use Tailwind-generated classes in `.razor.cs` backing code, `svg` files, or elsewhere.  See [here](https://tailwindcss.com/docs/content-configuration#configuring-source-paths){target="_blank"} for more info on `content`.
 
 ---
 
@@ -111,7 +118,7 @@ Lastly, make a "root" CSS file next to the config files, say `site.css`, and add
 @import "tailwindcss/utilities";
 ```
 
-This is what you'll feed the `tailwindcss` CLI, and where you'll import any of your project's CSS later.  Note this syntax is different from what you'll see in some of the docs (`@tailwind ...`).  I've found the behavior of `@import` easier to reason about.
+This is what you'll feed the `tailwindcss` CLI, and where you'll import any of your project's CSS later.  Note this syntax is different from what you'll see in some of the docs (`@tailwind ...`).  I've found the behavior of `@import` easier to reason about, but either should work.
 
 ## Behind the boilerplate CSS {#boilerplate-bg}
 
