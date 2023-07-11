@@ -1,0 +1,116 @@
+<p>:::: nav</p>
+<p>Setup { .font-bold }
+:::</p>
+<ul>
+<li><a href="setup#blazor">Blazor</a></li>
+<li><a href="setup#twsetup">Tailwind</a>
+:::
+Config { .font-bold }
+:::</li>
+<li><a href="setup#twconfig">Tailwind</a></li>
+<li><a href="setup#postcss">PostCSS</a>
+:::
+<a href="setup#boilerplate">Boilerplate CSS</a></li>
+</ul>
+<p>::::</p>
+<p>:::: content</p>
+<h1>.NET/Blazor setup {#blazor}</h1>
+<p>I'll be tweaking a default .NET 7 Blazor Empty WebAssembly project here - the steps are largely the same for other project types and i'll do my best to call out any differences.  I'll be using the <code>dotnet</code> CLI: each IDE does things differently and may change from version to version, but the CLI is a constant.</p>
+<p>::: info</p>
+<p>Running <code>dotnet workload install wasm-tools</code> (&quot;.NET WebAssembly build tools&quot; in Visual Studio installer) is required if your project will use AOT or native dependencies.  It's not required for basic projects, but installing it will enable <a href="https://learn.microsoft.com/en-us/aspnet/core/blazor/host-and-deploy/webassembly?view=aspnetcore-7.0#runtime-relinking">runtime relinking</a>{target=&quot;_blank&quot;}.  It is quite large though, about 1.5GB</p>
+<p>:::</p>
+<h2>Scaffold &amp; Tweak</h2>
+<ul>
+<li>Run <code>dotnet new blazorwasm-empty</code> and <code>dotnet new gitignore</code></li>
+<li>Move <code>wwwroot/css/app.css</code> up to project root, rename it <code>site.css</code></li>
+<li>Change <code>index.html</code> stylesheet link to <code>site.min.css</code></li>
+</ul>
+<p>Mind that these are just generic filenames/paths to demonstrate the setup, not best practices or anything.</p>
+<hr />
+<h1>Tailwind CSS setup {#twsetup}</h1>
+<p>The <a href="https://tailwindcss.com/docs/installation">documentation</a>{target=&quot;_blank&quot;} shows two main installation approaches.  I use the &quot;Tailwind CLI&quot; option, not the standalone executable or dotnet helpers.  See <a href="/notes#nonjs">notes</a> for more on this.</p>
+<h2>Install &amp; Initialize {#init}</h2>
+<ul>
+<li>In the Blazor project folder, run <code>npm init --yes</code> to initialize a <code>package.json</code> using defaults. These are analogous to a <code>dotnet new</code> &amp; <code>*.csproj</code>.</li>
+<li>Next run <code>npm install -D tailwindcss</code>, similar to<a href="/setup#npm-install">^1^</a> a <code>dotnet add package</code>.</li>
+<li>Next, <code>npx tailwindcss init --postcss</code> which will write default <code>tailwind.config.ts</code> and <code>postcss.config.js</code> files to disk.  (Note that this differs from the installation docs: adding <code>--postcss</code> which outputs a default <code>postcss.config.js</code> - more below.)</li>
+</ul>
+<p>::: info</p>
+<p>note the use of <code>npx</code>, similar in purpose to <a href="https://learn.microsoft.com/en-us/dotnet/core/tools/global-tools#invoke-a-global-tool">dotnet tool</a>{target=&quot;_blank&quot;}.</p>
+<p>:::</p>
+<hr />
+<h1>Tailwind CSS Config {#twconfig}</h1>
+<p>As of Tailwind CSS v3.3, the default <code>tailwind.config.js</code> file:</p>
+<div class="mc-code-block not-prose">
+<div class="mc-code-filename">tailwind.config.js</div>
+<div class="mc-code-lines">
+<div class="mc-diff"></div> <pre class="mc-code">/** @type {import('tailwindcss').Config} */</pre>
+<div class="mc-diff"></div> <pre class="mc-code">module.exports = {</pre>
+<div class="mc-diff"></div> <pre class="mc-code">  content: [],</pre>
+<div class="mc-diff"></div> <pre class="mc-code">  theme: {</pre>
+<div class="mc-diff"></div> <pre class="mc-code">    extend: {},</pre>
+<div class="mc-diff"></div> <pre class="mc-code">  },</pre>
+<div class="mc-diff"></div> <pre class="mc-code">  plugins: [],</pre>
+<div class="mc-diff"></div> <pre class="mc-code">}</pre>
+</div></div>
+<p>To get started, <code>content</code> must point Tailwind at any <em>markup</em> files where its yet-to-be-generated CSS is being <em>used</em>. (Hence the &quot;JIT&quot; in &quot;Tailwind JIT&quot;).  More specific configuration translates to better performance, but you don't want to miss any files either.  A decent starter for a Blazor project, taking advantage of globbing and negation/exclusion:</p>
+<div class="mc-code-block not-prose">
+<div class="mc-code-filename">tailwind.config.js</div>
+<div class="mc-code-lines">
+<div class="mc-diff"></div> <pre class="mc-code">/** @type {import('tailwindcss').Config} */</pre>
+<div class="mc-diff"></div> <pre class="mc-code">module.exports = {</pre>
+<div class="mc-diff"></div> <pre class="mc-code">  content: [</pre>
+<div class="mc-diff"></div> <pre class="mc-code">      '!**/{bin,obj,node_modules}/**',</pre>
+<div class="mc-diff"></div> <pre class="mc-code">      '**/*.{razor,html,cshtml}'</pre>
+<div class="mc-diff"></div> <pre class="mc-code">  ],</pre>
+<div class="mc-diff"></div> <pre class="mc-code">  theme: {</pre>
+<div class="mc-diff"></div> <pre class="mc-code">    extend: {},</pre>
+<div class="mc-diff"></div> <pre class="mc-code">  },</pre>
+<div class="mc-diff"></div> <pre class="mc-code">  plugins: [],</pre>
+<div class="mc-diff"></div> <pre class="mc-code">}</pre>
+</div></div>
+<p>Consider that there may be cases where you use Tailwind-generated classes in <code>.razor.cs</code> backing code, <code>svg</code> files, or elsewhere.  See <a href="https://tailwindcss.com/docs/content-configuration#configuring-source-paths">here</a>{target=&quot;_blank&quot;} for more info on <code>content</code>.</p>
+<p>That's the only required configuration - pointing out your files.  The <code>theme</code> and <code>plugin</code> properties are akin to using Bootstrap Sass to override, extend, or disable generated utilities.  Note that you can use CSS variables - see <a href="https://tailwindcss.com/docs/customizing-colors#using-css-variables">here</a>{target=&quot;_blank&quot;} for an example using colors.  (Heck, you can <a href="https://tailwindcss.com/blog/tailwindcss-v3-3#css-variables-without-the-var">use them inline</a>{target=&quot;_blank&quot;} too.)  I digress...</p>
+<hr />
+<h1>PostCSS Config {#postcss}</h1>
+<p>PostCSS is a general-purpose pipeline to transform input CSS through user-specified <a href="https://github.com/postcss/postcss/blob/main/docs/plugins.md">plugins</a>.  The Tailwind CLI wraps PostCSS functionality, automagically including some essential plugins.  Tweaking this list requires a <code>postcss.config.js</code>.</p>
+<p>I'll go into a bit more over in <a href="notes#postcss">notes</a>, but for now replace the contents of <code>postcss.config.js</code> with the following:</p>
+<div class="mc-code-block not-prose">
+<div class="mc-code-filename">postcss.config.js</div>
+<div class="mc-code-lines">
+<div class="mc-diff"></div> <pre class="mc-code">module.exports = {</pre>
+<div class="mc-diff"></div> <pre class="mc-code">    plugins: {</pre>
+<div class="mc-diff"></div> <pre class="mc-code">        'postcss-import': {},</pre>
+<div class="mc-diff"></div> <pre class="mc-code">        tailwindcss: {}</pre>
+<div class="mc-diff"></div> <pre class="mc-code">    }</pre>
+<div class="mc-diff"></div> <pre class="mc-code">};</pre>
+</div></div>
+<hr />
+<h1>Tailwind CSS Boilerplate {#boilerplate}</h1>
+<p>Lastly, make a &quot;root&quot; CSS file next to the config files, say <code>site.css</code>, and add the following:</p>
+<div class="mc-code-block not-prose">
+<div class="mc-code-filename">site.css</div>
+<div class="mc-code-lines">
+<div class="mc-diff"></div> <pre class="mc-code">@import &quot;tailwindcss/base&quot;;</pre>
+<div class="mc-diff"></div> <pre class="mc-code">@import &quot;tailwindcss/components&quot;;</pre>
+<div class="mc-diff"></div> <pre class="mc-code">@import &quot;tailwindcss/utilities&quot;;</pre>
+</div></div>
+<p>This is what you'll feed the <code>tailwindcss</code> CLI, and where you'll import any of your project's CSS later.  Note this syntax is different from what you'll see in some of the docs (<code>@tailwind ...</code>).  I've found the behavior of <code>@import</code> easier to reason about, but either should work.</p>
+<h2>Behind the boilerplate CSS {#boilerplate-bg}</h2>
+<p>A quick aside while we're dealing with Tailwind's boilerplate CSS.  Base, Components, and Utilities are &quot;layers&quot; - looking at the <a href="https://tailwindcss.com/docs/functions-and-directives">tailwind docs</a>{target=&quot;_blank&quot;}: &quot;Directives are custom Tailwind-specific at-rules you can use in your CSS that offer special functionality for Tailwind CSS projects.&quot;  How/if Tailwind's <code>@layer</code> differs from <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@layer">vanilla CSS</a>{target=&quot;_blank&quot;} i do not know.  Here's what Tailwind contributes to these layers:</p>
+<ul>
+<li><code>base</code> is a slim set of <a href="https://tailwindcss.com/docs/preflight">base styles</a>{target=&quot;_blank&quot;}.  It aims to reset styles to reasonable and consistent defaults.  Excluding this is handy when you want to see <em>only</em> what Tailwind is generating based on what it sees in your <code>content</code> and similar demo/troubleshooting scenarios.</li>
+<li><code>components</code> - as far as i know, <a href="https://tailwindcss.com/docs/container"><code>container</code></a>{target=&quot;_blank&quot;} is the only thing Tailwind outputs here (if you use it).  Plugins can add add styles here (or elsewhere) though.</li>
+<li><code>utilities</code> for, well, utility classes.</li>
+</ul>
+<p>Wether you use <code>@tailwind ...</code> or <code>@import &quot;tailwindcss/...</code>, the CSS generated for the specified is then inlined:</p>
+<p><a href="/images/default_layers.png"><img src="/images/default_layers.png" alt="default_layers" /></a>{target=&quot;_blank&quot;}</p>
+<p>More about layers in <a href="notes#layer">notes</a>.</p>
+<hr />
+<p><a href="/setup#init">[1]</a>{.pl-4 .inline} <code>npm install</code> vs <code>dotnet add package</code>/<code>dotnet tool install</code>: {#npm-install}</p>
+<p><code>npm install foo</code> is analogous to a <code>dotnet add package foo</code> for most use cases. But here we're using <code>npm install -D</code> <em>(<code>-D</code> being short for <code>--save-dev</code>)</em> - which is more like a <a href="https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-tool-install"><code>dotnet tool install</code></a>{target=&quot;_blank&quot;}. These are used when the packages being installed are <em>development tools</em>, not <em>project dependencies</em>.</p>
+<hr />
+<p>::: {.text-xl .italic .light .text-right .pr-6 }
+<a href="/build">next: build &amp; watch</a>
+:::</p>
+<p>::::</p>

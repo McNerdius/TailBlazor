@@ -1,0 +1,117 @@
+<p>:::: nav</p>
+<p><a href="/notes#postcss">PostCSS</a>
+<a href="/notes#directives">Tailwind Directives</a>
+:::</p>
+<ul>
+<li><a href="/notes#layer">@layer</a></li>
+<li><a href="/notes#tailwind">@tailwind</a>
+:::
+<a href="/notes#nonjs"><code>node.js</code> Alternatives</a>
+:::</li>
+<li><a href="/notes#CLI">Standalone CLI</a></li>
+<li><a href="/notes#CDN">CDN</a></li>
+<li><a href="/notes#dotnet">Helpers</a>
+:::
+<a href="/notes#VS">Visual Studio</a>
+<a href="/notes#VSCode">VS Code</a></li>
+</ul>
+<p>::::</p>
+<p>:::: content</p>
+<h1>A bit more on PostCSS {#postcss}</h1>
+<p>As mentioned in <a href="/setup#postcss">setup</a>, the <code>tailwindcss</code> CLI wraps PostCSS functionality and bundles a few essential plugins: <code>postcss-import</code>, <code>autoprefixer</code>, and <code>cssnano</code>.  They don't need to be installed manually, and will be applied automatically if you don't pass a <code>postcss.config.js</code> file to the <code>tailwindcss</code> CLI.</p>
+<p>The essential plugins, in the order they should be run:</p>
+<ul>
+<li><p><a href="https://github.com/postcss/postcss-import"><code>postcss-import</code></a>{target=&quot;_blank&quot;} mimics vanilla CSS <code>@import</code> by inlining the contents of the css files being imported.  As such, it should always be the first plugin applied to your input CSS.</p>
+</li>
+<li><p><code>tailwindcss</code> - yep, <code>tailwindcss</code> itself acts as a PostCSS plugin.</p>
+</li>
+<li><p><a href="https://github.com/postcss/autoprefixer"><code>autoprefixer</code></a>{target=&quot;_blank&quot;} applies &quot;vendor prefixes&quot; to your CSS to accommodate vendor-specific implementations of CSS features.  This is run second-to-last, after all CSS is built up.</p>
+</li>
+<li><p><a href="https://cssnano.co/docs/introduction/"><code>cssnano</code></a>{target=&quot;_blank&quot;} optionally minifies your output CSS, if you pass <code>--minify</code> to the CLI.  Obviously this needs to be run last !</p>
+</li>
+</ul>
+<p>The above is how it works without passing <code>--postcss postcss.config.js</code> to the <code>tailwindcss</code> CLI.  Opting for a <code>postcss.config.js</code> means we have to spell things out a bit, which is what i've shown in <a href="/setup#postcss">setup</a> and <a href="/tidy_css#nesting">nesting</a>.  Here's a simplified view of things - noting that if you do use a <code>postcss.config.js</code>, the extra plugins you're using should be sandwiched between <code>postcss-import</code> at the top, and <code>tailwindcss</code> at the bottom.</p>
+<p><a href="images/postcss.drawio.svg"><img src="images/postcss.drawio.svg" alt="postcss" /></a>{target=&quot;_blank&quot;}</p>
+<h2>Tailwind's Default <code>init --postcss</code> Config {#postcssconfig}</h2>
+<p>The default <code>postcss.config.js</code> includes itself and <code>autoprefixer</code> explicitly:</p>
+<div class="mc-code-block not-prose">
+<div class="mc-code-filename">postcss.config.js</div>
+<div class="mc-code-lines">
+<div class="mc-diff"></div> <pre class="mc-code">module.exports = {</pre>
+<div class="mc-diff"></div> <pre class="mc-code">  plugins: {</pre>
+<div class="mc-diff"></div> <pre class="mc-code">    tailwindcss: {},</pre>
+<div class="mc-diff"></div> <pre class="mc-code">    autoprefixer: {},</pre>
+<div class="mc-diff"></div> <pre class="mc-code">  }</pre>
+<div class="mc-diff"></div> <pre class="mc-code">}</pre>
+</div></div>
+<p>This file, as-is, is only needed <em>if you're not using the <code>tailwindcss</code> CLI directly</em>. If one were to use other JS tooling, it would be needed. When using the <code>tailwindcss</code> CLI directly:</p>
+<ul>
+<li><code>autoprefixer</code> never needs to be listed, <code>tailwindcss</code> will do that for us.</li>
+<li><code>tailwindcss</code> only needs to be listed if it's not running first, as is the case with <code>postcss-import</code> or <a href="/next#nesting"><code>tailwindcss/nesting</code></a>. So here's what my default <code>postcss.config.js</code> looks like when i'm using the nifty nesting plugin:</li>
+</ul>
+<div class="mc-code-block not-prose">
+<div class="mc-code-filename">postcss.config.js</div>
+<div class="mc-code-lines">
+<div class="mc-diff"></div> <pre class="mc-code">module.exports = {</pre>
+<div class="mc-diff"></div> <pre class="mc-code">    plugins: {</pre>
+<div class="mc-diff"></div> <pre class="mc-code">        'postcss-import': {},</pre>
+<div class="mc-diff"></div> <pre class="mc-code">        'tailwindcss/nesting': {},</pre>
+<div class="mc-diff"></div> <pre class="mc-code">        tailwindcss: {},</pre>
+<div class="mc-diff"></div> <pre class="mc-code">    },</pre>
+<div class="mc-diff"></div> <pre class="mc-code">}</pre>
+</div></div>
+<p>::: info</p>
+<p>Tailwind CSS v3.1 <a href="https://tailwindcss.com/blog/tailwindcss-v3-1#built-in-support-for-css-imports-in-the-cli">&quot;bakes in&quot; <code>postcss-import</code></a>, but not to the same degree as <code>autoprefixer</code> and <code>cssnano</code>.  Those two never need to be listed in <code>postcss.config.js</code>, whereas <code>postcss-import</code> still needs to be listed first.  So it's, uh, half-baked-in, one could say.</p>
+<p>:::</p>
+<hr />
+<h1>Tailwind CSS Directives  {#directives}</h1>
+<p>Let's take a look at how <code>postcss-import</code> influences the way we use Tailwind's <a href="https://tailwindcss.com/docs/functions-and-directives#directives"><code>@layer</code> and <code>@tailwind</code> directives</a>{target=&quot;_blank&quot;}.</p>
+<h2>The <code>@layer</code> directive {#layer}</h2>
+<p>In short, the <a href="https://tailwindcss.com/docs/adding-custom-styles#using-css-and-layer"><code>@layer</code> directive</a>{target=&quot;_blank&quot;} tells the Tailwind CLI to give your CSS a bit of extra attention.  It will be output along with the associated layer (<a href="setup#boilerplate-bg">recap</a>{target=&quot;_blank&quot;}) rather than inline, and be usable with modifiers like <code>hover</code>, dark mode, responsive breakpoints, etc.  (For the following examples i've overriden <code>screens</code> in <code>tailwind.config.ts</code> to only include a single <code>1024px</code> breakpoint.  Better quality images at some point, 4 bit is a bit ugly, eh. 🤔)</p>
+<p>Here's example without use of layers: note the ordering, and that while <code>dark-utility</code> is generated, <code>dark:dark-utility</code> won't <em>actually work</em>:</p>
+<p><a href="images/step1-vanilla.png"><img src="images/step1-vanilla.png" alt="step1-vanilla" /></a>{target=&quot;_blank&quot;}</p>
+<p>Adding <code>@layer</code> into the mix, we get smart ordering and a proper <code>dark:dark-utility</code>:</p>
+<p><a href="images/step2-layer.png"><img src="images/step2-layer.png" alt="step2-layer" /></a>{target=&quot;_blank&quot;}</p>
+<p>Finally, putting our custom <code>layer</code> CSS in their own files:</p>
+<p><a href="images/step3-import.png"><img src="images/step3-import.png" alt="step3-import" /></a>{target=&quot;_blank&quot;}</p>
+<h2>The <code>@tailwind</code> directive {#tailwind}</h2>
+<p>Revisiting a basic <code>Site.css</code> boilerplate:</p>
+<div class="mc-code-block not-prose">
+<div class="mc-code-filename">site.css</div>
+<div class="mc-code-lines">
+<div class="mc-diff"></div> <pre class="mc-code">@import &quot;tailwindcss/base&quot;;</pre>
+<div class="mc-diff"></div> <pre class="mc-code">@import &quot;tailwindcss/components&quot;;</pre>
+<div class="mc-diff"></div> <pre class="mc-code">@import &quot;tailwindcss/utilities&quot;;</pre>
+<div class="mc-diff"></div> <pre class="mc-code">@import &quot;./obj/net6.0/scopedcss/bundle/site.styles.css&quot;;</pre>
+</div></div>
+<p>Some notes:</p>
+<ul>
+<li>We have to <code>@import</code> to use Blazor's generated CSS Isolation bundle.</li>
+<li>All <code>@import</code> directives have to be at the top of the file.</li>
+<li>Tailwind's layers <em>could be</em> imported at the bottom using the <code>@tailwind</code> directive.</li>
+<li><code>site.styles.css</code> is really more of a &quot;components&quot; thing, and could be moved up a line.</li>
+<li>Moving it up a line would <em>require</em> <code>@import &quot;tailwindcss/utilities&quot;;</code>, as opposed to <code>@tailwind utilities</code>.</li>
+</ul>
+<p>While it's not <em>always</em> necessary to use <code>@import</code> syntax versus <code>@tailwind</code> syntax when using <code>postcss-import</code>, i like to stick with the one syntax that works in all cases.  See more about this sort of thing on Tailwind's <a href="https://tailwindcss.com/docs/using-with-preprocessors#build-time-imports">build time imports</a>{target=&quot;_blank&quot;} docs section.</p>
+<hr />
+<h1>Node.js Alternatives {#nonjs}</h1>
+<p>I'm not a web developer, and the JS ecosystem is a bit churny and disjointed for me to keep up with.  Using vanilla CSS wouldn't require any of that, but it is my biggest source of frustration in learning front-end development.  Tailwind CSS, on the other hand, just &quot;clicks&quot; for me.</p>
+<p>The way i've shown how to set things up on this site requires installation of Node.js, <code>tailwindcss</code> itself, and scaffolding a few boilerplate/config files.  Pretty much &quot;set it and forget it&quot;.  That said - is there a <em>better</em>, Node.js-free alternative ?  Emphasis on <em>better</em>.</p>
+<h2>Tailwind Standalone CLI {#CLI}</h2>
+<p>Tailwind 3+ offers a <a href="https://tailwindcss.com/blog/standalone-cli">standalone executable</a>{target=&quot;_blank&quot;} CLI.  At the time of writing, the singular advantage is that Node.js isn't required.  Unfortunately, PostCSS (such as <code>tailwindcss/nesting</code>) or third party Tailwind plugins (such as <code>debug-screens</code>) can't be used with it.</p>
+<p>Even when/if these plugins are supported, the standalone CLI and plugins will have to be acquired/installed somehow.  Will this be a <em>better</em> developer experience than doing so via <code>npm</code> ?  Consider continuous deployment - Node.js is likely already there, making this a one-liner.</p>
+<hr />
+<h2>Tailwind Play {#CDN}</h2>
+<p>The <a href="https://tailwindcss.com/docs/installation/play-cdn">Play CDN</a> is VERY COOL for just messing about with Tailwind, is fully features and allows use of first-party plugins.  But, it weighs in at ~110KB and runs on the client, so less ideal for production.  Obligatory mention in this category is <a href="https://twind.style/installation#twind-cdn">Twind</a> - interesting, but lacks key Tailwind features.  I'll dive into this on my next project, &quot;Blit&quot;, and share a link here at a later date.</p>
+<hr />
+<h2>Dotnet Wrappers {#dotnet}</h2>
+<p>See <a href="/also#nuget">here</a></p>
+<hr />
+<h1>Visual Studio {#VS}</h1>
+<p>I've mentioned it before but worth repeating: the <a href="https://marketplace.visualstudio.com/items?itemName=MadsKristensen.NpmTaskRunner64">NPM Task Runner</a>{target=&quot;_blank&quot;} seems to be the ideal way to take full advantage of Tailwind's watch &amp; incremental builds within Visual Studio.  No need to try to wrangle it into MSBuild via an &quot;inline code task&quot; or remember to manually run scripts.  Just keep an eye on it in case <code>tailwindcss</code> has errors or crashes.</p>
+<hr />
+<h1>VS Code {#VSCode}</h1>
+<p>The <a href="https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss">Tailwind CSS Extension</a>{target=&quot;_blank&quot;} is incredible. Its intellisense is dynamic: it will pick up on new or overridden values in <code>tailwind.config.ts</code> as well any <a href="https://tailwindcss.com/docs/adding-new-utilities">utility classes</a>{target=&quot;_blank&quot;} or <a href="https://tailwindcss.com/docs/plugins">plugins</a>{target=&quot;_blank&quot;} you've added. It also provides previews of the generated vanilla CSS on hover in the same dynamic manner:</p>
+<p><img src="/images/hover.png" alt="previews" /></p>
+<hr />
+<p>::::</p>

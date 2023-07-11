@@ -18,40 +18,28 @@
 
 # Tailwind Incremental Builds, and maybe Hot Reload {#intro}
 
-So far we've put four more-or-less boilerplate files on disk and installed a single package from `npm` to add Tailwind CSS to the `blazorwasm-empty` template.  Not too shabby.  Getting build & watch set up is pretty easy too, but unfortunately Hot Reload support is inconsistent between .NET project types.
+So far we've got two config files, a `package.json`, and installed a single package from `npm` to add Tailwind CSS to the `blazorwasm-empty` template.  Not too shabby.  Getting build & watch set up is pretty easy too, but unfortunately Hot Reload support is inconsistent between .NET project types.
 
-On the Tailwind side of things, nothing fancy is happening - just a fresh CSS file being output to `wwwroot` as needed.  For some project types, Hot Reload doesn't refresh the browser when it sees these changes (yet) - hopefully a fix for this seemingly-trivial issue will come soon.  This [GitHub Issue](https://github.com/dotnet/aspnetcore/issues/37496){target="_blank"} shows a script that reloads the CSS file on a timer.  I think it'd be interesting to make that into a Component - definitely on the todo list.
+On the Tailwind side of things, nothing happens - just a fresh CSS file being output to `wwwroot` as needed.  For some project types, Hot Reload doesn't refresh the browser when it sees these changes (yet) - hopefully a fix for this seemingly-trivial issue will come soon.  This [GitHub Issue](https://github.com/dotnet/aspnetcore/issues/37496){target="_blank"} shows a script that reloads the CSS file on a timer.  I think it'd be interesting to make that into a Component - definitely on the todo list.
 
 Ideally Hot Reload would ensure you're seeing latest version of both your Components and CSS.  For some project types this is the case, but some are... less Hot Reloady than others.  Having to do a full rebuild or browser refresh to see updates for some project types is unfortunate, but also outside the scope of integrating Tailwind CSS into those projects.  Hopefully Hot Reload improves in that regard.
 
 ## Define `npm` helper scripts {#helpers}
 
-In the default `package.json` you'll see the following:
-
-```json:package.json
-"scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-},
-```
-
-Swap the `"test"` line for the following:
+Tweak `package.json` as follows:
 
 ```json:package.json
 "scripts": { 
 -  "test": "echo \"Error: no test specified\" && exit 1",
-+  "build": "npx tailwindcss --postcss postcss.config.js -i site.css -o ./wwwroot/site.min.css",
-+  "watch": "npx tailwindcss --postcss postcss.config.js -i site.css -o ./wwwroot/site.min.css --watch",
-+  "publish": "npx tailwindcss --postcss postcss.config.js -i site.css -o ./wwwroot/site.min.css --minify"
++  "build": "npx tailwindcss -i site.css -o ./wwwroot/css/site.min.css",
++  "watch": "npx tailwindcss -i site.css -o ./wwwroot/css/site.min.css --watch",
++  "publish": "npx tailwindcss -i site.css -o ./wwwroot/css/site.min.css --minify"
 }
 ```
 
 _(Yes, that is `npx` not `npm`)_
 
-Connecting the dots here: point the `tailwindcss` CLI at the relevant config, input, and output files.  `npm run build` will do a one-off build, `npm run watch` is what gives us the quick incremental builds akin to Hot Reload, and `npm run publish` will do a one-off build, plus `cssnano` minification.
-
-::: info
-Finally !  Having created `site.css` and done the initial configuration, running `npm run build` will run `tailwindcss`, using `site.css` and markup specified in `tailwind.config.ts`'s `content` section to generate a vanilla `site.min.css`.
-:::
+Simple stuff -  `npm run build` will do a one-off build, `npm run watch` is what gives us the quick incremental builds akin to Hot Reload, and `npm run publish` will do a one-off build, plus `cssnano` minification.
 
 ---
 
@@ -107,7 +95,7 @@ This is the essential section:
 </Target>
 ```
 
-`AfterBuild` is a standard [MSBuild Target](https://docs.microsoft.com/en-us/visualstudio/msbuild/target-element-msbuild){target="_blank"}.  This section defines our own `TailwindCSS` Target which runs after `AfterBuild`.  Building the Blazor project in `Debug` mode does a one-off `tailwindcss` build, and `Release` mode results in a `cssnano`-minified build, thanks to their respective `build` and `publish` scripts found in `package.json`.
+`AfterBuild` is a standard [MSBuild Target](https://docs.microsoft.com/en-us/visualstudio/msbuild/target-element-msbuild){target="_blank"}.  This section defines our own `TailwindCSS` Target which runs after `AfterBuild`.  Building the Blazor project in `Debug` mode does a one-off `tailwindcss` build, and `Release` mode results in a `cssnano`-minified build, thanks to their respective `build` and `publish` scripts found in `package.json`.  Using `dotnet watch` will trigger `tailwindcss` one-off builds for the initial run, but only for "rude edits" after that.  (TODO: confirm this is still the case.)
 
 
 ### The NpmInstallCheck Target { #install }
@@ -128,7 +116,7 @@ The next (kinda optional) snippet actually runs in-between `AfterBuild` and `Tai
 
 The `npm --version` command is there to verify Node.js/npm is installed: if it's not, the command will fail and you'll get a build error prompting to install node.js.  Otherwise `npm install` runs.  (When used without parameters `npm install` is akin to a `dotnet restore`, installing/updating dependencies listed in `package.json`, if needed.)
 
-The `Inputs` & `Outputs` are for MSBuild [incremental build](https://docs.microsoft.com/en-us/visualstudio/msbuild/how-to-build-incrementally?view=vs-2022){target="_blank"} magic, preventing this from running **every. single. build.**  If `Inputs` (`package.json`) is newer than `Outputs` (`.package-lock.json`), or `Outputs` doesn't yet exist, the Target is run, otherwise it will be skipped.
+The `Inputs` & `Outputs` are for MSBuild [incremental build](https://docs.microsoft.com/en-us/visualstudio/msbuild/how-to-build-incrementally?view=vs-2022){target="_blank"} magic, preventing this from running every. single. build.  If `Inputs` (`package.json`) is newer than `Outputs` (`.package-lock.json`), or `Outputs` doesn't yet exist, the Target is run, otherwise it will be skipped.
 
 See [here](https://stackoverflow.com/questions/35435041/run-npm-install-only-when-needed-and-or-partially?answertab=active#tab-top){target="_blank"} for the StackOverflow-sauce, and [here](https://github.com/McNerdius/TailBlazor/discussions/107){target="_blank"} for some notes on the changes made to the StackOverflow version.
 
@@ -163,7 +151,7 @@ Breaking it down:  I've found `dotnet watch` without a proper `dotnet build` bef
 
 ## Using VS Code {#vsc}
 
-See the [tailblazor-templates](https://github.com/McNerdius/TailBlazor-Templates/tree/main/Templates/SingleProject/TailBlazorWasm/.vscode){target="_blank"} repo to see launch tasks/configs for various project types.  It's a bit more robust than the `watch.ps1` script but pretty involved.  More to come on this.
+TODO: Bring this back !
 
 ---
 
@@ -177,20 +165,20 @@ One-off `tailwindcss` builds are not ideal.  The long-running `tailwindcss --wat
 
 ### Other approaches {#vs-other}
 
-- **Using a "Post Build Event" in Visual Studio's project properties.**
+- Using a "Post Build Event" in Visual Studio's project properties.
 
-This places an MSBuild Target in the `.csproj` - `<Target Name="PostBuild" AfterTargets="PostBuildEvent">`. **This is a no-go for long-running tasks:** this and similar simple MSBuild Target based approaches do one of two things: terminate immediately or (more likely) hang the build.
+This places an MSBuild Target in the `.csproj` - `<Target Name="PostBuild" AfterTargets="PostBuildEvent">`. This is a no-go for long-running tasks: this and similar simple MSBuild Target based approaches do one of two things: terminate immediately or (more likely) hang the build.
 
-- **More advanced uses of MSBuild Targets**
+- More advanced uses of MSBuild Targets
 
-One example is using [Inline Tasks](https://docs.microsoft.com/en-us/visualstudio/msbuild/msbuild-inline-tasks) - essentially embedding code within the `.csproj` (or more ideally, the `tailwindcss.targets` it points to) to kick off the npm task. It works but it's a bit ugly IMO. Visit [See Also](/also) for a project using this approach.
+One example is using [Inline Tasks](https://docs.microsoft.com/en-us/visualstudio/msbuild/msbuild-inline-tasks) - essentially embedding code within the `.csproj` (or more ideally, the `tailwindcss.targets` it points to) to kick off the npm task. It works but it's a bit ugly IMO.
 
-- **Using Visual Studio Folders View's "Configure Tasks" / `tasks.vs.json`**
+- Using Visual Studio Folders View's "Configure Tasks" / `tasks.vs.json`
 
-Visual Studio [supports tasks](https://docs.microsoft.com/en-us/visualstudio/ide/customize-build-and-debug-tasks-in-visual-studio?view=vs-2022#define-tasks-with-tasksvsjson) much like VS Code which can be used to expose the needed scripts in a right-click menu in the Folder View. A few issues: You have to be in Folder View;  You still have to kick it off manually;  **I couldn't get it to work.**  Tried feeding it various combinations of working directories, no dice.
+Visual Studio [supports tasks](https://docs.microsoft.com/en-us/visualstudio/ide/customize-build-and-debug-tasks-in-visual-studio?view=vs-2022#define-tasks-with-tasksvsjson) much like VS Code which can be used to expose the needed scripts in a right-click menu in the Folder View. A few issues: You have to be in Folder View;  You still have to kick it off manually;  I couldn't get it to work.  Tried feeding it various combinations of working directories, no dice.
 
 ::: info
-All in all, using the NPM Task Runner with Visual Studio takes little effort and Just Works, without injecting long-running tasks into the `.csproj`/`.targets` build files.
+All in all, using the NPM Task Runner with Visual Studio takes little effort and Just Works™, without injecting long-running tasks into the `.csproj`/`.targets` build files.
 :::
 
 

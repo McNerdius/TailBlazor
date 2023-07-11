@@ -1,0 +1,75 @@
+<p>:::: nav</p>
+<p><a href="/tidy_css">Intro</a>
+<a href="/tidy_css#isolation">CSS Isolation</a>
+<a href="/tidy_css#apply">@apply</a></p>
+<ul>
+<li><a href="/tidy_css#import">postcss-import</a></li>
+</ul>
+<p><a href="/tidy_css#nesting">Nesting</a></p>
+<p>::::</p>
+<p>:::: content</p>
+<h1>Options for tidy CSS files {#intro}</h1>
+<p>Idiomatic usage of Tailwind puts the bulk of CSS styling directly in your component's HTML, but you'll probably end up having some CSS files around.  Let's look at some Blazor and Tailwind CSS features that can help us out, and how to set things up so they can work together.</p>
+<hr />
+<h2>Tailwind's <code>@apply</code> directive {#apply}</h2>
+<p><code>@apply</code> lets us cut long class strings out of our HTML and paste them into a <code>css</code> file and go on our way.  When we use <code>@apply</code> in a Scoped CSS file, the Blazor-generated <code>Site.styles.css</code> is no longer Vanilla CSS, and can't be linked directly in your HTML as shown <a href="https://docs.microsoft.com/en-us/aspnet/core/blazor/components/css-isolation?view=aspnetcore-6.0#css-isolation-bundling">in the docs</a>{target=&quot;_blank&quot;}.</p>
+<p>By default, for a project <code>Site.csproj</code>, the CSS Isolation will be output to <code>obj/{CONFIGURATION}/{TARGET FRAMEWORK}/scopedcss/bundle/Site.styles.css</code> and copied to <code>wwwroot</code> when the project is published - <code>{Configuration}</code> typically being <code>Debug</code> or <code>Release</code>.  Let's tweak <code>Site.csproj</code> so the filename is constant:</p>
+<div class="mc-code-block not-prose">
+<div class="mc-code-filename">Site.csproj</div>
+<div class="mc-code-lines">
+<div class="mc-diff"></div> <pre class="mc-code">&lt;PropertyGroup&gt;</pre>
+<div class="mc-diff"></div> <pre class="mc-code">    &lt;TargetFramework&gt;net7.0&lt;/TargetFramework&gt;</pre>
+<div class="mc-diff"></div> <pre class="mc-code">    ...</pre>
+<div class="mc-diff mc-ins"></div> <pre class="mc-code mc-ins">    &lt;IntermediateOutputPath&gt;obj&lt;/IntermediateOutputPath&gt;</pre>
+<div class="mc-diff mc-ins"></div> <pre class="mc-code mc-ins">    &lt;AppendTargetFrameworkToOutputPath&gt;false&lt;/AppendTargetFrameworkToOutputPath&gt;</pre>
+<div class="mc-diff"></div> <pre class="mc-code">    ...</pre>
+<div class="mc-diff"></div> <pre class="mc-code">&lt;/PropertyGroup&gt;</pre>
+</div></div>
+<p>The bundle will now be output to <code>/obj/scopedcss/bundle</code> for both <code>build</code> and <code>publish</code>.  Add this file to the root CSS created earler, <code>site.css</code>:</p>
+<div class="mc-code-block not-prose">
+<div class="mc-code-filename">site.css</div>
+<div class="mc-code-lines">
+<div class="mc-diff"></div> <pre class="mc-code">@import &quot;tailwindcss/base&quot;;</pre>
+<div class="mc-diff"></div> <pre class="mc-code">@import &quot;tailwindcss/components&quot;;</pre>
+<div class="mc-diff"></div> <pre class="mc-code">@import &quot;tailwindcss/utilities&quot;;</pre>
+<div class="mc-diff mc-ins"></div> <pre class="mc-code mc-ins">@import &quot;./obj/scopedcss/bundle/site.styles.css&quot;;</pre>
+</div></div>
+<p>::: warn
+Make sure to build the Blazor project before attempting an <code>npm run build/watch/publish</code>, or the <code>*.styles.css</code> bundle may be out of date or absent.  Similarly, if you don't actually use Scoped CSS (<code>*.razor.css</code>), a <code>*.styles.css</code> bundle will not be created on disk and <code>npm run build/watch/publish</code> will fail !
+:::</p>
+<p>If you're using a <code>watch</code> script, it's a good idea to wait on <code>site.styles.css</code> to be created:</p>
+<div class="mc-code-block not-prose">
+<div class="mc-code-filename">watch.ps1</div>
+<div class="mc-code-lines">
+<div class="mc-diff"></div> <pre class="mc-code">dotnet build -p:TailwindBuild=false</pre>
+<div class="mc-diff"></div> <pre class="mc-code">start &quot;dotnet&quot; -ArgumentList &quot;watch&quot; </pre>
+<div class="mc-diff mc-ins"></div> <pre class="mc-code mc-ins">while (!(Test-Path &quot;./obj/net6.0/scopedcss/bundle/site.styles.css&quot;)) { sleep -ms 100 } </pre>
+<div class="mc-diff"></div> <pre class="mc-code">while (!(Test-Path &quot;./node_modules/.package-lock.json&quot;)) { sleep -ms 100 } </pre>
+<div class="mc-diff"></div> <pre class="mc-code">npm run watch</pre>
+</div></div>
+<hr />
+<h2>Nesting - there if you want it {#nesting}</h2>
+<p>Sass-like <a href="https://tailwindcss.com/docs/using-with-preprocessors#nesting">nesting is included</a>{target=&quot;_blank&quot;} with <code>tailwindcss</code> and enabled by adding a line to your <code>postcss.config.js</code>, no extra dependencies, installs, build steps or boilerplate needed:</p>
+<div class="mc-code-block not-prose">
+<div class="mc-code-filename">postcss.config.js</div>
+<div class="mc-code-lines">
+<div class="mc-diff"></div> <pre class="mc-code">module.exports = {</pre>
+<div class="mc-diff"></div> <pre class="mc-code">    plugins: {</pre>
+<div class="mc-diff"></div> <pre class="mc-code">        'postcss-import': {},</pre>
+<div class="mc-diff mc-ins"></div> <pre class="mc-code mc-ins">        'tailwindcss/nesting': {},</pre>
+<div class="mc-diff"></div> <pre class="mc-code">        tailwindcss: {},</pre>
+<div class="mc-diff"></div> <pre class="mc-code">    },</pre>
+<div class="mc-diff"></div> <pre class="mc-code">}</pre>
+</div></div>
+<p>A couple scenarios where i use nesting:</p>
+<ul>
+<li><p>Where i can't use CSS Isolation.  This site's content is embedded and rendered using <a href="https://docs.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.components.markupstring?view=aspnetcore-6.0">MarkupString</a>{target=&quot;_blank&quot;}.  Because the embedded HTML is not part of the component being used to render it, the necessary <code>b-string</code>s are absent, and styles would not be applied.  Instead i wrap the <code>MarkupString</code> in a <code>&lt;div class=&quot;markdown&quot;&gt;</code> and <a href="https://github.com/McNerdius/TailBlazor/blob/main/Source/Pages/Markdown.nested.css">nest away</a>{target=&quot;_blank&quot;}.</p>
+</li>
+<li><p>To un-stack <a href="https://tailwindcss.com/docs/hover-focus-and-other-states">some stackables</a>{target=&quot;_blank&quot;}.  Being able to &quot;stack&quot; variants is handy: <code>class=&quot;dark:hover:bg-foo&quot;</code> but can get repetetive.  If i've already moved the classes out of my HTML into a CSS file, i may end up un-stacking some things.  Because why not ?</p>
+</li>
+</ul>
+<hr />
+<p>::: {.text-xl .italic .light .text-right .pr-6 }
+<a href="/next">next: more fun</a>
+:::</p>
+<p>::::</p>

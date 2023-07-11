@@ -1,6 +1,11 @@
+
 :::: content
 
-# NuGet tools / MSBuild Inline Tasks in place of `node.js` boilerplate.
+# Similar stuff
+
+---
+
+## NuGet tools / MSBuild Inline Tasks in place of `node.js` boilerplate. {#nuget}
 
 
 There are tools/libraries/tutorials that abstract either the standalone executable or node.js version of `tailwindcss`, none without compromise.  That's specifically why this site exists: To show how it can be done with minimal compromise.  Removing that abstraction, we are left with three boilerplate files for node.js functionality, and an MSBuild "Targets" file to tie it all together.  These files are straightforward - specifying dependencies and pointing to files on disk.  We are learning and using `tailwindcss` itself, no JS build tools are involved.  The deepest we get into the JS ecosystem is through plugins, each involving an `npm install -D` and adding a "hey use this" line to the appropriate config file.  This is no more complex than using a dotnet abstraction and eliminates compromises.
@@ -9,7 +14,7 @@ There are tools/libraries/tutorials that abstract either the standalone executab
   
 ---
 
-# Similar Projects
+## Similar Projects
 
 An incomplete list of projects i've come across, with different methods and perspectives:
 

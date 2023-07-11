@@ -1,0 +1,154 @@
+<p>:::: nav</p>
+<p><a href="build">Intro</a>
+<a href="build#helpers">NPM helper scripts</a>
+<a href="build#targets">MSBuild targets</a>
+:::</p>
+<ul>
+<li><a href="build#build">Build or Publish</a></li>
+<li><a href="build#install">Install check</a></li>
+<li><a href="build#optout">Opting Out</a>
+:::
+<a href="build#cli">CLI</a>
+<a href="build#vsc">VS Code</a>
+<a href="build#vs">Visual Studio</a></li>
+</ul>
+<p>::::</p>
+<p>:::: content</p>
+<h1>Tailwind Incremental Builds, and maybe Hot Reload {#intro}</h1>
+<p>So far we've got two config files, a <code>package.json</code>, and installed a single package from <code>npm</code> to add Tailwind CSS to the <code>blazorwasm-empty</code> template.  Not too shabby.  Getting build &amp; watch set up is pretty easy too, but unfortunately Hot Reload support is inconsistent between .NET project types.</p>
+<p>On the Tailwind side of things, nothing happens - just a fresh CSS file being output to <code>wwwroot</code> as needed.  For some project types, Hot Reload doesn't refresh the browser when it sees these changes (yet) - hopefully a fix for this seemingly-trivial issue will come soon.  This <a href="https://github.com/dotnet/aspnetcore/issues/37496">GitHub Issue</a>{target=&quot;_blank&quot;} shows a script that reloads the CSS file on a timer.  I think it'd be interesting to make that into a Component - definitely on the todo list.</p>
+<p>Ideally Hot Reload would ensure you're seeing latest version of both your Components and CSS.  For some project types this is the case, but some are... less Hot Reloady than others.  Having to do a full rebuild or browser refresh to see updates for some project types is unfortunate, but also outside the scope of integrating Tailwind CSS into those projects.  Hopefully Hot Reload improves in that regard.</p>
+<h2>Define <code>npm</code> helper scripts {#helpers}</h2>
+<p>Tweak <code>package.json</code> as follows:</p>
+<div class="mc-code-block not-prose">
+<div class="mc-code-filename">package.json</div>
+<div class="mc-code-lines">
+<div class="mc-diff"></div> <pre class="mc-code">&quot;scripts&quot;: { </pre>
+<div class="mc-diff mc-del"></div> <pre class="mc-code mc-del">  &quot;test&quot;: &quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;,</pre>
+<div class="mc-diff mc-ins"></div> <pre class="mc-code mc-ins">  &quot;build&quot;: &quot;npx tailwindcss -i site.css -o ./wwwroot/css/site.min.css&quot;,</pre>
+<div class="mc-diff mc-ins"></div> <pre class="mc-code mc-ins">  &quot;watch&quot;: &quot;npx tailwindcss -i site.css -o ./wwwroot/css/site.min.css --watch&quot;,</pre>
+<div class="mc-diff mc-ins"></div> <pre class="mc-code mc-ins">  &quot;publish&quot;: &quot;npx tailwindcss -i site.css -o ./wwwroot/css/site.min.css --minify&quot;</pre>
+<div class="mc-diff"></div> <pre class="mc-code">}</pre>
+</div></div>
+<p><em>(Yes, that is <code>npx</code> not <code>npm</code>)</em></p>
+<p>Simple stuff -  <code>npm run build</code> will do a one-off build, <code>npm run watch</code> is what gives us the quick incremental builds akin to Hot Reload, and <code>npm run publish</code> will do a one-off build, plus <code>cssnano</code> minification.</p>
+<hr />
+<h2>Automate <code>npm</code> with MSBuild Targets {#targets}</h2>
+<p>Next, let's set it up so that <code>dotnet</code> CLI or your IDE can care of some of the <code>npm</code> stuff for us.</p>
+<p>To keep the <code>*.csproj</code> clean, i use a special MSBuild &quot;Targets&quot; file, cleverly named <code>tailwindcss.targets</code>.  Here's an example file:</p>
+<div class="mc-code-block not-prose">
+<div class="mc-code-filename">tailwindcss.targets</div>
+<div class="mc-code-lines">
+<div class="mc-diff"></div> <pre class="mc-code">&lt;Project&gt;</pre>
+<div class="mc-diff"></div> <pre class="mc-code">    &lt;PropertyGroup&gt;</pre>
+<div class="mc-diff"></div> <pre class="mc-code">        &lt;TailwindBuild&gt;true&lt;/TailwindBuild&gt;</pre>
+<div class="mc-diff"></div> <pre class="mc-code">    &lt;/PropertyGroup&gt;</pre>
+<div class="mc-diff"></div> <pre class="mc-code">    &lt;Target Name=&quot;NpmInstallCheck&quot; BeforeTargets=&quot;TailwindCSS&quot; Inputs=&quot;./package.json&quot; Outputs=&quot;./node_modules/.package-lock.json&quot;&gt;</pre>
+<div class="mc-diff"></div> <pre class="mc-code">        &lt;Message Text=&quot;NpmInstallCheck Starting...&quot; Importance=&quot;high&quot;&gt;&lt;/Message&gt;</pre>
+<div class="mc-diff"></div> <pre class="mc-code">        &lt;Exec Command=&quot;npm -v&quot; ContinueOnError=&quot;true&quot; StandardOutputImportance=&quot;low&quot;&gt;</pre>
+<div class="mc-diff"></div> <pre class="mc-code">            &lt;Output TaskParameter=&quot;ExitCode&quot; PropertyName=&quot;error&quot; /&gt;</pre>
+<div class="mc-diff"></div> <pre class="mc-code">        &lt;/Exec&gt;</pre>
+<div class="mc-diff"></div> <pre class="mc-code">        &lt;Error Condition=&quot;'$(error)' != '0'&quot; Text=&quot;install node.js please !&quot; /&gt;</pre>
+<div class="mc-diff"></div> <pre class="mc-code">        &lt;Exec Command=&quot;npm install&quot; /&gt;</pre>
+<div class="mc-diff"></div> <pre class="mc-code">        &lt;Message Text=&quot;NpmInstallCheck Finished !&quot; Importance=&quot;high&quot;&gt;&lt;/Message&gt;</pre>
+<div class="mc-diff"></div> <pre class="mc-code">    &lt;/Target&gt;</pre>
+<div class="mc-diff"></div> <pre class="mc-code">    &lt;Target Name=&quot;TailwindCSS&quot; AfterTargets=&quot;AfterBuild&quot; Condition=&quot;'$(TailwindBuild)' == 'true'&quot;&gt;</pre>
+<div class="mc-diff"></div> <pre class="mc-code">        &lt;Message Text=&quot;TailwindCSS Starting...&quot; Importance=&quot;high&quot;&gt;&lt;/Message&gt;</pre>
+<div class="mc-diff"></div> <pre class="mc-code">        &lt;Exec Command=&quot;npm run build&quot; Condition=&quot;'$(Configuration)' == 'Debug'&quot;/&gt;</pre>
+<div class="mc-diff"></div> <pre class="mc-code">        &lt;Exec Command=&quot;npm run publish&quot; Condition=&quot;'$(Configuration)' == 'Release'&quot;/&gt;</pre>
+<div class="mc-diff"></div> <pre class="mc-code">        &lt;Message Text=&quot;TailwindCSS Finished !&quot; Importance=&quot;high&quot;&gt;&lt;/Message&gt;</pre>
+<div class="mc-diff"></div> <pre class="mc-code">    &lt;/Target&gt;</pre>
+<div class="mc-diff"></div> <pre class="mc-code">&lt;/Project&gt;</pre>
+</div></div>
+<p>To actually make use of this in your Blazor project, add it to your <code>*.csproj</code>, top-level:</p>
+<div class="mc-code-block not-prose">
+<div class="mc-code-filename">site.csproj</div>
+<div class="mc-code-lines">
+<div class="mc-diff"></div> <pre class="mc-code">&lt;Project Sdk=&quot;Microsoft.NET.Sdk.BlazorWebAssembly&quot;&gt;</pre>
+<div class="mc-diff mc-ins"></div> <pre class="mc-code mc-ins">    &lt;Import Project=&quot;tailwindcss.targets&quot; /&gt;</pre>
+<div class="mc-diff"></div> <pre class="mc-code">&lt;/Project&gt;</pre>
+</div></div>
+<hr />
+<h3>The TailwindCSS Target { #build }</h3>
+<p>This is the essential section:</p>
+<div class="mc-code-block not-prose">
+<div class="mc-code-filename">tailwindcss.targets-p2</div>
+<div class="mc-code-lines">
+<div class="mc-diff"></div> <pre class="mc-code">&lt;Target Name=&quot;TailwindCSS&quot; AfterTargets=&quot;AfterBuild&quot; Condition=&quot;'$(TailwindBuild)' == 'true'&quot;&gt;</pre>
+<div class="mc-diff"></div> <pre class="mc-code">    &lt;Message Text=&quot;TailwindCSS Starting...&quot; Importance=&quot;high&quot;&gt;&lt;/Message&gt;</pre>
+<div class="mc-diff"></div> <pre class="mc-code">    &lt;Exec Command=&quot;npm run build&quot; Condition=&quot;'$(Configuration)' == 'Debug'&quot;/&gt;</pre>
+<div class="mc-diff"></div> <pre class="mc-code">    &lt;Exec Command=&quot;npm run publish&quot; Condition=&quot;'$(Configuration)' == 'Release'&quot;/&gt;</pre>
+<div class="mc-diff"></div> <pre class="mc-code">    &lt;Message Text=&quot;TailwindCSS Finished !&quot; Importance=&quot;high&quot;&gt;&lt;/Message&gt;</pre>
+<div class="mc-diff"></div> <pre class="mc-code">&lt;/Target&gt;</pre>
+</div></div>
+<p><code>AfterBuild</code> is a standard <a href="https://docs.microsoft.com/en-us/visualstudio/msbuild/target-element-msbuild">MSBuild Target</a>{target=&quot;_blank&quot;}.  This section defines our own <code>TailwindCSS</code> Target which runs after <code>AfterBuild</code>.  Building the Blazor project in <code>Debug</code> mode does a one-off <code>tailwindcss</code> build, and <code>Release</code> mode results in a <code>cssnano</code>-minified build, thanks to their respective <code>build</code> and <code>publish</code> scripts found in <code>package.json</code>.  Using <code>dotnet watch</code> will trigger <code>tailwindcss</code> one-off builds for the initial run, but only for &quot;rude edits&quot; after that.  (TODO: confirm this is still the case.)</p>
+<h3>The NpmInstallCheck Target { #install }</h3>
+<p>The next (kinda optional) snippet actually runs in-between <code>AfterBuild</code> and <code>TailwindCSS</code> from above, doing a sanity check on <code>npm</code> stuff:</p>
+<div class="mc-code-block not-prose">
+<div class="mc-code-filename">tailwindcss.targets-p3</div>
+<div class="mc-code-lines">
+<div class="mc-diff"></div> <pre class="mc-code">&lt;Target Name=&quot;NpmInstallCheck&quot; BeforeTargets=&quot;TailwindCSS&quot; Inputs=&quot;./package.json&quot; Outputs=&quot;./node_modules/.package-lock.json&quot;&gt;</pre>
+<div class="mc-diff"></div> <pre class="mc-code">    &lt;Message Text=&quot;NpmInstallCheck Starting...&quot; Importance=&quot;high&quot;&gt;&lt;/Message&gt;</pre>
+<div class="mc-diff"></div> <pre class="mc-code">    &lt;Exec Command=&quot;npm --version&quot; ContinueOnError=&quot;true&quot; StandardOutputImportance=&quot;low&quot;&gt;</pre>
+<div class="mc-diff"></div> <pre class="mc-code">        &lt;Output TaskParameter=&quot;ExitCode&quot; PropertyName=&quot;error&quot; /&gt;</pre>
+<div class="mc-diff"></div> <pre class="mc-code">    &lt;/Exec&gt;</pre>
+<div class="mc-diff"></div> <pre class="mc-code">    &lt;Error Condition=&quot;'$(error)' != '0'&quot; Text=&quot;install node.js please ! https://nodejs.org/&quot; /&gt;</pre>
+<div class="mc-diff"></div> <pre class="mc-code">    &lt;Exec Command=&quot;npm install&quot; /&gt;</pre>
+<div class="mc-diff"></div> <pre class="mc-code">    &lt;Message Text=&quot;NpmInstallCheck Finished !&quot; Importance=&quot;high&quot;&gt;&lt;/Message&gt;</pre>
+<div class="mc-diff"></div> <pre class="mc-code">&lt;/Target&gt;</pre>
+</div></div>
+<p>The <code>npm --version</code> command is there to verify Node.js/npm is installed: if it's not, the command will fail and you'll get a build error prompting to install node.js.  Otherwise <code>npm install</code> runs.  (When used without parameters <code>npm install</code> is akin to a <code>dotnet restore</code>, installing/updating dependencies listed in <code>package.json</code>, if needed.)</p>
+<p>The <code>Inputs</code> &amp; <code>Outputs</code> are for MSBuild <a href="https://docs.microsoft.com/en-us/visualstudio/msbuild/how-to-build-incrementally?view=vs-2022">incremental build</a>{target=&quot;_blank&quot;} magic, preventing this from running every. single. build.  If <code>Inputs</code> (<code>package.json</code>) is newer than <code>Outputs</code> (<code>.package-lock.json</code>), or <code>Outputs</code> doesn't yet exist, the Target is run, otherwise it will be skipped.</p>
+<p>See <a href="https://stackoverflow.com/questions/35435041/run-npm-install-only-when-needed-and-or-partially?answertab=active#tab-top">here</a>{target=&quot;_blank&quot;} for the StackOverflow-sauce, and <a href="https://github.com/McNerdius/TailBlazor/discussions/107">here</a>{target=&quot;_blank&quot;} for some notes on the changes made to the StackOverflow version.</p>
+<p>Assuming no errors, things will continue with the <code>TailwindCSS</code> target.</p>
+<h3>Opting out { #optout }</h3>
+<p>The top section just defines an MSBuild property we can use like so: <code>dotnet build -p:TailwindBuild=false</code> to let us opt out of running the Tailwind build.  Note its use in the next section.</p>
+<div class="mc-code-block not-prose">
+<div class="mc-code-filename">tailwindcss.targets-p1</div>
+<div class="mc-code-lines">
+<div class="mc-diff"></div> <pre class="mc-code">&lt;PropertyGroup&gt;</pre>
+<div class="mc-diff"></div> <pre class="mc-code">    &lt;TailwindBuild&gt;true&lt;/TailwindBuild&gt;</pre>
+<div class="mc-diff"></div> <pre class="mc-code">&lt;/PropertyGroup&gt;</pre>
+</div></div>
+<hr />
+<h2>Using <code>dotnet watch</code> &amp; PowerShell {#cli}</h2>
+<p>A simple, sanity-checks-included PowerShell script:</p>
+<div class="mc-code-block not-prose">
+<div class="mc-code-filename">watch.ps1</div>
+<div class="mc-code-lines">
+<div class="mc-diff"></div> <pre class="mc-code">dotnet build -p:TailwindBuild=false</pre>
+<div class="mc-diff"></div> <pre class="mc-code">start &quot;dotnet&quot; -ArgumentList &quot;watch&quot; </pre>
+<div class="mc-diff"></div> <pre class="mc-code">while (!(Test-Path &quot;./node_modules/.package-lock.json&quot;)) { sleep -ms 100 } </pre>
+<div class="mc-diff"></div> <pre class="mc-code">npm run watch</pre>
+</div></div>
+<p>Breaking it down:  I've found <code>dotnet watch</code> without a proper <code>dotnet build</code> beforehand can do strange things sometimes.  It's only once, so whatever.  Using <code>start</code> launches <code>dotnet watch</code> in its own process.  Unlike the first line in the script, this will include the <code>tailwind build</code> Target, possibly doing an <code>npm install</code> for the first time.  Only after <code>.package-lock.json</code> provides evidence of an <code>npm install</code> is it OK to kick off <code>tailwindcss</code> via <code>npm run watch</code>.  At this point, both .NET's Hot Reload and Tailwind's incremental build mode are watching for relevant changes.</p>
+<hr />
+<h2>Using VS Code {#vsc}</h2>
+<p>TODO: Bring this back !</p>
+<hr />
+<h2>Using Visual Studio {#vs}</h2>
+<p>The best option i've found to integrate <code>tailwindcss --watch</code> with Visual Studio UI is to use the <a href="https://marketplace.visualstudio.com/items?itemName=MadsKristensen.NpmTaskRunner64">NPM Task Runner</a>{target=&quot;_blank&quot;}, and bind the relevant <code>watch</code> script to &quot;Project Open&quot;. (Not &quot;After Build&quot;, see below.)</p>
+<p>::: info
+One-off <code>tailwindcss</code> builds are not ideal.  The long-running <code>tailwindcss --watch</code> is the only way to take advantage of Tailwind's super-fast incremental builds.
+:::</p>
+<h3>Other approaches {#vs-other}</h3>
+<ul>
+<li>Using a &quot;Post Build Event&quot; in Visual Studio's project properties.</li>
+</ul>
+<p>This places an MSBuild Target in the <code>.csproj</code> - <code>&lt;Target Name=&quot;PostBuild&quot; AfterTargets=&quot;PostBuildEvent&quot;&gt;</code>. This is a no-go for long-running tasks: this and similar simple MSBuild Target based approaches do one of two things: terminate immediately or (more likely) hang the build.</p>
+<ul>
+<li>More advanced uses of MSBuild Targets</li>
+</ul>
+<p>One example is using <a href="https://docs.microsoft.com/en-us/visualstudio/msbuild/msbuild-inline-tasks">Inline Tasks</a> - essentially embedding code within the <code>.csproj</code> (or more ideally, the <code>tailwindcss.targets</code> it points to) to kick off the npm task. It works but it's a bit ugly IMO.</p>
+<ul>
+<li>Using Visual Studio Folders View's &quot;Configure Tasks&quot; / <code>tasks.vs.json</code></li>
+</ul>
+<p>Visual Studio <a href="https://docs.microsoft.com/en-us/visualstudio/ide/customize-build-and-debug-tasks-in-visual-studio?view=vs-2022#define-tasks-with-tasksvsjson">supports tasks</a> much like VS Code which can be used to expose the needed scripts in a right-click menu in the Folder View. A few issues: You have to be in Folder View;  You still have to kick it off manually;  I couldn't get it to work.  Tried feeding it various combinations of working directories, no dice.</p>
+<p>::: info
+All in all, using the NPM Task Runner with Visual Studio takes little effort and Just Works™, without injecting long-running tasks into the <code>.csproj</code>/<code>.targets</code> build files.
+:::</p>
+<hr />
+<p>::: {.text-xl .italic .light .text-right .pr-6 }
+<a href="/tidy_css">next: tidy css</a>
+:::</p>
+<p>::::</p>

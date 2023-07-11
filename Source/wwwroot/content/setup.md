@@ -22,13 +22,13 @@ I'll be tweaking a default .NET 7 Blazor Empty WebAssembly project here - the st
 
 ::: info
 
-Running `dotnet workload install wasm-tools` (".NET WebAssembly build tools" in Visual Studio installer) is required if your project will use AOT or native dependencies.  It's not required for basic projects, but installing it will enable [runtime relinking](https://learn.microsoft.com/en-us/aspnet/core/blazor/host-and-deploy/webassembly?view=aspnetcore-7.0#runtime-relinking).  It is quite large though, about 1.5GB
+Running `dotnet workload install wasm-tools` (".NET WebAssembly build tools" in Visual Studio installer) is required if your project will use AOT or native dependencies.  It's not required for basic projects, but installing it will enable [runtime relinking](https://learn.microsoft.com/en-us/aspnet/core/blazor/host-and-deploy/webassembly?view=aspnetcore-7.0#runtime-relinking){target="_blank"}.  It is quite large though, about 1.5GB
 
 :::
 
 ## Scaffold & Tweak
 
-* Run `dotnet new blazorwasm-empty`:
+* Run `dotnet new blazorwasm-empty` and `dotnet new gitignore`
 * Move `wwwroot/css/app.css` up to project root, rename it `site.css`
 * Change `index.html` stylesheet link to `site.min.css`
 
@@ -38,62 +38,62 @@ Mind that these are just generic filenames/paths to demonstrate the setup, not b
 
 # Tailwind CSS setup {#twsetup}
 
-The [documentation](https://tailwindcss.com/docs/installation){target="_blank"} shows two main installation approaches.  I use the "Tailwind CLI" option, as invoking the CLI directly is the only way to take advantage of its super-fast incremental builds.  Again, bear with me - there are nuget packages and a standalone executable, but the node/`npm` approach wins, IMO.  See [notes](TODO) for details.
+The [documentation](https://tailwindcss.com/docs/installation){target="_blank"} shows two main installation approaches.  I use the "Tailwind CLI" option, not the standalone executable or dotnet helpers.  See [notes](/notes#nonjs) for more on this.
 
 ## Install & Initialize {#init}
 
 - In the Blazor project folder, run `npm init --yes` to initialize a `package.json` using defaults. These are analogous to a `dotnet new` & `*.csproj`.
 - Next run `npm install -D tailwindcss`, similar to[^1^](/setup#npm-install) a `dotnet add package`.
-- Next, `npx tailwindcss init --postcss --ts` which will write default `tailwind.config.ts` and `postcss.config.js` files to disk.  (Note that this differs from the installation docs: adding `--postcss` which outputs a default `postcss.config.js` - more below.)
+- Next, `npx tailwindcss init --postcss` which will write default `tailwind.config.ts` and `postcss.config.js` files to disk.  (Note that this differs from the installation docs: adding `--postcss` which outputs a default `postcss.config.js` - more below.)
 
 ::: info
 
-note the use of `npx`, similar in purpose to [`dotnet tool`](https://learn.microsoft.com/en-us/dotnet/core/tools/global-tools#invoke-a-global-tool){target="_blank"}.
+note the use of `npx`, similar in purpose to [dotnet tool](https://learn.microsoft.com/en-us/dotnet/core/tools/global-tools#invoke-a-global-tool){target="_blank"}.
 
 :::
+
 ---
 
 # Tailwind CSS Config {#twconfig}
 
-As of Tailwind CSS v3.3, the default `tailwind.config.ts` file:
+As of Tailwind CSS v3.3, the default `tailwind.config.js` file:
 
-```typescript:tailwind.config.ts
-import type { Config } from 'tailwindcss'
-
-export default {
+```javascript:tailwind.config.js
+/** @type {import('tailwindcss').Config} */
+module.exports = {
   content: [],
   theme: {
     extend: {},
   },
   plugins: [],
-} satisfies Config
+}
 ```
 
 To get started, `content` must point Tailwind at any _markup_ files where its yet-to-be-generated CSS is being _used_. (Hence the "JIT" in "Tailwind JIT").  More specific configuration translates to better performance, but you don't want to miss any files either.  A decent starter for a Blazor project, taking advantage of globbing and negation/exclusion:
 
-```typescript:tailwind.config.ts
-import type { Config } from 'tailwindcss'
-
-export default {
--    content: [], 
-+    content: [
-+        '!**/{bin,obj,node_modules}/**',
-+        '**/*.{razor,html,cshtml}',
-+    ],
+```javascript:tailwind.config.js
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: [
+      '!**/{bin,obj,node_modules}/**',
+      '**/*.{razor,html,cshtml}'
+  ],
   theme: {
     extend: {},
   },
   plugins: [],
-} satisfies Config
+}
 ```
 
 Consider that there may be cases where you use Tailwind-generated classes in `.razor.cs` backing code, `svg` files, or elsewhere.  See [here](https://tailwindcss.com/docs/content-configuration#configuring-source-paths){target="_blank"} for more info on `content`.
+
+That's the only required configuration - pointing out your files.  The `theme` and `plugin` properties are akin to using Bootstrap Sass to override, extend, or disable generated utilities.  Note that you can use CSS variables - see [here](https://tailwindcss.com/docs/customizing-colors#using-css-variables){target="_blank"} for an example using colors.  (Heck, you can [use them inline](https://tailwindcss.com/blog/tailwindcss-v3-3#css-variables-without-the-var){target="_blank"} too.)  I digress...
 
 ---
 
 # PostCSS Config {#postcss}
 
-PostCSS is a general-purpose pipeline to transform input CSS through user-specified [plugins](https://github.com/postcss/postcss/blob/main/docs/plugins.md).  The Tailwind CLI wraps PostCSS functionality, automagically including some essential plugins.  However, in order to use PostCSS plugins not on the default list you'll need create a `postcss.config.js`.  There is [one such plugin](tidy_css#nesting) in particular i nearly always take advantage of, so i'm in the habit of using the `--postcss` option mentioned above when scaffolding my Tailwind projects.
+PostCSS is a general-purpose pipeline to transform input CSS through user-specified [plugins](https://github.com/postcss/postcss/blob/main/docs/plugins.md).  The Tailwind CLI wraps PostCSS functionality, automagically including some essential plugins.  Tweaking this list requires a `postcss.config.js`.
 
 I'll go into a bit more over in [notes](notes#postcss), but for now replace the contents of `postcss.config.js` with the following:
 
@@ -107,6 +107,7 @@ module.exports = {
 ```
 
 ---
+
 
 # Tailwind CSS Boilerplate {#boilerplate}
 
@@ -138,7 +139,8 @@ More about layers in [notes](notes#layer).
 
 [[1]](/setup#init){.pl-4 .inline} `npm install` vs `dotnet add package`/`dotnet tool install`: {#npm-install}
 
-  `npm install foo` is analogous to a `dotnet add package foo` for most use cases. But here we're using `npm install -D` *(`-D` being short for `--save-dev`)* - which is more like a [`dotnet tool install`](https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-tool-install){target="_blank"}. These are used when the packages being installed are _development tools_, not _project dependencies_.
+`npm install foo` is analogous to a `dotnet add package foo` for most use cases. But here we're using `npm install -D` *(`-D` being short for `--save-dev`)* - which is more like a [`dotnet tool install`](https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-tool-install){target="_blank"}. These are used when the packages being installed are _development tools_, not _project dependencies_.
+
 ---
 
 ::: {.text-xl .italic .light .text-right .pr-6 }

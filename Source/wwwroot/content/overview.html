@@ -1,0 +1,47 @@
+<p>:::: nav</p>
+<p><a href="/overview#innerloop">Inner Loop</a>
+<a href="/overview#tidy">Tidy CSS</a>
+<a href="/overview#prerequisites">Prerequisites</a>
+:::</p>
+<ul>
+<li><a href="/overview#de">[I]DE</a></li>
+<li><a href="/overview#sdk">SDKs</a></li>
+<li><a href="/overview#other">Optional</a>
+:::</li>
+</ul>
+<p>::::</p>
+<p>:::: content</p>
+<h1>TailBlazor for .NET 7</h1>
+<p>Every time i decided to take another shot at web development, i was quickly reminded that it's not so much the JS tooling &amp; ecosystem that's made me jump ship the last time, it's CSS.  Getting started with Blazor was a bit different - CSS became the <em>only</em> source of frustration.  Then i stumbled upon Tailwind CSS, which has been a valuable learning tool.</p>
+<p>The goal of this site and the &quot;TailBlazor&quot; template is to demonstrate a fairly complete and straightforward approach to integrating Blazor and Tailwind CSS.  Using nesting and <code>@apply</code> within Blazor's Scoped CSS files, taking advantage of the <code>tailwindcss</code> incremental builds, ensuring Tailwind &amp; PostCSS plugins can be used, these sorts of things.</p>
+<p>There are other tutorials and videos combining the two, but from what i've seen so far they are...</p>
+<ul>
+<li>Side by side demos where no real integration is happening, or</li>
+<li>Relying on JS tooling where it may not be necessary, or</li>
+<li>Using dotnet packages to avoid <code>node.js</code> at all costs</li>
+</ul>
+<p>Tailwind CSS is a <code>node.js</code> tool, no getting around it.  But it's a straightforward CLI - there's no need for JS tools like webpack, or dotnet tools or libraries.  Using the <code>tailwindcss</code> CLI directly lets us take full advantage of its features (such as nesting and incremental builds) with no overhead.</p>
+<p>::: info</p>
+<p>There is a standalone executable version of the CLI, but its plugin functionality is very limited, as the plugins are <code>node.js</code> packages.  More later.</p>
+<p>:::</p>
+<h2>Tidy CSS</h2>
+<p>Blazor's take on <a href="https://docs.microsoft.com/en-us/aspnet/core/blazor/components/css-isolation">CSS Isolation</a>{target=&quot;_blank&quot;} is a simple way to limit the scope of styles to a particular Razor Component: <code>.razor.css</code> (Scoped CSS) files will be rewritten at build time so they only apply to their associated <code>.razor</code> Component.  In addition to generating classes for us, Tailwind CSS offers an <a href="https://tailwindcss.com/docs/functions-and-directives#apply"><code>@apply</code> directive</a>{target=&quot;_blank&quot;}, and built-in support for Sass-like nesting is easily enabled.  Using Tailwind CSS within Scoped CSS files is a bit of a departure from the standard Blazor practices.</p>
+<h2>&quot;Inner Loop&quot; goodies</h2>
+<p>Blazor's <a href="https://docs.microsoft.com/en-us/aspnet/core/test/hot-reload">Hot Reload</a>{target=&quot;_blank&quot;} allows (certain) edits to be applied immediately without needing to pause or restart a running app, ideally retaining state.  Tailwind 3.0 was a major overhaul, replacing the original “generate then purge” approach with <a href="https://tailwindcss.com/blog/tailwindcss-v3#just-in-time-all-the-time">Just-In-Time</a>{target=&quot;_blank&quot;} CSS generation. Even better, <code>tailwindcss --watch</code> will perform a full CSS build then perform much faster incremental builds, only appending fresh CSS based on file edits.</p>
+<h1>Prerequisites</h1>
+<p>You'll need the .NET 7 SDK, Node.JS, and of course a development environment — <em>PowerShell optional</em></p>
+<p><em>Only a couple minor things described on this site actually require .NET 7: the new “empty” template, and the new “<code>--blazor-load-progress</code> variables.”</em></p>
+<h2>SDKs:</h2>
+<ul>
+<li><a href="https://dotnet.microsoft.com/download/dotnet/7.0">.NET 7 SDK</a>{target=&quot;_blank&quot;}, included with the VS install. If you're like me and use both VS and VSCode - VSCode <a href="https://www.tailblazor.dev/images/vscode_msbuild_bits.png">will use</a>{target=&quot;_blank&quot;}  Visual Studio's bits.</li>
+<li><a href="https://nodejs.org/en/download/">Node.js 12.13+</a>{target=&quot;_blank&quot;}.</li>
+</ul>
+<h2>Optional:</h2>
+<ul>
+<li><a href="https://docs.microsoft.com/en-us/powershell/scripting/install/installing-powershell">PowerShell</a>{target=&quot;_blank&quot;}. I'll be sharing simple PowerShell scripts to properly fire off both <code>dotnet</code> and <code>tailwindcss</code> in watch mode. These can be adapted to bash et al, but PowerShell is my go-to.</li>
+</ul>
+<h1>Let's set things up !</h1>
+<p>Hopefully, i won't miss any steps or be overly verbose in this howto. I’m a C# developer new to front-end stuff, so the level of detail may lean more toward the JS/Tailwind side of things, and be a bit sparse on the dotnet/C# side. Feel free to <a href="https://github.com/McNerdius/TailBlazor/issues">submit</a>{target=&quot;_blank&quot;} any clarification requests or suggestions.</p>
+<p>To fast forward through this howto and see what it looks like &quot;on disk&quot;, see the the <a href="https://www.github.com/McNerdius/tailblazor-templates"><code>tailblazor</code> template</a>{target=&quot;_blank&quot;}.</p>
+<hr />
+<p>::::</p>

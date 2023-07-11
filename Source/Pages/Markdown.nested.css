@@ -1,6 +1,6 @@
 .markdown {
   @apply pb-16;
-  @apply max-w-[50rem] 2xl:max-w-[60rem];
+  @apply max-w-[56rem] 2xl:max-w-[60rem];
   @apply transition-all duration-300;
 
   .emoji {
@@ -27,22 +27,36 @@
     a { @apply block no-underline; }
   }
 
-  .info {
+  .info, .warn {
     @apply p-2 md:p-4 my-8 ml-1 rounded-md 
-           italic font-semibold dark:text-black
-
-           bg-yellow-50 dark:bg-amber-300
-           
-            ring-1 dark:ring-2 ring-orange-600;
+           italic font-semibold 
+           ring-1 dark:ring-2 dark:text-black; 
 
     &:before {
-      content: url("info.svg");
       @apply w-6 h-6 mr-2 inline-block;
     }
 
     p {
       @apply inline;
     }
+  }
+
+  .info{
+
+    @apply bg-yellow-50 dark:bg-amber-300 ring-orange-600;
+
+    &:before {
+      content: url("info.svg");
+    }  
+  }
+
+  .warn
+  {
+        @apply bg-red-100 dark:bg-red-400 ring-red-600;
+
+    &:before {
+      content: url("warn.svg");
+    }  
   }
 
   code {

@@ -6,10 +6,11 @@
 - [@layer](/notes#layer)
 - [@tailwind](/notes#tailwind)
 :::
-[`npm` Alternatives](/notes#NPM)
+[`node.js` Alternatives](/notes#nonjs)
 :::
 - [Standalone CLI](/notes#CLI)
 - [CDN](/notes#CDN)
+- [Helpers](/notes#dotnet)
 :::
 [Visual Studio](/notes#VS)
 [VS Code](/notes#VSCode)
@@ -114,7 +115,7 @@ While it's not *always* necessary to use `@import` syntax versus `@tailwind` syn
 
 ---
 
-# Node.js Alternatives
+# Node.js Alternatives {#nonjs}
 
 I'm not a web developer, and the JS ecosystem is a bit churny and disjointed for me to keep up with.  Using vanilla CSS wouldn't require any of that, but it is my biggest source of frustration in learning front-end development.  Tailwind CSS, on the other hand, just "clicks" for me.  
 
@@ -131,6 +132,12 @@ Even when/if these plugins are supported, the standalone CLI and plugins will ha
 ## Tailwind Play {#CDN}
 
 The [Play CDN](https://tailwindcss.com/docs/installation/play-cdn) is VERY COOL for just messing about with Tailwind, is fully features and allows use of first-party plugins.  But, it weighs in at ~110KB and runs on the client, so less ideal for production.  Obligatory mention in this category is [Twind](https://twind.style/installation#twind-cdn) - interesting, but lacks key Tailwind features.  I'll dive into this on my next project, "Blit", and share a link here at a later date.
+
+---
+
+## Dotnet Wrappers {#dotnet}
+
+See [here](/also#nuget)
 
 ---
 

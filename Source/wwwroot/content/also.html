@@ -1,0 +1,40 @@
+<p>:::: content</p>
+<h1>Similar stuff</h1>
+<hr />
+<h2>NuGet tools / MSBuild Inline Tasks in place of <code>node.js</code> boilerplate. {#nuget}</h2>
+<p>There are tools/libraries/tutorials that abstract either the standalone executable or node.js version of <code>tailwindcss</code>, none without compromise.  That's specifically why this site exists: To show how it can be done with minimal compromise.  Removing that abstraction, we are left with three boilerplate files for node.js functionality, and an MSBuild &quot;Targets&quot; file to tie it all together.  These files are straightforward - specifying dependencies and pointing to files on disk.  We are learning and using <code>tailwindcss</code> itself, no JS build tools are involved.  The deepest we get into the JS ecosystem is through plugins, each involving an <code>npm install -D</code> and adding a &quot;hey use this&quot; line to the appropriate config file.  This is no more complex than using a dotnet abstraction and eliminates compromises.</p>
+<ul>
+<li>See <a href="https://marketplace.visualstudio.com/items?itemName=MadsKristensen.NpmTaskRunner64">NPM Task Runner</a>{target=&quot;_blank&quot;}.</li>
+</ul>
+<hr />
+<h2>Similar Projects</h2>
+<p>An incomplete list of projects i've come across, with different methods and perspectives:</p>
+<ul>
+<li><p>https://codewithmukesh.com/blog/integrating-tailwind-css-with-blazor/ and https://mattferderer.com/tailwind-with-blazor</p>
+<ul>
+<li><p>geared toward <code>postcss-cli</code></p>
+<p>Notes:</p>
+<p><code>AfterTargets=&quot;PostBuildEvent&quot;</code> versus <code>AfterTargets=&quot;AfterBuild&quot;</code> ?</p>
+</li>
+</ul>
+</li>
+<li><p>https://www.mistergoodcat.com/post/integrating-blazor-server-and-tailwind-css-part-2</p>
+<p>A different approach to integrating Scoped CSS: Overwriting scoped styles with a Tailwind-processed version of itself:</p>
+<blockquote>
+<p>This is basically a for-each loop over all the generated scoped CSS files that call the Tailwind CLI for each one</p>
+</blockquote>
+<p>Must bypass JIT to do this. Hot Reload + Incremental builds could result in an infinite CSS-rewriting loop (?)</p>
+<p>Notes:</p>
+<blockquote>
+<p>To understand what's going on during a build, you can use a verbose output of dotnet build and see all the involved msbuild magic - to find a suitable target you can use to plug in your custom CSS preprocessing logic. I've already done that and identified a target named <code>_GenerateScopedCssFiles</code></p>
+</blockquote>
+</li>
+<li><p>https://www.elian.codes/blog/configure-tailwindcss-with-blazor/</p>
+<ul>
+<li>Similar setup, using yarn and webpack.</li>
+</ul>
+</li>
+<li><p>https://github.com/barahonajm/blazor-tailwindcss-template</p>
+</li>
+</ul>
+<p>::::</p>

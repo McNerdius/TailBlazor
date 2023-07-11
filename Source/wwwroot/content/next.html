@@ -1,0 +1,54 @@
+<p>:::: nav</p>
+<p>Plugins { .font-bold }</p>
+<ul>
+<li><a href="/next#tailwind">Tailwind</a></li>
+<li><a href="/next#postcss">PostCSS</a></li>
+</ul>
+<p><a href="/next#components">MS Web Components</a></p>
+<p>::::</p>
+<p>:::: content</p>
+<h1>Plugins</h1>
+<p>The standalone executable CLI (currently) only supports first-party Tailwind plugins, so neither of the following suggestions can be used with it.  There are lots more out there, these are just my must-haves.</p>
+<h2>Tailwind Plugins {#tailwind}</h2>
+<h3><code>tailwindcss-debug-screens</code></h3>
+<p>Like Bootstrap, Tailwind CSS is <a href="https://tailwindcss.com/docs/responsive-design">responsive</a>{target=&quot;_blank&quot;} and mobile-first: when you use <code>class=&quot;lg:text-2xl&quot;</code>, text will be default-sized up until the <code>lg</code> media query kicks in.  The <a href="https://github.com/jorenvanhee/tailwindcss-debug-screens">debug-screens</a>{target=&quot;_blank&quot;} Tailwind plugin makes designing for this a breeze (no pun intended...), letting you know which screen/breakpoint is currently active.</p>
+<p>You'll have to run <code>npm install -D tailwindcss-debug-screens</code> and add it to your <code>tailwind.config.js</code>:</p>
+<div class="mc-code-block not-prose">
+<div class="mc-code-filename">tailwind.config.js</div>
+<div class="mc-code-lines">
+<div class="mc-diff"></div> <pre class="mc-code">/** @type {import('tailwindcss').Config} */</pre>
+<div class="mc-diff"></div> <pre class="mc-code">module.exports = {</pre>
+<div class="mc-diff"></div> <pre class="mc-code">  ...</pre>
+<div class="mc-diff"></div> <pre class="mc-code">  plugins: [</pre>
+<div class="mc-diff mc-ins"></div> <pre class="mc-code mc-ins">    require('tailwindcss-debug-screens'),</pre>
+<div class="mc-diff"></div> <pre class="mc-code">  ],</pre>
+<div class="mc-diff"></div> <pre class="mc-code">}</pre>
+</div></div>
+<h3>Others</h3>
+<p>There are some <a href="https://tailwindcss.com/docs/plugins#official-plugins">official plugins</a>{target=&quot;_blank&quot;}; i'm using <code>tailwindcss/typography</code> (with some tweaks) both here and in the <a href="https://www.tailblazor.net">tailblazor templates</a>{target=&quot;_blank&quot;}.  <em>Note you'll need 0.5.x+ for Tailwind 3+.</em></p>
+<p>Also nifty is <a href="https://github.com/adoxography/tailwind-scrollbar">tailwind-scrollbar</a>{target=&quot;_blank&quot;}, which i'm using for the code block containers.</p>
+<hr />
+<h2>PostCSS Plugins {#postcss}</h2>
+<h3><code>tailwindcss/nesting</code> {#nesting}</h3>
+<p>Worth mentioning twice, Tailwind has a built-in PostCSS plugin, <a href="https://tailwindcss.com/docs/using-with-preprocessors#nesting">tailwindcss/nesting</a>{target=&quot;_blank&quot;} that allows for, well, CSS nesting.  No install needed, just add it to your <code>postcss.config.js</code> and nest away:</p>
+<div class="mc-code-block not-prose">
+<div class="mc-code-filename">postcss.config.js</div>
+<div class="mc-code-lines">
+<div class="mc-diff"></div> <pre class="mc-code">module.exports = {</pre>
+<div class="mc-diff"></div> <pre class="mc-code">    plugins: {</pre>
+<div class="mc-diff"></div> <pre class="mc-code">        'postcss-import': {},</pre>
+<div class="mc-diff mc-ins"></div> <pre class="mc-code mc-ins">        'tailwindcss/nesting': {},</pre>
+<div class="mc-diff"></div> <pre class="mc-code">        tailwindcss: {}</pre>
+<div class="mc-diff"></div> <pre class="mc-code">    }</pre>
+<div class="mc-diff"></div> <pre class="mc-code">};</pre>
+</div></div>
+<p>Note the placement: after <code>postcss-import</code> inlines your files, but before <code>tailwindcss</code> does its magic.</p>
+<p>There are <em><a href="https://www.postcss.parts/">loads</a>{target=&quot;_blank&quot;}</em> of other PostCSS plugins out there.</p>
+<hr />
+<h1>Fluent UI Web Components: Easy drop-ins while prototyping {#components}</h1>
+<p>Rather than resorting to using something like Bootstrap alongside Tailwind/Blazor, i've been using Microsoft's <a href="https://fluent-components.azurewebsites.net/?path=/docs/getting-started-overview--page">Fluent UI Web Components</a>{target=&quot;_blank&quot;} via <a href="https://github.com/microsoft/fluentui/tree/master/packages/web-components#from-cdn">the CDN</a>{target=&quot;_blank&quot;} to start, phasing in my own components as a project progresses until i can eliminate the ~85kb dependency. Notice there is a <a href="https://github.com/microsoft/fast-blazor">Blazor NuGet Package</a>{target=&quot;_blank&quot;} but there is a <a href="https://github.com/microsoft/fast-blazor/issues/125">fundamental issue</a>{target=&quot;_blank&quot;} with styling the Razor Components. (You may have experienced this sort of thing with NavLink.)  Since i typically use them as stand-ins while i build my own, i take the quick and dirty Web Components CDN route.</p>
+<hr />
+<p>::: {.text-xl .italic .light .text-right .pr-6 }
+<a href="/notes">next: notes</a>
+:::
+::::</p>
