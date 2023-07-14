@@ -1,7 +1,7 @@
 import { html, unsafeCSS, nothing } from 'lit';
 import { customElement, property } from 'lit/decorators.js'
 import { BlitElement } from '../blit-element';
-import iconLinkCSS from './IconLink.razor.css?inline';
+import iconLinkCSS from './icon-link.css?inline';
 
 @customElement('icon-link')
 export class IconLink extends BlitElement

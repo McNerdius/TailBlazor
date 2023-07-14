@@ -45,7 +45,7 @@ The essential plugins, in the order they should be run:
 
 The above is how it works without passing `--postcss postcss.config.js` to the `tailwindcss` CLI.  Opting for a `postcss.config.js` means we have to spell things out a bit, which is what i've shown in [setup](/setup#postcss) and [nesting](/tidy_css#nesting).  Here's a simplified view of things - noting that if you do use a `postcss.config.js`, the extra plugins you're using should be sandwiched between `postcss-import` at the top, and `tailwindcss` at the bottom.
 
-[![postcss](images/postcss.drawio.svg)](images/postcss.drawio.svg){target="_blank"}
+[![postcss](../images/postcss.drawio.svg)](../images/postcss.drawio.svg){target="_blank"}
 
 ## Tailwind's Default `init --postcss` Config {#postcssconfig}
 
@@ -92,15 +92,15 @@ In short, the [`@layer` directive](https://tailwindcss.com/docs/adding-custom-st
 
 Here's example without use of layers: note the ordering, and that while `dark-utility` is generated, `dark:dark-utility` won't *actually work*:
 
-[![step1-vanilla](images/step1-vanilla.png)](images/step1-vanilla.png){target="_blank"}
+[![step1-vanilla](../images/step1-vanilla.png)](../images/step1-vanilla.png){target="_blank"}
 
 Adding `@layer` into the mix, we get smart ordering and a proper `dark:dark-utility`:
 
-[![step2-layer](images/step2-layer.png)](images/step2-layer.png){target="_blank"}
+[![step2-layer](../images/step2-layer.png)](../images/step2-layer.png){target="_blank"}
 
 Finally, putting our custom `layer` CSS in their own files:
 
-[![step3-import](images/step3-import.png)](images/step3-import.png){target="_blank"}
+[![step3-import](../images/step3-import.png)](../images/step3-import.png){target="_blank"}
 
 ## The `@tailwind` directive {#tailwind}
 
