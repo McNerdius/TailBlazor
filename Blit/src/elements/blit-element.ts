@@ -5,10 +5,6 @@ import tailwindCSS from '../../tailblazor.css?inline';
 export class BlitElement extends LitElement {
     static styles = [
         unsafeCSS( tailwindCSS ),
-        css`
-            :host {
-                display: block;
-            }
-        `,
+        css``,
     ];
 }

@@ -1,16 +1,18 @@
-import { BeforeEnterObserver, RouterLocation } from '@vaadin/router';
 import { css, html } from 'lit';
+import { until } from 'lit/directives/until.js';
 import { customElement, state } from 'lit/decorators.js'
 
-import { until } from 'lit/directives/until.js';
+import { BeforeEnterObserver, RouterLocation } from '@vaadin/router';
+
+import { BlitElement } from './blit-element';
+
 // import { cache } from 'lit/directives/cache.js';
 
 // import 'https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.1.0/dist/components/include/include.js';
 import 'https://cdn.jsdelivr.net/gh/zerodevx/zero-md@2/dist/zero-md.min.js'
-import { BlitPage } from './blit-page';
 
 @customElement('static-content')
-export class StaticContent extends BlitPage implements BeforeEnterObserver
+export class StaticContent extends BlitElement implements BeforeEnterObserver
 {
     static styles = [ ...super.styles, css`` ];
 
@@ -34,11 +36,8 @@ export class StaticContent extends BlitPage implements BeforeEnterObserver
     }
 
     render = () => html`
-        <page-title>${this.page}</page-title>
         <div class="w-full h-full">
             ${until(this.loadContent(), html`<awesome-loader></awesome-loader>`)}
         </div>
     `;
 }
-
-declare global { interface HTMLElementTagNameMap { 'static-content': StaticContent } };
