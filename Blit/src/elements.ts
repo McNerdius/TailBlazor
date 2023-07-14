@@ -1,5 +1,5 @@
 import { AwesomeLoader } from "./elements/awesome-loader";  //✅
-import { DarkSwitch } from "./elements/dark-switch";        //✅
+import { DarkSwitch } from "./elements/dark-switch/dark-switch";        //✅
 import { IconLink } from "./elements/icon-link";            //✅
 import { IndexPage } from "./elements/index-page";          //✅
 import { MainLayout } from "./main-layout";                 //✅

@@ -53,12 +53,12 @@ export class MainLayout extends LitElement {
                         border-b border-neutral-300 dark:border-0
                         dark:bg-neutral-800">
 
-                <!-- <div class="w-44 md:w-48 lg:w-52 text-center
+                <div class="w-44 md:w-48 lg:w-52 text-center
                         text-blue-600 font-extrabold italic tracking-widest
                             text-2xl sm:text-3xl lg:text-4xl
                             transition-[font-size,line-height] duration-300">
                     WIP !
-                </div>     -->
+                </div>
 
                 <div class="flex-grow"></div>
 
