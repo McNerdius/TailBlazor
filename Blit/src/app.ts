@@ -1,6 +1,6 @@
 import { Routes } from "./routes";
 import { Router } from '@vaadin/router';
-import { LitElement, html, unsafeCSS } from 'lit';
+import { LitElement, css, html, unsafeCSS } from 'lit';
 import { customElement, query } from 'lit/decorators.js'
 import twBaseOnly from "tailwindcss/base.css?inline";
 
@@ -11,7 +11,12 @@ import twBaseOnly from "tailwindcss/base.css?inline";
 export class TailBlazorApp extends LitElement
 {
     static styles = [
-        unsafeCSS(twBaseOnly)
+        unsafeCSS(twBaseOnly),
+        css`
+        :host, div{
+            display: block;
+            height: 100%;
+        }`
         // class="h-full w-full m-0 p-0"
     ]
 
@@ -31,6 +36,3 @@ export class TailBlazorApp extends LitElement
 
     }
 }
-
-// not needed, no props:
-// declare global { interface HTMLElementTagNameMap { 'tailblazor-app': TailBlazorApp } };
