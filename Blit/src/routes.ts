@@ -8,12 +8,12 @@ export const Routes = [
                 {
                     path: '/',
                     component: 'index-page',
-                    action: async () => { await import('./pages/index-page'); }
+                    action: async () => { await import('./elements/index-page'); }
                 },
                 {
                     path: '/:static',
                     component: 'static-content',
-                    action: async () => { await import('./pages/static-content'); }
+                    action: async () => { await import('./elements/static-content'); }
                 }       
             ]
     }

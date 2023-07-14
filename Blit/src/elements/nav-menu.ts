@@ -2,8 +2,9 @@ import { html, css } from 'lit';
 import { customElement } from 'lit/decorators.js'
 import { BlitElement } from './blit-element';
 
-@customElement('nav-bar')
-export class NavBar extends BlitElement {
+@customElement('nav-menu')
+export class NavMenu extends BlitElement 
+{
     static styles = [
         ...super.styles,
         css`
@@ -18,5 +19,3 @@ export class NavBar extends BlitElement {
         return html`<div class="m-2"></div>`;
     }
 }
-
-declare global { interface HTMLElementTagNameMap { 'nav-bar': NavBar } };
