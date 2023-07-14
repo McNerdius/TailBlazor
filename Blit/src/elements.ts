@@ -5,7 +5,7 @@ import { MainLayout } from "./main-layout";                         //✅
 import { NavMenu } from "./nav-menu";                      //✅
 import { NotFound } from "./elements/not-found";                    //✅
 import { StaticContent } from "./elements/static-content";          //✅
-// import { TailBlazorApp } from "./app";                              //✅
+import { TailBlazorApp } from "./app";                              //✅
 
 export
 {
@@ -16,7 +16,7 @@ export
     NavMenu,        //✅
     NotFound,       //✅
     StaticContent,  //✅
-    // TailBlazorApp   //✅
+    TailBlazorApp   //✅
 };
 
 declare global
@@ -30,6 +30,6 @@ declare global
         'nav-menu': NavMenu,                //✅
         'not-found': NotFound,              //✅
         'static-content': StaticContent,    //✅
-        // 'tailblazor-app': TailBlazorApp     //✅
+        'tailblazor-app': TailBlazorApp     //✅
     }
 };
