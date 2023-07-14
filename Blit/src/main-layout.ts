@@ -1,13 +1,13 @@
-import { LitElement, html, nothing, unsafeCSS } from 'lit';
+import { html, nothing } from 'lit';
 import { customElement, state } from 'lit/decorators.js'
 import { classMap } from 'lit/directives/class-map.js';
-import twBaseOnly from "tailwindcss/base.css?inline";
+import { BlitElement } from './elements/blit-element';
 
 @customElement('main-layout')
-export class MainLayout extends LitElement {
+export class MainLayout extends BlitElement {
 
     static styles = [
-        unsafeCSS(twBaseOnly)
+        ...super.styles
         // class="h-full w-full m-0 p-0"
     ]
 
