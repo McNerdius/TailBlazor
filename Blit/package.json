@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "@lit-labs/context": "^0.3.3",
-    "@vaadin/router": "^1.7.5",
+    "@lit-labs/router": "^0.1.1",
     "lit": "^2.7.5"
   },
   "devDependencies": {
