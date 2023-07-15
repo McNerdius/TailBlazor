@@ -1,0 +1,65 @@
+.markdown {
+  @apply pb-16;
+  @apply max-w-[50rem] 2xl:max-w-[60rem];
+  @apply transition-all duration-300;
+
+  .emoji {
+    @apply inline font-normal text-[120%];
+  }
+
+  a {
+    @apply text-link-blue;
+  }
+  .content{
+    @apply pl-2 pr-4 sm:px-6 lg:px-10 xl:px-12 2xl:px-16
+           transition-[padding];
+  }
+  .nav
+  {
+    @apply hidden xl:block absolute right-16 h-min w-44;
+    @apply border-l border-neutral-300 dark:border-neutral-600;
+    @apply text-[0.93rem] font-extralight leading-loose;
+    @apply pl-4;
+    
+    p, li { @apply my-0 py-0; }
+
+    ul { @apply list-none px-2; }
+    a { @apply block no-underline; }
+  }
+
+  .info {
+    @apply p-2 md:p-4 my-8 ml-1 rounded-md 
+           italic font-semibold dark:text-black
+
+           bg-yellow-50 dark:bg-amber-300
+           
+            ring-1 dark:ring-2 ring-orange-600;
+
+    &:before {
+      content: url("info.svg");
+      @apply w-6 h-6 mr-2 inline-block;
+    }
+
+    p {
+      @apply inline;
+    }
+  }
+
+  code {
+
+    @apply whitespace-pre-wrap font-medium;
+    /* more like ohmyposh.dev, less like tailwindcss.com */
+    @apply before:!content-none after:!content-none;
+
+    &:not(pre *) {
+      @apply bg-zinc-200/50 dark:bg-zinc-700/60;
+
+      @apply px-1 py-px rounded-[4px];
+    }
+  }
+
+  img {
+    @apply m-auto bg-neutral-400 rounded-md;
+  }
+
+}
