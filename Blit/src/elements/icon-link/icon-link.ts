@@ -6,35 +6,25 @@ import iconLinkCSS from './icon-link.css?inline';
 @customElement('icon-link')
 export class IconLink extends BlitElement
 {
-    
-    static styles = [
-        ...super.styles,
-        unsafeCSS(iconLinkCSS)];
+    static styles = [ ...super.styles, unsafeCSS(iconLinkCSS) ];
 
-    @property({ type: Boolean })
-    public NewTab: Boolean = false;
-    
-    @property({ type: Boolean })
-    public Large: Boolean = false;
-
-    @property()
-    public Text!: string;
-    
-    @property()
-    public Link?: string;
+    @property({ type: Boolean }) public NewTab: Boolean = false;
+    @property({ type: Boolean }) public Large: Boolean = false;
+    @property() public Text!: string;
+    @property() public Link?: string;
 
     render()
     {
+        const path = window.location.pathname.replace('/','');
+        const active = this.Link && path == this.Link;
         const common = "justify-start flex items-center";
 
         return html`
-            <div class="link-container first:mt-4 ${this.Large? 'mt-0' :'ml-2'}">
-        
-            ${  this.Link
-                    ? html`<a class=${common} href=${this.Link} target=${this.NewTab?'_blank':nothing}>${this.inner()}</a>`
-                    : html`<div class=${common}>${this.inner()}</div>`  }
-        
-            </div>
+            <div class="link-container first:mt-4 ${this.Large ? 'mt-0' : 'ml-2'}">${
+                this.Link
+                    ? html`<a ?active=${active} class=${common} href="/${this.Link}" target=${this.NewTab?'_blank':nothing}>${this.inner()}</a>`
+                    : html`<div ?active=${active} class=${common}>${this.inner()}</div>`  
+            }</div>
         `;
     }
 
