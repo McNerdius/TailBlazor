@@ -10,7 +10,10 @@
   "dependencies": {
     "@lit-labs/context": "^0.3.3",
     "@lit-labs/router": "^0.1.1",
-    "lit": "^2.7.5"
+    "@tailwindcss/typography": "^0.5.9",
+    "lit": "^2.7.5",
+    "tailwind-scrollbar": "^3.0.4",
+    "tailwindcss-debug-screens": "^2.2.1"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.14",

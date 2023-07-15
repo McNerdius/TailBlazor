@@ -19,7 +19,8 @@ export class DarkSwitch extends BlitElement
     render() {
         return html`
         <div class="relative text-[16px] leading-[23px]">
-        <button class="group max-w-min select-none focus:outline-none" @click=${() => this.toggleTheme()}>
+        <button type="button" class="group max-w-min select-none focus:outline-none"
+                @click=${() => this.toggleTheme()}>
             <div class="flex m-auto h-[24px] w-[48px] bg-[rgb(75,85,99)] rounded-full">
                 <div class="group w-[24px] h-[24px] opacity-0 dark:opacity-100">🌜</div>
                 <div class="group w-[24px] h-[24px] opacity-100 dark:opacity-0">🌞</div>
@@ -53,6 +54,7 @@ export class DarkSwitch extends BlitElement
         }
 
         localStorage.theme = theme;
+        this.requestUpdate();
     }
 
     private toggleTheme()
@@ -77,6 +79,7 @@ export class DarkSwitch extends BlitElement
                 localStorage.theme = 'dark';
                 break;
         };
+        this.requestUpdate();
 
     }
 }

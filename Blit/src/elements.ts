@@ -1,16 +1,16 @@
-import { AwesomeLoader } from "./elements/awesome-loader";          //✅
-import { DarkSwitch } from "./elements/dark-switch/dark-switch";    //✅
-import { IconLink } from "./elements/icon-link/icon-link";          //✅
-import { MainLayout } from "./main-layout";                         //✅
-import { NavMenu } from "./nav-menu";                      //✅
-import { NotFound } from "./elements/not-found";                    //✅
-import { StaticContent } from "./elements/static-content";          //✅
-import { TailBlazorApp } from "./app";                              //✅
+import { AwesomeLoader } from "./elements/awesome-loader";                  //✅
+// import { DarkSwitch } from "./elements/dark-switch/dark-switch";         //✅
+import { IconLink } from "./elements/icon-link/icon-link";                  //✅
+import { MainLayout } from "./main-layout";                                 //✅
+import { NavMenu } from "./nav-menu";                                       //✅
+import { NotFound } from "./elements/not-found";                            //✅
+import { StaticContent } from "./elements/static-content/static-content";   //✅
+import { TailBlazorApp } from "./app";                                      //✅
 
 export
 {
     AwesomeLoader,  //✅
-    DarkSwitch,     //✅
+    // DarkSwitch,     //✅
     IconLink,       //✅
     MainLayout,     //✅
     NavMenu,        //✅
@@ -24,7 +24,7 @@ declare global
     interface HTMLElementTagNameMap
     {
         'awesome-loader': AwesomeLoader,    //✅
-        'dark-switch': DarkSwitch,          //✅
+        // 'dark-switch': DarkSwitch,          //✅
         'icon-link': IconLink,              //✅
         'main-layout': MainLayout,          //✅
         'nav-menu': NavMenu,                //✅
