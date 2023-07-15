@@ -3,6 +3,6 @@ import { visualizer } from "rollup-plugin-visualizer";
 
 export default defineConfig({
     plugins: [
-        visualizer({ filename: "bundle_stats.html", title: "Bundle Stats", brotliSize: true })
+        visualizer({ filename: "dist/bundle_stats.html", title: "Bundle Stats", gzipSize: true, brotliSize: true })
     ]
 });

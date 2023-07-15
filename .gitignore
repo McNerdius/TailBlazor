@@ -5,4 +5,4 @@
 **/*.min.css
 local/**
 **/.vs/*
-Blit/bundle_stats.html
+bundle_stats.html
