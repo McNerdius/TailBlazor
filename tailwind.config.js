@@ -4,7 +4,7 @@ const mdRegex = new RegExp(/{\s*([^}])*}/g);
 /** @type {import('tailwindcss').Config} */
 export default {
   content: {
-    files: ["{src,public}/**/*.{ts,js,html,svg,md}", "index.{html,ts}"],
+    files: ["{source,content}/**/*.{ts,js,html,svg}", "index.html"],
     extract: {
       'md': (content) =>
       {
