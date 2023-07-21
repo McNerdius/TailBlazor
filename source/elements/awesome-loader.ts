@@ -5,14 +5,7 @@ import { BlitElement } from './blit-element';
 @customElement('awesome-loader')
 export class AwesomeLoader extends BlitElement 
 {
-    static styles = [
-        ...super.styles,
-        // css`
-        //     :host {
-        //         display: block;
-        //     }
-        // `,
-    ];
+    static styles = super.styles;
 
     render()
     {
