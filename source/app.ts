@@ -8,13 +8,13 @@ export class TailBlazorApp extends BlitElement
 {
     static styles = [
         ...super.styles,
-        css`:host, div{ display: block; height: 100%; background-color:inherit;}`
+        css`:host, div{ display: block; height: 100%; background-color:inherit; }`
     ];
 
     #router = new Router(this,
     [
-        { path: "/",      render: () => html`<static-content page="overview"></static-content>` },
-        { path: "/:page", render: ({ page }) => html`<static-content .page=${page!}></static-content>` },
+        { path: "/",       render: () => html`<static-content page="overview"></static-content>` },
+        { path: "/:page",  render: ({ page }) => html`<static-content .page=${page!}></static-content>` },
         { path: "/:page/", render: ({ page }) => html`<static-content .page=${page!}></static-content>` }
     ]);
 

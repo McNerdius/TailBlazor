@@ -1,3 +1,5 @@
+console.log("vite config loaded");
+
 import { defineConfig } from 'vite';
 import { visualizer } from "rollup-plugin-visualizer";
 

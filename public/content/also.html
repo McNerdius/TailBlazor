@@ -1,0 +1,36 @@
+<div class="content"><h1>NuGet tools / MSBuild wizardry in place of <code>npm</code> scripts.</h1>
+<ul>
+<li>See <a href="https://marketplace.visualstudio.com/items?itemName=MadsKristensen.NpmTaskRunner64" target="_blank">NPM Task Runner</a>. Adding dependencies or nontrivial MSBuild Targets/Tasks to abstract what translates to <code>npm</code> one-liners seems odd.</li>
+</ul>
+<hr />
+<h1>Similar Projects</h1>
+<p>An incomplete list of projects i've come across, with different methods and perspectives:</p>
+<ul>
+<li><p><a href="https://codewithmukesh.com/blog/integrating-tailwind-css-with-blazor/">https://codewithmukesh.com/blog/integrating-tailwind-css-with-blazor/</a> and <a href="https://mattferderer.com/tailwind-with-blazor">https://mattferderer.com/tailwind-with-blazor</a></p>
+<ul>
+<li><p>geared toward <code>postcss-cli</code></p>
+<p>Notes:</p>
+<p><code>AfterTargets=&quot;PostBuildEvent&quot;</code> versus <code>AfterTargets=&quot;AfterBuild&quot;</code> ?</p>
+</li>
+</ul>
+</li>
+<li><p><a href="https://www.mistergoodcat.com/post/integrating-blazor-server-and-tailwind-css-part-2">https://www.mistergoodcat.com/post/integrating-blazor-server-and-tailwind-css-part-2</a></p>
+<p>A different approach to integrating Scoped CSS: Overwriting scoped styles with a Tailwind-processed version of itself:</p>
+<blockquote>
+<p>This is basically a for-each loop over all the generated scoped CSS files that call the Tailwind CLI for each one</p>
+</blockquote>
+<p>Must bypass JIT to do this. Hot Reload + Incremental builds could result in an infinite CSS-rewriting loop (?)</p>
+<p>Notes:</p>
+<blockquote>
+<p>To understand what's going on during a build, you can use a verbose output of dotnet build and see all the involved msbuild magic - to find a suitable target you can use to plug in your custom CSS preprocessing logic. I've already done that and identified a target named <code>_GenerateScopedCssFiles</code></p>
+</blockquote>
+</li>
+<li><p><a href="https://www.elian.codes/blog/configure-tailwindcss-with-blazor/">https://www.elian.codes/blog/configure-tailwindcss-with-blazor/</a></p>
+<ul>
+<li>Similar setup, using yarn and webpack.</li>
+</ul>
+</li>
+<li><p><a href="https://github.com/barahonajm/blazor-tailwindcss-template">https://github.com/barahonajm/blazor-tailwindcss-template</a></p>
+</li>
+</ul>
+</div>

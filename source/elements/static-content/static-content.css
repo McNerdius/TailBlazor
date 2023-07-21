@@ -36,7 +36,7 @@
             ring-1 dark:ring-2 ring-orange-600;
 
     &:before {
-      content: url("info.svg");
+      content: url("./images/info.svg");
       @apply w-6 h-6 mr-2 inline-block;
     }
 

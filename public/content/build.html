@@ -18,6 +18,24 @@
 <p>Ideally Hot Reload would ensure you're seeing latest version of both your Components and CSS.  For some project types this is the case, but some are... less Hot Reloady than others.  Having to do a full rebuild or browser refresh to see updates for some project types is unfortunate, but also outside the scope of integrating Tailwind CSS into those projects.  Hopefully Hot Reload improves in that regard.</p>
 <h2 id="helpers">Define <code>npm</code> helper scripts</h2>
 <p>In the default <code>package.json</code> you'll see the following:</p>
+<div class="mc-code-block not-prose">
+<div class="mc-code-filename">package.json</div>
+<div class="mc-code-lines">
+<div class="mc-diff"></div> <pre class="mc-code"><span class="token property">"scripts"</span><span class="token operator">:</span> <span class="token punctuation">{</span></pre>
+<div class="mc-diff"></div> <pre class="mc-code">    <span class="token property">"test"</span><span class="token operator">:</span> <span class="token string">"echo \"Error: no test specified\" &amp;&amp; exit 1"</span></pre>
+<div class="mc-diff"></div> <pre class="mc-code"><span class="token punctuation">}</span><span class="token punctuation">,</span></pre>
+</div></div>
+<p>Swap the <code>&quot;test&quot;</code> line for the following:</p>
+<div class="mc-code-block not-prose">
+<div class="mc-code-filename">package.json</div>
+<div class="mc-code-lines">
+<div class="mc-diff"></div> <pre class="mc-code"><span class="token property">"scripts"</span><span class="token operator">:</span> <span class="token punctuation">{</span> </pre>
+<div class="mc-diff mc-del"></div> <pre class="mc-code mc-del">  <span class="token property">"test"</span><span class="token operator">:</span> <span class="token string">"echo \"Error: no test specified\" &amp;&amp; exit 1"</span><span class="token punctuation">,</span></pre>
+<div class="mc-diff mc-ins"></div> <pre class="mc-code mc-ins">  <span class="token property">"build"</span><span class="token operator">:</span> <span class="token string">"npx tailwindcss --config tailwind.config.js --postcss postcss.config.js -i site.css -o ./wwwroot/site.min.css"</span><span class="token punctuation">,</span></pre>
+<div class="mc-diff mc-ins"></div> <pre class="mc-code mc-ins">  <span class="token property">"watch"</span><span class="token operator">:</span> <span class="token string">"npx tailwindcss --config tailwind.config.js --postcss postcss.config.js -i site.css -o ./wwwroot/site.min.css --watch"</span><span class="token punctuation">,</span></pre>
+<div class="mc-diff mc-ins"></div> <pre class="mc-code mc-ins">  <span class="token property">"publish"</span><span class="token operator">:</span> <span class="token string">"npx tailwindcss --config tailwind.config.js --postcss postcss.config.js -i site.css -o ./wwwroot/site.min.css --minify"</span></pre>
+<div class="mc-diff"></div> <pre class="mc-code"><span class="token punctuation">}</span></pre>
+</div></div>
 <p><em>(Yes, that is <code>npx</code> not <code>npm</code>)</em></p>
 <p>Connecting the dots here: point the <code>tailwindcss</code> CLI at the relevant config, input, and output files.  <code>npm run build</code> will do a one-off build, <code>npm run watch</code> is what gives us the quick incremental builds akin to Hot Reload, and <code>npm run publish</code> will do a one-off build, plus <code>cssnano</code> minification.</p>
 <div class="info"><p>Finally !  Having created <code>site.css</code> and done the initial configuration, running <code>npm run build</code> will run <code>tailwindcss</code>, using <code>site.css</code> and markup specified in <code>tailwind.config.js</code>'s <code>content</code> section to generate a vanilla <code>site.min.css</code>.</p>

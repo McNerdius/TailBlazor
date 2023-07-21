@@ -1,4 +1,4 @@
-console.log(process.cwd());
+console.log("postcss loaded");
 
 module.exports = {
     // from: "tailblazor.css",

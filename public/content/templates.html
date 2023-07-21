@@ -1,0 +1,76 @@
+<div class="content"><p>Take the default <code>dotnet new</code> templates and apply the steps described on this site, and you get <a href="https://github.com/McNerdius/TailBlazor-Templates" target="_blank">tailblazor-templates</a>.  The <code>tailblazor-wasm</code> template is hosted at <a href="https://templates.tailblazor.dev" target="_blank">templates.tailblazor.dev</a>.</p>
+<div class="info"><p>With MAUI/Blazor Hybrid not being what i'd hoped, a <code>tailblazor-maui</code> template won't be happening anytime soon, if ever.  (The setup process is much like that of a WASM project.)  This voids one of the <code>tailblazor-templates</code> goals: to be a complete Blazor + Tailwind template package.</p>
+</div>
+<p>The template pack will grow, naming is still up in the air, but the near-future plan looks something like this:</p>
+<table>
+<col style="width:53.45%" />
+<col style="width:46.55%" />
+<thead>
+<tr>
+<th colspan="2" style="text-align: left;">single-project templates</th>
+</tr>
+<tr>
+<th colspan="2" style="text-align: left;">Template/Minimal/</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">-- TailBlazorWasm</td>
+<td style="text-align: center;"><code>tailblazor-wasm</code></td>
+</tr>
+<tr>
+<td style="text-align: left;">-- TailBlazorServer</td>
+<td style="text-align: center;"><code>tailblazor-server</code></td>
+</tr>
+<tr>
+<td style="text-align: left;">-- ~~TailBlazorMaui~~</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">-- TailBlazorPages</td>
+<td style="text-align: center;"><code>tailblazor-pages</code></td>
+</tr>
+</tbody>
+</table>
+<table>
+<col style="width:54.35%" />
+<col style="width:45.65%" />
+<thead>
+<tr>
+<th colspan="2">multi-project template</th>
+</tr>
+<tr>
+<th>Template/Full/</th>
+<th style="text-align: center;"><code>tailblazor-full</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-- RazorClassLibrary</td>
+<td style="text-align: center;">All UI goes here,
+shared below</td>
+</tr>
+<tr>
+<td>-- BlazorWasm</td>
+<td rowspan="4" style="text-align: center;">shares UI with RCL</td>
+</tr>
+<tr>
+<td>-- BlazorServer</td>
+</tr>
+<tr>
+<td>-- ~~BlazorMaui~~</td>
+</tr>
+<tr>
+<td>-- RazorPages</td>
+</tr>
+</tbody>
+</table>
+<p>There's not much different between the <code>Server</code> and <code>Pages</code> flavors:</p>
+<ul>
+<li><code>Server</code> is made from <code>dotnet new blazorserver</code></li>
+<li><code>Pages</code> is made from <code>dotnet new razor</code> (aka Razor Pages)</li>
+<li><code>Server</code> templates use <code>MainLayout.razor</code> as layout, and <code>Pages</code> uses <code>_Layout.cshtml</code>, skipping Blazor's LayoutComponent approach.</li>
+<li><code>Server</code> templates have a <code>razor</code> landing page, <code>Pages</code> uses <code>cshtml</code>.  The only real difference at this point is the file extension, but this along with using <code>_Layout.cshtml</code> should make it clear that intermingling Razor Components, Routable Components, and Razor Pages is the point of the <code>Pages</code> templates.</li>
+</ul>
+<p>Any comments / suggestions / feedback / whatever on the templates, path / template / project naming, toss it <a href="https://github.com/McNerdius/TailBlazor/issues/64" target="_blank">in here</a> !</p>
+</div>
