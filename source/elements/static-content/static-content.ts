@@ -1,8 +1,10 @@
 import { html, unsafeCSS } from 'lit';
 import { until } from 'lit/directives/until.js';
-import { customElement, property } from 'lit/decorators.js'
+import { customElement, state } from 'lit/decorators.js'
 
 import { BlitElement } from '../blit-element';
+
+import { BeforeEnterObserver, RouterLocation } from '@vaadin/router';
 
 import staticCSS from './static-content.css?inline';
 import codeBlockCSS from './codeblock.nested.css?inline';
@@ -12,11 +14,16 @@ import prismCSS from './prism-vsc-dark-plus.css?inline';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 
 @customElement('static-content')
-export class StaticContent extends BlitElement
+export class StaticContent extends BlitElement implements BeforeEnterObserver
 {
     static styles = [...super.styles, unsafeCSS(staticCSS), unsafeCSS(codeBlockCSS),unsafeCSS(prismCSS) ];
 
-    @property() page!: string;
+    @state() private page!: string;
+
+    async onBeforeEnter(location: RouterLocation)
+    {
+        this.page = location.params["static"] as string;
+    }
 
     async loadContent()
     {
