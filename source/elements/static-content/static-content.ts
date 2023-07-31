@@ -10,39 +10,50 @@ import staticCSS from './static-content.css?inline';
 import codeBlockCSS from './codeblock.nested.css?inline';
 import prismCSS from './prism-vsc-dark-plus.css?inline';
 
-// import 'https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.1.0/dist/components/include/include.js';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 
 @customElement('static-content')
 export class StaticContent extends BlitElement implements BeforeEnterObserver
 {
-    static styles = [ ...super.styles, unsafeCSS(staticCSS), unsafeCSS(codeBlockCSS), unsafeCSS(prismCSS) ];
+    static styles = [...super.styles, unsafeCSS(staticCSS), unsafeCSS(codeBlockCSS), unsafeCSS(prismCSS)];
 
     @state() private page!: string;
+
+    #observer?: MutationObserver;
     
     async onBeforeEnter(location: RouterLocation)
     {
         this.page = location.params["static"] as string;
     }
 
-    connectedCallback() {
+    connectedCallback()
+    {
         super.connectedCallback();
-        window.addEventListener('hashchange', () => this.scrollToHash());
+        this.#observer = new MutationObserver(() => this.scrollToHash());
+        this.#observer.observe(this.renderRoot, { childList: true, subtree: true });
+        // window.onhashchange = () => this.scrollToHash();
+        window.addEventListener('hashchange', this.scrollFunction);
     }
 
+    disconnectedCallback() {
+        super.disconnectedCallback();
+        window.removeEventListener('hashchange', this.scrollFunction);
+        this.#observer?.disconnect();
+    }
+
+    scrollFunction = this.scrollToHash.bind(this);
     scrollToHash()
     {
-        console.log("scroll");
-        const anchor = this.renderRoot.querySelector(`${location.hash}`);
-        console.dir(anchor);
+        if (!location.hash) return;
+        // console.log(`scroll @ ${location.hash}`);
+        const anchor = this.renderRoot?.querySelector(location.hash);
+        // console.dir(anchor);
         anchor?.scrollIntoView({ behavior: 'smooth' });
     }
 
-    
-
     async loadContent()
     {
-        console.log(`@load: (${location.hash})`);
+        // console.log(`@load: (${location.hash})`);
 
         let content = await fetch(`/content/${this.page}.html`).then(r => r.text()).catch();
     
@@ -53,7 +64,7 @@ export class StaticContent extends BlitElement implements BeforeEnterObserver
 
     render()
     {
-        console.log(`@render: (${location.hash})`);
+        // console.log(`@render: (${location.hash})`);
 
         return html`
         <div class="w-full h-full prose prose-sm md:prose-base lg:prose-lg 2xl:prose-xl dark:prose-invert

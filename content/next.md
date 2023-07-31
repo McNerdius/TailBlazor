@@ -1,7 +1,7 @@
 :::: nav
 
 Plugins { .font-bold }
-- [Tailwind](/next)
+- [Tailwind](/next#tailwind)
 - [PostCSS](/next#postcss)
   
   
