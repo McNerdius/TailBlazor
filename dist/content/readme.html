@@ -1,0 +1,29 @@
+<div class="content"><h1>Changes</h1>
+<p>2022-7-3</p>
+<ul>
+<li>Rewrite content regarding PostCSS and <code>postcss-import</code> for clarity and to reflect the changes in Tailwind 3.1</li>
+</ul>
+<p>2022-6-22</p>
+<ul>
+<li>Update content to reflect state of MAUI &amp; release of Tailwind 3.1</li>
+<li>Apply dll renaming workaround mentioned below</li>
+<li>This page</li>
+</ul>
+<hr />
+<h1>Issues</h1>
+<h2>Firewall / Security blockage</h2>
+<p>See the <a href="https://github.com/McNerdius/TailBlazor/issues/129">GitHub issue</a>.  A Blazor issue really, but it's a pretty big one IMO.  I've <a href="https://github.com/McNerdius/TailBlazor/pull/130/files?diff=unified&amp;w=0">applied the renaming workaround</a> to the <code>tailblazor.dev</code> repo but the dll-with-bin-extension files were still being blocked for the issue submitter, so i didn't merge it into the templates.  A 'drop in' sort of fix that actually works certainly belongs in the templates.  Coming up with such a fix isn't easy when i don't know how to reproduce various unknown security restrictions.  My google-fu is pretty weak on this topic too.</p>
+<h2>Hot Reload</h2>
+<p>As mentioned, hot reload / <code>dotnet watch</code> behavior differs between the project types.  As tooling improves, improving the experience means relying on tricks and workarounds.  I've implemented some in the <code>tailblazor-templates</code> repo, but it's still not ideal.</p>
+<hr />
+<h1>Thanks</h1>
+<ul>
+<li>Thanks to <code>niktek</code> for the VS Code <a href="https://github.com/McNerdius/TailBlazor-Templates/issues/14">background task regex</a> for the <code>tailwindcss</code> CLI.</li>
+<li>Thanks to <code>thismat</code> for ideas on <a href="https://github.com/McNerdius/TailBlazor/issues/108">improving the <code>tailwindcss.targets</code> setup</a>.</li>
+<li>Thanks to <code>umanivannan-conga</code> for bringing the <a href="https://github.com/McNerdius/TailBlazor-Templates/issues/26">security issue</a> to my attention.</li>
+<li>Thanks to <code>ErnieBernie10</code> for bringing .NET's <a href="https://github.com/McNerdius/TailBlazor-Templates/issues/5">inconsistent Hot Reload behavior</a> to my attention.</li>
+</ul>
+<hr />
+<div class="info"><p>Site design inspired by <a href="https://ohmyposh.dev/docs/" target="_blank">ohmyposh.dev docs</a>, using Tailwind Labs' <a href="https://github.com/tailwindlabs/heroicons">HeroIcons</a> - see <a href="https://heroicons.dev/">here</a> for an improved but unofficial icon-picker.</p>
+</div>
+</div>

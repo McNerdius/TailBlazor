@@ -1,0 +1,110 @@
+<div class="nav"><p class="font-bold">Setup </p>
+<div>
+<ul>
+<li><a href="setup#blazor">Blazor</a></li>
+<li><a href="setup#twsetup">Tailwind</a></li>
+</ul>
+</div>
+<p class="font-bold">Config </p>
+<div>
+<ul>
+<li><a href="setup#twconfig">Tailwind</a></li>
+<li><a href="setup#postcss">PostCSS</a></li>
+</ul>
+</div>
+<p><a href="setup#boilerplate">Boilerplate CSS</a></p>
+</div>
+<div class="content"><h1 id="blazor">.NET/Blazor setup</h1>
+<div class="info"><p>I'll be tweaking a default .NET 6 Blazor WebAssembly project here - the steps are largely the same for other project types and i'll do my best to call out any differences.  I'll be using the <code>dotnet</code> CLI: each IDE does things differently and may change from version to version, but the CLI is a constant.</p>
+</div>
+<h2>Install &amp; Nuke</h2>
+<p>After creating the Blazor WebAssembly project using <code>dotnet new blazorwasm</code>, i remove the following:</p>
+<ul>
+<li>The Bootstrap/Open-Iconic bits at <code>wwwroot/css/*</code>. <br />
+Note that at the bottom of <code>app.css</code> there are some Blazor-specific bits (<code>blazor-error-ui</code> and so on) that are worth taking a look at / keeping around. See <a href="https://docs.microsoft.com/en-us/aspnet/core/blazor/fundamentals/handle-errors?view=aspnetcore-6.0#detailed-errors-during-development-for-blazor-webassembly-apps" target="_blank">here</a> and <a href="https://docs.microsoft.com/en-us/aspnet/core/blazor/fundamentals/handle-errors?view=aspnetcore-6.0#error-boundaries" target="_blank">here</a> for more info.</li>
+<li>The <code>&lt;link href=&quot;...&quot; rel=&quot;stylesheet&quot;&gt;</code> references to Bootstrap/Open-Iconic in <code>index.html</code>.</li>
+</ul>
+<p>Same basic steps for other project types: Nuke the default CSS and references to it, they're just in different locations.</p>
+<hr />
+<h1 id="twsetup">Tailwind CSS setup</h1>
+<p>The <a href="https://tailwindcss.com/docs/installation" target="_blank">documentation</a> shows two main installation approaches.  The default &quot;Tailwind CLI&quot; method is the way to go as we're not dealing with JS tooling or edge cases the other option may be suited for.  The common denominator is PostCSS - more on this below.</p>
+<h2 id="init">Install &amp; Initialize</h2>
+<ul>
+<li>In the Blazor project folder, run <code>npm init --yes</code> to initialize a <code>package.json</code> using defaults. These are analogous to a <code>dotnet new</code> &amp; <code>*.csproj</code>.</li>
+<li>Next run <code>npm install -D tailwindcss</code>, similar to<a href="/setup#npm-install">^1^</a> a <code>dotnet add package</code>.</li>
+<li>Next, <code>npx tailwindcss init --postcss</code> which will write default <code>tailwind.config.js</code> and <code>postcss.config.js</code> files to disk.  (Note that this differs from the installation docs: adding <code>--postcss</code> which outputs a default <code>postcss.config.js</code>)</li>
+</ul>
+<hr />
+<h1 id="twconfig">Tailwind CSS Config</h1>
+<p>As of Tailwind CSS v3, the default <code>tailwind.config.js</code> file:</p>
+<div class="mc-code-block not-prose">
+<div class="mc-code-filename">tailwind.config.js</div>
+<div class="mc-code-lines">
+<div class="mc-diff"></div> <pre class="mc-code">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span></pre>
+<div class="mc-diff"></div> <pre class="mc-code">  <span class="token literal-property property">content</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span></pre>
+<div class="mc-diff"></div> <pre class="mc-code">  <span class="token literal-property property">theme</span><span class="token operator">:</span> <span class="token punctuation">{</span></pre>
+<div class="mc-diff"></div> <pre class="mc-code">    <span class="token literal-property property">extend</span><span class="token operator">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span></pre>
+<div class="mc-diff"></div> <pre class="mc-code">  <span class="token punctuation">}</span><span class="token punctuation">,</span></pre>
+<div class="mc-diff"></div> <pre class="mc-code">  <span class="token literal-property property">plugins</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span></pre>
+<div class="mc-diff"></div> <pre class="mc-code"><span class="token punctuation">}</span></pre>
+</div></div>
+<p>Tailwind is massively <a href="https://tailwindcss.com/docs/configuration" target="_blank">configurable</a>, letting you override and extend values used when generating classes, and even <a href="https://tailwindcss.com/docs/adding-new-utilities" target="_blank">add your own</a> utility classes to participate in the CSS generation process.</p>
+<p>However, there's only one tweak needed to get started: <code>content</code> is how the JIT magic happens. Here you point Tailwind at any <em>markup</em> files where its yet-to-be-generated CSS is being <em>used</em>. (Hence the &quot;JIT&quot; in &quot;Tailwind JIT&quot;).  More specific configuration translates to better performance, but you don't want to miss any files either.  A decent starter for a Blazor project, taking advantage of globbing and negation/exclusion:</p>
+<div class="mc-code-block not-prose">
+<div class="mc-code-filename">tailwind.config.js</div>
+<div class="mc-code-lines">
+<div class="mc-diff"></div> <pre class="mc-code">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span> </pre>
+<div class="mc-diff mc-del"></div> <pre class="mc-code mc-del">    <span class="token literal-property property">content</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> </pre>
+<div class="mc-diff mc-ins"></div> <pre class="mc-code mc-ins">    <span class="token literal-property property">content</span><span class="token operator">:</span> <span class="token punctuation">[</span></pre>
+<div class="mc-diff mc-ins"></div> <pre class="mc-code mc-ins">        <span class="token string">'!**/{bin,obj,node_modules}/**'</span><span class="token punctuation">,</span></pre>
+<div class="mc-diff mc-ins"></div> <pre class="mc-code mc-ins">        <span class="token string">'**/*.{razor,html,cshtml}'</span><span class="token punctuation">,</span></pre>
+<div class="mc-diff mc-ins"></div> <pre class="mc-code mc-ins">    <span class="token punctuation">]</span><span class="token punctuation">,</span></pre>
+<div class="mc-diff"></div> <pre class="mc-code">    <span class="token literal-property property">theme</span><span class="token operator">:</span> <span class="token punctuation">{</span> </pre>
+<div class="mc-diff"></div> <pre class="mc-code">        <span class="token literal-property property">extend</span><span class="token operator">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span> </pre>
+<div class="mc-diff"></div> <pre class="mc-code">    <span class="token punctuation">}</span><span class="token punctuation">,</span> </pre>
+<div class="mc-diff"></div> <pre class="mc-code">    <span class="token literal-property property">plugins</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span> </pre>
+<div class="mc-diff"></div> <pre class="mc-code"><span class="token punctuation">}</span></pre>
+</div></div>
+<p>Of course for Blazor WebAssembly, <code>cshtml</code> would be excluded.  Also consider that there may be cases where you use Tailwind-generated classes in <code>.razor.cs</code> backing code, <code>svg</code> files, or elsewhere.  See <a href="https://tailwindcss.com/docs/content-configuration#configuring-source-paths" target="_blank">here</a> for more info on <code>content</code>.</p>
+<hr />
+<h1 id="postcss">PostCSS Config</h1>
+<p>PostCSS is a general-purpose pipeline to transform input CSS through user-specified <a href="https://github.com/postcss/postcss/blob/main/docs/plugins.md">plugins</a>.  The Tailwind CLI wraps PostCSS functionality, automagically including some essential plugins.  However, in order to use PostCSS plugins not on the default list you'll need create a <code>postcss.config.js</code>.  There is <a href="tidy_css#nesting">one such plugin</a> in particular i nearly always take advantage of, so i'm in the habit of using the <code>--postcss</code> option mentioned above when scaffolding my Tailwind projects.</p>
+<p>I'll go into a bit more over in <a href="notes#postcss">notes</a>, but for now replace the contents of <code>postcss.config.js</code> with the following:</p>
+<div class="mc-code-block not-prose">
+<div class="mc-code-filename">postcss.config.js</div>
+<div class="mc-code-lines">
+<div class="mc-diff"></div> <pre class="mc-code">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span></pre>
+<div class="mc-diff"></div> <pre class="mc-code">    <span class="token literal-property property">plugins</span><span class="token operator">:</span> <span class="token punctuation">{</span></pre>
+<div class="mc-diff"></div> <pre class="mc-code">        <span class="token string-property property">'postcss-import'</span><span class="token operator">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span></pre>
+<div class="mc-diff"></div> <pre class="mc-code">        <span class="token literal-property property">tailwindcss</span><span class="token operator">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span></pre>
+<div class="mc-diff"></div> <pre class="mc-code">    <span class="token punctuation">}</span></pre>
+<div class="mc-diff"></div> <pre class="mc-code"><span class="token punctuation">}</span><span class="token punctuation">;</span></pre>
+</div></div>
+<hr />
+<h1 id="boilerplate">Tailwind CSS Boilerplate</h1>
+<p>Lastly, make a &quot;root&quot; CSS file next to the config files, say <code>site.css</code>, and add the following:</p>
+<div class="mc-code-block not-prose">
+<div class="mc-code-filename">site.css</div>
+<div class="mc-code-lines">
+<div class="mc-diff"></div> <pre class="mc-code"><span class="token atrule"><span class="token rule">@import</span> <span class="token string">"tailwindcss/base"</span><span class="token punctuation">;</span></span></pre>
+<div class="mc-diff"></div> <pre class="mc-code"><span class="token atrule"><span class="token rule">@import</span> <span class="token string">"tailwindcss/components"</span><span class="token punctuation">;</span></span></pre>
+<div class="mc-diff"></div> <pre class="mc-code"><span class="token atrule"><span class="token rule">@import</span> <span class="token string">"tailwindcss/utilities"</span><span class="token punctuation">;</span></span></pre>
+</div></div>
+<p>This is what you'll feed the <code>tailwindcss</code> CLI, and where you'll import any of your project's CSS later.  Note this syntax is different from what you'll see in some of the docs (<code>@tailwind ...</code>).  I've found the behavior of <code>@import</code> easier to reason about.</p>
+<h2 id="boilerplate-bg">Behind the boilerplate CSS</h2>
+<p>A quick aside while we're dealing with Tailwind's boilerplate CSS.  Base, Components, and Utilities are CSS precedence layers.  Now, CSS has <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@layer">its own <code>@layer</code> feature</a>, but this is a bit different.  Here's what Tailwind contributes to these layers:</p>
+<ul>
+<li><code>base</code> is a slim set of <a href="https://tailwindcss.com/docs/preflight" target="_blank">base styles</a>.  It aims to reset styles to reasonable and consistent defaults.  Excluding this is handy when you want to see <em>only</em> what Tailwind is generating based on what it sees in your <code>content</code> and similar demo/troubleshooting scenarios.</li>
+<li><code>components</code> - as far as i know, <a href="https://tailwindcss.com/docs/container" target="_blank"><code>container</code></a> is the only thing Tailwind outputs here (if you use it).  Plugins can add add styles here (or elsewhere) though.</li>
+<li><code>utilities</code> for, well, utility classes.</li>
+</ul>
+<p>Wether you use <code>@tailwind ...</code> or <code>@import &quot;tailwindcss/...</code>, the CSS generated for the specified is then inlined:</p>
+<p><a href="/images/default_layers.png" target="_blank"><img src="/images/default_layers.png" alt="default_layers" /></a></p>
+<p>More about layers in <a href="notes#layer">notes</a>.</p>
+<hr />
+<p id="npm-install"><a href="/setup#init" class="pl-4 inline">[1]</a> <code>npm install</code> vs <code>dotnet add package</code>/<code>dotnet tool install</code>: </p>
+<p class="text-base"><code>npm install foo</code> is analogous to a <code>dotnet add package foo</code> for most use cases. But here we're using <code>npm install -D</code> <em>(<code>-D</code> being short for <code>--save-dev</code>)</em> - which is more like a <a href="https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-tool-install" target="_blank"><code>dotnet tool install</code></a>. These are used when the packages being installed are <em>development tools</em>, not <em>project dependencies</em>. <code>dotnet tool install</code> isn't used nearly as much as <code>npm install -D</code>, much less with <em>local</em> tools. (You may remember when <code>dotnet watch</code> needed to be <a href="https://www.nuget.org/packages/dotnet-watch" target="_blank">installed</a>.) Some handy dotnet global tools are <a href="https://www.nuget.org/packages/dotnet-format/" target="_blank">dotnet format</a>, <a href="https://www.nuget.org/packages/dotnet-outdated-tool/" target="_blank">dotnet outdated</a>, and finally <a href="https://www.nuget.org/packages/dotnet-script/" target="_blank">dotnet script</a> for C# scripting and a REPL, with VSCode debugging support. </p>
+<hr />
+<div class="text-xl italic light text-right pr-6"><p><a href="/build">next: build &amp; watch</a></p>
+</div>
+</div>

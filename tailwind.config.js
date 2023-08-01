@@ -5,7 +5,11 @@ const colors = require('tailwindcss/colors');
 /** @type {import('tailwindcss').Config} */
 export default {
   content: {
-    files: ["{source,content}/**/*.{ts,js,html,svg}", "index.html"],
+    files:
+      [
+        "{elements,public}/**/*.{ts,html,svg}",
+        "./*.{ts,html}"
+      ],
   },
   darkMode: 'media',
 

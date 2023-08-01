@@ -36,7 +36,7 @@
 </li>
 </ul>
 <p>The above is how it works without passing <code>--postcss postcss.config.js</code> to the <code>tailwindcss</code> CLI.  Opting for a <code>postcss.config.js</code> means we have to spell things out a bit, which is what i've shown in <a href="/setup#postcss">setup</a> and <a href="/tidy_css#nesting">nesting</a>.  Here's a simplified view of things - noting that if you do use a <code>postcss.config.js</code>, the extra plugins you're using should be sandwiched between <code>postcss-import</code> at the top, and <code>tailwindcss</code> at the bottom.</p>
-<p><a href="../images/postcss.drawio.svg" target="_blank"><img src="../images/postcss.drawio.svg" alt="postcss" /></a></p>
+<p><a href="images/postcss.drawio.svg" target="_blank"><img src="images/postcss.drawio.svg" alt="postcss" /></a></p>
 <h2 id="postcssconfig">Tailwind's Default <code>init --postcss</code> Config</h2>
 <p>The default <code>postcss.config.js</code> includes itself and <code>autoprefixer</code> explicitly:</p>
 <div class="mc-code-block not-prose">
@@ -73,11 +73,11 @@
 <h2 id="layer">The <code>@layer</code> directive</h2>
 <p>In short, the <a href="https://tailwindcss.com/docs/adding-custom-styles#using-css-and-layer" target="_blank"><code>@layer</code> directive</a> tells the Tailwind CLI to give your CSS a bit of extra attention.  It will be output along with the associated layer (<a href="setup#boilerplate-bg" target="_blank">recap</a>) rather than inline, and be usable with modifiers like <code>hover</code>, dark mode, responsive breakpoints, etc.  (For the following examples i've overriden <code>screens</code> in <code>tailwind.config.js</code> to only include a single <code>1024px</code> breakpoint.  Better quality images at some point, 4 bit is a bit ugly, eh. 🤔)</p>
 <p>Here's example without use of layers: note the ordering, and that while <code>dark-utility</code> is generated, <code>dark:dark-utility</code> won't <em>actually work</em>:</p>
-<p><a href="../images/step1-vanilla.png" target="_blank"><img src="../images/step1-vanilla.png" alt="step1-vanilla" /></a></p>
+<p><a href="images/step1-vanilla.png" target="_blank"><img src="images/step1-vanilla.png" alt="step1-vanilla" /></a></p>
 <p>Adding <code>@layer</code> into the mix, we get smart ordering and a proper <code>dark:dark-utility</code>:</p>
-<p><a href="../images/step2-layer.png" target="_blank"><img src="../images/step2-layer.png" alt="step2-layer" /></a></p>
+<p><a href="images/step2-layer.png" target="_blank"><img src="images/step2-layer.png" alt="step2-layer" /></a></p>
 <p>Finally, putting our custom <code>layer</code> CSS in their own files:</p>
-<p><a href="../images/step3-import.png" target="_blank"><img src="../images/step3-import.png" alt="step3-import" /></a></p>
+<p><a href="images/step3-import.png" target="_blank"><img src="images/step3-import.png" alt="step3-import" /></a></p>
 <h2 id="tailwind">The <code>@tailwind</code> directive</h2>
 <p>Revisiting a basic <code>Site.css</code> boilerplate:</p>
 <div class="mc-code-block not-prose">
