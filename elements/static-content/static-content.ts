@@ -56,7 +56,13 @@ export class StaticContent extends BlitElement implements BeforeEnterObserver
         // console.log(`@load: (${location.hash})`);
 
         let content = await fetch(`/content/${this.page}.html`).then(r => r.text()).catch();
-    
+
+        // function sleep(ms: number)
+        // {
+        //     return new Promise(resolve => setTimeout(resolve, ms));
+        // }
+
+
         return content
             ? html`<div class="content">${unsafeHTML(content)}</div>`
             : html`<not-found></not-found>`;
@@ -68,7 +74,7 @@ export class StaticContent extends BlitElement implements BeforeEnterObserver
 
         return html`
         <div class="w-full h-full prose prose-sm md:prose-base lg:prose-lg 2xl:prose-xl dark:prose-invert
-                markdown">
+                    markdown">
             ${until(this.loadContent(), html`<awesome-loader></awesome-loader>`)}
         </div>`;
     }
