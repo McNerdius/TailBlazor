@@ -10,7 +10,7 @@ export class AwesomeLoader extends BlitElement
     render()
     {
         return html`
-        <div class="flex flex-col justify-center h-full gap-4 animate-fade-in">
+        <div class="flex flex-col justify-center h-full gap-4 animate-fade-in ease-in">
             <div class="relative w-[min(25vh,80vw-2rem)] mx-auto">
                 <div style="background-image: repeating-conic-gradient(#539ffd 0 12deg, #0576f8 12deg 24deg);"
                      class="absolute rounded-full m-auto animate-spin-slow w-full h-full">
