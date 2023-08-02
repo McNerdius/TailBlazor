@@ -74,7 +74,7 @@ export class StaticContent extends BlitElement implements BeforeEnterObserver
         // console.log(`@render: (${location.hash})`);
 
         return html`
-        <div class="w-full h-full prose prose-sm md:prose-base lg:prose-lg 2xl:prose-xl dark:prose-invert
+        <div class="prose prose-sm md:prose-base lg:prose-lg 2xl:prose-xl dark:prose-invert
                     markdown animate-fade-in-fast">
             ${until(this.loadContent(), html`<awesome-loader></awesome-loader>`)}
         </div>`;
