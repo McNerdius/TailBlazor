@@ -10,7 +10,7 @@ export class NavMenu extends BlitElement
     render()
     {
         return html`
-        <div class="w-44 md:w-48 lg:w-52 
+        <div class="w-44 md:w-48 lg:w-52  first:mt-4
                     pr-2 pl-2 sm:pl-4 md:pl-6 lg:pl-8
                     transition-[width,padding]">
 
