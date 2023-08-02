@@ -1,4 +1,4 @@
-import { html, unsafeCSS, nothing, PropertyValueMap } from 'lit';
+import { html, unsafeCSS, nothing } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js'
 import { BlitElement } from '../blit-element';
 import iconLinkCSS from './icon-link.css?inline';

@@ -59,7 +59,7 @@
   }
 
   img {
-    @apply m-auto bg-neutral-400 rounded-md;
+    @apply m-auto dark:bg-zinc-800 rounded-xl p-4;
   }
 
 }
