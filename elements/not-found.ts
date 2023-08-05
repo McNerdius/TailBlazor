@@ -1,24 +1,18 @@
-import { html, css } from 'lit';
+import { html } from 'lit';
 import { customElement } from 'lit/decorators.js'
 import { BlitElement } from './blit-element';
 
 @customElement('not-found')
 export class NotFound extends BlitElement {
-    static styles = [
-        ...super.styles,
-        css`
-            :host {
-                display: block;
-            }
-        `,
-    ];
+
+    static styles = super.styles;
 
     render()
     {
         return html`
-        <div class="text-center relative top-1/3">
+        <div class="flex flex-col h-full text-center relative gap-4 justify-center animate-fade-in-fast ease-in">
             <div class="text-8xl mb-4">😢</div>
-            <div class="text-3xl font-semibold">Not Found</div>
+            <div class="text-3xl font-semibold text-amber-600/80">not found</div>
         </div>`
             ;
     }

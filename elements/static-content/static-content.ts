@@ -58,12 +58,12 @@ export class StaticContent extends BlitElement implements BeforeEnterObserver
 
     async loadContent()
     {
-        // function sleep(ms: number)
+        // function sleep(s: number)
         // {
-        //     return new Promise(resolve => setTimeout(resolve, ms));
+        //     return new Promise(resolve => setTimeout(resolve, s*1000));
         // }
 
-        // await sleep(2000);
+        // await sleep(5);
 
         let content = await fetch(`/content/${this.page}.html`).then(r => r.text()).catch();
 
@@ -76,7 +76,7 @@ export class StaticContent extends BlitElement implements BeforeEnterObserver
         }
         else
         {
-            this.content = html`<not-found class="h-full"></not-found>`;
+            this.content = html`<not-found></not-found>`;
         }
     }
 

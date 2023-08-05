@@ -40,9 +40,9 @@ export default {
       animation:
       {
         'spin-slow': 'spin 10s linear infinite',
-        'fade-in': 'fadein 5s',
-        'fade-in-fast': 'fadein 150ms linear',
-        'fade-out-fast': 'fadeout 150ms linear',
+        'fade-in': 'fadein 3s',
+        'fade-in-fast': 'fadein 100ms linear',
+        'fade-out-fast': 'fadeout 100ms linear',
       }
     }
   },
