@@ -1,5 +1,4 @@
-import { html, unsafeCSS } from 'lit';
-import { until } from 'lit/directives/until.js';
+import { css, html, unsafeCSS } from 'lit';
 import { customElement, state } from 'lit/decorators.js'
 
 import { BlitElement } from '../blit-element';
@@ -15,9 +14,10 @@ import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 @customElement('static-content')
 export class StaticContent extends BlitElement implements BeforeEnterObserver
 {
-    static styles = [...super.styles, unsafeCSS(staticCSS), unsafeCSS(codeBlockCSS), unsafeCSS(prismCSS)];
+    static styles = [...super.styles, unsafeCSS(staticCSS), unsafeCSS(codeBlockCSS), unsafeCSS(prismCSS), css`:host { height: 100%; display: block; }`];
 
-    @state() private page!: string;
+    /* @state() */ private page!: string;
+    @state() content = html`<awesome-loader></awesome-loader>`;
 
     #observer?: MutationObserver;
     
@@ -26,13 +26,13 @@ export class StaticContent extends BlitElement implements BeforeEnterObserver
         this.page = location.params["static"] as string;
     }
 
-    connectedCallback()
+    async connectedCallback()
     {
-        super.connectedCallback();
+        await super.connectedCallback();
         this.#observer = new MutationObserver(() => this.scrollToHash());
         this.#observer.observe(this.renderRoot, { childList: true, subtree: true });
-        // window.onhashchange = () => this.scrollToHash();
         window.addEventListener('hashchange', this.scrollFunction);
+        await this.loadContent();
     }
 
     disconnectedCallback() {
@@ -45,38 +45,41 @@ export class StaticContent extends BlitElement implements BeforeEnterObserver
     scrollToHash()
     {
         if (!location.hash) return;
-        // console.log(`scroll @ ${location.hash}`);
         const anchor = this.renderRoot?.querySelector(location.hash);
-        // console.dir(anchor);
         anchor?.scrollIntoView({ behavior: 'smooth' });
     }
 
     async loadContent()
     {
-        // console.log(`@load: (${location.hash})`);
-
-        let content = await fetch(`/content/${this.page}.html`).then(r => r.text()).catch();
-
         // function sleep(ms: number)
         // {
         //     return new Promise(resolve => setTimeout(resolve, ms));
         // }
 
-        // await sleep(100000);
+        // await sleep(2000);
 
-        return content
-            ? html`<div class="content">${unsafeHTML(content)}</div>`
-            : html`<not-found></not-found>`;
+        let content = await fetch(`/content/${this.page}.html`).then(r => r.text()).catch();
+
+        if (content)
+        {
+            this.content = html`
+                <div class="prose prose-sm md:prose-base lg:prose-lg 2xl:prose-xl dark:prose-invert
+                            markdown animate-fade-in-fast">
+                ${unsafeHTML(content)}</div>`;
+        }
+        else
+        {
+            this.content = html`<not-found class="h-full"></not-found>`;
+        }
     }
 
     render()
     {
+        return this.content;
+
         // console.log(`@render: (${location.hash})`);
 
-        return html`
-        <div class="prose prose-sm md:prose-base lg:prose-lg 2xl:prose-xl dark:prose-invert
-                    markdown animate-fade-in-fast">
-            ${until(this.loadContent(), html`<awesome-loader></awesome-loader>`)}
-        </div>`;
+        // return html`
+
     }
 }
