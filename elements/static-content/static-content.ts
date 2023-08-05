@@ -14,7 +14,13 @@ import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 @customElement('static-content')
 export class StaticContent extends BlitElement implements BeforeEnterObserver
 {
-    static styles = [...super.styles, unsafeCSS(staticCSS), unsafeCSS(codeBlockCSS), unsafeCSS(prismCSS), css`:host { height: 100%; display: block; }`];
+    static styles = [
+        ...super.styles, 
+        unsafeCSS(staticCSS), 
+        unsafeCSS(codeBlockCSS), 
+        unsafeCSS(prismCSS), 
+        css`:host { height: 100%; display: block; }`
+    ];
 
     /* @state() */ private page!: string;
     @state() content = html`<awesome-loader></awesome-loader>`;
@@ -45,6 +51,7 @@ export class StaticContent extends BlitElement implements BeforeEnterObserver
     scrollToHash()
     {
         if (!location.hash) return;
+        // console.log("scroll");
         const anchor = this.renderRoot?.querySelector(location.hash);
         anchor?.scrollIntoView({ behavior: 'smooth' });
     }
@@ -76,10 +83,5 @@ export class StaticContent extends BlitElement implements BeforeEnterObserver
     render()
     {
         return this.content;
-
-        // console.log(`@render: (${location.hash})`);
-
-        // return html`
-
     }
 }
