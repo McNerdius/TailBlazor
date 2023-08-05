@@ -11,9 +11,9 @@
     "@lit-labs/context": "^0.3.3",
     "@tailwindcss/typography": "^0.5.9",
     "@vaadin/router": "^1.7.5",
+    "@vicgutt/tailwindcss-debug": "^0.1.0",
     "lit": "^2.7.5",
-    "tailwind-scrollbar": "^3.0.4",
-    "tailwindcss-debug-screens": "^2.2.1"
+    "tailwind-scrollbar": "^3.0.4"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.14",

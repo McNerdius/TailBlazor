@@ -1,11 +1,13 @@
 import { html } from 'lit';
 import { customElement, state } from 'lit/decorators.js'
 import { BlitElement } from './elements/blit-element';
+// import { ifDefined } from 'lit/directives/if-defined.js';
 
 @customElement('main-layout')
 export class MainLayout extends BlitElement 
 {
-    // private string debug => HostEnvironment.IsDevelopment() ?"debug-screens": "";
+    // private readonly debug = location.hostname === "localhost" || location.hostname === "127.0.0.1";
+
     static styles = [...super.styles];
 
     @state()
@@ -21,7 +23,7 @@ export class MainLayout extends BlitElement
         
         return html`
         
-        <div class="grid grid-cols-[min-content,auto] grid-rows-[min-content,auto] h-full @debug">
+        <div class="grid grid-cols-[min-content,auto] grid-rows-[min-content,auto] h-full">
 
             ${MainLayout.topBar}
 
