@@ -6,3 +6,4 @@
 local/**
 **/.vs/*
 bundle_stats.html
+.prismjs
