@@ -3,8 +3,9 @@
   "private": true,
   "version": "0.0.0",
   "scripts": {
+    "mdig":"mdig.exe -i=./content -o=./public/content -e=abbreviations+mcprism+autolinks+customcontainers+emphasisextras+pipetables+gridtables+tasklists+attributes",
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "npm run mdig && tsc && vite build",
     "preview": "vite preview"
   },
   "dependencies": {
