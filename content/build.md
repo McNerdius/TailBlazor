@@ -1,6 +1,6 @@
 :::: nav
 
-[Intro](build)
+[Intro](build#intro)
 [NPM helper scripts](build#helpers)
 [MSBuild targets](build#targets)
 :::

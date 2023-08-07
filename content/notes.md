@@ -125,7 +125,7 @@ While it's not *always* necessary to use `@import` syntax versus `@tailwind` syn
 
 ---
 
-# `npm` Alternatives
+# `npm` Alternatives {#NPM}
 
 I'm not a web developer, and the JS ecosystem is a bit churny and disjointed for me to keep up with.  Using vanilla CSS wouldn't require any of that, but it is my biggest source of frustration in learning front-end development.  Tailwind CSS just "clicks" for me.  
 

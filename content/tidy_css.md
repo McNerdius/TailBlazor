@@ -1,10 +1,8 @@
 :::: nav
 
-[Intro](/tidy_css)
+[Intro](/tidy_css#intro)
 [CSS Isolation](/tidy_css#isolation)
 [@apply](/tidy_css#apply)
-- [postcss-import](/tidy_css#import)
-  
 [Nesting](/tidy_css#nesting)
 
 ::::
