@@ -1,5 +1,5 @@
 .markdown {
-  @apply pb-16;
+  @apply pb-8 pt-4 sm:pt-6 sm:pb-10 lg:pt-8 lg:pb-12;
   @apply max-w-[50rem] 2xl:max-w-[60rem];
   @apply transition-all duration-300;
 
@@ -11,7 +11,8 @@
     @apply text-link-blue;
   }
   .content{
-    @apply pl-2 pr-4 sm:px-6 lg:px-10 xl:px-12 2xl:px-16
+    @apply 
+           px-1.5 sm:px-4 md:px-6 lg:px-10 xl:px-12 2xl:px-16
            transition-[padding];
   }
   .nav
@@ -21,10 +22,9 @@
     @apply text-[0.93rem] font-extralight leading-loose;
     @apply pl-4;
     
+    ul { @apply list-none px-2 mt-0 mb-1 leading-relaxed; }  
     p, li { @apply my-0 py-0; }
-
-    ul { @apply list-none px-2; }
-    a { @apply block no-underline; }
+    a { @apply block no-underline my-[inherit]; }
   }
 
   .info {

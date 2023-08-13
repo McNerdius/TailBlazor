@@ -1,7 +1,7 @@
 
 .mc-code-block {
   @apply font-mono font-bold
-         mr-4 my-6 rounded-t-lg
+          my-6 rounded-t-lg
          bg-zinc-800 text-neutral-200;
 
   .mc-code-lines {

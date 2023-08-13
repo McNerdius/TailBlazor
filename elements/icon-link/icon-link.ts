@@ -43,7 +43,7 @@ export class IconLink extends BlitElement
         const common = "justify-start flex items-center";
 
         return html`
-            <div class="link-container ${this.Large ? 'mt-0' : 'ml-2'}">${
+            <div class="link-container">${
                 this.Link
                     ? html`<a ?active=${this.active} class=${common} href="/${this.Link}" target=${this.NewTab?'_blank':nothing}>${this.inner()}</a>`
                     : html`<div ?active=${this.active} class=${common}>${this.inner()}</div>`  
@@ -53,13 +53,13 @@ export class IconLink extends BlitElement
 
     private inner() 
     {
-        const sizing = this.Large ? "w-6 ml-1" : "w-4 ml-2";
+        const sizing = "w-5 sm:w-6 md:w-7"; // this.Large ? "w-5 sm:w-6" : "w-4 sm:w-5";
 
         return html`
             <span class="relative ${sizing}" aria-hidden="true">
                 <slot></slot>
             </span> 
-            <span class="ml-3">
+            <span>
                 ${this.Text}
             </span>
         `;
