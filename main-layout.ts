@@ -1,4 +1,4 @@
-import { html, nothing } from 'lit';
+import { html } from 'lit';
 import { customElement, state } from 'lit/decorators.js'
 import { BlitElement } from './elements/blit-element';
 // import { ifDefined } from 'lit/directives/if-defined.js';    
