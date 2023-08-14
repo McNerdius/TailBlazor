@@ -1,20 +1,40 @@
 <!DOCTYPE html>
-<html lang="en" class="m-0 p-0 w-full h-full">
+<html lang="en" class="m-0 p-0 w-full h-full bg-white dark:bg-neutral-900">
+  
   <head>
+    
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script type="module" src="./elements.ts"></script>
-    <link rel="stylesheet" href="./tailblazor.css">
+    
+    <link   rel="stylesheet" href="./tailblazor.css">
+    <script type="module" src="./elements/awesome-loader.ts"></script>
+    <script type="module" src="app.ts" defer></script>
+
     <title>TailBlazor for .NET 8</title>
     <link rel="icon" href="favicon.svg">
-
-      <script>
-        window.ZeroMdConfig = {
-          cssUrls: []
-        }
-      </script>
+    
   </head>
-  <body class="m-0 p-0 w-full h-full">
-    <tailblazor-app></tailblazor-app>
+
+  <body class="m-0 p-0 w-full h-full relative">
+
+    <awesome-loader class="absolute w-full h-full transition-opacity duration-300"></awesome-loader>
+
+    <div class="absolute w-full h-full transition-opacity duration-300 ease-out opacity-0" id="app">
+      <tailblazor-app></tailblazor-app>
+    </div>
+
+    <script type="application/javascript">
+        // @ts-check
+        const loader = document.getElementsByTagName('awesome-loader')[0];
+        const app = document.getElementById('app');
+
+        document.addEventListener(
+          "content_loaded", 
+          () => { console.log("loaded"); loader.classList.add("opacity-0"); app.classList.remove("opacity-0"); },
+          { once: true }
+        );
+    </script>
+
   </body>
+
 </html>

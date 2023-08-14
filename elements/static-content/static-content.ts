@@ -11,6 +11,9 @@ import prismCSS from './prism-vsc-dark-plus.css?inline';
 
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 
+// import '../awesome-loader';
+import '../not-found';
+
 @customElement('static-content')
 export class StaticContent extends BlitElement implements BeforeEnterObserver
 {
@@ -78,7 +81,11 @@ export class StaticContent extends BlitElement implements BeforeEnterObserver
         {
             this.content = html`<not-found></not-found>`;
         }
+
+        document.dispatchEvent(new Event("content_loaded"));
     }
+
+    // const foo = new Event("content_loaded", {});
 
     render()
     {

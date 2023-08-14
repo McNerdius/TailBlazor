@@ -10,11 +10,13 @@
   a {
     @apply text-link-blue;
   }
+  
   .content{
     @apply 
            px-1.5 sm:px-4 md:px-6 lg:px-10 xl:px-12 2xl:px-16
            transition-[padding];
   }
+
   .nav
   {
     @apply hidden xl:block absolute right-16 h-min w-44;

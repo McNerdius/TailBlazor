@@ -10,7 +10,7 @@ export class AwesomeLoader extends BlitElement
     render()
     {
         return html`
-        <div class="flex flex-col justify-center h-full gap-4 animate-fade-in ease-in">
+        <div class="flex flex-col justify-center h-full gap-4 animate-fade-in ease-linear ">
             <div class="relative w-[min(25vh,80vw-2rem)] mx-auto">
                 <div style="background-image: repeating-conic-gradient(#539ffd 0 12deg, #0576f8 12deg 24deg);"
                      class="absolute rounded-full m-auto animate-spin-slow w-full h-full">
@@ -27,7 +27,7 @@ export class AwesomeLoader extends BlitElement
                     <path d="m504 590s-46 40-105 53c-66 15-114-7-114-7s14-76 93-95c76-18 126 49 126 49z" fill="#f9bedd"></path>
                 </svg>
             </div>
-            <div class="font-bold text-4xl text-center italic">loading...</div>
+            <div class="font-bold text-4xl text-center italic dark:text-neutral-300">loading...</div>
         </div>
     `;
     }

@@ -2,6 +2,8 @@ import { html } from 'lit';
 import { customElement } from 'lit/decorators.js'
 import { BlitElement } from './elements/blit-element';
 
+import './elements/icon-link/icon-link';
+
 @customElement('nav-menu')
 export class NavMenu extends BlitElement 
 {
