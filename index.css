@@ -1,3 +1,5 @@
+@config "./tailwind.index.js";
+
 @tailwind base;
 @tailwind utilities;
 @tailwind components;

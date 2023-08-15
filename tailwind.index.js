@@ -15,11 +15,11 @@ export default {
     'transitionDuration',
     'transitionTimingFunction',
     'opacity',
-    'fontFamily'
+    'fontFamily',
     // 'preflight'
   ],
-  // plugins: [
-  //   require('@vicgutt/tailwindcss-debug'),
-  // ],
+  plugins: [
+    require('@vicgutt/tailwindcss-debug'),
+  ],
 }
 

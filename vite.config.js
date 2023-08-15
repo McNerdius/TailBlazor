@@ -7,13 +7,13 @@ export default defineConfig({
     plugins: [
         visualizer({ filename: "dist/bundle_stats.html", title: "Bundle Stats", gzipSize: true, brotliSize: true })
     ],
-    build: {
-        
-        // rollupOptions: {
-        //     output: {
-        //         preserveModules: true,
-        //     },
-        //     preserveEntrySignatures: true,
-        // }
+    esbuild: {
+        drop: [ "console" ],
+
     }
+    // build: {
+        
+    //     rollupOptions: {
+    //     }
+    // }
 });

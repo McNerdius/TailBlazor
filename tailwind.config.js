@@ -47,7 +47,6 @@ export default {
     }
   },
   plugins: [
-    require('@vicgutt/tailwindcss-debug'),
     require('tailwind-scrollbar'),
     require('@tailwindcss/typography'),
   ],
