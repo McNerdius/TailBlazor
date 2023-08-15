@@ -1,0 +1,42 @@
+/* prose prose-sm md:prose-base lg:prose-lg 2xl:prose-xl dark:prose-invert */
+
+.prose {
+
+  max-width: 65ch;
+  @apply bg-neutral-800;
+  
+
+
+  p {
+
+
+  }
+
+}
+
+.prose-sm {
+
+
+}
+
+.prose-base {
+
+
+}
+
+
+.prose-lg {
+
+
+}
+
+
+.prose-xl {
+
+
+}
+
+.prose-invert {
+
+
+}

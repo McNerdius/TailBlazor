@@ -8,6 +8,7 @@ import { BeforeEnterObserver, RouterLocation } from '@vaadin/router';
 import staticCSS from './static-content.css?inline';
 import codeBlockCSS from './codeblock.nested.css?inline';
 import prismCSS from './prism-vsc-dark-plus.css?inline';
+import prose from './prose.css?inline';
 
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 
@@ -19,6 +20,7 @@ export class StaticContent extends BlitElement implements BeforeEnterObserver
 {
     static styles = [
         ...BlitElement.styles, 
+        unsafeCSS(prose), 
         unsafeCSS(staticCSS), 
         unsafeCSS(codeBlockCSS), 
         unsafeCSS(prismCSS), 
@@ -73,8 +75,8 @@ export class StaticContent extends BlitElement implements BeforeEnterObserver
         if (content)
         {
             this.content = html`
-                <div class="prose prose-sm md:prose-base lg:prose-lg 2xl:prose-xl dark:prose-invert
-                            markdown animate-fade-in-fast">
+                <div class="markdown prose prose-sm md:prose-base lg:prose-lg 2xl:prose-xl dark:prose-invert
+                            animate-fade-in-fast">
                 ${unsafeHTML(content)}</div>`;
         }
         else
