@@ -29,8 +29,8 @@
         const app = document.getElementById('app');
 
         document.addEventListener(
-          "content_loaded", 
-          () => { console.log("loaded"); loader.classList.add("opacity-0"); app.classList.remove("opacity-0"); },
+          "content_loaded",  // @ts-ignore app might be null
+          () => { loader.classList.add("opacity-0"); app.classList.remove("opacity-0"); },
           { once: true }
         );
     </script>

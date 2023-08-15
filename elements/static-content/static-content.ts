@@ -85,8 +85,6 @@ export class StaticContent extends BlitElement implements BeforeEnterObserver
         document.dispatchEvent(new Event("content_loaded"));
     }
 
-    // const foo = new Event("content_loaded", {});
-
     render()
     {
         return this.content;
