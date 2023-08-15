@@ -3,9 +3,11 @@
   "private": true,
   "version": "0.0.0",
   "scripts": {
+    "tw:index": "tailwindcss --config tailwind.index.js -i index.css -o ./public/index.css",
     "mdig": "mdig.exe -i=./content -o=./public/content -e=abbreviations+mcprism+autolinks+customcontainers+emphasisextras+pipetables+gridtables+tasklists+attributes",
     "dev": "vite",
-    "build": "npm run mdig && tsc && vite build",
+    "build": "npm run tw:index && tsc && vite build",
+    "publish": "npm run mdig && npm run build",
     "preview": "vite preview"
   },
   "dependencies": {

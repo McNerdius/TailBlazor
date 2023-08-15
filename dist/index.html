@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="m-0 p-0 w-full h-full bg-white dark:bg-neutral-900">
+<html lang="en" class="">
   
   <head>
     
@@ -13,13 +13,13 @@
     <title>TailBlazor for .NET 8</title>
     <link rel="icon" href="favicon.svg">
     
-    <script type="module" crossorigin src="/assets/index-fa0125c9.js"></script>
-    <link rel="stylesheet" href="/assets/index-30b8173e.css">
+    <script type="module" crossorigin src="/assets/index-1251092d.js"></script>
+    <link rel="stylesheet" href="/assets/index-cca65e79.css">
   </head>
 
-  <body class="m-0 p-0 w-full h-full relative">
+  <body class="relative">
 
-    <awesome-loader class="absolute w-full h-full transition-opacity duration-300"></awesome-loader>
+    <awesome-loader class="absolute w-full h-full transition-opacity duration-300 ease-in"></awesome-loader>
 
     <div class="absolute w-full h-full transition-opacity duration-300 ease-out opacity-0" id="app">
       <tailblazor-app></tailblazor-app>
@@ -31,8 +31,8 @@
         const app = document.getElementById('app');
 
         document.addEventListener(
-          "content_loaded", 
-          () => { console.log("loaded"); loader.classList.add("opacity-0"); app.classList.remove("opacity-0"); },
+          "content_loaded",  // @ts-ignore app might be null
+          () => { loader.classList.add("opacity-0"); app.classList.remove("opacity-0"); },
           { once: true }
         );
     </script>

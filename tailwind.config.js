@@ -8,7 +8,7 @@ export default {
     files:
       [
         "{elements,public}/**/*.{ts,html,svg}",
-        "./*.{ts,html}"
+        "./*.ts"
       ],
   },
   darkMode: 'media',

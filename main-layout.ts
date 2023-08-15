@@ -1,15 +1,12 @@
 import { html } from 'lit';
 import { customElement, state } from 'lit/decorators.js'
 import { BlitElement } from './elements/blit-element';
-// import { ifDefined } from 'lit/directives/if-defined.js';
 
 import './nav-menu';
 
 @customElement('main-layout')
 export class MainLayout extends BlitElement 
 {
-    // private readonly debug = location.hostname === "localhost" || location.hostname === "127.0.0.1";
-
     static styles = BlitElement.styles;
 
     @state()
@@ -17,8 +14,6 @@ export class MainLayout extends BlitElement
 
     render()
     {
-        // console.log(this.menuVisible);
-
         const navClasses = this.menuVisible ? "" : "invisible w-0 sm:visible sm:w-auto";
 
         return html`
@@ -31,7 +26,6 @@ export class MainLayout extends BlitElement
                 <nav-menu></nav-menu>
             </div>
 
-            <!-- @{ /* buggy: @onclick=@(_ => hidden = true) */ } -->
             <div id="body"
                 class=" w-full h-full
                         overflow-x-hidden overflow-y-auto

@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind utilities;
+@tailwind components;
+
+@layer base {
+
+  html, body {
+    @apply font-sans w-full h-full m-0 p-0
+          bg-white dark:bg-neutral-900;
+  }
+
+
+
+}
+
