@@ -6,7 +6,7 @@ import { BlitElement } from './elements/blit-element';
 export class TailBlazorApp extends BlitElement
 {
     static styles = [
-        ...super.styles,
+        ...BlitElement.styles,
         css`:host, div{ display: block; height: 100%; background-color:inherit; }`
     ];
 

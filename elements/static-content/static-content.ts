@@ -18,7 +18,7 @@ import '../not-found';
 export class StaticContent extends BlitElement implements BeforeEnterObserver
 {
     static styles = [
-        ...super.styles, 
+        ...BlitElement.styles, 
         unsafeCSS(staticCSS), 
         unsafeCSS(codeBlockCSS), 
         unsafeCSS(prismCSS), 

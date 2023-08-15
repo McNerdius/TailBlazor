@@ -5,7 +5,7 @@ import { BlitElement } from './blit-element';
 @customElement('not-found')
 export class NotFound extends BlitElement {
 
-    static styles = super.styles;
+    static styles = BlitElement.styles;
 
     render()
     {

@@ -10,7 +10,7 @@ export class MainLayout extends BlitElement
 {
     // private readonly debug = location.hostname === "localhost" || location.hostname === "127.0.0.1";
 
-    static styles = [...super.styles];
+    static styles = BlitElement.styles;
 
     @state()
     private menuVisible: boolean = false;

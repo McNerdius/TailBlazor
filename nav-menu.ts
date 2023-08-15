@@ -7,7 +7,7 @@ import './elements/icon-link/icon-link';
 @customElement('nav-menu')
 export class NavMenu extends BlitElement 
 {
-    static styles = [...super.styles];
+    static styles = BlitElement.styles;
     
     render()
     {

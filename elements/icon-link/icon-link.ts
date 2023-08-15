@@ -6,7 +6,7 @@ import iconLinkCSS from './icon-link.css?inline';
 @customElement('icon-link')
 export class IconLink extends BlitElement 
 {
-    static styles = [ ...super.styles, unsafeCSS(iconLinkCSS) ];
+    static styles = [ ...BlitElement.styles, unsafeCSS(iconLinkCSS) ];
 
     @property({ type: Boolean }) public NewTab: Boolean = false;
     @property({ type: Boolean }) public Large: Boolean = false;
