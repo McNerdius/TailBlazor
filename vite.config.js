@@ -9,11 +9,11 @@ export default defineConfig({
     ],
     build: {
         
-        rollupOptions: {
-            output: {
-                preserveModules: true,
-            },
-            preserveEntrySignatures: true,
-        }
+        // rollupOptions: {
+        //     output: {
+        //         preserveModules: true,
+        //     },
+        //     preserveEntrySignatures: true,
+        // }
     }
 });
