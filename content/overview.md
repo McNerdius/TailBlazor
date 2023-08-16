@@ -16,7 +16,7 @@
 
 # Tailwind CSS + Blazor = <div class="emoji">💯</div> 
 
-Getting the best out of both takes a couple `csproj` tweaks and a bit of config. {.text-lg .font-bold .italic}
+Getting the best out of both takes a couple `csproj` tweaks and a bit of config. {.font-semibold .italic}
 
 
 ::: info
@@ -28,7 +28,7 @@ Keep an eye on [notes](notes) as i shift to .NET 7 & Tailwind CSS 3.2.
 ---
 
 
-[Blazor](https://dotnet.microsoft.com/apps/aspnet/web-apps/blazor){target="_blank" .text-2xl .italic .font-extrabold} is a fresh take on the [well-estabished](https://weblogs.asp.net/scottgu/introducing-razor){target="_blank"} Razor/C# combo for building UI components.  It pairs quite well with [Tailwind CSS](https://tailwindcss.com/){target="_blank" .text-2xl .italic .font-extrabold}, which will significantly reduce the amount of custom CSS you have to write, keep styling local to your Razor components, while also allowing for things like themes, variables, and nesting.  Rather than a set of static utility classes, it is effectively a CSS generator, building classes on demand based on an overridable and extendable base set of values and utilities.  The [documentation](https://tailwindcss.com/docs/utility-first){target="_blank"} is great as well. (Random example: [position](https://tailwindcss.com/docs/position){target="_blank"}.)  
+**[Blazor](https://dotnet.microsoft.com/apps/aspnet/web-apps/blazor){target="_blank" .text-[150%] .italic}** is a fresh take on the [well-estabished](https://weblogs.asp.net/scottgu/introducing-razor){target="_blank"} Razor/C# combo for building UI components.  It pairs quite well with **[Tailwind CSS](https://tailwindcss.com/){target="_blank" .text-[150%] .italic}**, which will significantly reduce the amount of custom CSS you have to write, keep styling local to your Razor components, while also allowing for things like themes, variables, and nesting.  Rather than a set of static utility classes, it is effectively a CSS generator, building classes on demand based on an overridable and extendable base set of values and utilities.  The [documentation](https://tailwindcss.com/docs/utility-first){target="_blank"} is great as well. (Random example: [position](https://tailwindcss.com/docs/position){target="_blank"}.)  
 
 ---
 
