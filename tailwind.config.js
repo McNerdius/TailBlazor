@@ -12,7 +12,6 @@ export default {
       ],
   },
   darkMode: 'media',
-
   theme: {
     container: {
       center: true,
@@ -32,10 +31,26 @@ export default {
           "0%": { opacity: "0%" }
         }
       },
+      // transitionDelay:
+      transitionDuration:
+      {
+        fast: '100',
+        medium: '300',
+        slow: '2s'
+      },
       colors:
       {
         'dotnet-blurple': '#512BD4',
         'link-blue': colors.blue[600],
+
+        'dark': colors.neutral[900], 
+        'dark-focus': colors.neutral[800],
+
+        'border-light': colors.neutral[300],
+        'border-dark': colors.neutral[600],
+
+        'code-bg': colors.zinc[800],
+
       },
       animation:
       {

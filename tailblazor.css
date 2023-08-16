@@ -1,3 +1,16 @@
+@config './tailwind.config.js';
+
+/* @import '/elements/static-content/codeblock.nested.css';
+@import '/elements/static-content/prism-vsc-dark-plus.css';
+@import '/elements/static-content/prose.css';
+@import '/elements/static-content/static-content.css'; */
+
 @tailwind base;
 @tailwind utilities;
 @tailwind components;
+
+@layer base {
+
+
+
+}

@@ -16,6 +16,7 @@ export default {
     'transitionTimingFunction',
     'opacity',
     'fontFamily',
+    'textColor'
     // 'preflight'
   ],
   plugins: [
