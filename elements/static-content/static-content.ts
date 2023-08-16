@@ -75,7 +75,7 @@ export class StaticContent extends BlitElement implements BeforeEnterObserver
         if (content)
         {
             this.content = html`
-                <div class="markdown prose prose-sm md:prose-base lg:prose-lg 2xl:prose-xl dark:prose-invert
+                <div class="markdown prose sm:prose-sm md:prose-md lg:prose-lg 2xl:prose-2xl
                             animate-fade-in-fast">
                 ${unsafeHTML(content)}</div>`;
         }
