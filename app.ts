@@ -40,7 +40,7 @@ export class TailBlazorApp extends BlitElement
 
     render = () => 
         html`
-        <div class="bg-white dark:bg-neutral-900 transition-[background-color] duration-500 w-full h-full overflow-hidden">
+        <div class="dark:bg-dark bg-white transition-[background-color] duration-medium overflow-hidden">
             <div id="outlet">
             </div>
         </div>`;
