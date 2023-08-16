@@ -29,10 +29,11 @@ export class TailBlazorApp extends BlitElement
     
     @query("#outlet") public outlet!: HTMLDivElement;
 
+    /*  This breaks `outlet` - reasonable.  OTOH, the lambdized version works.  Learn the reason. */
     // render()
     // {
     //     html`
-    //     <div class="bg-white dark:bg-neutral-900 transition-[background-color] duration-500 w-full h-full overflow-hidden">
+    //     <div class="dark:bg-dark bg-white transition-[background-color] duration-medium overflow-hidden">
     //         <div id="outlet">
     //         </div>
     //     </div>`;
