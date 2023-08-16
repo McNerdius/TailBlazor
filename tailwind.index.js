@@ -19,6 +19,10 @@ export default {
     'textColor'
     // 'preflight'
   ],
+  transitionDuration:
+  {
+    medium: '500',
+  },
   plugins: [
     require('@vicgutt/tailwindcss-debug'),
   ],

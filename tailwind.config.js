@@ -35,7 +35,7 @@ export default {
       transitionDuration:
       {
         fast: '100',
-        medium: '300',
+        medium: '500',
         slow: '2s'
       },
       colors:
