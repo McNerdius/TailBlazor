@@ -3,11 +3,9 @@
   "private": true,
   "version": "0.0.0",
   "scripts": {
-    "tw:idx-w": "tailwindcss -i index.css -o ./public/index.css --watch",
-    "tw:idx": "tailwindcss -i index.css -o ./public/index.css",
     "mdig": "mdig.exe -i=./content -o=./public/content -e=abbreviations+mcprism+autolinks+customcontainers+emphasisextras+pipetables+gridtables+tasklists+attributes",
     "dev": "vite",
-    "build": "npm run tw:idx && tsc && vite build",
+    "build": "tsc && vite build",
     "publish": "npm run mdig && npm run build",
     "preview": "vite preview"
   },

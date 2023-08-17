@@ -1,6 +1,6 @@
-import{B as h,r as u,x as s,A as k,e as w}from"./index-1251092d.js";import{n as v,t as m}from"./state-dd38a3b3.js";const f=`.link-container{border-radius:4px;stroke:#000;font-size:.875rem;line-height:1.25rem;font-weight:500;line-height:1}@media (prefers-color-scheme: dark){.link-container{stroke:#fff}}@media (min-width: 640px){.link-container{font-size:1rem;line-height:1.5rem}}@media (min-width: 1024px){.link-container{font-size:1.125rem;line-height:1.75rem}}.link-container:hover{background-color:#e5e5e5cc;text-decoration-line:none}@media (prefers-color-scheme: dark){.link-container:hover{background-color:#404040b3}}a{margin-top:.25rem;margin-bottom:.25rem}a>:not([hidden])~:not([hidden]){--tw-space-x-reverse: 0;margin-right:calc(.375rem * var(--tw-space-x-reverse));margin-left:calc(.375rem * calc(1 - var(--tw-space-x-reverse)))}a{padding:.25rem .25rem .25rem .375rem}@media (prefers-color-scheme: dark){a{--tw-text-opacity: 1;color:rgb(229 229 229 / var(--tw-text-opacity))}}@media (min-width: 640px){a{margin-top:.375rem;margin-bottom:.375rem;padding-left:.5rem}}@media (min-width: 768px){a{margin-right:.375rem}a>:not([hidden])~:not([hidden]){--tw-space-x-reverse: 0;margin-right:calc(.75rem * var(--tw-space-x-reverse));margin-left:calc(.75rem * calc(1 - var(--tw-space-x-reverse)))}a{padding-top:.375rem;padding-bottom:.375rem}}a[active]{border-radius:4px;background-color:#e5e5e5cc}@media (prefers-color-scheme: dark){a[active]{background-color:#404040b3}}
-`;var x=Object.defineProperty,b=Object.getOwnPropertyDescriptor,d=(t,i,r,n)=>{for(var e=n>1?void 0:n?b(i,r):i,a=t.length-1,o;a>=0;a--)(o=t[a])&&(e=(n?o(i,r,e):o(e))||e);return n&&e&&x(i,r,e),e};let l=class extends h{constructor(){super(...arguments),this.NewTab=!1,this.Large=!1,this.navFunction=this.nav.bind(this)}connectedCallback(){super.connectedCallback(),window.addEventListener("popstate",this.navFunction)}disconnectedCallback(){super.disconnectedCallback(),window.removeEventListener("popstate",this.navFunction)}firstUpdated(){this.nav()}nav(){const t=window.location.pathname.replace("/","");this.active=t==this.Link}render(){const t="justify-start flex items-center";return s`
-            <div class="link-container">${this.Link?s`<a ?active=${this.active} class=${t} href="/${this.Link}" target=${this.NewTab?"_blank":k}>${this.inner()}</a>`:s`<div ?active=${this.active} class=${t}>${this.inner()}</div>`}</div>
+import{B as d,r as k,x as s,A as u,e as m}from"./index-5865b3ce.js";import{n as v,t as w}from"./state-7dd720ce.js";const f=`.link-container{border-radius:4px;stroke:#000;font-size:.875rem;line-height:1.25rem;font-weight:500;line-height:1}@media (prefers-color-scheme: dark){.link-container{stroke:#fff}}@media (min-width: 560px){.link-container{font-size:1rem;line-height:1.5rem}}@media (min-width: 960px){.link-container{font-size:1.125rem;line-height:1.75rem}}.link-container a{margin-top:.25rem;margin-bottom:.25rem}.link-container a>:not([hidden])~:not([hidden]){--tw-space-x-reverse: 0;margin-right:calc(.375rem * var(--tw-space-x-reverse));margin-left:calc(.375rem * calc(1 - var(--tw-space-x-reverse)))}.link-container a{border-radius:4px;padding:.25rem .25rem .25rem .375rem}@media (prefers-color-scheme: dark){.link-container a{--tw-text-opacity: 1;color:rgb(245 245 245 / var(--tw-text-opacity))}}@media (min-width: 560px){.link-container a{margin-top:.375rem;margin-bottom:.375rem;padding-left:.5rem}}@media (min-width: 680px){.link-container a{margin-right:.375rem}.link-container a>:not([hidden])~:not([hidden]){--tw-space-x-reverse: 0;margin-right:calc(.75rem * var(--tw-space-x-reverse));margin-left:calc(.75rem * calc(1 - var(--tw-space-x-reverse)))}.link-container a{padding-top:.375rem;padding-bottom:.375rem}}.link-container a[active]{background-color:#e5e5e5cc}@media (prefers-color-scheme: dark){.link-container a[active]{background-color:#262626b3}}.link-container a:hover{background-color:#e5e5e5cc;text-decoration-line:none}@media (prefers-color-scheme: dark){.link-container a:hover{background-color:#404040b3}}
+`;var x=Object.defineProperty,b=Object.getOwnPropertyDescriptor,h=(t,i,r,n)=>{for(var e=n>1?void 0:n?b(i,r):i,a=t.length-1,o;a>=0;a--)(o=t[a])&&(e=(n?o(i,r,e):o(e))||e);return n&&e&&x(i,r,e),e};let l=class extends d{constructor(){super(...arguments),this.NewTab=!1,this.Large=!1,this.navFunction=this.nav.bind(this)}connectedCallback(){super.connectedCallback(),window.addEventListener("popstate",this.navFunction)}disconnectedCallback(){super.disconnectedCallback(),window.removeEventListener("popstate",this.navFunction)}firstUpdated(){this.nav()}nav(){const t=window.location.pathname.replace("/","");this.active=t==this.Link}render(){const t="justify-start flex items-center";return s`
+            <div class="link-container">${this.Link?s`<a ?active=${this.active} class=${t} href="/${this.Link}" target=${this.NewTab?"_blank":u}>${this.inner()}</a>`:s`<div ?active=${this.active} class=${t}>${this.inner()}</div>`}</div>
         `}inner(){return s`
             <span class="relative ${"w-5 sm:w-6 md:w-7"}" aria-hidden="true">
                 <slot></slot>
@@ -8,7 +8,7 @@ import{B as h,r as u,x as s,A as k,e as w}from"./index-1251092d.js";import{n as 
             <span>
                 ${this.Text}
             </span>
-        `}};l.styles=[...h.styles,u(f)];d([v({type:Boolean})],l.prototype,"NewTab",2);d([v({type:Boolean})],l.prototype,"Large",2);d([v()],l.prototype,"Text",2);d([v()],l.prototype,"Link",2);d([m()],l.prototype,"active",2);l=d([w("icon-link")],l);var y=Object.defineProperty,M=Object.getOwnPropertyDescriptor,L=(t,i,r,n)=>{for(var e=n>1?void 0:n?M(i,r):i,a=t.length-1,o;a>=0;a--)(o=t[a])&&(e=(n?o(i,r,e):o(e))||e);return n&&e&&y(i,r,e),e};let p=class extends h{render(){return s`
+        `}};l.styles=[...d.styles,k(f)];h([v({type:Boolean})],l.prototype,"NewTab",2);h([v({type:Boolean})],l.prototype,"Large",2);h([v()],l.prototype,"Text",2);h([v()],l.prototype,"Link",2);h([w()],l.prototype,"active",2);l=h([m("icon-link")],l);var y=Object.defineProperty,M=Object.getOwnPropertyDescriptor,L=(t,i,r,n)=>{for(var e=n>1?void 0:n?M(i,r):i,a=t.length-1,o;a>=0;a--)(o=t[a])&&(e=(n?o(i,r,e):o(e))||e);return n&&e&&y(i,r,e),e};let p=class extends d{render(){return s`
         <div class="w-36 sm:w-40 md:w-48 lg:w-52  
                     md:pt-0.5
                     px-1 sm:px-1.5 md:pl-2 2xl:pl-3
@@ -49,45 +49,44 @@ import{B as h,r as u,x as s,A as k,e as w}from"./index-1251092d.js";import{n as 
             </icon-link>
 
 
-        </div>`}};p.styles=h.styles;p=L([w("nav-menu")],p);var $=Object.defineProperty,_=Object.getOwnPropertyDescriptor,g=(t,i,r,n)=>{for(var e=n>1?void 0:n?_(i,r):i,a=t.length-1,o;a>=0;a--)(o=t[a])&&(e=(n?o(i,r,e):o(e))||e);return n&&e&&$(i,r,e),e};let c=class extends h{constructor(){super(...arguments),this.menuVisible=!1,this.on="transition-700 opacity-0",this.off="transition-50 opacity-100",this.toggler=()=>s`
-        <div class="absolute bottom-4 right-8 w-12 h-12 sm:hidden
-                    !bg-blue-600/70 rounded-full shadow-2xl shadow-black">
+        </div>`}};p.styles=d.styles;p=L([m("nav-menu")],p);var $=Object.defineProperty,_=Object.getOwnPropertyDescriptor,g=(t,i,r,n)=>{for(var e=n>1?void 0:n?_(i,r):i,a=t.length-1,o;a>=0;a--)(o=t[a])&&(e=(n?o(i,r,e):o(e))||e);return n&&e&&$(i,r,e),e};let c=class extends d{constructor(){super(...arguments),this.menuVisible=!1,this.svg="transition-opacity absolute top-2 left-2 w-8 h-8 duration-medium",this.on="opacity-0",this.off="opacity-100",this.toggler=()=>s`
 
-            <button @click=${()=>this.menuVisible=!this.menuVisible} class="relative w-12 h-12" >
+            <button @click=${()=>this.menuVisible=!this.menuVisible} 
+                    class="absolute bottom-4 right-6 w-12 h-12 sm:hidden
+                         !bg-blue-600/70 rounded-full shadow-2xl shadow-black text-dark" >
             
-                <svg class="transition-opacity absolute top-2 left-2 w-8 h-8 ${this.openCSS}" 
+                <svg class="${this.svg} ${this.openCSS}" 
                         fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7"></path>
                 </svg>
 
-                <svg class="transition-opacity absolute top-2 left-2 w-8 h-8 ${this.hideCSS}"
+                <svg class="${this.svg} ${this.hideCSS}"
                         fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                 </svg>
 
-            </button>
-        </div>`}render(){const t=this.menuVisible?"":"invisible w-0 sm:visible sm:w-auto";return s`
-        
-        <div class="grid grid-cols-[min-content,auto] grid-rows-[min-content,auto] h-full">
+            </button>`}render(){const t=this.menuVisible?"":"invisible w-0 sm:visible sm:w-auto";return s`
+            
+            <div class="grid grid-cols-[min-content,auto] grid-rows-[min-content,auto] h-full">
 
-            ${c.topBar}
+                ${c.topBar}
 
-            <div class="${t}  border-r-2 border-neutral-300 dark:border-neutral-600" >
-                <nav-menu></nav-menu>
+                <div class="${t}  border-r-2 border-border-light dark:border-border-dark" >
+                    <nav-menu></nav-menu>
+                </div>
+
+                <div id="body"
+                    class=" w-full h-full
+                            overflow-x-hidden overflow-y-auto
+                            scrollbar-thin !scrollbar-thumb-neutral-400 !scrollbar-track-neutral-200">
+                    <slot><!-- "@Body" --></slot>
+                </div>
             </div>
 
-            <div id="body"
-                class=" w-full h-full
-                        overflow-x-hidden overflow-y-auto
-                        scrollbar-thin !scrollbar-thumb-neutral-400 !scrollbar-track-neutral-200">
-                <slot><!-- "@Body" --></slot>
-            </div>
+            ${this.toggler()}`}get openCSS(){return this.menuVisible?this.on:this.off}get hideCSS(){return this.menuVisible?this.off:this.on}};c.styles=d.styles;c.topBar=s`
 
-        </div>
-
-        ${this.toggler()}`}get openCSS(){return this.menuVisible?this.on:this.off}get hideCSS(){return this.menuVisible?this.off:this.on}};c.styles=h.styles;c.topBar=s`
-        <div class="col-span-2 flex flex-row dark:bg-neutral-800
-                    border-b border-neutral-300 dark:border-neutral-600
+        <div class="col-span-2 flex flex-row dark:bg-dark-focus
+                    border-b border-border-light dark:border-border-dark
                     items-center self-center justify-between
                     
                     h-8 sm:h-10 md:h-11 lg:h-14
@@ -95,10 +94,10 @@ import{B as h,r as u,x as s,A as k,e as w}from"./index-1251092d.js";import{n as 
                     px-[2%]">
 
             <div class="text-center  text-blue-600 italic
-                        transition-[font-size,line-height] duration-300
-                        font-bold     sm:font-extrabold     lg:font-black
+                        transition-[font-size,line-height] duration-medium
+                        font-bold     sm:font-extrabold    lg:font-black
                         tracking-wide sm:tracking-wider     
-                        text-xl       sm:text-2xl           md:text-3xl     lg:text-4xl">
+                        text-xl       sm:text-2xl          md:text-3xl     lg:text-4xl">
                         
                 TailBlazor for .NET 8
             </div>
@@ -116,4 +115,4 @@ import{B as h,r as u,x as s,A as k,e as w}from"./index-1251092d.js";import{n as 
                 <dark-switch></dark-switch>
             </div> -->
 
-        </div>`;g([m()],c.prototype,"menuVisible",2);c=g([w("main-layout")],c);export{c as MainLayout};
+        </div>`;g([w()],c.prototype,"menuVisible",2);c=g([m("main-layout")],c);export{c as MainLayout};

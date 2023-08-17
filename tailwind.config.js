@@ -1,4 +1,4 @@
-// console.log("tailwind config loaded");
+console.log("tailwind main config loaded");
 
 const colors = require('tailwindcss/colors');
 

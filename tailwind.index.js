@@ -23,7 +23,7 @@ export default {
   theme: {
     transitionDuration:
     {
-      medium: '500ms',
+      medium: '400ms',
     },
     screens: {
       'sm': '560px',
