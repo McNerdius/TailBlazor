@@ -16,7 +16,7 @@
 
 # Tailwind CSS + Blazor = <div class="emoji">💯</div> 
 
-Getting the best out of both takes a couple `csproj` tweaks and a bit of config. {.font-semibold .italic}
+Getting the best out of both takes a couple `csproj` tweaks and a bit of config. {.font-semibold .italic .mx-4 .!indent-0}
 
 
 ::: info

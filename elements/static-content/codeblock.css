@@ -1,13 +1,15 @@
+@config '../../tailwind.config.js';
 
 .mc-code-block {
+  
   @apply font-mono font-bold
           my-6 rounded-t-lg
-         bg-zinc-800 text-neutral-200;
+         bg-code-bg text-neutral-200;
 
   .mc-code-lines {
     @apply grid grid-cols-[min-content,auto]
-           text-[90%] font-extralight tracking-tight leading-snug
-           pb-6 pt-3 overflow-auto
+           font-extralight tracking-tight leading-snug
+           pb-4 pt-3 overflow-auto
            scrollbar-thin !scrollbar-thumb-neutral-400 !scrollbar-track-neutral-200;  
   }
 

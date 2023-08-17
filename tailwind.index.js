@@ -16,12 +16,22 @@ export default {
     'transitionTimingFunction',
     'opacity',
     'fontFamily',
-    'textColor'
+    'textColor',
+    ''
     // 'preflight'
   ],
-  transitionDuration:
-  {
-    medium: '500',
+  theme: {
+    transitionDuration:
+    {
+      medium: '500ms',
+    },
+    screens: {
+      'sm': '560px',
+      'md': '680px',
+      'lg': '960px',
+      'xl': '1120px',
+      '2xl': '1280px'
+    },
   },
   plugins: [
     require('@vicgutt/tailwindcss-debug'),

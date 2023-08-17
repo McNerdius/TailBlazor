@@ -1,12 +1,12 @@
-import { css, html, unsafeCSS } from 'lit';
+import { html, unsafeCSS } from 'lit';
 import { customElement, state } from 'lit/decorators.js'
 
 import { BlitElement } from '../blit-element';
 
 import { BeforeEnterObserver, RouterLocation } from '@vaadin/router';
 
-import staticCSS from './static-content.css?inline';
-import codeBlockCSS from './codeblock.nested.css?inline';
+import markdownCSS from './markdown.css?inline';
+import codeBlockCSS from './codeblock.css?inline';
 import prismCSS from './prism-vsc-dark-plus.css?inline';
 import prose from './prose.css?inline';
 
@@ -20,11 +20,10 @@ export class StaticContent extends BlitElement implements BeforeEnterObserver
 {
     static styles = [
         ...BlitElement.styles, 
-        unsafeCSS(prose), 
-        unsafeCSS(staticCSS), 
-        unsafeCSS(codeBlockCSS), 
+        unsafeCSS(markdownCSS), 
         unsafeCSS(prismCSS), 
-        css`:host { height: 100%; display: block; }`
+        unsafeCSS(prose), 
+        unsafeCSS(codeBlockCSS), 
     ];
 
     /* @state() */ private page!: string;
@@ -75,7 +74,7 @@ export class StaticContent extends BlitElement implements BeforeEnterObserver
         if (content)
         {
             this.content = html`
-                <div class="markdown prose sm:prose-sm md:prose-md lg:prose-lg 2xl:prose-2xl
+                <div class="markdown prose sm:prose-sm md:prose-md lg:prose-lg xl:prose-xl
                             animate-fade-in-fast">
                 ${unsafeHTML(content)}</div>`;
         }

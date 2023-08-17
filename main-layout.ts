@@ -17,30 +17,30 @@ export class MainLayout extends BlitElement
         const navClasses = this.menuVisible ? "" : "invisible w-0 sm:visible sm:w-auto";
 
         return html`
-        
-        <div class="grid grid-cols-[min-content,auto] grid-rows-[min-content,auto] h-full">
+            
+            <div class="grid grid-cols-[min-content,auto] grid-rows-[min-content,auto] h-full">
 
-            ${MainLayout.topBar}
+                ${MainLayout.topBar}
 
-            <div class="${navClasses}  border-r-2 border-neutral-300 dark:border-neutral-600" >
-                <nav-menu></nav-menu>
+                <div class="${navClasses}  border-r-2 border-border-light dark:border-border-dark" >
+                    <nav-menu></nav-menu>
+                </div>
+
+                <div id="body"
+                    class=" w-full h-full
+                            overflow-x-hidden overflow-y-auto
+                            scrollbar-thin !scrollbar-thumb-neutral-400 !scrollbar-track-neutral-200">
+                    <slot><!-- "@Body" --></slot>
+                </div>
             </div>
 
-            <div id="body"
-                class=" w-full h-full
-                        overflow-x-hidden overflow-y-auto
-                        scrollbar-thin !scrollbar-thumb-neutral-400 !scrollbar-track-neutral-200">
-                <slot><!-- "@Body" --></slot>
-            </div>
-
-        </div>
-
-        ${this.toggler()}`;
+            ${this.toggler()}`;
     }
 
     private static topBar = html`
-        <div class="col-span-2 flex flex-row dark:bg-neutral-800
-                    border-b border-neutral-300 dark:border-neutral-600
+
+        <div class="col-span-2 flex flex-row dark:bg-dark-focus
+                    border-b border-border-light dark:border-border-dark
                     items-center self-center justify-between
                     
                     h-8 sm:h-10 md:h-11 lg:h-14
@@ -48,10 +48,10 @@ export class MainLayout extends BlitElement
                     px-[2%]">
 
             <div class="text-center  text-blue-600 italic
-                        transition-[font-size,line-height] duration-300
-                        font-bold     sm:font-extrabold     lg:font-black
+                        transition-[font-size,line-height] duration-medium
+                        font-bold     sm:font-extrabold    lg:font-black
                         tracking-wide sm:tracking-wider     
-                        text-xl       sm:text-2xl           md:text-3xl     lg:text-4xl">
+                        text-xl       sm:text-2xl          md:text-3xl     lg:text-4xl">
                         
                 TailBlazor for .NET 8
             </div>
@@ -71,28 +71,29 @@ export class MainLayout extends BlitElement
 
         </div>`;
 
-    private on = "transition-700 opacity-0"; 
-    private off = "transition-50 opacity-100";
+    private readonly svg = "transition-opacity absolute top-2 left-2 w-8 h-8 duration-medium";
+    private readonly on = "opacity-0";
+    private readonly off = "opacity-100";
 
     private get openCSS() { return this.menuVisible ? this.on : this.off };
     private get hideCSS() { return this.menuVisible ? this.off : this.on };
 
     private toggler = () => html`
-        <div class="absolute bottom-4 right-8 w-12 h-12 sm:hidden
-                    !bg-blue-600/70 rounded-full shadow-2xl shadow-black">
 
-            <button @click=${() => this.menuVisible = !this.menuVisible} class="relative w-12 h-12" >
+            <button @click=${() => this.menuVisible = !this.menuVisible} 
+                    class="absolute bottom-4 right-6 w-12 h-12 sm:hidden
+                         !bg-blue-600/70 rounded-full shadow-2xl shadow-black text-dark" >
             
-                <svg class="transition-opacity absolute top-2 left-2 w-8 h-8 ${this.openCSS}" 
+                <svg class="${this.svg} ${this.openCSS}" 
                         fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7"></path>
                 </svg>
 
-                <svg class="transition-opacity absolute top-2 left-2 w-8 h-8 ${this.hideCSS}"
+                <svg class="${this.svg} ${this.hideCSS}"
                         fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                 </svg>
 
-            </button>
-        </div>`;
+            </button>`;
+            
 }

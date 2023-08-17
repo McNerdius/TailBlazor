@@ -15,7 +15,7 @@ export class AwesomeLoader extends BlitElement
                 <div style="background-image: repeating-conic-gradient(#539ffd 0 12deg, #0576f8 12deg 24deg);"
                      class="absolute rounded-full m-auto animate-spin-slow w-full h-full">
                 </div>
-                <svg class="relative p-[7%]" xmlns="http://www.w3.org/2000/svg" id="svg1923" viewBox="0 0 733 733">
+                <svg class="relative m-[7%]" xmlns="http://www.w3.org/2000/svg" id="svg1923" viewBox="0 0 733 733">
                     <circle cy="366.5" cx="366.5" r="366.5"></circle>
                     <circle cy="366.5" cx="366.5" r="336.5" fill="#fede58"></circle>
                     <path d="m325 665c-121-21-194-115-212-233v-8l-25-1-1-18h481c6 13 10 27 13 41 13 94-38 146-114 193-45 23-93 29-142 26z"></path>

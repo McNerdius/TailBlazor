@@ -16,6 +16,13 @@ export default {
     container: {
       center: true,
     },
+    screens: {
+      'sm': '560px',
+      'md': '680px',
+      'lg': '960px',
+      'xl': '1120px',
+      '2xl': '1280px'
+    },
     extend:
     {
       keyframes:
@@ -34,8 +41,8 @@ export default {
       // transitionDelay:
       transitionDuration:
       {
-        fast: '100',
-        medium: '500',
+        fast: '100ms',
+        medium: '500ms',
         slow: '2s'
       },
       colors:

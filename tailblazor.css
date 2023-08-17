@@ -11,6 +11,6 @@
 
 @layer base {
 
-
+    * { @apply text-sm md:text-base lg:text-lg 2xl:text-xl; }
 
 }

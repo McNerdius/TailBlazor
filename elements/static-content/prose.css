@@ -1,42 +1,94 @@
-/* prose prose-sm md:prose-base lg:prose-lg 2xl:prose-xl dark:prose-invert */
+@config '../../tailwind.config.js';
+@tailwind utilities;
 
-.prose {
+@layer utilities
+{
+  .prose {
 
-  max-width: 65ch;
-  @apply bg-neutral-800;
-  
+    p { 
+        @apply indent-4 my-5;
+        @apply max-lg:text-justify; 
+    }
+    
+    h1 { @apply max-md:text-center md:pl-4; }
+    h2, h3 { @apply pl-4; }
+
+    h1, h2, h3 { 
+      @apply tracking-normal font-bold leading-none;
+      @apply mt-8 mb-4; 
+    }
+
+    h1 { @apply text-[175%]; }
+
+    h2 { @apply text-[140%]; }
+
+    h3 { @apply text-[115%]; }
+
+    strong > * {
+      @apply font-extrabold;
+    }
+
+    hr { 
+      @apply border-border-light dark:border-border-dark/60;
+      @apply my-6 mx-2;
+    }
+
+    ul { @apply list-disc pl-3 ml-3 leading-relaxed; } 
 
 
-  p {
 
+    pre, code { @apply bg-code-bg opacity-[inherit] text-neutral-100 tracking-wide; }
+
+    code {
+
+      @apply text-[85%];
+
+      @apply whitespace-pre-wrap font-medium;
+      /* more like ohmyposh.dev, less like tailwindcss.com */
+      @apply before:!content-none after:!content-none;
+
+      &:not(pre *) {
+        @apply bg-zinc-200/80 dark:bg-zinc-700/80 ;
+
+        @apply px-1 py-px rounded-[4px];
+      }
+    }
+  }
+
+
+  /* .prose-md {
+
+    p { @apply my-6; }
+
+    h1 { @apply text-3xl; }
+
+    h2 { @apply text-2xl; }
+
+    h3 { @apply text-xl; }
 
   }
 
-}
+  .prose-lg {
 
-.prose-sm {
+    p { @apply my-8; }
 
+    h1 { @apply text-4xl; }
 
-}
+    h2 { @apply text-3xl; }
 
-.prose-base {
+    h3 { @apply text-2xl; }
 
+  }
 
-}
+  .prose-2xl {
 
+    p { @apply my-8; }
 
-.prose-lg {
+    h1 { @apply text-5xl; }
 
+    h2 { @apply text-4xl; }
 
-}
+    h3 { @apply text-3xl; }
 
-
-.prose-xl {
-
-
-}
-
-.prose-invert {
-
-
+  } */
 }

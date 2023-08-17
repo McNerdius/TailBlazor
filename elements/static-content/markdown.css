@@ -1,0 +1,75 @@
+@config '../../tailwind.config.js';
+
+.markdown {
+
+  * {@apply transition-all duration-medium; } 
+  @apply pb-16 pt-4;
+  @apply sm:pt-6 sm:pb-10;
+  @apply lg:pt-8 lg:pb-12;
+
+  @apply max-w-[48rem] 2xl:max-w-[56rem];
+  
+
+  @apply dark:bg-dark;
+
+  .emoji {
+    @apply inline font-normal text-[120%];
+  }
+
+  a { /* applies to nav, not just prose */
+    @apply text-link-blue underline font-bold;
+  }
+  
+  .content{
+    @apply 
+           pl-2.5 pr-4 
+           sm:pl-4 sm:pr-7
+           md:pl-6 md:pr-10 
+           lg:pl-10
+           xl:px-16
+           transition-[padding];
+  }
+
+  .nav
+  {
+    @apply hidden xl:block absolute h-min;
+    @apply mt-4 right-[2%] w-40;
+    @apply 2xl:mt-6 2xl:right-[3%] 2xl:w-44;
+    @apply border-l border-border-light dark:border-border-dark;
+    @apply ml-2;
+    
+    ul { @apply list-none mt-0 leading-relaxed; }  
+    p, li { @apply my-0.5; }
+    a 
+    { 
+      @apply text-base font-normal 2xl:text-lg;
+      @apply block no-underline my-[inherit]; 
+    }
+  }
+
+  .info {
+    @apply flex indent-0
+           px-1.5 py-1 my-6 mx-1 rounded-md 
+           md:p-3 md:my-8
+           italic font-semibold dark:text-black
+
+           bg-yellow-50 dark:bg-amber-300
+           
+            ring-1 dark:ring-2 ring-orange-600;
+
+    &:before {
+      content: url("./images/info.svg");
+      @apply w-6 h-6 mr-2 mt-1 flex-shrink-0;
+    }
+
+    p {
+      @apply m-1 indent-0;
+    }
+  }
+
+
+  img {
+    @apply m-auto dark:bg-zinc-800 rounded-xl p-1 cursor-alias;
+  }
+
+}
