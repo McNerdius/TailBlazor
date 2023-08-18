@@ -1,6 +1,4 @@
-@import '../../app.css';
-
-/* @config '../../app.tw.config.js'; */
+@config '../../app.tw.config.js';
 
 .link-container {
   @apply font-medium

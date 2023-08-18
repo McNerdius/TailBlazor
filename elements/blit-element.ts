@@ -1,5 +1,5 @@
 import { LitElement, unsafeCSS } from 'lit';
-import tailwindCSS from '../tailblazor.css?inline';
+import tailwindCSS from '../app.css?inline';
     
 export class BlitElement extends LitElement
 {

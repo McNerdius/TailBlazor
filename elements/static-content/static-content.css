@@ -1,8 +1,7 @@
 
-@import '../../app.css';
 @import './prism-vsc-dark-plus.css';
 
-/* @config '../../app.tw.config.js'; */
+@config '../../app.tw.config.js';
 
 .markdown {
 

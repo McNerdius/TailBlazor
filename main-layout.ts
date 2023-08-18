@@ -2,7 +2,7 @@ import { html } from 'lit';
 import { customElement, state } from 'lit/decorators.js'
 import { BlitElement } from './elements/blit-element';
 
-import './nav-menu';
+import './elements/nav-menu';
 
 @customElement('main-layout')
 export class MainLayout extends BlitElement 
