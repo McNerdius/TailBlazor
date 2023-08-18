@@ -1,4 +1,4 @@
-@config './tailwind.config.js';
+@config './app.tw.config.js';
 
 /* @import '/elements/static-content/codeblock.nested.css';
 @import '/elements/static-content/prism-vsc-dark-plus.css';

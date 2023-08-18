@@ -1,4 +1,4 @@
-@config "./tailwind.index.js";
+@config "./index.tw.config.js";
 
 @tailwind base;
 @tailwind utilities;
@@ -11,7 +11,5 @@
           dark:text-neutral-100 text-neutral-900
           bg-white dark:bg-neutral-900;
   }
-
-
 }
 

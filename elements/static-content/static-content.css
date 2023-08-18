@@ -1,0 +1,215 @@
+
+@import '../../app.css';
+@import './prism-vsc-dark-plus.css';
+
+/* @config '../../app.tw.config.js'; */
+
+.markdown {
+
+  * {@apply transition-all duration-medium; } 
+  @apply pb-16 pt-4;
+  @apply sm:pt-6 sm:pb-10;
+  @apply lg:pt-8 lg:pb-12;
+
+  @apply max-w-[48rem] 2xl:max-w-[56rem];
+  
+
+  @apply dark:bg-dark;
+
+  .emoji {
+    @apply inline font-normal text-[120%];
+  }
+
+  a { /* applies to nav, not just prose */
+    @apply text-link-blue underline font-bold;
+  }
+  
+  .content{
+    @apply 
+           pl-2.5 pr-4 
+           sm:pl-4 sm:pr-7
+           md:pl-6 md:pr-10 
+           lg:pl-10
+           xl:px-16
+           transition-[padding];
+  }
+
+  .nav
+  {
+    @apply hidden xl:block absolute h-min;
+    @apply mt-4 right-[2%] w-40;
+    @apply 2xl:mt-6 2xl:right-[3%] 2xl:w-44;
+    @apply border-l border-border-light dark:border-border-dark;
+    @apply ml-2;
+    
+    ul { @apply list-none mt-0 leading-relaxed; }  
+    p, li { @apply my-0.5; }
+    a 
+    { 
+      @apply text-base font-normal 2xl:text-lg;
+      @apply block no-underline my-[inherit]; 
+    }
+  }
+
+  .info {
+    @apply flex indent-0
+           px-1.5 py-1 my-6 mx-1 rounded-md 
+           md:p-3 md:my-8
+           italic font-semibold dark:text-black
+
+           bg-yellow-50 dark:bg-amber-300
+           
+            ring-1 dark:ring-2 ring-orange-600;
+
+    &:before {
+      content: url("./images/info.svg");
+      @apply w-6 h-6 mr-2 mt-1 flex-shrink-0;
+    }
+
+    p {
+      @apply m-1 indent-0;
+    }
+  }
+
+
+  img {
+    @apply m-auto dark:bg-zinc-800 rounded-xl p-1 cursor-alias;
+  }
+
+}
+
+.mc-code-block {
+  
+  @apply font-mono font-bold
+          my-6 rounded-t-lg
+         bg-code-bg text-neutral-200;
+
+  .mc-code-lines {
+    @apply grid grid-cols-[min-content,auto]
+           font-extralight tracking-tight leading-snug
+           pb-4 pt-3 overflow-auto
+           scrollbar-thin !scrollbar-thumb-neutral-400 !scrollbar-track-neutral-200;  
+  }
+
+  .mc-code
+  {
+    @apply pr-6;
+  }
+    
+  .mc-code-filename {
+    @apply bg-blue-500 text-black text-lg italic px-6 w-min rounded-t-md whitespace-nowrap;
+  }
+
+  .mc-diff
+  {
+    @apply w-6 text-center;
+  }         
+
+  .mc-ins {
+      @apply bg-green-300/20 no-underline;
+      &.mc-diff {
+        @apply before:content-['+'];
+      }
+  }
+
+  .mc-del {
+      @apply bg-red-400/20 no-underline;
+      &.mc-diff {
+        @apply before:content-['-'];
+      }
+  }
+}
+
+@tailwind utilities;
+
+@layer utilities
+{
+  .prose {
+
+    p { 
+        @apply indent-4 my-5;
+        @apply max-lg:text-justify; 
+    }
+    
+    h1 { @apply max-md:text-center md:pl-4; }
+    h2, h3 { @apply pl-4; }
+
+    h1, h2, h3 { 
+      @apply tracking-normal font-bold leading-none;
+      @apply mt-8 mb-4; 
+    }
+
+    h1 { @apply text-[175%]; }
+
+    h2 { @apply text-[140%]; }
+
+    h3 { @apply text-[115%]; }
+
+    strong > * {
+      @apply font-extrabold;
+    }
+
+    hr { 
+      @apply border-border-light dark:border-border-dark/60;
+      @apply my-6 mx-2;
+    }
+
+    ul { @apply list-disc pl-3 ml-3 leading-relaxed; } 
+
+
+
+    pre, code { @apply bg-code-bg opacity-[inherit] text-neutral-100 tracking-wide; }
+
+    code {
+
+      @apply text-[85%];
+
+      @apply whitespace-pre-wrap font-medium;
+      /* more like ohmyposh.dev, less like tailwindcss.com */
+      @apply before:!content-none after:!content-none;
+
+      &:not(pre *) {
+        @apply bg-zinc-200/80 dark:bg-zinc-700/80 ;
+
+        @apply px-1 py-px rounded-[4px];
+      }
+    }
+  }
+
+
+  /* .prose-md {
+
+    p { @apply my-6; }
+
+    h1 { @apply text-3xl; }
+
+    h2 { @apply text-2xl; }
+
+    h3 { @apply text-xl; }
+
+  }
+
+  .prose-lg {
+
+    p { @apply my-8; }
+
+    h1 { @apply text-4xl; }
+
+    h2 { @apply text-3xl; }
+
+    h3 { @apply text-2xl; }
+
+  }
+
+  .prose-2xl {
+
+    p { @apply my-8; }
+
+    h1 { @apply text-5xl; }
+
+    h2 { @apply text-4xl; }
+
+    h3 { @apply text-3xl; }
+
+  } */
+}

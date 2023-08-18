@@ -1,3 +1,7 @@
+@import '../../app.css';
+
+/* @config '../../app.tw.config.js'; */
+
 .link-container {
   @apply font-medium
          text-sm sm:text-base lg:text-lg
