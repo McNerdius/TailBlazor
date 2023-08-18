@@ -4,6 +4,9 @@ const colors = require('tailwindcss/colors');
 
 /** @type {import('tailwindcss').Config} */
 export default {
+  presets: [
+    require('./base.tw.config.js')
+  ],
   content: {
     files:
       [
@@ -11,39 +14,18 @@ export default {
         "./*.ts"
       ],
   },
-  darkMode: 'media',
   theme: {
-    container: {
-      center: true,
-    },
-    screens: {
-      'sm': '560px',
-      'md': '680px',
-      'lg': '960px',
-      'xl': '1120px',
-      '2xl': '1280px'
-    },
-    extend:
-    {
+    extend: {
       keyframes:
       {
-        fadein:
-        {
+        fadein: {
           "0%": { opacity: "0%" },
           "100%": { opacity: "100%" }
         },
-        fadeout:
-        {
+        fadeout: {
           "100%": { opacity: "100%" },
           "0%": { opacity: "0%" }
         }
-      },
-      // transitionDelay:
-      transitionDuration:
-      {
-        fast: '100ms',
-        medium: '500ms',
-        slow: '2s'
       },
       colors:
       {
@@ -57,7 +39,6 @@ export default {
         'border-dark': colors.neutral[600],
 
         'code-bg': colors.zinc[800],
-
       },
       animation:
       {
@@ -70,7 +51,6 @@ export default {
   },
   plugins: [
     require('tailwind-scrollbar'),
-    // require('@tailwindcss/typography'),
   ],
 }
 
