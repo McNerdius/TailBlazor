@@ -5,3 +5,6 @@
 **/*.min.css
 local/**
 **/.vs/*
+bundle_stats.html
+.prismjs
+public/index.css

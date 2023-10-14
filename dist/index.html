@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  
+  <head>
+    
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <base href="" />
+    
+    
+    
+
+    <title>TailBlazor for .NET 8</title>
+    <link rel="icon" href="favicon.svg">
+    
+    <script type="module" crossorigin src="/assets/index-79a37b8d.js"></script>
+    <link rel="stylesheet" href="/assets/index-18d597ec.css">
+  </head>
+
+  <body class="relative">
+
+    <awesome-loader class="absolute w-full h-full transition-opacity duration-medium ease-out"></awesome-loader>
+
+    <div class="absolute w-full h-full transition-opacity duration-medium ease-in opacity-0" id="app">
+      <tailblazor-app></tailblazor-app>
+    </div>
+
+    <script type="application/javascript">
+        // @ts-check
+        const loader = document.getElementsByTagName('awesome-loader')[0];
+        const app = document.getElementById('app');
+
+        document.addEventListener(
+          "content_loaded",  // @ts-ignore app might be null
+          () => { loader.classList.add("opacity-0"); app.classList.remove("opacity-0"); },
+          { once: true }
+        );
+    </script>
+
+  </body>
+
+</html>

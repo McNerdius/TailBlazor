@@ -1,0 +1,61 @@
+<div class="nav"><p><a href="/overview#innerloop">Inner Loop</a>
+<a href="/overview#tidy">Tidy CSS</a>
+<a href="/overview#prerequisites">Prerequisites</a></p>
+<div>
+<ul>
+<li><a href="/overview#de">[I]DE</a></li>
+<li><a href="/overview#sdk">SDKs</a></li>
+<li><a href="/overview#other">Optional</a></li>
+</ul>
+</div>
+</div>
+<div class="content"><h1>Tailwind CSS + Blazor = <div class="emoji">💯</div></h1>
+<p class="font-semibold italic mx-4 !indent-0">Getting the best out of both takes a couple <code>csproj</code> tweaks and a bit of config. </p>
+<div class="info"><p>Keep an eye on <a href="notes">notes</a> as i shift to .NET 7 &amp; Tailwind CSS 3.2.</p>
+</div>
+<hr />
+<p><strong><a href="https://dotnet.microsoft.com/apps/aspnet/web-apps/blazor" class="text-[150%] italic" target="_blank">Blazor</a></strong> is a fresh take on the <a href="https://weblogs.asp.net/scottgu/introducing-razor" target="_blank">well-estabished</a> Razor/C# combo for building UI components.  It pairs quite well with <strong><a href="https://tailwindcss.com/" class="text-[150%] italic" target="_blank">Tailwind CSS</a></strong>, which will significantly reduce the amount of custom CSS you have to write, keep styling local to your Razor components, while also allowing for things like themes, variables, and nesting.  Rather than a set of static utility classes, it is effectively a CSS generator, building classes on demand based on an overridable and extendable base set of values and utilities.  The <a href="https://tailwindcss.com/docs/utility-first" target="_blank">documentation</a> is great as well. (Random example: <a href="https://tailwindcss.com/docs/position" target="_blank">position</a>.)</p>
+<hr />
+<h2 id="innerloop">&quot;Inner Loop&quot; goodies</h2>
+<p>Blazor's <a href="https://docs.microsoft.com/en-us/aspnet/core/test/hot-reload?view=aspnetcore-6.0" target="_blank">Hot Reload</a> allows edits to be applied immediately without needing to pause or restart a running app.  This includes edits to code as well as markup and CSS.  It's still newish and not fully supported for all project types or code edits.</p>
+<p>Similar to .NET's Hot Reload, Tailwind's <a href="https://tailwindcss.com/blog/tailwindcss-v3#just-in-time-all-the-time" target="_blank">Just-In-Time</a> CSS generation is the primary goodness Tailwind CSS 3 brings.  Initially it generates only what CSS is relevant to your markup and CSS, subsequently performing much faster incremental builds when changes are spotted.  Also newish, it works well until it doesn't - for me it gets &quot;stuck&quot; during a build and runs out of memory once every 2-3 hours.</p>
+<p>Hot Reload and <code>tailwindcss --watch</code> do their work independently - what's needed from us is to point <code>tailwindcss</code> at our input markup/CSS, and our Blazor project at the <code>tailwindcss</code> output.</p>
+<hr />
+<h2 id="tidy">Tidy CSS</h2>
+<p>Blazor's take on <a href="https://docs.microsoft.com/en-us/aspnet/core/blazor/components/css-isolation?view=aspnetcore-6.0" target="_blank">CSS Isolation</a> is a simple way to limit the scope of styles to a particular Razor Component: by convention, styles defined in <code>.razor.css</code> (Scoped CSS) files will be rewritten at build time so they only apply to their associated <code>.razor</code> Component.</p>
+<p>In addition to generating classes for us, Tailwind CSS offers an <a href="https://tailwindcss.com/docs/functions-and-directives#apply" target="_blank"><code>@apply</code> directive</a>, and built-in support for Sass-like nesting is easily enabled.</p>
+<p>To use Tailwind CSS features within your Scoped CSS files takes as little as three lines of code and is well worth it, IMO.</p>
+<hr />
+<h1 id="prerequisites">Prerequisites</h1>
+<p>You'll need the .NET 6+ SDK, Node.JS, and of course a development environment — <em>PowerShell optional</em></p>
+<div class="info"><p>TailBlazor is geared toward .NET 6+ and Tailwind 3+. Older versions would work too, but the build steps and config would be a bit different.  I'm currently rehashing this site and the associated templates, updating them for .NET 7.  The only incompatibilities i forsee will be usage of .NET 7's &quot;empty&quot; (bootstrap-free) templates, and the <code>--blazor-load-progress</code> variables.</p>
+</div>
+<h2 id="de">Development Environment:</h2>
+<ul>
+<li><a href="https://visualstudio.microsoft.com/downloads/" target="_blank">Visual Studio 2022</a> with &quot;ASP.NET and web development&quot; workload; <a href="https://marketplace.visualstudio.com/items?itemName=MadsKristensen.NpmTaskRunner64" target="_blank">NPM Task Runner</a> is handy.</li>
+<li><a href="https://code.visualstudio.com/Download" target="_blank">VS Code</a> with some handy extensions:
+<ul>
+<li>The <a href="https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp" target="_blank">C# Extension</a>.</li>
+<li>The <a href="https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.blazorwasm-companion" target="_blank">Blazor-wasm debugger</a>, if applicable.</li>
+<li>The <a href="https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss" target="_blank">Tailwind CSS Extension</a>.  Adds Intellisense and shows generated CSS on hover.  Awesome.  <a href="/notes#VSCode" target="_blank">Notes</a></li>
+</ul>
+</li>
+<li>Other - Rider ? VS for Mac ? Sublime Text ? Fleet ? Butterfly operated punchcards ? You do you !</li>
+</ul>
+<h2 id="sdk">SDKs:</h2>
+<ul>
+<li><a href="https://dotnet.microsoft.com/download/dotnet/6.0" target="_blank">.NET 6 SDK</a>, included with the VS install. If you're like me and use both VS and VSCode - VSCode <a href="/images/vscode_msbuild_bits.png" target="_blank">will use</a> Visual Studio's bits.</li>
+<li><a href="https://nodejs.org/en/download/" target="_blank">Node.js 12.13+</a>.</li>
+</ul>
+<h2 id="other">Optional:</h2>
+<ul>
+<li><a href="https://docs.microsoft.com/en-us/powershell/scripting/install/installing-powershell?view=powershell-7.2" target="_blank">PowerShell</a>. I'll be sharing simple PowerShell scripts to properly fire off both <code>dotnet</code> and <code>tailwindcss</code> in watch mode. These can be adapted to bash et al, but PowerShell is my go-to.</li>
+</ul>
+<hr />
+<h1>Let's set things up !</h1>
+<p>Hopefully, i won't miss any steps or be overly verbose in this howto. It'll be more detailed regarding the JS tooling side of things - i'm adding Tailwind CSS to a C# project, after all.  Feel free to <a href="https://github.com/McNerdius/TailBlazor/issues" target="_blank">submit</a> any clarification requests or suggestions.</p>
+<p>To fast forward through this howto and see what it looks like &quot;on disk&quot;, see the the <code>tailblazor-wasm</code> template found in my <a href="https://www.github.com/McNerdius/tailblazor-templates" target="_blank">tailblazor-templates repository</a>.  It's hosted at <a href="https://templates.tailblazor.dev/" target="_blank">templates.tailblazor.dev</a> and the content is essentially a tl;dr of this site.</p>
+<hr />
+<div class="text-xl italic light text-right pr-6"><p><a href="/setup">next: setup</a></p>
+</div>
+</div>

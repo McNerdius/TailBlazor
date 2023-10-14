@@ -1,0 +1,26 @@
+@config '../../app.tw.config.js';
+
+.link-container {
+  @apply font-medium
+         text-sm sm:text-base lg:text-lg
+         rounded-[4px] leading-none 
+         stroke-black dark:stroke-white;
+
+    a {
+        @apply dark:text-neutral-100 rounded-[4px]
+                space-x-1.5 md:space-x-3
+                my-1 py-1 pl-1.5 pr-1
+                sm:my-1.5 sm:pl-2
+                md:py-1.5 md:mr-1.5;
+
+        &[active] {
+          @apply bg-neutral-200/80 
+              dark:bg-dark-focus/70 ;
+        }
+
+        &:hover {
+          @apply no-underline bg-neutral-200/80 
+                        dark:bg-neutral-700/70;
+        }
+    }
+}

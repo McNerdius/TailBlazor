@@ -1,0 +1,64 @@
+<div class="nav"><p class="font-bold">Plugins </p>
+<ul>
+<li><a href="/next#tailwind">Tailwind</a></li>
+<li><a href="/next#postcss">PostCSS</a></li>
+</ul>
+<p><a href="/next#rcl">Razor Class Libraries</a>
+<a href="/next#components">MS Web Components</a></p>
+</div>
+<div class="content"><h1 id="tailwind">Tailwind Plugins</h1>
+<h2><code>tailwindcss-debug-screens</code></h2>
+<p>Like Bootstrap, Tailwind CSS is <a href="https://tailwindcss.com/docs/responsive-design" target="_blank">responsive</a> and mobile-first: when you use <code>class=&quot;lg:text-2xl&quot;</code>, text will be default-sized up until the <code>lg</code> media query kicks in.  The <a href="https://github.com/jorenvanhee/tailwindcss-debug-screens" target="_blank">debug-screens</a> Tailwind plugin makes designing for this a breeze (no pun intended...), letting you know which screen/breakpoint is currently active.</p>
+<p>You'll have to run <code>npm install -D tailwindcss-debug-screens</code> and add it to your <code>tailwind.config.js</code>:</p>
+<div class="mc-code-block not-prose">
+<div class="mc-code-filename">tailwind.config.js</div>
+<div class="mc-code-lines">
+<div class="mc-diff"></div> <pre class="mc-code">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span></pre>
+<div class="mc-diff"></div> <pre class="mc-code">    <span class="token literal-property property">content</span><span class="token operator">:</span> <span class="token punctuation">[</span> <span class="token string">'./**/*.{razor,html}'</span> <span class="token punctuation">]</span><span class="token punctuation">,</span></pre>
+<div class="mc-diff"></div> <pre class="mc-code">    <span class="token operator">...</span></pre>
+<div class="mc-diff"></div> <pre class="mc-code">    <span class="token literal-property property">plugins</span><span class="token operator">:</span> <span class="token punctuation">[</span></pre>
+<div class="mc-diff mc-ins"></div> <pre class="mc-code mc-ins">        <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'tailwindcss-debug-screens'</span><span class="token punctuation">)</span><span class="token punctuation">,</span></pre>
+<div class="mc-diff"></div> <pre class="mc-code">        <span class="token operator">...</span></pre>
+<div class="mc-diff"></div> <pre class="mc-code">    <span class="token punctuation">]</span></pre>
+<div class="mc-diff"></div> <pre class="mc-code"><span class="token punctuation">}</span></pre>
+</div></div>
+<h2>Others</h2>
+<p>There are some <a href="https://tailwindcss.com/docs/plugins#official-plugins" target="_blank">official plugins</a>; i'm using <code>tailwindcss/typography</code> (with some tweaks) both here and in the <a href="https://www.tailblazor.net" target="_blank">tailblazor templates</a>.  <em>Note you'll need 0.5.x+ for Tailwind 3+.</em></p>
+<p>Also nifty is <a href="https://github.com/adoxography/tailwind-scrollbar" target="_blank">tailwind-scrollbar</a>, which i'm using for the code block containers.</p>
+<hr />
+<h1 id="postcss">PostCSS Plugins</h1>
+<h2 id="nesting"><code>tailwindcss/nesting</code></h2>
+<p>Worth mentioning twice, Tailwind has a built-in PostCSS plugin, <a href="https://tailwindcss.com/docs/using-with-preprocessors#nesting" target="_blank">tailwindcss/nesting</a> that allows for, well, CSS nesting.  No install needed, just add it to your <code>postcss.config.js</code> and nest away:</p>
+<div class="mc-code-block not-prose">
+<div class="mc-code-filename">postcss.config.js</div>
+<div class="mc-code-lines">
+<div class="mc-diff"></div> <pre class="mc-code">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span></pre>
+<div class="mc-diff"></div> <pre class="mc-code">    <span class="token literal-property property">plugins</span><span class="token operator">:</span> <span class="token punctuation">{</span></pre>
+<div class="mc-diff"></div> <pre class="mc-code">        <span class="token string-property property">'postcss-import'</span><span class="token operator">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span></pre>
+<div class="mc-diff mc-ins"></div> <pre class="mc-code mc-ins">        <span class="token string-property property">'tailwindcss/nesting'</span><span class="token operator">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span></pre>
+<div class="mc-diff"></div> <pre class="mc-code">        <span class="token literal-property property">tailwindcss</span><span class="token operator">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span></pre>
+<div class="mc-diff"></div> <pre class="mc-code">    <span class="token punctuation">}</span></pre>
+<div class="mc-diff"></div> <pre class="mc-code"><span class="token punctuation">}</span><span class="token punctuation">;</span></pre>
+</div></div>
+<p>Note the placement: after <code>postcss-import</code> inlines your files, but before <code>tailwindcss</code> does its magic.</p>
+<p>There are <em><a href="https://www.postcss.parts/" target="_blank">loads</a></em> of other PostCSS plugins out there.</p>
+<hr />
+<h1 id="rcl">Razor Class Libraries: Sharing Razor Components</h1>
+<p>More to come on this topic, but for now...</p>
+<p>By putting all or most of your UI into a <a href="https://docs.microsoft.com/en-us/aspnet/core/razor-pages/ui-class?view=aspnetcore-6.0&amp;tabs=visual-studio" target="_blank">Razor Class Library</a>, you can share Components, Pages / Routable Components, even your Layouts and <code>App.razor</code> with other Blazor-capable projects.  See <a href="https://github.com/McNerdius/TailBlazor-Templates/tree/main/Templates/MultiProject" target="_blank">tailblazor-templates</a>'s MutliProject template to see this in action.</p>
+<p>Here's some notes on how i set up a solution, using a shared <code>RazorClassLibrary.csproj</code>:</p>
+<ul>
+<li>I keep the <code>npm</code> related files at the root of the solution, not in the Razor Class Library's folder.  This includes <code>package.json</code>, <code>tailwind.config.js</code>, <code>postcss.config.js</code>, <code>node-modules</code>, the root CSS file (call it <code>site.css</code> for these notes), and so on.</li>
+<li><code>site.css</code> will reference the Razor Class Library's <code>*.styles.css</code> bundle: <code>@import &quot;./RazorClassLibrary/obj/scopedcss/bundle/RazorClassLibrary.styles.css&quot;;</code>,</li>
+<li>and <code>package.json</code> will output to <code>RazorClassLibrary</code>: <code>./RazorClassLibrary/wwwroot/css/site.min.css</code>.  This folder will automatically get pulled into other projects, and placed at <code>wwwroot/_content/RazorClassLibrary</code>.</li>
+<li>This means that any references to these shared files must be prefixed with <code>./_content/RazorClassLibrary/</code>.  For instance, a Blazor Wasm project consuming the Razor Class Library will need to use <code>&lt;link rel=&quot;stylesheet&quot; href=&quot;./_content/RazorClassLibrary/css/site.min.css&quot;/&gt;</code>, any Components using <a href="https://docs.microsoft.com/en-us/aspnet/core/blazor/javascript-interoperability/call-javascript-from-dotnet?view=aspnetcore-6.0#javascript-isolation-in-javascript-modules" target="_blank">JavaScript Isolation</a> will use JSRuntime to import their scripts from <code>&quot;./_content/RazorClassLibrary/Components/{ComponentName}/{ComponentName}.razor.js&quot;</code>.</li>
+<li>While i avoid placing Components and the like in projects that reference the Razor Class Library, i still set up the <code>contents</code> value in <code>tailwind.config.js</code> to look at the solution as a whole, not just the Razor Class Library on the off chance i'm using Tailwind CSS classes in non-shared UI.  Also, be sure to include <code>cshtml</code> if relevant:  <code>content: [ './**/*.{razor,html,cshtml}' ]</code>.</li>
+<li>... i'm probably forgetting stuff ...</li>
+</ul>
+<hr />
+<h1 id="components">Fluent UI Web Components: Easy drop-ins while prototyping</h1>
+<p>Rather than resorting to using something like Bootstrap alongside Tailwind/Blazor, i've been using Microsoft's <a href="https://fluent-components.azurewebsites.net/?path=/docs/getting-started-overview--page" target="_blank">Fluent UI Web Components</a> via <a href="https://github.com/microsoft/fluentui/tree/master/packages/web-components#from-cdn" target="_blank">the CDN</a> to start, phasing in my own components as a project progresses until i can eliminate the ~85kb dependency. Notice there is a <a href="https://github.com/microsoft/fast-blazor" target="_blank">Blazor NuGet Package</a> but there is a <a href="https://github.com/microsoft/fast-blazor/issues/125" target="_blank">fundamental issue</a> with styling the Razor Components. (You may have experienced this sort of thing with NavLink.)  Since i typically use them as stand-ins while i build my own, i take the quick and dirty Web Components CDN route.</p>
+<hr />
+<div class="text-xl italic light text-right pr-6"><p><a href="/notes">next: notes</a></p>
+</div>
+</div>

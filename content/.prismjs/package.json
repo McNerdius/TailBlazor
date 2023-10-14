@@ -1,0 +1,18 @@
+{
+  "name": "prism-highlighter-pkg",
+  "version": "1.0.0",
+  "description": "",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bin": {
+    "prismhighlighterpkg": "prism-highlighter-pkg.js"
+  },
+  "devDependencies": {
+    "pkg": "^5.8.1"
+  },
+  "dependencies": {
+    "prismjs": "^1.29.0",
+    "yargs": "^17.7.2"
+  }
+}
